@@ -17,7 +17,7 @@ Then we elaborate on the three major workflow components:
 `The following workflow was developed for a social media archiving use case at KBR Royal Library of Belgium,
 funded by the Belgian Federal Science Policy Office (BELSPO) BRAIN 2.0.` [BESOCIAL](https://kbr.be/en/projects/besocial/).
 
-![image](https://user-images.githubusercontent.com/3501171/114556733-49e25180-9c69-11eb-97e4-9185b207c1bf.png)
+![Architecture for a social media archiving workflow](https://github.com/RMLio/social-media-archiving/blob/master/architecture.jpg)
 Our architecture for a sustainable social media archiving workflow: heterogeneous data are collected (1, 2),
 declarative mapping rules are used to generate a Knowledge Graph (3),
 and declarative mappings and templates are used to create an API of domain-specific metadata records.
