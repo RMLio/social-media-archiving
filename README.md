@@ -15,8 +15,12 @@ Then we elaborate on the three major workflow components:
 
 
 `The following workflow was developed for a social media archiving use case at KBR Royal Library of Belgium,
-funded by the Belgian Federal Science Policy Office (BELSPO) BRAIN 2.0. [BESOCIAL](https://kbr.be/en/projects/besocial/).`
+funded by the Belgian Federal Science Policy Office (BELSPO) BRAIN 2.0.` [BESOCIAL](https://kbr.be/en/projects/besocial/).
 
+![image](https://user-images.githubusercontent.com/3501171/114556733-49e25180-9c69-11eb-97e4-9185b207c1bf.png)
+Our architecture for a sustainable social media archiving workflow: heterogeneous data are collected (1, 2),
+declarative mapping rules are used to generate a Knowledge Graph (3),
+and declarative mappings and templates are used to create an API of domain-specific metadata records.
 
 ## Comparison of social media harvesting tools
 
@@ -47,12 +51,10 @@ This step provides:
 * Content selection
 * Content collection
 
-Based on the tool comparison above, we have chosen SFM to harvest social media because
-
-* it supports several social media provider by reusing existing social media harvesters
-* it is extensible with new harvesters or other components as it uses a central RabbitMQ message queue
-* it preserves machine-readable social media data within uniform WARC files, preserving necessary provenance information
-* it provides a user interface to describe collections, this data is available in a relational PostgreSQL database
+Based on the tool comparison above, we have chosen SFM to harvest social media.
+Users select content via the user interface of SFM and also configure how often the harvest process
+should be performed. Starts and stops of harvests are communicated on a RabbitMQ message queue,
+and thus further actions, such as a Knowledge Graph generation, can be triggered.
 
 ## Knowledge Graph generation
 
