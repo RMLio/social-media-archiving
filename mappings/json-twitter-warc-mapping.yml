@@ -1,0 +1,425 @@
+prefixes:
+  idlab-fn: "http://example.com/idlab/function/"
+  dc: "http://purl.org/dc/elements/1.1/"
+  dcterms: "http://purl.org/dc/terms/"
+  http: "http://www.w3.org/2011/http#"
+  grel: "http://users.ugent.be/~bjdmeest/function/grel.ttl#"  
+  owl: "http://www.w3.org/2002/07/owl#"
+  xsd: "http://www.w3.org/2001/XMLSchema#"
+  edm: "http://www.europeana.eu/schemas/edm/"
+  sioc: "http://rdfs.org/sioc/ns#"
+  premis: "http://www.loc.gov/premis/rdf/v3/"
+  relSubType: "https://id.loc.gov/vocabulary/preservation/relationshipSubType/"
+  prov: "http://www.w3.org/ns/prov#"
+  bsd: "http://example.org/ns/besocial/data#"
+  bss: "http://example.org/ns/besocial/shapes#"
+  ex: "http://example.org/ns#"
+
+variables:
+  access: &dbHost INSERT POSTGRESQL CONNECTION STRING HERE
+  type: &dbType postgresql
+  queryFormulation: &sqlQueryFormulation sql2008
+  referenceFormulation: &csvReferenceFormulation csv
+  credentials: &credentials
+    username: INSERT DB USERNAME HERE
+    password: INSERT DB PASSWORD HERE
+
+mappings:
+
+  httpRequestActivity:
+    creator: "<Sven.Lieber@ugent.be>"
+    description: ""
+    version: "v1.0.0"
+    sources:
+      - access: "message.json"
+        referenceFormulation: jsonpath
+        iterator: "$.[*]"
+    s: bsd:httpRequest_$(warc-header.warc-record-id)
+    condition:
+       function: idlab-fn:equal
+       parameters:
+         - [grel:valueParameter, $(warc-header.warc-type)]
+         - [grel:valueParameter2, "request"]
+    po:
+      - [a, prov:Activity]
+      - [a, http:Request]
+      - [dc:title, "HTTP request $(warc-header.warc-record-id)"]
+      - [dc:description, "HTTP request for $(warc-header.warc-target-uri).", en~lang]
+      - [prov:generated, bsd:httpResponse_$(warc-header.warc-concurrent-to)~iri]
+      - [prov:startedAtTime, $(warc-header.warc-date), xsd:dateTime]
+      - [dcterms:isPartOf, bsd:warcJSON_$(warc-header.warc-id)~iri]
+
+
+  httpResponse:
+    creator: "<Sven.Lieber@ugent.be>"
+    description: ""
+    version: "v1.0.0"
+    sources:
+      - access: "message.json"
+        referenceFormulation: jsonpath
+        iterator: "$.[*]"
+    s: bsd:httpResponse_$(warc-header.warc-record-id)
+    condition:
+       function: idlab-fn:equal
+       parameters:
+         - [grel:valueParameter, $(warc-header.warc-type)]
+         - [grel:valueParameter2, "response"]
+    po:
+      - [a, prov:Entity]
+      - [a, http:Response]
+      - [dc:title, "HTTP response $(warc-header.warc-record-id)", en~lang]
+      - [dc:description, "HTTP response for $(warc-header.warc-target-uri).", en~lang]
+      - [dcterms:isPartOf, bsd:warcJSON_$(warc-header.warc-id)~iri]
+
+
+
+  tweetsAggregationStatusObject:
+    creator: "<Sven.Lieber@ugent.be>"
+    description: ""
+    version: "v1.0.0"
+    sources:
+      - access: "message.json"
+        referenceFormulation: jsonpath
+        iterator: "$.[*]"
+    s: bsd:aggregation_post_twitter_$(status.id_str)
+    condition:
+      function: grel:string_contains
+      parameters:
+        - [grel:valueParameter, "$(warc-header.warc-type)_$(warc-header.warc-target-uri)"]
+        - [grel:string_sub, "response_https://api.twitter.com/1.1/users/show.json"]
+    po:
+      - [a, edm:Aggregation]
+      - [dc:title, "Aggregation tweet $(status.id_str)", en~lang]
+      - [edm:aggregatesCHO, bsd:post_twitter_$(status.id_str)~iri]
+      - [edm:hasView, bsd:post_twitter_json_$(status.id_str)~iri]
+
+
+  tweetsAggregationTimelineObject:
+    creator: "<Sven.Lieber@ugent.be>"
+    description: ""
+    version: "v1.0.0"
+    sources:
+      - access: "message.json"
+        referenceFormulation: jsonpath
+        iterator: "$.[*]"
+    s: bsd:aggregation_post_twitter_$(id_str)
+    condition:
+      function: grel:string_contains
+      parameters:
+        - [grel:valueParameter, "$(warc-header.warc-type)_$(warc-header.warc-target-uri)"]
+        - [grel:string_sub, "response_https://api.twitter.com/1.1/statuses/user_timeline.json"]
+    po:
+      - [a, edm:Aggregation]
+      - [dc:title, "Aggregation tweet $(id_str)", en~lang]
+      - [edm:aggregatesCHO, bsd:post_twitter_$(id_str)~iri]
+      - [edm:hasView, bsd:post_twitter_json_$(id_str)~iri]
+
+
+ 
+  tweetsCHOStatusObject:
+    creator: "<Sven.Lieber@ugent.be>"
+    description: ""
+    version: "v1.0.0"
+    sources:
+      - access: "message.json"
+        referenceFormulation: jsonpath
+        iterator: "$.[*]"
+    s: bsd:post_twitter_$(status.id_str)
+    condition:
+      function: grel:string_contains
+      parameters:
+        - [grel:valueParameter, "$(warc-header.warc-type)_$(warc-header.warc-target-uri)"]
+        - [grel:string_sub, "response_https://api.twitter.com/1.1/users/show.json"]
+    po:
+      - [a, edm:ProvidedCHO]
+      - [a, premis:IntellectualEntity]
+      - [a, schema:SocialMediaPosting]
+      - [a, sioc:Post]
+      - [dc:title, "Tweet $(status.id_str)", en~lang]
+      - [dc:creator, bsd:author_twitter_$(id_str)~iri]
+      - [sioc:has_creator, bsd:author_twitter_$(id_str)~iri]
+      - [sioc:id, $(status.id_str)]
+      - [dcterms:identifier, $(status.id_str)]
+
+
+  tweetsCHOTimelineObject:
+    creator: "<Sven.Lieber@ugent.be>"
+    description: ""
+    version: "v1.0.0"
+    sources:
+      - access: "message.json"
+        referenceFormulation: jsonpath
+        iterator: "$.[*]"
+    s: bsd:post_twitter_$(id_str)
+    condition:
+      function: grel:string_contains
+      parameters:
+        - [grel:valueParameter, "$(warc-header.warc-type)_$(warc-header.warc-target-uri)"]
+        - [grel:string_sub, "response_https://api.twitter.com/1.1/statuses/user_timeline.json"]
+    po:
+      - [a, edm:ProvidedCHO]
+      - [a, premis:IntellectualEntity]
+      - [a, schema:SocialMediaPosting]
+      - [a, sioc:Post]
+      - [dc:title, "Tweet $(id_str)", en~lang]
+      - [dc:creator, bsd:author_twitter_$(user.id_str)~iri]
+      - [sioc:has_creator, bsd:author_twitter_$(user.id_str)~iri]
+      - [sioc:id, $(id_str)]
+      - [dcterms:identifier, $(id_str)]
+
+
+
+  tweetsAuthorsStatusObject:
+    creator: "<Sven.Lieber@ugent.be>"
+    description: ""
+    version: "v1.0.0"
+    sources:
+      - access: "message.json"
+        referenceFormulation: jsonpath
+        iterator: "$.[*]"
+    s: bsd:author_twitter_$(id_str)
+    condition:
+      function: grel:string_contains
+      parameters:
+        - [grel:valueParameter, "$(warc-header.warc-type)_$(warc-header.warc-target-uri)"]
+        - [grel:string_sub, "response_https://api.twitter.com/1.1/users/show.json"]
+    po:
+      - [a, premis:Person]
+      - [a, sioc:UserAccount]
+      - [sioc:id, $(id_str)]
+      - [sioc:name, $(screen_name)]
+      - [dc:title, "Twitter user $(id_str)", en~lang]
+
+
+
+  tweetsAuthorsTimelineObject:
+    creator: "<Sven.Lieber@ugent.be>"
+    description: ""
+    version: "v1.0.0"
+    sources:
+      - access: "message.json"
+        referenceFormulation: jsonpath
+        iterator: "$.[*]"
+    s: bsd:author_twitter_$(user.id_str)
+    condition:
+      function: grel:string_contains
+      parameters:
+        - [grel:valueParameter, "$(warc-header.warc-type)_$(warc-header.warc-target-uri)"]
+        - [grel:string_sub, "response_https://api.twitter.com/1.1/statuses/user_timeline.json"]
+    po:
+      - [a, premis:Person]
+      - [a, sioc:UserAccount]
+      - [sioc:id, $(user.id_str)]
+      - [sioc:name, $(user.screen_name)]
+      - [dc:title, "Twitter user $(user.id_str)", en~lang]
+
+
+  tweetJSONStatusObject:
+    creator: "<Sven.Lieber@ugent.be>"
+    description: ""
+    version: "v1.0.0"
+    sources:
+      - access: "message.json"
+        referenceFormulation: jsonpath
+        iterator: "$.[*]"
+    s: bsd:post_twitter_json_$(status.id_str)
+    condition:
+      function: grel:string_contains
+      parameters:
+        - [grel:valueParameter, "$(warc-header.warc-type)_$(warc-header.warc-target-uri)"]
+        - [grel:string_sub, "response_https://api.twitter.com/1.1/users/show.json"]
+    po:
+      - [a, edm:WebResource]
+      - [a, premis:Representation]
+      - [relSubType:rep, bsd:post_twitter_$(status.id_str)~iri]
+      - [dc:title, "JSON version of tweet $(status.id_str)", en~lang]
+      - [dcterms:isPartOf, bsd:httpResponse_$(warc-header.warc-record-id)~iri]
+
+
+  tweetJSONTimelineObject:
+    creator: "<Sven.Lieber@ugent.be>"
+    description: ""
+    version: "v1.0.0"
+    sources:
+      - access: "message.json"
+        referenceFormulation: jsonpath
+        iterator: "$.[*]"
+    s: bsd:post_twitter_json_$(id_str)
+    condition:
+      function: grel:string_contains
+      parameters:
+        - [grel:valueParameter, "$(warc-header.warc-type)_$(warc-header.warc-target-uri)"]
+        - [grel:string_sub, "response_https://api.twitter.com/1.1/statuses/user_timeline.json"]
+    po:
+      - [a, edm:WebResource]
+      - [a, premis:Representation]
+      - [relSubType:rep, bsd:post_twitter_$(id_str)~iri]
+      - [dc:title, "JSON version of tweet $(id_str)", en~lang]
+      - [dcterms:isPartOf, bsd:httpResponse_$(warc-header.warc-record-id)~iri]
+
+
+
+
+  tweetsRecognizedEntitiesCollectionStatusObject:
+    creator: "<Sven.Lieber@ugent.be>"
+    description: ""
+    version: "v1.0.0"
+    sources:
+      - access: "message.json"
+        referenceFormulation: jsonpath
+        iterator: "$.[*]"
+    s: bsd:entityCollection_twitter_$(status.id_str)
+    condition:
+      function: grel:string_contains
+      parameters:
+        - [grel:valueParameter, "$(warc-header.warc-type)_$(warc-header.warc-target-uri)"]
+        - [grel:string_sub, "response_https://api.twitter.com/1.1/users/show.json"]
+    po:
+      - [a, prov:Collection]
+      - [dc:title, "Entities extracted from Tweet $(status.id_str)", en~lang]
+      - [dc:description, "A collection of entities which were extracted from tweet $(status.id_str) during Knowledge Graph generation with RML", en~lang]
+      - [prov:wasDerivedFrom, bsd:post_twitter_$(status.id_str)~iri]
+      - [prov:qualifiedDerivation, bsd:entityRecognitionDerivation_twitter_$(status.id_str)~iri]
+      - p: prov:hadMember
+        o:
+          function: idlab-fn:dbpediaSpotlightWithConfidenceParameter
+          parameters:
+            - [idlab-fn:str, $(status.full_text)]
+            - [idlab-fn:endpoint, "https://api.dbpedia-spotlight.org/en"]
+            - [idlab-fn:confidence, .9]
+          type: iri
+        condition:
+          function: idlab-fn:notEqual
+          parameters:
+            - [grel:valueParameter, $(status.full_text)]
+            - [grel:valueParameter2, ""]
+
+
+  tweetsRecognizedEntitiesCollectionTimelineObject:
+    creator: "<Sven.Lieber@ugent.be>"
+    description: "These mappings mostly concern information to fulfill CQ-8, which named entities where extracted from a collection item"
+    version: "v1.0.0"
+    sources:
+      - access: "message.json"
+        referenceFormulation: jsonpath
+        iterator: "$.[*]"
+    s: bsd:entityCollection_twitter_$(id_str)
+    condition:
+      function: grel:string_contains
+      parameters:
+        - [grel:valueParameter, "$(warc-header.warc-type)_$(warc-header.warc-target-uri)"]
+        - [grel:string_sub, "response_https://api.twitter.com/1.1/statuses/user_timeline.json"]
+    po:
+      - [a, prov:Collection]
+      - [dc:title, "Entities extracted from Tweet $(id_str)", en~lang]
+      - [dc:description, "A collection of entities which were extracted from tweet $(id_str) during Knowledge Graph generation with RML", en~lang]
+      - [prov:wasDerivedFrom, bsd:post_twitter_$(id_str)~iri]
+      - [prov:qualifiedGeneration, bsd:entityRecognitionDerivation_twitter_$(id_str)~iri]
+      - p: prov:hadMember
+        o:
+          function: idlab-fn:dbpediaSpotlightWithConfidenceParameter
+          parameters:
+            - [idlab-fn:str, $(full_text)]
+            - [idlab-fn:endpoint, "https://api.dbpedia-spotlight.org/en"]
+            - [idlab-fn:confidence, .9]
+          type: iri
+        condition:
+          function: idlab-fn:notEqual
+          parameters:
+            - [grel:valueParameter, $(full_text)]
+            - [grel:valueParameter2, ""]
+
+
+
+
+
+  tweetsRecognizedEntitiesActivityStatusObject:
+    creator: "<Sven.Lieber@ugent.be>"
+    description: ""
+    version: "v1.0.0"
+    sources:
+      - access: "message.json"
+        referenceFormulation: jsonpath
+        iterator: "$.[*]"
+    s: bsd:entityRecognitionActivity_twitter_$(status.id_str)
+    condition:
+      function: grel:string_contains
+      parameters:
+        - [grel:valueParameter, "$(warc-header.warc-type)_$(warc-header.warc-target-uri)"]
+        - [grel:string_sub, "response_https://api.twitter.com/1.1/users/show.json"]
+    po:
+      - [a, prov:Activity]
+      - [dc:title, "DBpedia Entity Recognition for Tweet $(status.id_str)", en~lang]
+      - [dc:description, "An activity executed during the RML mapping to generate DBpedia named entities by using DBpedia spotlight (www.dbpedia-spotlight.org/) extracting named entities from post_twitter_$(status.id_str)", en~lang]
+      - [prov:used, bsd:post_twitter_$(status.id_str)~iri]
+      - [prov:used, "www.dbpedia-spotlight.org", schema:URL]
+
+
+  tweetsRecognizedEntitiesActivityTimelineObject:
+    creator: "<Sven.Lieber@ugent.be>"
+    description: ""
+    version: "v1.0.0"
+    sources:
+      - access: "message.json"
+        referenceFormulation: jsonpath
+        iterator: "$.[*]"
+    s: bsd:entityRecognitionActivity_twitter_$(id_str)
+    condition:
+      function: grel:string_contains
+      parameters:
+        - [grel:valueParameter, "$(warc-header.warc-type)_$(warc-header.warc-target-uri)"]
+        - [grel:string_sub, "response_https://api.twitter.com/1.1/statuses/user_timeline.json"]
+    po:
+      - [a, prov:Activity]
+      - [dc:title, "DBpedia Entity Recognition for Tweet $(id_str)", en~lang]
+      - [dc:description, "An activity executed during the RML mapping to generate DBpedia named entities by using DBpedia spotlight (www.dbpedia-spotlight.org/) extracting named entities from post_twitter_$(id_str)", en~lang]
+      - [prov:used, bsd:post_twitter_$(id_str)~iri]
+      - [prov:used, "www.dbpedia-spotlight.org", schema:URL]
+
+
+
+
+  tweetsRecognizedEntitiesDerivationStatusObject:
+    creator: "<Sven.Lieber@ugent.be>"
+    description: ""
+    version: "v1.0.0"
+    sources:
+      - access: "message.json"
+        referenceFormulation: jsonpath
+        iterator: "$.[*]"
+    s: bsd:entityRecognitionDerivation_twitter_$(status.id_str)
+    condition:
+      function: grel:string_contains
+      parameters:
+        - [grel:valueParameter, "$(warc-header.warc-type)_$(warc-header.warc-target-uri)"]
+        - [grel:string_sub, "response_https://api.twitter.com/1.1/users/show.json"]
+    po:
+      - [a, prov:Derivation]
+      - [dc:title, "DBpedia Entity Recognition for Tweet $(status.id_str)", en~lang]
+      - [dc:description, "The derivation of a collection of named entities entityCollection_twitter_$(status.id_str) from post_twitter_$(status.id_str) via the activity entityRecognitionActivity_twitter_$(status.id_str)", en~lang]
+      - [prov:entity, bsd:entityCollection_twitter_$(status.id_str)~iri]
+      - [prov:hadActivity, bsd:entityRecognitionActivity_twitter_$(status.id_str)~iri]
+
+
+  tweetsRecognizedEntitiesDerivationTimelineObject:
+    creator: "<Sven.Lieber@ugent.be>"
+    description: ""
+    version: "v1.0.0"
+    sources:
+      - access: "message.json"
+        referenceFormulation: jsonpath
+        iterator: "$.[*]"
+    s: bsd:entityRecognitionDerivation_twitter_$(id_str)
+    condition:
+      function: grel:string_contains
+      parameters:
+        - [grel:valueParameter, "$(warc-header.warc-type)_$(warc-header.warc-target-uri)"]
+        - [grel:string_sub, "response_https://api.twitter.com/1.1/statuses/user_timeline.json"]
+    po:
+      - [a, prov:Derivation]
+      - [dc:title, "DBpedia Entity Recognition for Tweet $(id_str)", en~lang]
+      - [dc:description, "The derivation of a collection of named entities entityCollection_twitter_$(id_str) from post_twitter_$(id_str) via the activity entityRecognitionActivity_twitter_$(id_str)", en~lang]
+      - [prov:entity, bsd:entityCollection_twitter_$(id_str)~iri]
+      - [prov:hadActivity, bsd:entityRecognitionActivity_twitter_$(id_str)~iri]
+
+
