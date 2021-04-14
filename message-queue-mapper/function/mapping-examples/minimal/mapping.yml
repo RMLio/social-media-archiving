@@ -1,0 +1,43 @@
+prefixes:
+  idlab-fn: "http://example.com/idlab/function/"
+  dcterms: "http://purl.org/dc/terms/"
+  http: "http://www.w3.org/2011/http#"
+  grel: "http://users.ugent.be/~bjdmeest/function/grel.ttl#"  
+  owl: "http://www.w3.org/2002/07/owl#"
+  xsd: "http://www.w3.org/2001/XMLSchema#"
+  edm: "http://www.europeana.eu/schemas/edm/"
+  sioc: "http://rdfs.org/sioc/ns#"
+  bsd: "http://example.org/ns/besocial/data#"
+  bss: "http://example.org/ns/besocial/shapes#"
+  ex: "http://example.org/ns#"
+
+
+mappings:
+
+  tweetsRecognizedEntitiesCollectionStatusObject:
+    sources:
+      - access: "data/message.json"
+        referenceFormulation: jsonpath
+        iterator: "$.[*]"
+    s: bsd:entityCollection_twitter_$(status.id_str)
+    po:
+      - [a, prov:Collection]
+      - [dc:title, "Entities extracted from Tweet $(status.id_str)", en~lang]
+      - [dc:description, "A collection of entities which were extracted from tweet $(status.id_str) during Knowledge Graph generation with RML", en~lang]
+      - [prov:wasDerivedFrom, bsd:post_twitter_$(status.id_str)~iri]
+      - [prov:qualifiedGeneration, bsd:entityRecognitionDerivation_twitter_$(status.id_str)~iri]
+      - p: prov:hadMember
+        o:
+          function: idlab-fn:dbpediaSpotlightWithConfidenceParameter
+          parameters:
+            - [idlab-fn:str, $(status.full_text)]
+            - [idlab-fn:endpoint, "https://api.dbpedia-spotlight.org/en"]
+            - [idlab-fn:confidence, .5]
+        condition:
+          function: idlab-fn:notEqual
+          parameters:
+            - [grel:valueParameter, $(status.full_text)]
+            - [grel:valueParameter2, ""]
+
+
+ 

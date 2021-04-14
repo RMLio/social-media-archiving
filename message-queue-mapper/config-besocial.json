@@ -1,0 +1,19 @@
+{
+    "targets": [
+        {
+	    "type": "rmlmapper"
+        }
+    ],
+    "generators": [
+        {
+            "name": "RabbitMQ Social Feed Manager generator",
+            "generator": "./lib/generators/warc-generator.js",
+            "options": {
+		          "url": "amqp://USER:PASSWORD@IP:PORT",
+            	"routingKey": "#",
+            	"exchange": "kg_generation"	
+            },
+            "interval": 5000 
+        }
+    ]
+}

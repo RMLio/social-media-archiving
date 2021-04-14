@@ -1,0 +1,15 @@
+.idea
+target
+*.iml
+.DS_Store
+.settings
+.vscode
+.attach_*
+ojdbc*.jar
+pom-oracle.xml
+dependency-reduced-pom.xml
+settings.xml
+# ignore rmlmapper JAR
+rmlmapper*.jar
+# ignore besocial-functions JAR
+besocial-functions-*.jar

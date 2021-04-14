@@ -1,0 +1,22 @@
+{
+    "targets": [
+        {
+	    "type": "rabbitmq",
+            "url": "amqp://USER:PASSWORD@IP:PORT",
+            "routingKey": "#",
+            "exchange": "kg_generation"
+        }
+    ],
+    "generators": [
+        {
+            "name": "RabbitMQ generator",
+            "generator": "./lib/generators/rabbitmq.js",
+            "options": {
+                "url": "amqp://USER:PASSWORD@IP:PORT",
+                "routingKey": "warc_created",
+                "exchange": "sfm_exchange"
+            },
+	    "interval": 1000
+        }
+    ]
+}
