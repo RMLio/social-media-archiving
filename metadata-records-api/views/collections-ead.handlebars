@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE ead PUBLIC "+//ISBN 1-931666-00-8//DTD ead.dtd (Encoded Archival Description (EAD) Version 2002)//EN" "http://lcweb2.loc.gov/xmlcommon/dtds/ead2002/ead.dtd">
+
+<ead>
+ <eadheader>
+  <eadid identifier="ead-{{data.[0].[identifier]}}.xml">{{data.[0].[identifier]}}</eadid>
+  <filedesc>
+   <titlestmt>
+    <titleproper>Collection {{data.[0].[identifier]}}</titleproper>
+    <author>Sven Lieber</author>
+   </titlestmt>
+  </filedesc>
+  <profiledesc>
+   <creation>Finding aid created with Walder and encoded in EAD version 2002</creation>
+   <langusage>
+    <language langcode="eng">English</language>
+   </langusage>
+   <descrules>Description based on ISAD(G)</descrules>
+  </profiledesc>
+ </eadheader>
+ <archdesc level="collection" audience="external">
+  <did>
+   <unitid>{{data.[0].[aggregatedCHO].[0].[identifier]}}</unitid>
+   <unittitle>{{data.[0].[aggregatedCHO].[0].[title]}}</unittitle>
+   <physdesc>
+    <genreform source="aat">Social media</genreform>
+    <genreform source="lcgft">Data sets</genreform>
+    <genreform source="aat">Electronic records (Digital records)</genreform>
+   </physdesc>
+   <langmaterial>
+    <language langcode="eng">English</language>
+   </langmaterial>
+   <materialspec>Original file formats: JavaScript Object Notation (JSON) files</materialspec>
+  </did>
+  <acqinfo>
+   <p>Materials were collected from the Twitter API by using the Social Feed Manager (SFM) and Twarc.</p>
+   <p>The following seeds were used to crawl content for this collection:</p>
+  </acqinfo>
+  <bioghist>
+   <chronlist>
+     {{#each harvests}}
+       <chronitem>
+         <date>{{this.identifier}}</date>
+         <event>{{this.description}}</event>
+       </chronitem>
+     {{/each}}
+   </chronlist>
+  </bioghist>
+  <scopecontent>
+   <p>{{data.[0].[aggregatedCHO].[0].[description]}}</p>
+  </scopecontent>
+  <controlaccess>
+   <!-- most used named entities -->
+   {{#each ner-data}}
+     <subject >{{this.name}}</subject>
+   {{/each}}
+   <name role="Contributor">Twitter Inc (Firm)</name>
+  </controlaccess>
+  <accessrestrict>
+   <p>Partly restricted - Additional processing required.</p>
+  </accessrestrict>
+  {{#each data}}
+  <dsc>
+    <!-- The different representations of this collection, e.g. JSON or HTML -->
+      {{#each this.hasView}}
+      <c level="collection">
+        <did>
+          <unitid>{{this.identifier}}</unitid>
+          <unittitle>{{this.title}}</unittitle>
+
+          <physdesc>
+            <genreform source="aat">Social media</genreform>
+            <genreform source="lcgft">Data sets</genreform>
+            <genreform source="aat">Electronic records (Digital records)</genreform>
+          </physdesc>
+
+        </did>
+        <scopecontent>
+          <p>{{this.description}}</p>
+        </scopecontent>
+        <!-- The different versions of this collection -->
+        {{#each this.hasSpecialization}}
+        <c level="collection">
+          <did>
+            <unitid>{{this.identifier}}</unitid>
+            <unittitle>{{this.title}}</unittitle>
+            <physdesc>
+              <genreform source="aat">Social media</genreform>
+              <genreform source="lcgft">Data sets</genreform>
+              <genreform source="aat">Electronic records (Digital records)</genreform>
+            </physdesc>
+          </did>
+          <scopecontent>
+            <p>{{this.description}}</p>
+          </scopecontent>
+          <!-- The different WARC files which are part of this collection version -->
+          {{#each this.hasPart}}
+            <c level="file">
+              <did>
+                <unitid>{{this.identifier}}</unitid>
+                <unittitle>{{this.title}}</unittitle>
+                <physdesc>
+                  <genreform source="aat">Social media</genreform>
+                  <genreform source="lcgft">Data sets</genreform>
+                  <genreform source="aat">Electronic records (Digital records)</genreform>
+                  <extent>1.00 data set(s)</extent>
+                 <extent>{{this.fileSize}}</extent>
+                </physdesc>
+              </did>
+              <scopecontent>
+                <p>{{this.description}}</p>
+              </scopecontent>
+            </c>
+          {{/each}}
+        </c>
+        {{/each}}
+      </c>
+      {{/each}}
+  </dsc>
+  {{/each}}
+ </archdesc>
+</ead>

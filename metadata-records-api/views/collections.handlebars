@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+<h1>Collections</h1>
+<div>
+    <ul>
+        {{#each data}}
+            <li>{{this.title}}: <a href="http://localhost:3000/collection/{{this.identifier}}/export/ead2002" download="ead-{{this.identifier}}.xml">Link to EAD</a></li>
+        {{/each}} 
+    </ul>
+</div>
+</body>
+</html>
+

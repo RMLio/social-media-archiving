@@ -1,0 +1,121 @@
+openapi: 3.0.2
+info:
+  title: 'BeSocial - domain-specific social media archive formats'
+  version: 1.0.0
+x-walder-resources:
+  path: ./
+x-walder-datasources:
+  - http://localhost:8080/collection-data.ttl
+  - http://localhost:8080/harvest-data.ttl
+ 
+x-walder-errors:
+  500:
+    description: "Internal server error"
+    x-walder-input-text/html: error500.html
+paths:
+  /collection/{collection}/export/ead2002:
+    get:
+      summary: 'Returns an EAD 2002 description of the given collection'
+      parameters:
+        - in: path
+          name: collection
+          required: true
+          schema:
+            type: string
+          description: 'Identifier of a collection'
+      responses:
+        200:
+          description: 'EAD 2002 description of the given collection'
+          x-walder-input-text/html: collections-ead.handlebars
+      x-walder-query:
+        graphql-query: 
+          data: >
+            {
+              type(_:Aggregation)
+              identifier @single
+              aggregatedCHO {
+                type(_:Collection)
+                identifier(_: $collection)
+                title @single
+                identifier @single
+                description @single
+              }
+              hasView {
+                type(_:WebResource)
+                identifier @single
+                title @single
+                description @single
+                hasSpecialization {
+                  id @single
+                  description @single
+                  type(_:WebResource)
+                  title
+                  hasPart {
+                    title @single
+                    identifier @single
+                    description @single
+                    fileSize @single
+                    format @single
+                    generatedAtTime @single
+                  }
+                }
+              }
+            }
+        json-ld-context: >
+          {
+            "prov": "http://www.w3.org/ns/prov#",
+            "dcterms": "http://purl.org/dc/terms/",
+            "dc": "http://purl.org/dc/elements/1.1/",
+            "dcmitype": "http://purl.org/dc/dcmitype/",
+            "edm": "http://www.europeana.eu/schemas/edm/",
+            "bsd": "http://example.org/ns/besocial/data#",
+            "schema": "http://schema.org/",
+            "Aggregation": "edm:Aggregation",
+            "aggregatedCHO": "edm:aggregatedCHO",
+            "hasView": "edm:hasView",
+            "Collection": "dcmitype:Collection",
+            "identifier": "dcterms:identifier",
+            "WebResource": "edm:WebResource",
+            "title": "dc:title",
+            "hasSpecialization": {"@reverse": "prov:specializationOf"},
+            "Entity": "prov:Entity",
+            "Activity": "prov:Activity",
+            "fileSize": "schema:fileSize",
+            "description": "dc:description",
+            "format": "dcterms:format",
+            "generatedAtTime": "prov:generatedAtTime",
+            "hasPart": {"@reverse": "dcterms:isPartOf"},
+            "type": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+          }
+  /collections:
+    get:
+      summary: 'Returns a list of all collections'
+      responses:
+        200:
+          description: 'List of all collections'
+          x-walder-input-text/html: collections.handlebars
+      x-walder-query:
+        graphql-query: >
+          {
+            id @single
+            type(_:Collection)
+            identifier @single
+            title @single
+          }
+        json-ld-context: >
+          {
+           "dcterms": "http://purl.org/dc/terms/",
+           "edm": "http://www.europeana.eu/schemas/edm/>",
+           "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+           "dc": "http://purl.org/dc/elements/1.1/",
+           "prov": "http://www.w3.org/ns/prov#",
+            "identifier": "dcterms:identifier",
+           "bsd": "http://example.com/ns/besocial-data#",
+           "schema": "https://schema.org/",
+           "dcmitype": "http://purl.org/dc/dcmitype/",
+           "ex": "http://example.com/ns/example#",
+           "title": "dc:title",
+           "type": "rdf:type",
+           "Collection": "dcmitype:Collection"
+          }
+
