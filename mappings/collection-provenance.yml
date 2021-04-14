@@ -1,0 +1,354 @@
+prefixes:
+  idlab-fn: "http://example.com/idlab/function/"
+  dc: "http://purl.org/dc/elements/1.1/"
+  dcterms: "http://purl.org/dc/terms/"
+  dcmitype: "http://purl.org/dc/dcmitype/"
+  premis: "http://www.loc.gov/premis/rdf/v3/"
+  relSubType: "https://id.loc.gov/vocabulary/preservation/relationshipSubType/"
+  ebucore: "https://www.ebu.ch/metadata/ontologies/ebucore#"
+  grel: "http://users.ugent.be/~bjdmeest/function/grel.ttl#"  
+  owl: "http://www.w3.org/2002/07/owl#"
+  prov: "http://www.w3.org/ns/prov#"
+  xsd: "http://www.w3.org/2001/XMLSchema#"
+  edm: "http://www.europeana.eu/schemas/edm/"
+  bsd: "http://example.org/ns/besocial/data#"
+  bss: "http://example.org/ns/besocial/shapes#"
+  ex: "http://example.org/ns#"
+
+variables:
+  access: &dbHost INSERT POSTGRES CONNECTION STRING HERE
+  type: &dbType postgresql
+  queryFormulation: &sqlQueryFormulation sql2008
+  referenceFormulation: &csvReferenceFormulation csv
+  credentials: &credentials
+    username: INSERT DB USERNAME HERE
+    password: INSERT DB PASSWORD HERE
+
+mappings:
+
+  harvests:
+    creator: "<Sven.Lieber@ugent.be>"
+    description: ""
+    version: "v1.0.0"
+    sources:
+      - access: *dbHost
+        type: *dbType
+        credentials: *credentials
+        queryFormulation: *sqlQueryFormulation
+        referenceFormulation: *csvReferenceFormulation
+        query: SELECT c1.collection_id_sfm, h.id as "harvest_id", h.harvest_id as "harvest_id_sfm", h.harvest_type, h.status, h.collection_id, (to_char(h.date_started, 'YYYY-MM-DDT') || to_char(h.date_started, 'HH24:MI:SSOF')) as "harvest_started", (to_char(h.date_ended, 'YYYY-MM-DDT') || to_char(h.date_ended, 'HH24:MI:SSOF')) as "harvest_ended", (to_char(c1.date_updated, 'YYYY-MM-DDT') || to_char(c1.date_updated, 'HH24:MI:SSOF')) as "date_updated", c1.type, c1.history_id FROM ui_harvest h LEFT JOIN ( SELECT c.history_id as "history_id", c.date_updated as "date_updated", c.id as "collection_id", c.collection_id as "collection_id_sfm", 'collection' as "type" FROM ui_historicalcollection c UNION SELECT s.history_id as "history_id", s.date_updated as "date_updated", s.collection_id as "collection_id", sub_c.collection_id as "collection_id_sfm", 'seed' as "type" FROM ui_historicalseed s JOIN ui_collection sub_c ON s.collection_id=sub_c.id) c1 ON h.collection_id=c1.collection_id AND c1.date_updated = (SELECT MAX(c2.date_updated) FROM ( SELECT c.history_id as "history_id", c.date_updated as "date_updated", c.id as "collection_id", c.collection_id as "collection_id_sfm", 'collection' as "type" FROM ui_historicalcollection c UNION SELECT s.history_id as "history_id", s.date_updated as "date_updated", s.collection_id as "collection_id", NULL as "collection_id_sfm", 'seed' as "type" FROM ui_historicalseed s) c2 WHERE c2.collection_id=h.collection_id AND c2.date_updated <= h.date_started) ORDER BY h.collection_id, h.date_started;
+    s: bsd:harvest_$(harvest_id_sfm)
+    po:
+      - [a, prov:Activity]
+      - [dc:title, "Harvest $(harvest_id_sfm)", en~lang]
+      - [dc:description, "A $(harvest_type) harvest with status $(status) for collection $(collection_id_sfm)", en~lang]
+      - [prov:used, bsd:harvestSeeds_$(harvest_id_sfm)~iri]
+      - [prov:startedAtTime, $(harvest_started), xsd:dateTime]
+      - [prov:endedAtTime, $(harvest_ended), xsd:dateTime]
+
+  harvestInputCollection:
+    creator: "<Sven.Lieber@ugent.be>"
+    description: ""
+    version: "v1.0.0"
+    sources:
+      - access: *dbHost
+        type: *dbType
+        credentials: *credentials
+        queryFormulation: *sqlQueryFormulation
+        referenceFormulation: *csvReferenceFormulation
+        query: SELECT harvest_id FROM ui_harvest
+    s: bsd:harvestSeeds_$(harvest_id)
+    po:
+      - [a, prov:Collection]
+      - [dc:title, "Input seeds for harvest $(harvest_id)", en~lang]
+ 
+
+  warcs:
+    creator: "<Sven.Lieber@ugent.be>"
+    description: ""
+    version: "v1.0.0"
+    sources:
+      - access: *dbHost
+        type: *dbType
+        credentials: *credentials
+        queryFormulation: *sqlQueryFormulation
+        referenceFormulation: *csvReferenceFormulation
+        query: SELECT w.warc_id, w.path, c1.collection_id_sfm, w.bytes, pg_size_pretty(w.bytes::bigint) as "bytesFormatted", w.sha1, h.id as "harvest_id", h.harvest_id as "harvest_id_sfm", h.harvest_type, h.status, h.collection_id, (to_char(w.date_created, 'YYYY-MM-DDT') || to_char(w.date_created, 'HH24:MI:SSOF')) as "date_created", (to_char(h.date_started, 'YYYY-MM-DDT') || to_char(h.date_started, 'HH24:MI:SSOF')) as "harvest_started", (to_char(h.date_ended, 'YYYY-MM-DDT') || to_char(h.date_ended, 'HH24:MI:SSOF')) as "harvest_ended", (to_char(c1.date_updated, 'YYYY-MM-DDT') || to_char(c1.date_updated, 'HH24:MI:SSOF')) as "date_updated", c1.type, c1.history_id FROM ui_warc w JOIN ui_harvest h ON w.harvest_id=h.id LEFT JOIN ( SELECT c.history_id as "history_id", c.date_updated as "date_updated", c.id as "collection_id", c.collection_id as "collection_id_sfm", 'collection' as "type" FROM ui_historicalcollection c UNION SELECT s.history_id as "history_id", s.date_updated as "date_updated", s.collection_id as "collection_id", sub_c.collection_id as "collection_id_sfm", 'seed' as "type" FROM ui_historicalseed s JOIN ui_collection sub_c ON s.collection_id=sub_c.id) c1 ON h.collection_id=c1.collection_id AND c1.date_updated = (SELECT MAX(c2.date_updated) FROM ( SELECT c.history_id as "history_id", c.date_updated as "date_updated", c.id as "collection_id", c.collection_id as "collection_id_sfm", 'collection' as "type" FROM ui_historicalcollection c UNION SELECT s.history_id as "history_id", s.date_updated as "date_updated", s.collection_id as "collection_id", NULL as "collection_id_sfm", 'seed' as "type" FROM ui_historicalseed s) c2 WHERE c2.collection_id=h.collection_id AND c2.date_updated <= h.date_started) ORDER BY h.collection_id, h.date_started;
+    s: bsd:warcJSON_$(warc_id)
+    po:
+      - [a, prov:Entity]
+      - [a, premis:File]
+      - [dc:title, "WARC $(warc_id)", en~lang]
+      - [dc:description, "The WARC file $(warc_id) of size $(bytesFormatted) generated by harvest $(harvest_id_sfm) at $(date_created).", en~lang]
+      - [dcterms:identifier, $(warc_id)]
+      - [schema:encodingFormat, "application/warc"]
+      - [schema:fileSize, $(bytesFormatted)]
+      - [premis:size, $(bytes)]
+      - [premis:fixity, bsd:warcJSONFixity_$(warc_id)~iri]
+      - [premis:originalName, $(path)]
+      - [dcterms:format, "application/warc"]
+      - [ebucore:hasMimeType, "application/warc"]
+      - [dcterms:isPartOf, bsd:collectionVersionJSON_$(collection_id_sfm)_$(type)_$(history_id)~iri]
+      - [relSubType:isp, bsd:collectionVersionJSON_$(collection_id_sfm)_$(type)_$(history_id)~iri]
+      - [prov:generatedAtTime, $(date_created)]
+      - [prov:wasGeneratedBy, bsd:harvest_$(harvest_id_sfm)~iri]
+
+
+  warcsFixity:
+    creator: "<Sven.Lieber@ugent.be>"
+    description: ""
+    version: "v1.0.0"
+    sources:
+      - access: *dbHost
+        type: *dbType
+        credentials: *credentials
+        queryFormulation: *sqlQueryFormulation
+        referenceFormulation: *csvReferenceFormulation
+        query: SELECT w.warc_id, c1.collection_id_sfm, w.bytes, pg_size_pretty(w.bytes::bigint) as bytesFormatted, w.sha1, h.id as "harvest_id", h.harvest_id as "harvest_id_sfm", h.harvest_type, h.status, h.collection_id, (to_char(w.date_created, 'YYYY-MM-DDT') || to_char(w.date_created, 'HH24:MI:SSOF')) as "date_created", (to_char(h.date_started, 'YYYY-MM-DDT') || to_char(h.date_started, 'HH24:MI:SSOF')) as "harvest_started", (to_char(h.date_ended, 'YYYY-MM-DDT') || to_char(h.date_ended, 'HH24:MI:SSOF')) as "harvest_ended", (to_char(c1.date_updated, 'YYYY-MM-DDT') || to_char(c1.date_updated, 'HH24:MI:SSOF')) as "date_updated", c1.type, c1.history_id FROM ui_warc w JOIN ui_harvest h ON w.harvest_id=h.id LEFT JOIN ( SELECT c.history_id as "history_id", c.date_updated as "date_updated", c.id as "collection_id", c.collection_id as "collection_id_sfm", 'collection' as "type" FROM ui_historicalcollection c UNION SELECT s.history_id as "history_id", s.date_updated as "date_updated", s.collection_id as "collection_id", sub_c.collection_id as "collection_id_sfm", 'seed' as "type" FROM ui_historicalseed s JOIN ui_collection sub_c ON s.collection_id=sub_c.id) c1 ON h.collection_id=c1.collection_id AND c1.date_updated = (SELECT MAX(c2.date_updated) FROM ( SELECT c.history_id as "history_id", c.date_updated as "date_updated", c.id as "collection_id", c.collection_id as "collection_id_sfm", 'collection' as "type" FROM ui_historicalcollection c UNION SELECT s.history_id as "history_id", s.date_updated as "date_updated", s.collection_id as "collection_id", NULL as "collection_id_sfm", 'seed' as "type" FROM ui_historicalseed s) c2 WHERE c2.collection_id=h.collection_id AND c2.date_updated <= h.date_started) ORDER BY h.collection_id, h.date_started;
+    s: bsd:warcJSONFixity_$(warc_id)
+    po:
+      - [a, premis:Fixity]
+      - [dc:title, "WARC Fixity $(warc_id)", en~lang]
+      - [rdf:value, $(sha1)]
+      - [dc:description, "The fixity of WARC file $(warc_id): '$(sha1)'.", en~lang]
+
+
+
+
+  collectionsAggregation:
+    creator: "<Sven.Lieber@ugent.be>"
+    description: ""
+    version: "v1.0.0"
+    sources:
+      - access: *dbHost
+        type: *dbType
+        credentials: *credentials
+        queryFormulation: *sqlQueryFormulation
+        referenceFormulation: *csvReferenceFormulation
+        query: select c.collection_id, c.name, c.description, c.harvest_type, cs.collection_set_id from ui_collection c JOIN ui_collectionset cs ON c.collection_set_id=cs.id;
+    s: bsd:collectionAggregation_$(collection_id)
+    po:
+      - [a, edm:Aggregation]
+      - [dc:title, $(name)]
+      - [dc:description, $(description)]
+      - [dcterms:identifier, $(collection_id)]
+      - [edm:aggregatedCHO, bsd:collectionObject_$(collection_id)~iri]
+      - [edm:hasView, bsd:collectionJSON_$(collection_id)~iri]
+
+      
+  collectionsCHO:
+    creator: "<Sven.Lieber@ugent.be>"
+    description: ""
+    version: "v1.0.0"
+    sources:
+      - access: *dbHost
+        type: *dbType
+        credentials: *credentials
+        queryFormulation: *sqlQueryFormulation
+        referenceFormulation: *csvReferenceFormulation
+        query: select c.collection_id, c.name, c.description, c.harvest_type, cs.collection_set_id from ui_collection c JOIN ui_collectionset cs ON c.collection_set_id=cs.id;
+    s: bsd:collectionObject_$(collection_id)
+    po:
+      - [a, prov:Entity]
+      - [a, edm:ProvidedCHO]
+      - [a, premis:IntellectualEntity]
+      - [a, dcmitype:Collection]
+      - [dcterms:identifier, $(collection_id)]
+      - [dc:title, $(name)]
+      - [dc:description, $(description)]
+      - [dcterms:isPartOf, bsd:collectionSet_$(collection_set_id)~iri]
+
+
+  collectionsRepresentation:
+    creator: "<Sven.Lieber@ugent.be>"
+    description: ""
+    version: "v1.0.0"
+    sources:
+      - access: *dbHost
+        type: *dbType
+        credentials: *credentials
+        queryFormulation: *sqlQueryFormulation
+        referenceFormulation: *csvReferenceFormulation
+        query: select c.collection_id, c.name, c.description, c.harvest_type, cs.collection_set_id from ui_collection c JOIN ui_collectionset cs ON c.collection_set_id=cs.id;
+    s: bsd:collectionJSON_$(collection_id)
+    po:
+      - [a, edm:WebResource]
+      - [a, premis:Representation]
+      - [dc:title, "$(name) JSON"]
+      - [dcterms:identifier, $(collection_id)]
+      - [ebucore:hasMimeType, "application/json"]
+      - [dc:description, $(description)]
+      - [dcterms:isPartOf, bsd:collectionSet_$(collection_set_id)~iri]
+      - [relSubType:rep, bsd:collectionObject_$(collection_id)~iri]
+      - [dc:source, $(harvest_type)]
+
+
+
+
+  collectionsVersionAggregation:
+    creator: "<Sven.Lieber@ugent.be>"
+    description: ""
+    version: "v1.0.0"
+    sources:
+      - access: *dbHost
+        type: *dbType
+        credentials: *credentials
+        queryFormulation: *sqlQueryFormulation
+        referenceFormulation: *csvReferenceFormulation
+        query: SELECT DISTINCT c1.collection_id_sfm, (to_char(c1.date_updated, 'YYYY-MM-DDT') || to_char(c1.date_updated, 'HH24:MI:SSOF')) as "date_updated", c1.collection_id, c1.type, c1.history_id FROM ui_harvest h LEFT JOIN ( SELECT c.history_id as "history_id", c.date_updated as "date_updated", c.id as "collection_id", c.collection_id as "collection_id_sfm", 'collection' as "type" FROM ui_historicalcollection c UNION SELECT s.history_id as "history_id", s.date_updated as "date_updated", s.collection_id as "collection_id", sub_c.collection_id as "collection_id_sfm", 'seed' as "type" FROM ui_historicalseed s JOIN ui_collection sub_c ON s.collection_id=sub_c.id) c1 ON h.collection_id=c1.collection_id AND c1.date_updated = (SELECT MAX(c2.date_updated) FROM ( SELECT c.history_id as "history_id", c.date_updated as "date_updated", c.id as "collection_id", c.collection_id as "collection_id_sfm", 'collection' as "type" FROM ui_historicalcollection c UNION SELECT s.history_id as "history_id", s.date_updated as "date_updated", s.collection_id as "collection_id", NULL as "collection_id_sfm", 'seed' as "type" FROM ui_historicalseed s) c2 WHERE c2.collection_id=h.collection_id AND c2.date_updated <= h.date_started) WHERE c1.collection_id_sfm IS NOT NULL;
+    s: bsd:collectionVersionAggregation_$(collection_id_sfm)_$(type)_$(history_id)
+    po:
+      - [a, edm:Aggregation]
+      - [dc:title, "Aggregation of collection $(collection_id_sfm) version '$(type)_$(history_id)'", en~lang]
+      - [dc:description, "The version of this collection aggregation created at $(date_updated), including changes in the collection or related seeds since the last version.", en~lang]
+      - [edm:aggregatedCHO, bsd:collectionObjectVersion_$(collection_id_sfm)_$(type)_$(history_id)~iri]
+      - [edm:hasView, bsd:collectionVersionJSON_$(collection_id_sfm)_$(type)_$(history_id)~iri]
+
+
+  collectionsCHOVersion:
+    creator: "<Sven.Lieber@ugent.be>"
+    description: ""
+    version: "v1.0.0"
+    sources:
+      - access: *dbHost
+        type: *dbType
+        credentials: *credentials
+        queryFormulation: *sqlQueryFormulation
+        referenceFormulation: *csvReferenceFormulation
+        query: SELECT DISTINCT c1.collection_id_sfm, (to_char(c1.date_updated, 'YYYY-MM-DDT') || to_char(c1.date_updated, 'HH24:MI:SSOF')) as "date_updated", c1.collection_id, c1.type, c1.history_id FROM ui_harvest h LEFT JOIN ( SELECT c.history_id as "history_id", c.date_updated as "date_updated", c.id as "collection_id", c.collection_id as "collection_id_sfm", 'collection' as "type" FROM ui_historicalcollection c UNION SELECT s.history_id as "history_id", s.date_updated as "date_updated", s.collection_id as "collection_id", sub_c.collection_id as "collection_id_sfm", 'seed' as "type" FROM ui_historicalseed s JOIN ui_collection sub_c ON s.collection_id=sub_c.id) c1 ON h.collection_id=c1.collection_id AND c1.date_updated = (SELECT MAX(c2.date_updated) FROM ( SELECT c.history_id as "history_id", c.date_updated as "date_updated", c.id as "collection_id", c.collection_id as "collection_id_sfm", 'collection' as "type" FROM ui_historicalcollection c UNION SELECT s.history_id as "history_id", s.date_updated as "date_updated", s.collection_id as "collection_id", NULL as "collection_id_sfm", 'seed' as "type" FROM ui_historicalseed s) c2 WHERE c2.collection_id=h.collection_id AND c2.date_updated <= h.date_started) WHERE c1.collection_id_sfm IS NOT NULL;
+    s: bsd:collectionObjectVersion_$(collection_id_sfm)_$(type)_$(history_id)
+    po:
+      - [a, prov:Entity]
+      - [a, edm:ProvidedCHO]
+      - [a, premis:IntellectualEntity]
+      - [a, dcmitype:Collection]
+      - [dc:title, "Collection $(collection_id_sfm) version '$(type)_$(history_id)'", en~lang]
+      - [dc:description, "The version of this collection created at $(date_updated), including changes in the collection or related seeds since the last version.", en~lang]
+      - [prov:generatedAtTime, $(date_updated), xsd:dateTime]
+      - [prov:specializationOf, bsd:collectionObject_$(collection_id_sfm)~iri]
+
+
+  collectionsRepresentationVersion:
+    creator: "<Sven.Lieber@ugent.be>"
+    description: ""
+    version: "v1.0.0"
+    sources:
+      - access: *dbHost
+        type: *dbType
+        credentials: *credentials
+        queryFormulation: *sqlQueryFormulation
+        referenceFormulation: *csvReferenceFormulation
+        query: SELECT DISTINCT c1.collection_id_sfm, (to_char(c1.date_updated, 'YYYY-MM-DDT') || to_char(c1.date_updated, 'HH24:MI:SSOF')) as "date_updated", c1.collection_id, c1.type, c1.history_id FROM ui_harvest h LEFT JOIN ( SELECT c.history_id as "history_id", c.date_updated as "date_updated", c.id as "collection_id", c.collection_id as "collection_id_sfm", 'collection' as "type" FROM ui_historicalcollection c UNION SELECT s.history_id as "history_id", s.date_updated as "date_updated", s.collection_id as "collection_id", sub_c.collection_id as "collection_id_sfm", 'seed' as "type" FROM ui_historicalseed s JOIN ui_collection sub_c ON s.collection_id=sub_c.id) c1 ON h.collection_id=c1.collection_id AND c1.date_updated = (SELECT MAX(c2.date_updated) FROM ( SELECT c.history_id as "history_id", c.date_updated as "date_updated", c.id as "collection_id", c.collection_id as "collection_id_sfm", 'collection' as "type" FROM ui_historicalcollection c UNION SELECT s.history_id as "history_id", s.date_updated as "date_updated", s.collection_id as "collection_id", NULL as "collection_id_sfm", 'seed' as "type" FROM ui_historicalseed s) c2 WHERE c2.collection_id=h.collection_id AND c2.date_updated <= h.date_started) WHERE c1.collection_id_sfm IS NOT NULL;
+    s: bsd:collectionVersionJSON_$(collection_id_sfm)_$(type)_$(history_id)
+    po:
+      - [a, edm:WebResource]
+      - [a, premis:Representation]
+      - [dcterms:identifier, $(collection_id_sfm)_$(type)_$(history_id)]
+      - [ebucore:hasMimeType, "application/json"]
+      - [dc:title, "JSON representation of collection $(collection_id_sfm) version '$(type)_$(history_id)'", en~lang]
+      - [dc:description, "The version of this collection created at $(date_updated), including changes in the collection or related seeds since the last version.", en~lang]
+      - [prov:generatedAtTime, $(date_updated), xsd:dateTime]
+      - [prov:specializationOf, bsd:collectionJSON_$(collection_id_sfm)~iri]
+
+
+  seedObjects:
+    creator: "<Sven.Lieber@ugent.be>"
+    description: ""
+    version: "v1.0.0"
+    sources:
+      - access: *dbHost
+        type: *dbType
+        credentials: *credentials
+        queryFormulation: *sqlQueryFormulation
+        referenceFormulation: *csvReferenceFormulation
+        query: select s.seed_id, s.collection_id, s.token, s.uid, s.history_note, c.harvest_type from ui_seed s JOIN ui_collection c ON s.collection_id=c.id;
+    s: bsd:seedObject_$(seed_id)
+    po:
+      - [a, prov:Entity]
+      - [dc:title, "Seed $(seed_id)", en~lang]
+      - [rdf:value, $(token)]
+      - p: dcterms:identifier
+        o: $(uid)
+        condition:
+          function: idlab-fn:equal
+          parameters:
+            - [grel:valueParameter, $(harvest_type)]
+            - [grel:valueParameter2, "twitter_user_timeline"]
+      - p: dc:description
+        o: "This seed is a twitter user with the initial value '$(token)'. This name may change, please consider specific versions of this entity."
+        condition:
+          function: idlab-fn:equal
+          parameters:
+            - [grel:valueParameter, $(harvest_type)]
+            - [grel:valueParameter2, "twitter_user_timeline"]
+      - p: dc:description
+        o: "This seed is a search query with the initial value '$(token)'. This query may change, please consider specific versions of this entity."
+        condition:
+          function: idlab-fn:equal
+          parameters:
+            - [grel:valueParameter, $(harvest_type)]
+            - [grel:valueParameter2, "twitter_search"]
+
+  seedVersions:
+    creator: "<Sven.Lieber@ugent.be>"
+    description: ""
+    version: "v1.0.0"
+    sources:
+      - access: *dbHost
+        type: *dbType
+        credentials: *credentials
+        queryFormulation: *sqlQueryFormulation
+        referenceFormulation: *csvReferenceFormulation
+        query: select s.seed_id, s.collection_id, s.token, s.uid, s.history_id, s.history_note, (to_char(s.history_date, 'YYYY-MM-DDT') || to_char(s.history_date, 'HH24:MI:SSOF')) as "history_date", c.harvest_type from ui_historicalseed s JOIN ui_collection c ON s.collection_id=c.id;
+    s: bsd:seedVersion_$(seed_id)_$(history_id)
+    po:
+      - [a, prov:Entity]
+      - [dc:title, "Seed Version $(seed_id)_$(history_id)", en~lang]
+      - [prov:specializationOf, bsd:seedObject_$(seed_id)~iri]
+      - [prov:generatedAtTime, $(history_date), xsd:dateTime]
+      - [rdf:value, $(token)]
+      - p: dcterms:identifier
+        o: $(uid)
+        condition:
+          function: idlab-fn:equal
+          parameters:
+            - [grel:valueParameter, $(harvest_type)]
+            - [grel:valueParameter2, "twitter_user_timeline"]
+ 
+      - p: dc:description
+        o: "This seed is a twitter user with value '$(token)'."
+        condition:
+          function: idlab-fn:equal
+          parameters:
+            - [grel:valueParameter, $(harvest_type)]
+            - [grel:valueParameter2, "twitter_user_timeline"]
+      - p: dc:description
+        o: "This seed is a search query with the value '$(token)' and uid '$(uid)'."
+        condition:
+          function: idlab-fn:equal
+          parameters:
+            - [grel:valueParameter, $(harvest_type)]
+            - [grel:valueParameter2, "twitter_search"]
+      - p: dc:description
+        o: $(history_note)
+        condition:
+          function: idlab-fn:notEqual
+          parameters:
+            - [grel:valueParameter, $(history_note)]
+            - [grel:valueParameter2, ""]
+
+  seedUse:
+    creator: "<Sven.Lieber@ugent.be>"
+    description: ""
+    version: "v1.0.0"
+    sources:
+      - access: *dbHost
+        type: *dbType
+        credentials: *credentials
+        queryFormulation: *sqlQueryFormulation
+        referenceFormulation: *csvReferenceFormulation
+        query: select n.id, h.harvest_id, n.historicalseed_id, s.seed_id from ui_harvest_historical_seeds n JOIN ui_historicalseed s ON n.historicalseed_id=s.history_id JOIN ui_harvest h ON n.harvest_id=h.id
+    s: bsd:harvestSeeds_$(harvest_id)
+    po:
+      - [prov:hadMember, bsd:seedVersion_$(seed_id)_$(historicalseed_id)~iri]
+ 
