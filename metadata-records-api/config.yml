@@ -13,6 +13,67 @@ x-walder-errors:
     description: "Internal server error"
     x-walder-input-text/html: error500.html
 paths:
+  /collection/{collection}/export/marc21:
+    get:
+      summary: 'Returns a MARC21 description of the given collection'
+      parameters:
+        - in: path
+          name: collection
+          required: true
+          schema:
+            type: string
+          description: 'Identifier of a collection'
+      responses:
+        200:
+          description: 'MARC21 description of the given collection'
+          x-walder-input-text/html: collections-marc.handlebars
+      x-walder-query:
+        graphql-query: 
+          data: >
+            {
+              type(_:Aggregation)
+              identifier @single
+              aggregatedCHO {
+                type(_:Collection)
+                identifier(_: $collection)
+                title @single
+                identifier @single
+                description @single
+              }
+              hasView {
+                type(_:WebResource)
+                identifier @single
+                title @single
+                description @single
+              }
+            }
+        json-ld-context: >
+          {
+            "prov": "http://www.w3.org/ns/prov#",
+            "dcterms": "http://purl.org/dc/terms/",
+            "dc": "http://purl.org/dc/elements/1.1/",
+            "dcmitype": "http://purl.org/dc/dcmitype/",
+            "edm": "http://www.europeana.eu/schemas/edm/",
+            "bsd": "http://example.org/ns/besocial/data#",
+            "schema": "http://schema.org/",
+            "Aggregation": "edm:Aggregation",
+            "aggregatedCHO": "edm:aggregatedCHO",
+            "hasView": "edm:hasView",
+            "Collection": "dcmitype:Collection",
+            "identifier": "dcterms:identifier",
+            "WebResource": "edm:WebResource",
+            "title": "dc:title",
+            "hasSpecialization": {"@reverse": "prov:specializationOf"},
+            "Entity": "prov:Entity",
+            "Activity": "prov:Activity",
+            "fileSize": "schema:fileSize",
+            "description": "dc:description",
+            "format": "dcterms:format",
+            "generatedAtTime": "prov:generatedAtTime",
+            "hasPart": {"@reverse": "dcterms:isPartOf"},
+            "type": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+          }
+ 
   /collection/{collection}/export/ead2002:
     get:
       summary: 'Returns an EAD 2002 description of the given collection'

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<marc:collection xmlns:marc="http://www.loc.gov/MARC21/slim" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/MARC21/slim
+http://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd" id="{{data.[0].[identifier]}}">
+
+  {{#each data}} 
+  {{#each this.hasView}}
+	<marc:record id="{{this.identifier}}">
+		<marc:datafield tag="245">
+			<marc:subfield code="a">{{this.title}}</marc:subfield>
+		</marc:datafield>
+		<marc:datafield tag="520">
+			<marc:subfield code="a">{{this.description}}</marc:subfield>
+		</marc:datafield>
+  </marc:record>
+  {{/each}}
+  {{/each}}
+</marc:collection>
