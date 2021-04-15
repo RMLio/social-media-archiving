@@ -33,7 +33,7 @@ A summary is available in [this GoogleSpreadsheet](https://docs.google.com/sprea
 
 After an initial selection we tested several of the surveyed tools.
 The folder `harvesting-tool-comparison` of this repository contains the documentation
-we created during this testing activities.
+we created during this testing activity.
 
 
 We selected the [Social Feed Manager (SFM)](https://gwu-libraries.github.io/sfm-ui/),
