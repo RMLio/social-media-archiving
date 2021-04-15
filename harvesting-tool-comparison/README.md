@@ -10,3 +10,5 @@ A summary is available in [this GoogleSpreadsheet](https://docs.google.com/sprea
 After an initial selection we tested several of the surveyed tools.
 This folder contains the documentation
 we created during this testing activity.
+
+We thank *Stephanie Chen* for setting up and testing most of the different tools.
