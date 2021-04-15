@@ -1,0 +1,33 @@
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX premis: <http://www.loc.gov/premis/rdf/v3/>
+PREFIX schema: <http://schema.org/>
+PREFIX edm: <http://www.europeana.eu/schemas/edm/>
+PREFIX sioc: <http://rdfs.org/sioc/ns#>
+PREFIX bsd: <http://example.org/ns/besocial/data#>
+
+SELECT DISTINCT ?username ?filename
+WHERE {
+
+  ?aggregation a edm:Aggregation ;
+               edm:aggregatesCHO ?cho ;
+               edm:hasView ?representation .
+
+  ?cho a schema:SocialMediaPosting ;
+       dc:creator ?creator .
+
+  ?creator sioc:name ?username .
+
+  ?representation a edm:WebResource ;
+                  dc:title ?representationName ;
+                  dcterms:isPartOf ?httpResponse .
+
+  ?httpResponse dcterms:isPartOf ?file .
+
+  ?file a premis:File ;
+        premis:originalName ?filename ;
+        dcterms:isPartOf ?representationVersion ;
+        prov:generatedAtTime ?generationTime .
+
+}

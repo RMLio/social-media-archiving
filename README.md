@@ -72,7 +72,7 @@ This step provides:
 
 We provide requirements for our Knowledge Graph in the form of user stories
 and competency questions, thus following common best practices.
-These requirements are available in [this GoogleSpreadsheet](#).
+These requirements are available in [this GoogleSpreadsheet](https://docs.google.com/spreadsheets/d/13D2Z-stDdWhul3CGI5UClhPlGJtkFMBhB_Mk3Tl7giQ/edit#gid=0).
 Given our use case we decided to use the [Europeana Data Model (EDM)](https://pro.europeana.eu/page/edm-documentation), the *de-facto* standard for cultural heritage data.
 Additionally we use the [PREMIS](https://www.loc.gov/standards/premis/ontology/owl-version3.html) ontology in version 3 concerning preservation of digital content,
 which is able to describe collected and preserved WARC Files as well as the digital content they preserve.

@@ -1,0 +1,19 @@
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX edm: <http://www.europeana.eu/schemas/edm/>
+PREFIX bsd: <http://example.org/ns/besocial/data#>
+
+SELECT ?cho ?representationName
+WHERE {
+
+  ?aggregation a edm:Aggregation ;
+               edm:aggregatesCHO ?cho ;
+               edm:hasView ?representation .
+
+  ?cho a schema:SocialMediaPosting .
+
+  ?representation a edm:WebResource ;
+                  dc:title ?representationName .
+
+}

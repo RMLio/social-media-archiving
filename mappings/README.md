@@ -12,7 +12,7 @@ todo command
 ## Requirements and data model
 We provide requirements for our Knowledge Graph in the form of user stories
 and competency questions, thus following common best practices.
-A live version of these requirements is available in [this GoogleSpreadsheet](#).
+A live version of these requirements is available in [this GoogleSpreadsheet](https://docs.google.com/spreadsheets/d/13D2Z-stDdWhul3CGI5UClhPlGJtkFMBhB_Mk3Tl7giQ/edit#gid=0).
 
 The folder `sparql-queries` contains formalized competency questions using the query language SPARQL.
 

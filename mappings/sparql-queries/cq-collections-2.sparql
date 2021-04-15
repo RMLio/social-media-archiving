@@ -1,0 +1,20 @@
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+PREFIX edm: <http://www.europeana.eu/schemas/edm/>
+PREFIX bsd: <http://example.org/ns/besocial/data#>
+
+
+SELECT ?collectionTitle ?creation
+WHERE {
+
+  ?aggregation a edm:Aggregation ;
+               edm:aggregatesCHO ?choVersion .
+
+  ?choVersion a dcmitype:Collection ;
+              dc:title ?collectionTitle ;
+              prov:specializationOf ?cho ;
+              prov:generatedAtTime ?creation .
+
+}

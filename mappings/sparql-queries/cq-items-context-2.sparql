@@ -1,0 +1,23 @@
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX edm: <http://www.europeana.eu/schemas/edm/>
+PREFIX bsd: <http://example.org/ns/besocial/data#>
+
+SELECT  ?post ?ne ?componentTitle
+WHERE {
+
+  ?derivation a prov:Derivation ;
+              prov:entity ?namedEntities ;
+              prov:hadActivity ?nerActivity .
+
+  ?namedEntities a prov:Collection ;
+                 prov:hadMember ?ne .
+
+  ?nerActivity a prov:Activity ;
+               dc:title ?componentTitle ;
+               prov:used ?cho .
+
+  ?cho a edm:ProvidedCHO ;
+       dc:title ?post .
+
+}
