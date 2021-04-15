@@ -8,7 +8,8 @@
 <div>
     <ul>
         {{#each data}}
-            <li>{{this.title}}: <a href="http://localhost:3000/collection/{{this.identifier}}/export/ead2002" download="ead-{{this.identifier}}.xml">Link to EAD</a></li>
+            <li>{{this.title}}: <a href="http://localhost:3000/collection/{{this.identifier}}/export/ead2002" download="ead-{{this.identifier}}.xml">Link to EAD</a>
+                                <a href="http://localhost:3000/collection/{{this.identifier}}/export/marc21" download="marc-{{this.identifier}}.xml">Link to MARC</a></li>
         {{/each}} 
     </ul>
 </div>
