@@ -90,7 +90,7 @@ mappings:
     po:
       - [a, edm:Aggregation]
       - [dc:title, "Aggregation tweet $(status.id_str)", en~lang]
-      - [edm:aggregatesCHO, bsd:post_twitter_$(status.id_str)~iri]
+      - [edm:aggregatedCHO, bsd:post_twitter_$(status.id_str)~iri]
       - [edm:hasView, bsd:post_twitter_json_$(status.id_str)~iri]
 
 
@@ -111,7 +111,7 @@ mappings:
     po:
       - [a, edm:Aggregation]
       - [dc:title, "Aggregation tweet $(id_str)", en~lang]
-      - [edm:aggregatesCHO, bsd:post_twitter_$(id_str)~iri]
+      - [edm:aggregatedCHO, bsd:post_twitter_$(id_str)~iri]
       - [edm:hasView, bsd:post_twitter_json_$(id_str)~iri]
 
 

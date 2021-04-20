@@ -8,7 +8,7 @@ SELECT ?cho ?representationName
 WHERE {
 
   ?aggregation a edm:Aggregation ;
-               edm:aggregatesCHO ?cho ;
+               edm:aggregatedCHO ?cho ;
                edm:hasView ?representation .
 
   ?cho a schema:SocialMediaPosting .

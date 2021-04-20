@@ -10,7 +10,7 @@ SELECT (COUNT(?cho) as ?count)
 WHERE {
 
   ?aggregation a edm:Aggregation ;
-               edm:aggregatesCHO ?cho .
+               edm:aggregatedCHO ?cho .
 
   ?cho a dcmitype:Collection ;
        dc:title ?collectionTitle .

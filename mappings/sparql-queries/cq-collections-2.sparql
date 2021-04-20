@@ -10,7 +10,7 @@ SELECT ?collectionTitle ?creation
 WHERE {
 
   ?aggregation a edm:Aggregation ;
-               edm:aggregatesCHO ?choVersion .
+               edm:aggregatedCHO ?choVersion .
 
   ?choVersion a dcmitype:Collection ;
               dc:title ?collectionTitle ;
