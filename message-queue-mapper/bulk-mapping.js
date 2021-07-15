@@ -60,7 +60,7 @@ amqp.connect("amqp://" + mqUser + ":" +  mqPw + "@" + mqHost + ":" +  mqPort, fu
         generationMsg['id'] = row['harvest_id'];
         generationMsg['type'] = 'rml_mapping';
         generationMsg['input_path'] = row['path'];
-        generationMsg['output_path'] = '/sfm-kg-data/' + row['warc_id'] + '.nq';
+        generationMsg['output_path'] = '/sfm-kg-data/' + row['collection_id'] + '/' row['warc_id'] + '.nq';
         generationMsg['input_type'] = 'application/warc';
         generationMsg['input_mapping'] = '/sfm-collection-set-data/json-twitter-warc-mapping.rml.ttl';
         generationMsg['warc'] = { 'id': row['warc_id'] };
