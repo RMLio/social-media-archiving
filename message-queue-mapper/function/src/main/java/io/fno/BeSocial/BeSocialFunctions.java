@@ -8,6 +8,9 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
+import java.util.Locale;
+import java.text.SimpleDateFormat;
 import okhttp3.HttpUrl;
 
 import com.jayway.jsonpath.Configuration;
@@ -57,6 +60,30 @@ public class BeSocialFunctions {
         }
 
         return new ArrayList<>();
+    }
+
+    public static String toXSDDateTime(String pattern, String value) {
+        if (!pattern.equals("")) {
+
+            try {
+                SimpleDateFormat sf = new SimpleDateFormat(pattern, Locale.ENGLISH);
+                sf.setLenient(true);
+                
+                Date date = sf.parse(value);
+                SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+                return fmt.format(date);
+
+            } catch (java.lang.IllegalArgumentException argE) {
+                // One of the provided date patterns is invalid
+                logger.warn(argE.getMessage(), argE);
+            } catch (java.text.ParseException parseE) {
+                // The provided date value could not be parsed
+                logger.warn(parseE.getMessage(), parseE);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return new String("");
     }
 
 }

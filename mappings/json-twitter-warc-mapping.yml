@@ -140,6 +140,13 @@ mappings:
       - [sioc:has_creator, bsd:author_twitter_$(id_str)~iri]
       - [sioc:id, $(status.id_str)]
       - [dcterms:identifier, $(status.id_str)]
+      - p: dc:created
+        o:
+          function: idlab-fn:toXSDDateTime
+          parameters:
+            - [idlab-fn:datePattern, "EEE MMM dd HH:mm:ss ZZZZZ yyyy"]
+            - [idlab-fn:dateString, $(status.created_at)]
+          datatype: xsd:dateTime
 
 
   tweetsCHOTimelineObject:
@@ -166,6 +173,13 @@ mappings:
       - [sioc:has_creator, bsd:author_twitter_$(user.id_str)~iri]
       - [sioc:id, $(id_str)]
       - [dcterms:identifier, $(id_str)]
+      - p: dc:created
+        o:
+          function: idlab-fn:toXSDDateTime
+          parameters:
+            - [idlab-fn:datePattern, "EEE MMM dd HH:mm:ss ZZZZZ yyyy"]
+            - [idlab-fn:dateString, $(created_at)]
+          datatype: xsd:dateTime
 
 
 

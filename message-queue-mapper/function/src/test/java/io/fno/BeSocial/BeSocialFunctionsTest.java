@@ -30,4 +30,31 @@ public class BeSocialFunctionsTest {
 
         assertThat(entities, CoreMatchers.is(expected));
     }
+
+    @Test
+    public void toXSDDateTimeCorrect() {
+        // GIVEN a valid date pattern and a valid date
+        String xsdDateTime = BeSocialFunctions.toXSDDateTime("EEE MMM dd HH:mm:ss ZZZZZ yyyy", "Wed Oct 10 20:19:24 +0000 2018");
+
+        // THEN a correctly formatted xsd:dateTime should be returned
+        assertThat(xsdDateTime, CoreMatchers.is("2018-10-10T22:19:24+0200"));
+    }
+
+    @Test
+    public void toXSDDateTimeWrongInputPattern() {
+        // GIVEN an invalid date pattern and a valid date
+        String xsdDateTime = BeSocialFunctions.toXSDDateTime("ABC MMM dd HH:mm:ss ZZZZZ yyyy", "Wed Oct 10 20:19:24 +0000 2018");
+
+        // THEN an empty string should be returned
+        assertThat(xsdDateTime, CoreMatchers.is(""));
+    }
+
+    @Test
+    public void toXSDDateTimeWrongInputValue() {
+        // GIVEN a valid date pattern and an invalid date value
+        String xsdDateTime = BeSocialFunctions.toXSDDateTime("EEE MMM dd HH:mm:ss ZZZZZ yyyy", "Abc Oct 10 20:19:24 +0000 2018");
+
+        // THEN an empty string should be returned
+        assertThat(xsdDateTime, CoreMatchers.is(""));
+    }
 }
