@@ -1,0 +1,26 @@
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
+PREFIX ebucore: <https://www.ebu.ch/metadata/ontologies/ebucore#>
+PREFIX edm: <http://www.europeana.eu/schemas/edm/>
+PREFIX bsd: <http://example.org/ns/besocial/data#>
+
+SELECT ?cho ?mimeType ?name
+WHERE {
+
+  ?aggregation a edm:Aggregation ;
+               edm:aggregatedCHO ?cho ;
+               edm:hasView ?representation .
+
+  ?cho a dcmitype:Collection .
+
+  ?representation a edm:WebResource ;
+                  dc:title ?name ;
+                  ebucore:hasMimeType ?mimeType 
+
+  # we do not want versions
+  FILTER ( !EXISTS {
+    ?representation prov:specializationOf ?o 
+   })
+
+}
