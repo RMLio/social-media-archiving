@@ -47,11 +47,12 @@ Therefore our model should be interoperable with Europeana and PREMIS.
 ## Reused vocabularies
 In general this data model makes use of the following *de facto* standard vocabularies in our context:
 
-* **Europeana Data Model (EDM)**
+* **Europeana Data Model (EDM)**, the *de-facto* standard to represent cultural heritage objects
 * **PREMIS**, developed by the Library of Congress to support long-term preservation of digital objects
 * **PROV-O**, a W3C recommended vocabulary to represent provenance
 * **SIOC**, a widely used vocabulary to represent social media content
 * **Dublin Core**, a common standard to represent metadata
+* **SHACL**, a W3C recommended vocabulary to define and validate constraints
 
 ## User stories and requirements
 
@@ -91,11 +92,110 @@ such that we reach our high-level goals regarding interoperability with EDM and 
 
 **Our solution**
 
-Following EDM and PREMIS we distinguish a collection by using three classes
+<details>
+<summary>Following EDM and PREMIS we distinguish a collection by reusing three classes and create one class ourselves</summary>
 
 * The conceptual *thing* using `edm:ProvidedCHO`, `premis:IntellectualEntity` and `prov:Entity`
 * A representation of the conceptual thing using `edm:WebResource`, `premis:Representation` and `prov:Entity`
 * An aggregation object linking a thing to its representations and the context we provide using `edm:Aggregation` and `prov:Entity`
+
+For our purposes we have to add an own subclass for a collection.
+*Collection* is a very generic term, `PROV-O` knows `prov:Collection` which is different as it describes a data structure;
+the DCMI Metadata Terms of Dublin Core know `dcmitype:Collection` but it is already used as superclass of EDM aggregation, thus not enough to distinguish a collection in our context.
+
+Therefore we introduce `bsm:SocialMediaCollection`, a subclass of `edm:ProvidedCHO`, `premis:IntellectualEntity` and `prov:Entity`
+which can be used with the other reused classes in the following way.
+Please note that according to the EDM mapping guidelines an instance of `edm:ProvidedCHO` should contain more properties as shown in the example, see next constraints section.
+
+```turtle
+#
+# A social media collection "thing"
+#
+bsd:flemishNewspaperCollection
+  a bsm:SocialMediaCollection ;
+  dc:title "Flemish Newspapers"@en ;
+  dc:description "A collection of tweets from Twitter accounts of several Flemish newspapers."@en ;
+  prov:generatedAtTime "2020-10-26T10:15:00+02:00"^^xsd:dateTime .
+
+#
+# A JSON representation of this collection (its tweets are harvested in JSON format)
+#
+bsd:flemishNewspaperCollectionJSON
+  a edm:WebResource, premis:Representation, prov:Entity ;
+  dc:title "Flemish Newspapers (JSON)"@en ;
+  dc:description "A collection of tweets from Twitter accounts of several Flemish newspapers in JSON format."@en ;
+  dcterms:format "application/json" ;
+  ebucore:hasMimeType, "application/json" ;
+  relSubType:rep bsd:flemishNewspaperCollection .
+
+#
+# An aggregation to group the collection with its representations
+#
+bsd:flemishNewspaperCollectionAggregation
+  a edm:Aggregation, prov:Entity ;
+  dc:title "Flemish Newspapers Aggregation"@en ;
+  dc:description "Resources related to a collection of tweets from Twitter accounts of several Flemish newspapers."@en ;
+  edm:aggregatedCHO bsd:flemishNewspaperCollection ;
+  edm:hasView bsd:flemishNewspaperCollectionJSON .
+
+```
+
+</details>
+
+**Constraints related to our solution**
+
+<details>
+<summary>Following the EDM mapping guidelines each `edm:ProvidedCHO` should have several properties</summary>
+
+Example of EDM constraints for the class `edm:ProvidedCHO` expressed using SHACL.
+
+```turtle
+
+bss:providedCHOMinimum a sh:NodeShape
+  rdfs:label "ProvidedCHO minimum"@en ;
+  rdfs:comment "Properties needed according to the EDM mapping guidelines"@en ;
+  sh:property [
+    sh:path dc:language ;
+    sh:minCount 1 ;
+  ] ;
+  sh:property [
+    sh:path edm:type ;
+    sh:minCount 1 ;
+  ] ;
+  sh:property [
+    sh:path edm:aggregatedCHO ;
+    sh:minCount 1 ;
+  ] ;
+  sh:property [
+    sh:path edm:dataProvider;
+    sh:minCount 1 ;
+  ] ;
+  sh:property [
+    sh:path edm:provider ;
+    sh:minCount 1 ;
+  ] ;
+  sh:property [
+    sh:path edm:rights ;
+    sh:minCount 1 ;
+  ] ;
+  sh:or (
+    [ sh:path dc:description ; sh:minCount 1 ; ]
+    [ sh:path dc:title ; sh:minCount 1 ; ]
+  ) ;
+  sh:or (
+    [ sh:path dc:subject ; sh:minCount 1 ; ]
+    [ sh:path dc:type ; sh:minCount 1; ]
+    [ sh:path dcterms:spatial ; sh:minCount 1; ]
+    [ sh:path dcterms:temporal ; sh:minCount 1 ; ]
+  ) ;
+  sh:or (
+    [ sh:path edm:isShownAt ; sh:minCount 1 ; ]
+    [ sh:path edm:isShownBy ; sh:minCount 1 ; ]
+  )
+```
+
+</details>
+
 
 
 ### Seeds
