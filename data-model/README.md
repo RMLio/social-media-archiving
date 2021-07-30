@@ -23,10 +23,10 @@ and for the different components of the model (and the data) we use the followin
 
 ```
 # BESOCIAL data model (concepts and properties)
-bsm: <http://w3id.org/besocial/model#> .
+bsm: <http://w3id.org/besocial/ns/model#> .
 
 # BESOCIAL data model shapes (constraints on the data)
-bss: <http://w3id.org/besocial/shapes#> .
+bss: <http://w3id.org/besocial/ns/shapes#> .
 
 # BESOCIAL data
 bsd: <http://w3id.org/besocial/data/> .

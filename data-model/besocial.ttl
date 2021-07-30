@@ -1,0 +1,65 @@
+@prefix bsm: <http://w3id.org/besocial/ns/model#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix qb: <http://purl.org/linked-data/cube#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix edm: <http://www.europeana.eu/schemas/edm/> .
+@prefix premis: <http://www.loc.gov/premis/rdf/v3/> .
+
+<https://w3id.org/besocial/ns/model#> rdf:type owl:Ontology ;
+                                       vann:preferredNamespacePrefix "bsm" ;
+                                       vann:preferredNamespaceUri "https://w3id.org/besocial/ns/model#" ;
+                                       rdfs:label "BESOCIAL vocabulary"@en ;
+                                       dc:title "BESOCIAL vocabulary"@en ;
+                                       dc:description "The BESOCIAL vocabulary used to describe social media archives"@en ;
+                                       rdfs:comment """-Version 1.0.0: Initial version introduces needed classes."""@en ;
+                                       owl:versionIRI   <https://w3id.org/besocial/ns/model/v1.0.0#> ;
+                                       owl:versionInfo "1.0.0" ;
+                                       owl:priorVersion <https://w3id.org/besocial/ns/model#> ;
+                                       rdfs:seeAlso <https://w3id.org/besocial> ;
+                                       dc:modified "2021-07-30"^^xsd:date ;
+                                       dc:issued "2021-07-30"^^xsd:date ;
+                                       dc:created "2021-07-30"^^xsd:date ;
+                                       dc:rights "Copyright © Ghent University – imec – IDLab"@en ;
+                                       cc:license <https://creativecommons.org/licenses/by/4.0/> ;
+                                       foaf:primaryTopic <https://w3id.org/besocial> ;
+                                       dc:creator <https://sven-lieber.org/profile#me> .
+
+#
+# Classes
+#
+bsm:SocialMediaCollection a rdfs:Class ;
+  rdfs:label "SocialMediaCollection"@en ;
+  rdfs:comment "A social media collection which is a premis:IntellectualEntity, edm:ProvidedCHO and prov:Entity"@en ;
+  rdfs:subClassOf edm:ProvidedCHO, premis:IntellectualEntity, prov:Entity .
+
+
+
+#
+# Named individuals
+#
+bsm:collectionDimension a qb:DimensionProperty, rdf:Property ;
+  rdfs:label "collectionDimension"@en ;
+  rdfs:comment "The collection to which this observation relates to."@en .
+
+bsm:collectionRepresentationDimension a qb:DimensionProperty, rdf:Property ;
+  rdfs:label "collectionRepresentationDimension"@en ;
+  rdfs:comment "The collection representation this observation relates to, e.g. a JSON representation."@en .
+
+bsm:collectionRepresentationVersionDimension a qb:DimensionProperty, rdf:Property ;
+  rdfs:label "collectionRepresentationVersionDimension"@en ;
+  rdfs:comment "The collection representation version this observation relates to, e.g. the version 2020100416 of a JSON representation."@en .
+
+bsm:monthDimension a qb:DimensionProperty, rdf:Property ;
+  rdfs:label "monthDimension"@en ;
+  rdfs:comment "The month this observation relates to."@en .
+
+bsm:yearDimension a qb:DimensionProperty, rdf:Property ;
+  rdfs:label "yearDimension"@en ;
+  rdfs:comment "The year this observation relates to."@en .
