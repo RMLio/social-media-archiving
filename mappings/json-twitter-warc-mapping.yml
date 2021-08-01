@@ -34,6 +34,8 @@ mappings:
       - access: "message.json"
         referenceFormulation: jsonpath
         iterator: "$.[*]"
+    targets:
+      - sparql-target: ["http://193.190.127.232:8086/bigdata/namespace/sfm-item/sparql"]
     s: bsd:httpRequest_$(warc-header.warc-record-id)
     condition:
        function: idlab-fn:equal

@@ -11,18 +11,19 @@ prefixes:
   prov: "http://www.w3.org/ns/prov#"
   xsd: "http://www.w3.org/2001/XMLSchema#"
   edm: "http://www.europeana.eu/schemas/edm/"
-  bsd: "http://example.org/ns/besocial/data#"
-  bss: "http://example.org/ns/besocial/shapes#"
+  bsm: "http://w3id.org/besocial/ns/model#"
+  bsd: "http://w3id.org/besocial/data#"
+  bss: "http://w3id.org/besocial/ns/shapes#"
   ex: "http://example.org/ns#"
 
 variables:
-  access: &dbHost INSERT POSTGRES CONNECTION STRING HERE
+  access: &dbHost //${SFM_DB_HOST}:${SFM_DB_PORT}/${SFM_DB_DATABASE}
   type: &dbType postgresql
   queryFormulation: &sqlQueryFormulation sql2008
   referenceFormulation: &csvReferenceFormulation csv
   credentials: &credentials
-    username: INSERT DB USERNAME HERE
-    password: INSERT DB PASSWORD HERE
+    username: ${SFM_DB_USER}
+    password: ${SFM_DB_PASSWORD}
 
 mappings:
 
@@ -184,50 +185,6 @@ mappings:
 
 
 
-
-  collectionsVersionAggregation:
-    creator: "<Sven.Lieber@ugent.be>"
-    description: ""
-    version: "v1.0.0"
-    sources:
-      - access: *dbHost
-        type: *dbType
-        credentials: *credentials
-        queryFormulation: *sqlQueryFormulation
-        referenceFormulation: *csvReferenceFormulation
-        query: SELECT DISTINCT c1.collection_id_sfm, (to_char(c1.date_updated, 'YYYY-MM-DDT') || to_char(c1.date_updated, 'HH24:MI:SSOF')) as "date_updated", c1.collection_id, c1.type, c1.history_id FROM ui_harvest h LEFT JOIN ( SELECT c.history_id as "history_id", c.date_updated as "date_updated", c.id as "collection_id", c.collection_id as "collection_id_sfm", 'collection' as "type" FROM ui_historicalcollection c UNION SELECT s.history_id as "history_id", s.date_updated as "date_updated", s.collection_id as "collection_id", sub_c.collection_id as "collection_id_sfm", 'seed' as "type" FROM ui_historicalseed s JOIN ui_collection sub_c ON s.collection_id=sub_c.id) c1 ON h.collection_id=c1.collection_id AND c1.date_updated = (SELECT MAX(c2.date_updated) FROM ( SELECT c.history_id as "history_id", c.date_updated as "date_updated", c.id as "collection_id", c.collection_id as "collection_id_sfm", 'collection' as "type" FROM ui_historicalcollection c UNION SELECT s.history_id as "history_id", s.date_updated as "date_updated", s.collection_id as "collection_id", NULL as "collection_id_sfm", 'seed' as "type" FROM ui_historicalseed s) c2 WHERE c2.collection_id=h.collection_id AND c2.date_updated <= h.date_started) WHERE c1.collection_id_sfm IS NOT NULL;
-    s: bsd:collectionVersionAggregation_$(collection_id_sfm)_$(type)_$(history_id)
-    po:
-      - [a, edm:Aggregation]
-      - [dc:title, "Aggregation of collection $(collection_id_sfm) version '$(type)_$(history_id)'", en~lang]
-      - [dc:description, "The version of this collection aggregation created at $(date_updated), including changes in the collection or related seeds since the last version.", en~lang]
-      - [edm:aggregatedCHO, bsd:collectionObjectVersion_$(collection_id_sfm)_$(type)_$(history_id)~iri]
-      - [edm:hasView, bsd:collectionVersionJSON_$(collection_id_sfm)_$(type)_$(history_id)~iri]
-
-
-  collectionsCHOVersion:
-    creator: "<Sven.Lieber@ugent.be>"
-    description: ""
-    version: "v1.0.0"
-    sources:
-      - access: *dbHost
-        type: *dbType
-        credentials: *credentials
-        queryFormulation: *sqlQueryFormulation
-        referenceFormulation: *csvReferenceFormulation
-        query: SELECT DISTINCT c1.collection_id_sfm, (to_char(c1.date_updated, 'YYYY-MM-DDT') || to_char(c1.date_updated, 'HH24:MI:SSOF')) as "date_updated", c1.collection_id, c1.type, c1.history_id FROM ui_harvest h LEFT JOIN ( SELECT c.history_id as "history_id", c.date_updated as "date_updated", c.id as "collection_id", c.collection_id as "collection_id_sfm", 'collection' as "type" FROM ui_historicalcollection c UNION SELECT s.history_id as "history_id", s.date_updated as "date_updated", s.collection_id as "collection_id", sub_c.collection_id as "collection_id_sfm", 'seed' as "type" FROM ui_historicalseed s JOIN ui_collection sub_c ON s.collection_id=sub_c.id) c1 ON h.collection_id=c1.collection_id AND c1.date_updated = (SELECT MAX(c2.date_updated) FROM ( SELECT c.history_id as "history_id", c.date_updated as "date_updated", c.id as "collection_id", c.collection_id as "collection_id_sfm", 'collection' as "type" FROM ui_historicalcollection c UNION SELECT s.history_id as "history_id", s.date_updated as "date_updated", s.collection_id as "collection_id", NULL as "collection_id_sfm", 'seed' as "type" FROM ui_historicalseed s) c2 WHERE c2.collection_id=h.collection_id AND c2.date_updated <= h.date_started) WHERE c1.collection_id_sfm IS NOT NULL;
-    s: bsd:collectionObjectVersion_$(collection_id_sfm)_$(type)_$(history_id)
-    po:
-      - [a, prov:Entity]
-      - [a, edm:ProvidedCHO]
-      - [a, premis:IntellectualEntity]
-      - [a, dcmitype:Collection]
-      - [dc:title, "Collection $(collection_id_sfm) version '$(type)_$(history_id)'", en~lang]
-      - [dc:description, "The version of this collection created at $(date_updated), including changes in the collection or related seeds since the last version.", en~lang]
-      - [prov:generatedAtTime, $(date_updated), xsd:dateTime]
-      - [prov:specializationOf, bsd:collectionObject_$(collection_id_sfm)~iri]
-
-
   collectionsRepresentationVersion:
     creator: "<Sven.Lieber@ugent.be>"
     description: ""
@@ -289,6 +246,7 @@ mappings:
             - [grel:valueParameter, $(harvest_type)]
             - [grel:valueParameter2, "twitter_search"]
 
+
   seedVersions:
     creator: "<Sven.Lieber@ugent.be>"
     description: ""
@@ -336,6 +294,7 @@ mappings:
           parameters:
             - [grel:valueParameter, $(history_note)]
             - [grel:valueParameter2, ""]
+
 
   seedUse:
     creator: "<Sven.Lieber@ugent.be>"
