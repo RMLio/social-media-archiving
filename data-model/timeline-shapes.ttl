@@ -7,15 +7,21 @@
 @prefix edm: <http://www.europeana.eu/schemas/edm#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-bss:collectionTimelineShape
+bss:collectionRepresentationTimelineShape
   a sh:NodeShape ;
-  sh:targetClass bsm:SocialMediaPostsObservation ;
-  dc:title "collectionTimelineShape"@en ;
-  dc:description "There should be at least two correct timeline measurements for a collection, such that a timeline chart can be shown."@en ;
-  dc:creator <https://sven-lieber.org/profile#me> ;
+  sh:targetClass bsm:SocialMediaCollectionRepresentation ;
   sh:property [
-    sh:path [ sh:inversePath bsd:collectionDimension ] ;
-    sh:qualifiedValueShape bss:correctMonthlyMeasurementShape ;
+    sh:path [ sh:inversePath bsd:collectionVersionDimension ] ;
+    sh:qualifiedValueShape bss:correctTimelineMeasurementShape ;
+    sh:qualifiedMinCount 2 ;
+  ] .
+
+bss:collectionRepresentationVersionTimelineShape
+  a sh:NodeShape ;
+  sh:targetClass bsm:SocialMediaCollectionRepresentationVersion ;
+  sh:property [
+    sh:path [ sh:inversePath bsd:collectionVersionDimension ] ;
+    sh:qualifiedValueShape bss:correctTimelineMeasurementShape ;
     sh:qualifiedMinCount 2 ;
   ] .
 
