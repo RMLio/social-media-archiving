@@ -14,7 +14,7 @@ PREFIX ex: <http://example.org/ns#>
 CONSTRUCT {
   
   ?obs
-    a qb:Observation ;
+    a bsm:SocialMediaPostsObservation ;
     bsm:collectionDimension                      ?collectionCHO ;
     bsm:collectionRepresentationDimension        ?collectionRepresentation ;
     bsm:collectionRepresentationVersionDimension ?collectionRepresentationVersion ;
@@ -25,7 +25,26 @@ CONSTRUCT {
 }
 WHERE {
 
-  {SELECT ?collectionRepresentationVersion ?year ?month (COUNT(?itemRepresentation) AS ?numberOfPosts)
+  #
+  # Get some context: related concepts to the aggregated data queried in the subquery below
+  #
+  ?collectionRepresentationVersion
+    a edm:WebResource ;
+    prov:specializationOf ?collectionRepresentation .
+
+    ?aggregation
+      a edm:Aggregation ;
+      edm:hasView ?collectionRepresentation ;
+      edm:aggregatedCHO ?collectionCHO .
+
+    ?collectionCHO
+      a edm:ProvidedCHO .
+
+  #
+  # Get the aggregated number of posts per year and month
+  #
+  {
+  SELECT ?collectionRepresentationVersion ?year ?month (COUNT(?itemRepresentation) AS ?numberOfPosts)
   WHERE {
       
 
@@ -34,27 +53,21 @@ WHERE {
         edm:hasView ?itemRepresentation ;
         edm:aggregatedCHO ?itemCHO .
 
+      ?itemCHO
+        a schema:SocialMediaPosting ;
+        dc:created ?creationDate .
+        
+
       ?itemRepresentation
         a edm:WebResource ;
-        dc:created ?creationDate ;
         dcterms:isPartOf ?collectionRepresentationVersion .
 
-
-      ?collectionRepresentationVersion
-        a edm:WebResource ;
-        prov:specializationOf ?collectionRepresentation .
-
-      ?aggregation
-        a edm:Aggregation ;
-        edm:hasView ?collectionRepresentation ;
-        edm:aggregatedCHO ?collectionCHO .
-
-      ?collectionCHO
-        a edm:ProvidedCHO ;
-        dc:title ?collectionName .
   }
-  GROUP BY ?collectionCHO (year(?creationDate) AS ?year) (month(?creationDate) AS ?month)
+  GROUP BY ?collectionRepresentationVersion (year(?creationDate) AS ?year) (month(?creationDate) AS ?month)
   }
 
-  BIND (URI(concat("http://example.org/data#", STRUUID())) as ?obs)
+  #
+  # Generate a new IRI for every observation
+  #
+  BIND (URI(concat("http://w3id.org/besocial/data#obs_", STRUUID())) as ?obs)
 }

@@ -175,6 +175,7 @@ mappings:
     po:
       - [a, edm:WebResource]
       - [a, premis:Representation]
+      - [a, bsm:SocialMediaCollectionRepresentation]
       - [dc:title, "$(name) JSON"]
       - [dcterms:identifier, $(collection_id)]
       - [ebucore:hasMimeType, "application/json"]
@@ -200,6 +201,7 @@ mappings:
     po:
       - [a, edm:WebResource]
       - [a, premis:Representation]
+      - [a, bsm:SocialMediaCollectionRepresentationVersion]
       - [dcterms:identifier, $(collection_id_sfm)_$(type)_$(history_id)]
       - [ebucore:hasMimeType, "application/json"]
       - [dc:title, "JSON representation of collection $(collection_id_sfm) version '$(type)_$(history_id)'", en~lang]
