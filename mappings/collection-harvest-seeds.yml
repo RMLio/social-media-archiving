@@ -27,6 +27,7 @@ variables:
 
 mappings:
 
+
   harvestInputCollection:
     creator: "<Sven.Lieber@ugent.be>"
     description: ""
@@ -43,75 +44,6 @@ mappings:
       - [a, prov:Collection]
       - [dc:title, "Input seeds for harvest $(harvest_id)", en~lang]
  
-
-
-  collectionsAggregation:
-    creator: "<Sven.Lieber@ugent.be>"
-    description: ""
-    version: "v1.0.0"
-    sources:
-      - access: *dbHost
-        type: *dbType
-        credentials: *credentials
-        queryFormulation: *sqlQueryFormulation
-        referenceFormulation: *csvReferenceFormulation
-        query: select c.collection_id, c.name, c.description, c.harvest_type, cs.collection_set_id from ui_collection c JOIN ui_collectionset cs ON c.collection_set_id=cs.id;
-    s: bsd:collectionAggregation_$(collection_id)
-    po:
-      - [a, edm:Aggregation]
-      - [dc:title, $(name)]
-      - [dc:description, $(description)]
-      - [dcterms:identifier, $(collection_id)]
-      - [edm:aggregatedCHO, bsd:collectionObject_$(collection_id)~iri]
-      - [edm:hasView, bsd:collectionJSON_$(collection_id)~iri]
-
-      
-  collectionsCHO:
-    creator: "<Sven.Lieber@ugent.be>"
-    description: ""
-    version: "v1.0.0"
-    sources:
-      - access: *dbHost
-        type: *dbType
-        credentials: *credentials
-        queryFormulation: *sqlQueryFormulation
-        referenceFormulation: *csvReferenceFormulation
-        query: select c.collection_id, c.name, c.description, c.harvest_type, cs.collection_set_id from ui_collection c JOIN ui_collectionset cs ON c.collection_set_id=cs.id;
-    s: bsd:collectionObject_$(collection_id)
-    po:
-      - [a, prov:Entity]
-      - [a, edm:ProvidedCHO]
-      - [a, premis:IntellectualEntity]
-      - [a, dcmitype:Collection]
-      - [dcterms:identifier, $(collection_id)]
-      - [dc:title, $(name)]
-      - [dc:description, $(description)]
-      - [dcterms:isPartOf, bsd:collectionSet_$(collection_set_id)~iri]
-
-
-  collectionsRepresentation:
-    creator: "<Sven.Lieber@ugent.be>"
-    description: ""
-    version: "v1.0.0"
-    sources:
-      - access: *dbHost
-        type: *dbType
-        credentials: *credentials
-        queryFormulation: *sqlQueryFormulation
-        referenceFormulation: *csvReferenceFormulation
-        query: select c.collection_id, c.name, c.description, c.harvest_type, cs.collection_set_id from ui_collection c JOIN ui_collectionset cs ON c.collection_set_id=cs.id;
-    s: bsd:collectionJSON_$(collection_id)
-    po:
-      - [a, edm:WebResource]
-      - [a, premis:Representation]
-      - [a, bsm:SocialMediaCollectionRepresentation]
-      - [dc:title, "$(name) JSON"]
-      - [dcterms:identifier, $(collection_id)]
-      - [ebucore:hasMimeType, "application/json"]
-      - [dc:description, $(description)]
-      - [dcterms:isPartOf, bsd:collectionSet_$(collection_set_id)~iri]
-      - [relSubType:rep, bsd:collectionObject_$(collection_id)~iri]
-      - [dc:source, $(harvest_type)]
 
 
   seedObjects:
