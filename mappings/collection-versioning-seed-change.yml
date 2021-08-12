@@ -27,26 +27,6 @@ variables:
 
 mappings:
 
-  harvests:
-    creator: "<Sven.Lieber@ugent.be>"
-    description: ""
-    version: "v1.0.0"
-    sources:
-      - access: *dbHost
-        type: *dbType
-        credentials: *credentials
-        queryFormulation: *sqlQueryFormulation
-        referenceFormulation: *csvReferenceFormulation
-        query: SELECT c1.collection_id_sfm, h.id as "harvest_id", h.harvest_id as "harvest_id_sfm", h.harvest_type, h.status, h.collection_id, (to_char(h.date_started, 'YYYY-MM-DDT') || to_char(h.date_started, 'HH24:MI:SSOF')) as "harvest_started", (to_char(h.date_ended, 'YYYY-MM-DDT') || to_char(h.date_ended, 'HH24:MI:SSOF')) as "harvest_ended", (to_char(c1.date_updated, 'YYYY-MM-DDT') || to_char(c1.date_updated, 'HH24:MI:SSOF')) as "date_updated", c1.type, c1.history_id FROM ui_harvest h LEFT JOIN ( SELECT c.history_id as "history_id", c.date_updated as "date_updated", c.id as "collection_id", c.collection_id as "collection_id_sfm", 'collection' as "type" FROM ui_historicalcollection c UNION SELECT s.history_id as "history_id", s.date_updated as "date_updated", s.collection_id as "collection_id", sub_c.collection_id as "collection_id_sfm", 'seed' as "type" FROM ui_historicalseed s JOIN ui_collection sub_c ON s.collection_id=sub_c.id) c1 ON h.collection_id=c1.collection_id AND c1.date_updated = (SELECT MAX(c2.date_updated) FROM ( SELECT c.history_id as "history_id", c.date_updated as "date_updated", c.id as "collection_id", c.collection_id as "collection_id_sfm", 'collection' as "type" FROM ui_historicalcollection c UNION SELECT s.history_id as "history_id", s.date_updated as "date_updated", s.collection_id as "collection_id", NULL as "collection_id_sfm", 'seed' as "type" FROM ui_historicalseed s) c2 WHERE c2.collection_id=h.collection_id AND c2.date_updated <= h.date_started) ORDER BY h.collection_id, h.date_started;
-    s: bsd:harvest_$(harvest_id_sfm)
-    po:
-      - [a, prov:Activity]
-      - [dc:title, "Harvest $(harvest_id_sfm)", en~lang]
-      - [dc:description, "A $(harvest_type) harvest with status $(status) for collection $(collection_id_sfm)", en~lang]
-      - [prov:used, bsd:harvestSeeds_$(harvest_id_sfm)~iri]
-      - [prov:startedAtTime, $(harvest_started), xsd:dateTime]
-      - [prov:endedAtTime, $(harvest_ended), xsd:dateTime]
-
 
   warcs:
     creator: "<Sven.Lieber@ugent.be>"

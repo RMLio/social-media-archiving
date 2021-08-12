@@ -27,6 +27,27 @@ variables:
 
 mappings:
 
+  harvests:
+    creator: "<Sven.Lieber@ugent.be>"
+    description: ""
+    version: "v1.0.0"
+    sources:
+      - access: *dbHost
+        type: *dbType
+        credentials: *credentials
+        queryFormulation: *sqlQueryFormulation
+        referenceFormulation: *csvReferenceFormulation
+        query: SELECT h.harvest_id, h.harvest_type, h.status, (to_char(h.date_started, 'YYYY-MM-DDT') || to_char(h.date_started, 'HH24:MI:SSOF')), (to_char(h.date_ended, 'YYYY-MM-DDT') || to_char(h.date_ended, 'HH24:MI:SSOF')), c.collection_id FROM ui_harvest h JOIN ui_collection c ON h.collection_id=c.id
+    s: bsd:harvest_$(harvest_id)
+    po:
+      - [a, prov:Activity]
+      - [dc:title, "Harvest $(harvest_id)", en~lang]
+      - [dc:description, "A $(harvest_type) harvest with status $(status) for collection $(collection_id)", en~lang]
+      - [prov:used, bsd:harvestSeeds_$(harvest_id)~iri]
+      - [prov:startedAtTime, $(harvest_started), xsd:dateTime]
+      - [prov:endedAtTime, $(harvest_ended), xsd:dateTime]
+
+
 
   harvestInputCollection:
     creator: "<Sven.Lieber@ugent.be>"
