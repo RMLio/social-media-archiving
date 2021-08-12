@@ -1,0 +1,207 @@
+prefixes:
+  idlab-fn: "http://example.com/idlab/function/"
+  dc: "http://purl.org/dc/elements/1.1/"
+  dcterms: "http://purl.org/dc/terms/"
+  dcmitype: "http://purl.org/dc/dcmitype/"
+  premis: "http://www.loc.gov/premis/rdf/v3/"
+  relSubType: "https://id.loc.gov/vocabulary/preservation/relationshipSubType/"
+  ebucore: "https://www.ebu.ch/metadata/ontologies/ebucore#"
+  schema: "http://schema.org/"
+  grel: "http://users.ugent.be/~bjdmeest/function/grel.ttl#"  
+  owl: "http://www.w3.org/2002/07/owl#"
+  prov: "http://www.w3.org/ns/prov#"
+  xsd: "http://www.w3.org/2001/XMLSchema#"
+  edm: "http://www.europeana.eu/schemas/edm/"
+  bsm: "http://w3id.org/besocial/ns/model#"
+  bsd: "http://w3id.org/besocial/data#"
+  bss: "http://w3id.org/besocial/ns/shapes#"
+  ex: "http://example.org/ns#"
+
+variables:
+  access: &dbHost //${SFM_DB_HOST}:${SFM_DB_PORT}/${SFM_DB_DATABASE}
+  type: &dbType postgresql
+  queryFormulation: &sqlQueryFormulation sql2008
+  referenceFormulation: &csvReferenceFormulation csv
+  credentials: &credentials
+    username: ${SFM_DB_USER}
+    password: ${SFM_DB_PASSWORD}
+
+mappings:
+
+  harvests:
+    creator: "<Sven.Lieber@ugent.be>"
+    description: ""
+    version: "v1.0.0"
+    sources:
+      - access: *dbHost
+        type: *dbType
+        credentials: *credentials
+        queryFormulation: *sqlQueryFormulation
+        referenceFormulation: *csvReferenceFormulation
+        query: SELECT h.harvest_id, h.harvest_type, h.status, (to_char(h.date_started, 'YYYY-MM-DDT') || to_char(h.date_started, 'HH24:MI:SSOF')) as harvest_started, (to_char(h.date_ended, 'YYYY-MM-DDT') || to_char(h.date_ended, 'HH24:MI:SSOF')) as harvest_ended, c.collection_id FROM ui_harvest h JOIN ui_collection c ON h.collection_id=c.id
+    s: bsd:harvest_$(harvest_id)
+    po:
+      - p: a
+        o: bsm:TwitterSearchHarvest
+        condition:
+          function: idlab-fn:equal
+          parameters:
+            - [grel:valueParameter, $(harvest_type)]
+            - [grel:valueParameter2, "twitter_search"]
+      - p: a
+        o: bsm:TwitterTimelineHarvest
+        condition:
+          function: idlab-fn:equal
+          parameters:
+            - [grel:valueParameter, $(harvest_type)]
+            - [grel:valueParameter2, "twitter_user_timeline"]
+      - [dc:title, "Harvest $(harvest_id)", en~lang]
+      - [dc:description, "A $(harvest_type) harvest with status $(status) for collection $(collection_id)", en~lang]
+      - [prov:used, bsd:harvestSeeds_$(harvest_id)~iri]
+      - [prov:startedAtTime, $(harvest_started), xsd:dateTime]
+      - [prov:endedAtTime, $(harvest_ended), xsd:dateTime]
+      - p: schema:eventStatus
+        o: bsm:harvestSuccessful~iri
+        condition:
+          function: idlab-fn:equal
+          parameters:
+            - [grel:valueParameter, $(status)]
+            - [grel:valueParameter2, "completed success"]
+      - p: schema:eventStatus
+        o: bsm:harvestFailed~iri
+        condition:
+          function: idlab-fn:equal
+          parameters:
+            - [grel:valueParameter, $(status)]
+            - [grel:valueParameter2, "completed failure"]
+      - p: schema:eventStatus
+        o: bsm:harvestSkipped~iri
+        condition:
+          function: idlab-fn:equal
+          parameters:
+            - [grel:valueParameter, $(status)]
+            - [grel:valueParameter2, "skipped"]
+
+
+
+  harvestInputCollection:
+    creator: "<Sven.Lieber@ugent.be>"
+    description: ""
+    version: "v1.0.0"
+    sources:
+      - access: *dbHost
+        type: *dbType
+        credentials: *credentials
+        queryFormulation: *sqlQueryFormulation
+        referenceFormulation: *csvReferenceFormulation
+        query: SELECT harvest_id FROM ui_harvest
+    s: bsd:harvestSeeds_$(harvest_id)
+    po:
+      - [a, prov:Collection]
+      - [dc:title, "Input seeds for harvest $(harvest_id)", en~lang]
+ 
+
+
+  seedObjects:
+    creator: "<Sven.Lieber@ugent.be>"
+    description: ""
+    version: "v1.0.0"
+    sources:
+      - access: *dbHost
+        type: *dbType
+        credentials: *credentials
+        queryFormulation: *sqlQueryFormulation
+        referenceFormulation: *csvReferenceFormulation
+        query: select s.seed_id, s.collection_id, s.token, s.uid, s.history_note, c.harvest_type from ui_seed s JOIN ui_collection c ON s.collection_id=c.id;
+    s: bsd:seedObject_$(seed_id)
+    po:
+      - [a, prov:Entity]
+      - [dc:title, "Seed $(seed_id)", en~lang]
+      - [rdf:value, $(token)]
+      - p: dcterms:identifier
+        o: $(uid)
+        condition:
+          function: idlab-fn:equal
+          parameters:
+            - [grel:valueParameter, $(harvest_type)]
+            - [grel:valueParameter2, "twitter_user_timeline"]
+      - p: dc:description
+        o: "This seed is a twitter user with the initial value '$(token)'. This name may change, please consider specific versions of this entity."
+        condition:
+          function: idlab-fn:equal
+          parameters:
+            - [grel:valueParameter, $(harvest_type)]
+            - [grel:valueParameter2, "twitter_user_timeline"]
+      - p: dc:description
+        o: "This seed is a search query with the initial value '$(token)'. This query may change, please consider specific versions of this entity."
+        condition:
+          function: idlab-fn:equal
+          parameters:
+            - [grel:valueParameter, $(harvest_type)]
+            - [grel:valueParameter2, "twitter_search"]
+
+
+  seedVersions:
+    creator: "<Sven.Lieber@ugent.be>"
+    description: ""
+    version: "v1.0.0"
+    sources:
+      - access: *dbHost
+        type: *dbType
+        credentials: *credentials
+        queryFormulation: *sqlQueryFormulation
+        referenceFormulation: *csvReferenceFormulation
+        query: select s.seed_id, s.collection_id, s.token, s.uid, s.history_id, s.history_note, (to_char(s.history_date, 'YYYY-MM-DDT') || to_char(s.history_date, 'HH24:MI:SSOF')) as "history_date", c.harvest_type from ui_historicalseed s JOIN ui_collection c ON s.collection_id=c.id;
+    s: bsd:seedVersion_$(seed_id)_$(history_id)
+    po:
+      - [a, prov:Entity]
+      - [dc:title, "Seed Version $(seed_id)_$(history_id)", en~lang]
+      - [prov:specializationOf, bsd:seedObject_$(seed_id)~iri]
+      - [prov:generatedAtTime, $(history_date), xsd:dateTime]
+      - [rdf:value, $(token)]
+      - p: dcterms:identifier
+        o: $(uid)
+        condition:
+          function: idlab-fn:equal
+          parameters:
+            - [grel:valueParameter, $(harvest_type)]
+            - [grel:valueParameter2, "twitter_user_timeline"]
+ 
+      - p: dc:description
+        o: "This seed is a twitter user with value '$(token)'."
+        condition:
+          function: idlab-fn:equal
+          parameters:
+            - [grel:valueParameter, $(harvest_type)]
+            - [grel:valueParameter2, "twitter_user_timeline"]
+      - p: dc:description
+        o: "This seed is a search query with the value '$(token)' and uid '$(uid)'."
+        condition:
+          function: idlab-fn:equal
+          parameters:
+            - [grel:valueParameter, $(harvest_type)]
+            - [grel:valueParameter2, "twitter_search"]
+      - p: dc:description
+        o: $(history_note)
+        condition:
+          function: idlab-fn:notEqual
+          parameters:
+            - [grel:valueParameter, $(history_note)]
+            - [grel:valueParameter2, ""]
+
+
+  seedUse:
+    creator: "<Sven.Lieber@ugent.be>"
+    description: ""
+    version: "v1.0.0"
+    sources:
+      - access: *dbHost
+        type: *dbType
+        credentials: *credentials
+        queryFormulation: *sqlQueryFormulation
+        referenceFormulation: *csvReferenceFormulation
+        query: select n.id, h.harvest_id, n.historicalseed_id, s.seed_id from ui_harvest_historical_seeds n JOIN ui_historicalseed s ON n.historicalseed_id=s.history_id JOIN ui_harvest h ON n.harvest_id=h.id
+    s: bsd:harvestSeeds_$(harvest_id)
+    po:
+      - [prov:hadMember, bsd:seedVersion_$(seed_id)_$(historicalseed_id)~iri]
+ 

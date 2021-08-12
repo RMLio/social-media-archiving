@@ -1,0 +1,98 @@
+prefixes:
+  idlab-fn: "http://example.com/idlab/function/"
+  dc: "http://purl.org/dc/elements/1.1/"
+  dcterms: "http://purl.org/dc/terms/"
+  dcmitype: "http://purl.org/dc/dcmitype/"
+  premis: "http://www.loc.gov/premis/rdf/v3/"
+  relSubType: "https://id.loc.gov/vocabulary/preservation/relationshipSubType/"
+  ebucore: "https://www.ebu.ch/metadata/ontologies/ebucore#"
+  grel: "http://users.ugent.be/~bjdmeest/function/grel.ttl#"  
+  owl: "http://www.w3.org/2002/07/owl#"
+  prov: "http://www.w3.org/ns/prov#"
+  xsd: "http://www.w3.org/2001/XMLSchema#"
+  edm: "http://www.europeana.eu/schemas/edm/"
+  bsm: "http://w3id.org/besocial/ns/model#"
+  bsd: "http://w3id.org/besocial/data#"
+  bss: "http://w3id.org/besocial/ns/shapes#"
+  ex: "http://example.org/ns#"
+
+variables:
+  access: &dbHost //${SFM_DB_HOST}:${SFM_DB_PORT}/${SFM_DB_DATABASE}
+  type: &dbType postgresql
+  queryFormulation: &sqlQueryFormulation sql2008
+  referenceFormulation: &csvReferenceFormulation csv
+  credentials: &credentials
+    username: ${SFM_DB_USER}
+    password: ${SFM_DB_PASSWORD}
+
+mappings:
+
+  collectionsAggregation:
+    creator: "<Sven.Lieber@ugent.be>"
+    description: ""
+    version: "v1.0.0"
+    sources:
+      - access: *dbHost
+        type: *dbType
+        credentials: *credentials
+        queryFormulation: *sqlQueryFormulation
+        referenceFormulation: *csvReferenceFormulation
+        query: select c.collection_id, c.name, c.description, c.harvest_type, cs.collection_set_id from ui_collection c JOIN ui_collectionset cs ON c.collection_set_id=cs.id;
+    s: bsd:collectionAggregation_$(collection_id)
+    po:
+      - [a, edm:Aggregation]
+      - [dc:title, $(name)]
+      - [dc:description, $(description)]
+      - [dcterms:identifier, $(collection_id)]
+      - [edm:aggregatedCHO, bsd:collectionObject_$(collection_id)~iri]
+      - [edm:hasView, bsd:collectionJSON_$(collection_id)~iri]
+
+      
+  collectionsCHO:
+    creator: "<Sven.Lieber@ugent.be>"
+    description: ""
+    version: "v1.0.0"
+    sources:
+      - access: *dbHost
+        type: *dbType
+        credentials: *credentials
+        queryFormulation: *sqlQueryFormulation
+        referenceFormulation: *csvReferenceFormulation
+        query: select c.collection_id, c.name, c.description, c.harvest_type, cs.collection_set_id from ui_collection c JOIN ui_collectionset cs ON c.collection_set_id=cs.id;
+    s: bsd:collectionObject_$(collection_id)
+    po:
+      - [a, prov:Entity]
+      - [a, edm:ProvidedCHO]
+      - [a, premis:IntellectualEntity]
+      - [a, dcmitype:Collection]
+      - [dcterms:identifier, $(collection_id)]
+      - [dc:title, $(name)]
+      - [dc:description, $(description)]
+      - [dcterms:isPartOf, bsd:collectionSet_$(collection_set_id)~iri]
+
+
+  collectionsRepresentation:
+    creator: "<Sven.Lieber@ugent.be>"
+    description: ""
+    version: "v1.0.0"
+    sources:
+      - access: *dbHost
+        type: *dbType
+        credentials: *credentials
+        queryFormulation: *sqlQueryFormulation
+        referenceFormulation: *csvReferenceFormulation
+        query: select c.collection_id, c.name, c.description, c.harvest_type, cs.collection_set_id from ui_collection c JOIN ui_collectionset cs ON c.collection_set_id=cs.id;
+    s: bsd:collectionJSON_$(collection_id)
+    po:
+      - [a, edm:WebResource]
+      - [a, premis:Representation]
+      - [a, bsm:SocialMediaCollectionRepresentation]
+      - [dc:title, "$(name) JSON"]
+      - [dcterms:identifier, $(collection_id)]
+      - [ebucore:hasMimeType, "application/json"]
+      - [dc:description, $(description)]
+      - [dcterms:isPartOf, bsd:collectionSet_$(collection_set_id)~iri]
+      - [relSubType:rep, bsd:collectionObject_$(collection_id)~iri]
+      - [dc:source, $(harvest_type)]
+
+

@@ -11,6 +11,7 @@
 @prefix vann: <http://purl.org/vocab/vann/> .
 @prefix edm: <http://www.europeana.eu/schemas/edm/> .
 @prefix premis: <http://www.loc.gov/premis/rdf/v3/> .
+@prefix schema: <http://schema.org/> .
 
 <https://w3id.org/besocial/ns/model#> rdf:type owl:Ontology ;
                                        vann:preferredNamespacePrefix "bsm" ;
@@ -32,7 +33,7 @@
                                        dc:creator <https://sven-lieber.org/profile#me> .
 
 #
-# Classes
+# Collections
 #
 bsm:SocialMediaCollection a rdfs:Class ;
   rdfs:label "SocialMediaCollection"@en ;
@@ -49,11 +50,37 @@ bsm:SocialMediaCollectionRepresentationVersion a rdfs:Class ;
   rdfs:comment "A specific version of a social media collection representation which is a premis:Representation, edm:WebResource and prov:Entity, for example a representation in JSON."@en ;
   rdfs:subClassOf edm:WebResource, premis:Representation, prov:Entity .
 
+#
+# Aggregations
+#
 bsm:SocialMediaPostsObservation a rdfs:Class ;
   rdfs:label "SocialMediaPostsObservation"@en ;
   rdfs:comment "A data cube observation regarding a number of social media posts."@en ;
   rdfs:subClassOf qb:Observation . 
 
+
+#
+# Harvests
+#
+bsm:SocialMediaHarvest a rdfs:Class ;
+  rdfs:label "SocialMediaHarvest"@en ;
+  rdfs:comment "An attempted harvest of one or more seeds from a social media provider."@en ;
+  rdfs:subClassOf prov:Activity .
+
+bsm:TwitterHarvest a rdfs:Class ;
+  rdfs:label "TwitterHarvest"@en ;
+  rdfs:comment "An attempted harvest of one or more seeds from Twitter."@en ;
+  rdfs:subClassOf bsm:SocialMediaHarvest .
+
+bsm:TwitterSearchHarvest a rdfs:Class ;
+  rdfs:label "TwitterSearchHarvest"@en ;
+  rdfs:comment "An attempted harvest of one or more seeds from the search API of Twitter."@en ;
+  rdfs:subClassOf bsm:TwitterHarvest .
+
+bsm:TwitterTimelineHarvest a rdfs:Class ;
+  rdfs:label "TwitterTimelineHarvest"@en ;
+  rdfs:comment "An attempted harvest of one or more seeds from the user timeline API of Twitter."@en ;
+  rdfs:subClassOf bsm:TwitterHarvest .
 
 #
 # Named individuals
@@ -82,3 +109,24 @@ bsm:yearDimension a qb:DimensionProperty, rdf:Property ;
 bsm:numberPosts a qb:MeasureProperty, rdf:Property ;
   rdfs:label "numberPosts"@en ;
   rdfs:comment "Number of social media posts. For example 55 social media posts such as 55 tweets."@en .
+
+
+#
+# Harvest statuses
+#
+bsm:harvestSuccessful a schema:EventStatusType ;
+  rdfs:label "harvestSuccessful"@en ;
+  rdfs:comment "A status indicating that a scheduled harvest was executed successfully."@en .
+
+bsm:harvestFailed a schema:EventStatusType ;
+  rdfs:label "harvestFailed"@en ;
+  rdfs:comment "A status indicating that a scheduled harvest failed."@en .
+
+bsm:harvestSkipped a schema:EventStatusType ;
+  rdfs:label "harvestSkipped"@en ;
+  rdfs:comment "A status indicating that a scheduled harvest was skipped."@en .
+
+bsm:harvestVoided a schema:EventStatusType ;
+  rdfs:label "harvestVoided"@en ;
+  rdfs:comment "A status indicating that a skipped harvest was voided."@en .
+

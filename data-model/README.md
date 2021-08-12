@@ -93,7 +93,7 @@ such that we reach our high-level goals regarding interoperability with EDM and 
 **Our solution**
 
 <details>
-<summary>Following EDM and PREMIS we distinguish a collection by reusing three classes and create one class ourselves</summary>
+<summary>Following EDM and PREMIS we distinguish a collection by reusing three classes and create one class ourselves (click to read more)</summary>
 
 * The conceptual *thing* using `edm:ProvidedCHO`, `premis:IntellectualEntity` and `prov:Entity`
 * A representation of the conceptual thing using `edm:WebResource`, `premis:Representation` and `prov:Entity`
@@ -145,7 +145,7 @@ bsd:flemishNewspaperCollectionAggregation
 **Constraints related to our solution**
 
 <details>
-<summary>Following the EDM mapping guidelines each `edm:ProvidedCHO` should have several properties</summary>
+<summary>Following the EDM mapping guidelines each `edm:ProvidedCHO` should have several properties (click to read more)</summary>
 
 Example of EDM constraints for the class `edm:ProvidedCHO` expressed using SHACL.
 
@@ -216,7 +216,7 @@ This might be valuable information, e.g. in 2021 the Belgian social democratic p
 **Our solution**
 
 <details>
-<summary>We use PROV-O to represent seeds and their versions which are used by harvests.</summary>
+<summary>We use PROV-O to represent seeds and their versions which are used by harvests. (click to read more)</summary>
 
 Following `PROV-O`, we represent a seed as an instance of `prov:Entity` and different versions also as `prov:Entity` but linking via `prov:specializationOf` to their representation across versions.
 
@@ -263,6 +263,9 @@ This also takes changed collection metadata into account, for instance when the 
 
 > :computer: *As a data steward, I want to know which seeds contributed in which time period to a collection version, so I an assess the collection's provenance.*
 
+> :computer: *As a data steward, I want to know which harvests succeeded, failed, or were skipped, so I can gain insights in the system's behavior.*
+
+> :computer: *As a data steward, I want to know which harvests concerned which type of social media, e.g. twitter search, twitter user timeline or flickr search, so I can filter a search.*
 
 *Harvests* result in one or more *WARC* files, thus these files are part of a collection representation and versions.
 For example, the three harvests `h1`, `h2` and `h3` represent the versions `v1`, `v2` and `v3` of collection `c1`.
@@ -275,12 +278,19 @@ Additionally all these WARC Files are part of `c1` representing the collection a
 > :computer: *As a data steward, I want to know which harvested files belong to which collection and collection version, so I can assess its provenance in the context of a collection.*
 
 **Our solution**
-
 <details>
-<summary>We represent harvests as PROV-O activities which use a PROV-O collection of seed versions and produce one or more PROV-O entities and PREMIS files representing WARC files.</summary>
+<summary>We represent harvests as PROV-O activities which use a PROV-O collection of seed versions and produce one or more PROV-O entities and PREMIS files representing WARC files. (click to read more)</summary>
 
-Following `PROV-O`, we represent harvests as instances of `prov:Activity` which generate one or more WARC files (`ex:warc prov:wasGeneratedBy ex:harvest`)
+Following `PROV-O`, we represent harvests as instances of  a `prov:Activity` subclass which generate one or more WARC files (`ex:warc prov:wasGeneratedBy ex:harvest`)
 by using one or more seeds organized as an instance of `prov:Collection`.
+
+For each `harvest_type` we created a subclass of `prov:Activity`, e.g. `bsm:TwitterTimelineHarvest`.
+Additionally, the status of a harvest can be retrieved via the property `schema:eventStatus` which can take one of several values,
+e.g. `bsm:harvestSuccessful` which is an instance of `schema:EventStatusType`.
+
+We currently map the following harvest statuses: successful, failed, skipped and voided.
+We do not map the statuses requested, running and stop requested as we consider harvests to be finished, skipped or voided.
+For example, in a daily insert harvest metadata are updated, usually requested or running harvests are at some point either finished, skipped or voided.
 
 Each harvest produces new content which may justify also a new version of a collection.
 Despite which versioning scheme is used, new versions of a collection are instances of `prov:Entity`
@@ -307,9 +317,10 @@ bsd:harvestSeeds_123
   prov:hadMember bas:seedVersion_789_3 .
 
 bsd:harvest_123
-  a prov:Activity ;
+  a bsm:TwitterTimelineHarvest ;
   dc:title "Harvest 123"@en ;
   dc:description "A twitter_user_timeline harvest with status success for collection 123"@en ;
+  schema:eventStatus bsm:harvestSuccessful ;
   prov:used bsd:harvestSeeds_123 ;
   prov:startedAtTime "..."^^xsd:dateTime ;
   prov:endedAtTime "..."^^xsd:dateTime .
