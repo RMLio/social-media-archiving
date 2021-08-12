@@ -6,6 +6,7 @@ prefixes:
   premis: "http://www.loc.gov/premis/rdf/v3/"
   relSubType: "https://id.loc.gov/vocabulary/preservation/relationshipSubType/"
   ebucore: "https://www.ebu.ch/metadata/ontologies/ebucore#"
+  schema: "http://schema.org/"
   grel: "http://users.ugent.be/~bjdmeest/function/grel.ttl#"  
   owl: "http://www.w3.org/2002/07/owl#"
   prov: "http://www.w3.org/ns/prov#"
@@ -37,15 +38,49 @@ mappings:
         credentials: *credentials
         queryFormulation: *sqlQueryFormulation
         referenceFormulation: *csvReferenceFormulation
-        query: SELECT h.harvest_id, h.harvest_type, h.status, (to_char(h.date_started, 'YYYY-MM-DDT') || to_char(h.date_started, 'HH24:MI:SSOF')), (to_char(h.date_ended, 'YYYY-MM-DDT') || to_char(h.date_ended, 'HH24:MI:SSOF')), c.collection_id FROM ui_harvest h JOIN ui_collection c ON h.collection_id=c.id
+        query: SELECT h.harvest_id, h.harvest_type, h.status, (to_char(h.date_started, 'YYYY-MM-DDT') || to_char(h.date_started, 'HH24:MI:SSOF')) as harvest_started, (to_char(h.date_ended, 'YYYY-MM-DDT') || to_char(h.date_ended, 'HH24:MI:SSOF')) as harvest_ended, c.collection_id FROM ui_harvest h JOIN ui_collection c ON h.collection_id=c.id
     s: bsd:harvest_$(harvest_id)
     po:
-      - [a, prov:Activity]
+      - p: a
+        o: bsm:TwitterSearchHarvest
+        condition:
+          function: idlab-fn:equal
+          parameters:
+            - [grel:valueParameter, $(harvest_type)]
+            - [grel:valueParameter2, "twitter_search"]
+      - p: a
+        o: bsm:TwitterTimelineHarvest
+        condition:
+          function: idlab-fn:equal
+          parameters:
+            - [grel:valueParameter, $(harvest_type)]
+            - [grel:valueParameter2, "twitter_user_timeline"]
       - [dc:title, "Harvest $(harvest_id)", en~lang]
       - [dc:description, "A $(harvest_type) harvest with status $(status) for collection $(collection_id)", en~lang]
       - [prov:used, bsd:harvestSeeds_$(harvest_id)~iri]
       - [prov:startedAtTime, $(harvest_started), xsd:dateTime]
       - [prov:endedAtTime, $(harvest_ended), xsd:dateTime]
+      - p: schema:eventStatus
+        o: bsm:harvestSuccessful~iri
+        condition:
+          function: idlab-fn:equal
+          parameters:
+            - [grel:valueParameter, $(status)]
+            - [grel:valueParameter2, "completed success"]
+      - p: schema:eventStatus
+        o: bsm:harvestFailed~iri
+        condition:
+          function: idlab-fn:equal
+          parameters:
+            - [grel:valueParameter, $(status)]
+            - [grel:valueParameter2, "completed failure"]
+      - p: schema:eventStatus
+        o: bsm:harvestSkipped~iri
+        condition:
+          function: idlab-fn:equal
+          parameters:
+            - [grel:valueParameter, $(status)]
+            - [grel:valueParameter2, "skipped"]
 
 
 
