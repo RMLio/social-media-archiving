@@ -10,19 +10,14 @@ prefixes:
   sioc: "http://rdfs.org/sioc/ns#"
   premis: "http://www.loc.gov/premis/rdf/v3/"
   relSubType: "https://id.loc.gov/vocabulary/preservation/relationshipSubType/"
+  schema: "http://schema.org/"
   prov: "http://www.w3.org/ns/prov#"
-  bsd: "http://example.org/ns/besocial/data#"
-  bss: "http://example.org/ns/besocial/shapes#"
+  bsd: "http://w3id.org/besocial/data#"
+  bss: "http://w3id.org/besocial/ns/shapes#"
   ex: "http://example.org/ns#"
 
-variables:
-  access: &dbHost INSERT POSTGRESQL CONNECTION STRING HERE
-  type: &dbType postgresql
-  queryFormulation: &sqlQueryFormulation sql2008
-  referenceFormulation: &csvReferenceFormulation csv
-  credentials: &credentials
-    username: INSERT DB USERNAME HERE
-    password: INSERT DB PASSWORD HERE
+targets:
+  subject-target: ["${TRIPLE_STORE_ITEMS}~sd"]
 
 mappings:
 
@@ -34,8 +29,6 @@ mappings:
       - access: "message.json"
         referenceFormulation: jsonpath
         iterator: "$.[*]"
-    targets:
-      - sparql-target: ["http://193.190.127.232:8086/bigdata/namespace/sfm-item/sparql"]
     s: bsd:httpRequest_$(warc-header.warc-record-id)
     condition:
        function: idlab-fn:equal
@@ -184,7 +177,6 @@ mappings:
           datatype: xsd:dateTime
 
 
-
   tweetsAuthorsStatusObject:
     creator: "<Sven.Lieber@ugent.be>"
     description: ""
@@ -274,6 +266,57 @@ mappings:
       - [dcterms:isPartOf, bsd:httpResponse_$(warc-header.warc-record-id)~iri]
 
 
+  tweetsStatusHashtags:
+    sources:
+      - access: "message.json"
+        referenceFormulation: jsonpath
+        iterator: "$.[*].entities.hashtags.[*]"
+    s: bsd:hashtag_twitter_$(text)
+    condition:
+    po:
+      - [a, sioc:Tag]
+      - [rdfs:label, $(text)]
+
+  tweetsTimelineHashtags:
+    sources:
+      - access: "message.json"
+        referenceFormulation: jsonpath
+        iterator: "$.[*].status.entities.hashtags.[*]"
+    s: bsd:hashtag_twitter_$(text)
+    condition:
+    po:
+      - [a, sioc:Tag]
+      - [rdfs:label, $(text)]
+  
+
+  tweetsHashtagLinksStatusObject:
+    sources:
+      - access: "message.json"
+        referenceFormulation: jsonpath
+        iterator: "$.[*]"
+    s: bsd:post_twitter_$(status.id_str)
+    condition:
+      function: grel:string_contains
+      parameters:
+        - [grel:valueParameter, "$(warc-header.warc-type)_$(warc-header.warc-target-uri)"]
+        - [grel:string_sub, "response_https://api.twitter.com/1.1/users/show.json"]
+    po:
+      - [schema:mentions, 'bsd:hashtag_$(status.entities.hashtags[*].text)~iri']
+
+
+  tweetsHashtagLinksTimelineObject:
+    sources:
+      - access: "message.json"
+        referenceFormulation: jsonpath
+        iterator: "$.[*]"
+    s: bsd:post_twitter_$(id_str)
+    condition:
+      function: grel:string_contains
+      parameters:
+        - [grel:valueParameter, "$(warc-header.warc-type)_$(warc-header.warc-target-uri)"]
+        - [grel:string_sub, "response_https://api.twitter.com/1.1/statuses/user_timeline.json"]
+    po:
+      - [schema:mentions, 'bsd:hashtag_$(entities.hashtags[*].text)~iri']
 
 
   tweetsRecognizedEntitiesCollectionStatusObject:
