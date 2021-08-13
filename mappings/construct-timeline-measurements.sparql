@@ -69,5 +69,5 @@ WHERE {
   #
   # Generate a new IRI for every observation
   #
-  BIND (URI(concat("http://w3id.org/besocial/data#obs_", STRUUID())) as ?obs)
+  BIND (URI(concat("http://w3id.org/besocial/data/obs_", STRUUID())) as ?obs)
 }
