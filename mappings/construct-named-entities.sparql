@@ -1,0 +1,41 @@
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX schema: <http://schema.org/>
+PREFIX edm: <http://www.europeana.eu/schemas/edm/>
+PREFIX bsd: <http://w3id.org/besocial/data/>
+PREFIX sioc: <http://rdfs.org/sioc/ns#>
+PREFIX nee: <http://www.ics.forth.gr/isl/oae/core#>
+
+CONSTRUCT {
+
+  ?neObject a nee:Entity ;
+    nee:hasMatchedURL ?ne .
+
+  ?itemCHO schema:mentions ?neObject .
+}
+WHERE {
+
+  #
+  # retrieve named Entities via prov derivations
+  #
+  ?derivation a prov:Derivation ;
+              prov:entity ?namedEntities ;
+              prov:hadActivity ?nerActivity .
+
+  ?namedEntities a prov:Collection ;
+                 prov:hadMember ?ne .
+
+  ?nerActivity a prov:Activity ;
+               dc:description ?componentDescription ;
+               prov:used ?itemCHO .
+
+  #
+  # itemCHO should be a cultural heritage object
+  #
+  ?itemAggregation a edm:Aggregation ;
+                   edm:hasView ?itemRepresentation ;
+                   edm:aggregatedCHO ?itemCHO .
+
+  BIND (URI(concat("http://w3id.org/besocial/data/ne_", STRUUID())) as ?neObject)
+ 
+}
