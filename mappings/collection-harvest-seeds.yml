@@ -13,7 +13,7 @@ prefixes:
   xsd: "http://www.w3.org/2001/XMLSchema#"
   edm: "http://www.europeana.eu/schemas/edm/"
   bsm: "http://w3id.org/besocial/ns/model#"
-  bsd: "http://w3id.org/besocial/data#"
+  bsd: "http://w3id.org/besocial/data/"
   bss: "http://w3id.org/besocial/ns/shapes#"
   ex: "http://example.org/ns#"
 
