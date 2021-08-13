@@ -12,7 +12,7 @@ prefixes:
   relSubType: "https://id.loc.gov/vocabulary/preservation/relationshipSubType/"
   schema: "http://schema.org/"
   prov: "http://www.w3.org/ns/prov#"
-  bsd: "http://w3id.org/besocial/data#"
+  bsd: "http://w3id.org/besocial/data/"
   bss: "http://w3id.org/besocial/ns/shapes#"
   ex: "http://example.org/ns#"
 
@@ -270,8 +270,8 @@ mappings:
     sources:
       - access: "message.json"
         referenceFormulation: jsonpath
-        iterator: "$.[*].entities.hashtags.[*]"
-    s: bsd:hashtag_twitter_$(text)
+        iterator: "$.[*].status.entities.hashtags.[*]"
+    s: bsd:hashtag_$(text)
     condition:
     po:
       - [a, sioc:Tag]
@@ -281,8 +281,8 @@ mappings:
     sources:
       - access: "message.json"
         referenceFormulation: jsonpath
-        iterator: "$.[*].status.entities.hashtags.[*]"
-    s: bsd:hashtag_twitter_$(text)
+        iterator: "$.[*]..entities.hashtags.[*]"
+    s: bsd:hashtag_$(text)
     condition:
     po:
       - [a, sioc:Tag]

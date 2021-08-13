@@ -64,7 +64,7 @@ mappings:
       - [a, prov:Entity]
       - [a, edm:ProvidedCHO]
       - [a, premis:IntellectualEntity]
-      - [a, dcmitype:Collection]
+      - [a, bsm:SocialMediaCollection]
       - [dcterms:identifier, $(collection_id)]
       - [dc:title, $(name)]
       - [dc:description, $(description)]
