@@ -24,7 +24,7 @@
                                        owl:versionInfo "1.0.0" ;
                                        owl:priorVersion <https://w3id.org/besocial/ns/model#> ;
                                        rdfs:seeAlso <https://w3id.org/besocial> ;
-                                       dc:modified "2021-07-30"^^xsd:date ;
+                                       dc:modified "2021-08-13"^^xsd:date ;
                                        dc:issued "2021-07-30"^^xsd:date ;
                                        dc:created "2021-07-30"^^xsd:date ;
                                        dc:rights "Copyright © Ghent University – imec – IDLab"@en ;
@@ -105,11 +105,18 @@ bsm:yearDimension a qb:DimensionProperty, rdf:Property ;
   rdfs:label "yearDimension"@en ;
   rdfs:comment "The year this observation relates to."@en .
 
+bsm:hashtagDimension a qb:DimensionProperty, rdf:Property ;
+  rdfs:label "hashtagDimension"@en ;
+  rdfs:comment "The hashtag this observation relates to."@en .
+
 
 bsm:numberPosts a qb:MeasureProperty, rdf:Property ;
   rdfs:label "numberPosts"@en ;
   rdfs:comment "Number of social media posts. For example 55 social media posts such as 55 tweets."@en .
 
+bsm:numberPostsWithHashtag a qb:MeasureProperty, rdf:Property ;
+  rdfs:label "numberPostsWithHashtag"@en ;
+  rdfs:comment "Number of how often a hashtag is used."@en .
 
 #
 # Harvest statuses
