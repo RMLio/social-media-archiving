@@ -45,6 +45,13 @@ map(){
     -m $rml_file > $output_file
 }
 
+applyFix(){
+  local rml_file=$1
+  local output_file=$2
+  echo "fixing '$rml_file' and store fix in '$output_file'"
+  python workaround-yarrrml-issue-124.py -i $rml_file -o $output_file
+}
+
 if [ $# -ne 2 ];
 then
   echo "Please provide a valid yarrrml file (.yml) and the name of the mapped turtle output"
@@ -55,12 +62,14 @@ inputFile=$1
 outputFilename=$2
 inputBasename=$(basename $inputFile .yml)
 rmlFilename="$inputBasename""-rml.ttl"
+fixFilename="$inputBasename""-rml-fixed.ttl"
 
 echo "Creating $outputFilename by transforming $inputFile to $rmlFilename and executing it with $RML_MAPPER"
 
 downloadYARRRML
 downloadRML
 parseYARRRML $inputFile $rmlFilename
-map $rmlFilename $outputFilename
+applyFix $rmlFilename $fixFilename
+map $fixFilename $outputFilename
 
 exit 0
