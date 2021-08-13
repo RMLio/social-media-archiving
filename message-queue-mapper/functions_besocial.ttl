@@ -66,3 +66,40 @@ idlab-fn:_confidence
     rdfs:label    "confidence" ;
     fno:type      xsd:double ;
     fno:predicate idlab-fn:confidence .
+
+
+
+idlab-fn:toXSDDateTime
+    a                    fno:Function ;
+    fno:name             "to xsd:dateTime" ;
+    rdfs:label           "to xsd:dateTime" ;
+    dcterms:description  "Returns a correctly formatted xsd:dateTime string based on the provided value and date pattern" ;
+    fno:expects          ( idlab-fn:_datePattern idlab-fn:_dateString ) ;
+    fno:returns          ( idlab-fn:_stringOut ) .
+
+idlab-fn:toXSDDateTimeMapping
+    a                    fnoi:Mapping ;
+    fno:function         idlab-fn:toXSDDateTime ;
+    fno:implementation   idlab-fn:javaBeSocial ;
+    fno:methodMapping    [ a                fnom:StringMethodMapping ;
+                           fnom:method-name "toXSDDateTime" ] .
+
+idlab-fn:_datePattern
+    a             fno:Parameter ;
+    fno:name      "datePattern" ;
+    rdfs:label    "datePattern" ;
+    fno:predicate idlab-fn:datePattern ;
+    fno:type      xsd:string ;
+    fno:required  "true"^^xsd:boolean .
+
+
+
+idlab-fn:_dateString
+    a             fno:Parameter ;
+    fno:name      "dateString" ;
+    rdfs:label    "dateString" ;
+    fno:predicate idlab-fn:dateString ;
+    fno:type      xsd:string ;
+    fno:required  "true"^^xsd:boolean .
+
+

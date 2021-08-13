@@ -83,11 +83,19 @@ class RMLMapper {
 
     let klass = this;
     //fs.writeFileSync(`msg-${data['warc-type']}-${data['warc-record-id']}.json`, JSON.stringify(data['_input_data']), {encoding: "utf8", flag: "w"});
-    klass.logger.info(`Mapping WARC ${data['warc-type']} record ${data['warc-record-id']} of WARC ${data['warc']['id']}`);
-    // If there is no data we do not have to map
-    if(data['_input_data'].length == 0) {
-        klass.logger.debug(`Empty input data for WARC record ${data['warc-record-id']} of WARC ${data['warc']['id']}`);
+    // If it is a warcinfo record we do not have to map
+    if(data['warc-type'] === 'warcinfo') {
+        klass.logger.info(`Skipping warcinfo record ${data['warc-record-id']} of WARC ${data['warc']['id']}`);
         return;
+    } else {
+
+        // If there is no data we do not have to map
+        if(data['_input_data'].length == 0) {
+            klass.logger.info(`Empty input data for WARC record ${data['warc-record-id']} of WARC ${data['warc']['id']}`);
+            return;
+        } else {
+            klass.logger.info(`Mapping WARC ${data['warc-type']} record ${data['warc-record-id']} of WARC ${data['warc']['id']}`);
+        }
     }
 
     // Read mapping path from data
@@ -100,9 +108,10 @@ class RMLMapper {
 
     // FnO
     const pathsFunctionDescriptions = [
-        'functions_besocial.ttl',
-        'functions_idlab.ttl',
-        'functions_grel.ttl',
+        './function/functions_besocial.ttl',
+        './function/functions_idlab.ttl',
+        './function/functions_grel.ttl',
+        './function/grel_java_mapping.ttl'
     ];
 
 
@@ -148,6 +157,7 @@ class RMLMapper {
             //                 JSON.stringify(data['_input_data']), {encoding: "utf8", flag: "w"});
         }
         // Write triples to disk
+        fs.mkdirSync(path.dirname(data['output_path']), {recursive: true});
         const outputStream = fs.createWriteStream(data['output_path'], {flags: 'a'});
         const writer = new Writer(outputStream, { format: 'N-Triples' });
 

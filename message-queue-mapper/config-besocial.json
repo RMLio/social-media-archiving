@@ -1,6 +1,7 @@
 {
     "targets": [
         {
+            "name": "RMLMapper target",
 	    "type": "rmlmapper"
         }
     ],
@@ -9,7 +10,7 @@
             "name": "RabbitMQ Social Feed Manager generator",
             "generator": "./lib/generators/warc-generator.js",
             "options": {
-		          "url": "amqp://USER:PASSWORD@IP:PORT",
+		          "url": "amqp://${SFM_RABBITMQ_USER}:${SFM_RABBITMQ_PASSWORD}@${SFM_RABBITMQ_HOST}:${SFM_RABBITMQ_PORT}",
             	"routingKey": "#",
             	"exchange": "kg_generation"	
             },

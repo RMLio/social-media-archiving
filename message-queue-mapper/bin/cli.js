@@ -67,11 +67,13 @@ const configDir = path.dirname(program.config);
  */
 const targets = [];
 
-config.targets.forEach(targetOpts => {
+config.targets.forEach(async targetOpts => {
   targetOpts.logger = logger;
-  targets.push(createTarget(targetOpts));
+  targets.push(await createTarget(targetOpts));
 });
 
+logger.debug("The following targets were created:");
+logger.debug(targets);
 /*
  * Start data generators.
  */
@@ -86,6 +88,7 @@ config.generators.forEach(generatorOptions => {
     const dataArray = await generator.generate();
 
     targets.forEach( async target => {
+      logger.debug(`Check target: ${target.name}`);
       for (const data of dataArray) {
         logger.debug(`${generatorOptions.name}: ${JSON.stringify(data)}`);
         await target.sendData(data);

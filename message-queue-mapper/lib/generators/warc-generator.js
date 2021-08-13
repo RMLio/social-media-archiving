@@ -9,6 +9,7 @@ const zlib = require('zlib');
 const child_process = require('child_process');
 // recordIterator only exported if async iteration on readable streams is available
 const { AutoWARCParser } = require('node-warc')
+const path = require('path');
 
 
 class WARCGenerator {
@@ -234,6 +235,15 @@ class WARCGenerator {
             this.logger.error("This should not happen, a record without content field");
             this.logger.error(record);
           }
+         /* saving preprocessed json file for the purpose of reuse it somewhere else as test data
+	  fs.writeFileSync(
+            path.join(
+                '/home/default-user/Downloads/',
+                emitMsg['warc']['id'] + '-' + emitMsg['warc-type'] + '-' + emitMsg['warc-record-id'] + "-processed.json"
+            ),
+            JSON.stringify(emitMsg[dataKey]),
+            {encoding: "utf8", flag: "w"});
+           */
           data.push(emitMsg);
         }
 
@@ -262,12 +272,12 @@ class WARCGenerator {
     if('input_path' in msg && 'input_mapping' in msg && 'output_path' in msg && 'type' in msg && 'input_type' in msg) {
         // if we run outside docker we do not have access to the specified path
         // thus we manually adapt
-        //msg['input_path'] = msg['input_path'].replace('/sfm-collection-set-data', '/mnt/cental_sfm_ssh');
-        //msg['input_mapping'] = msg['input_mapping'].replace('/sfm-collection-set-data', '/mnt/cental_sfm_ssh');
+        msg['input_path'] = msg['input_path'].replace('/sfm-collection-set-data', '/mnt/cental_sfm_ssh');
+        msg['input_mapping'] = msg['input_mapping'].replace('/sfm-collection-set-data', '/mnt/cental_sfm_ssh');
         //msg['output_path'] = msg['output_path'].replace('/sfm-kg-data', '/mnt/cental_sfm_ssh');
-        msg['input_path'] = msg['input_path'].replace('/sfm-collection-set-data', '/home/default-user/raw-data-backup-for-mapping');
-        msg['input_mapping'] = msg['input_mapping'].replace('/sfm-collection-set-data', '/home/default-user/raw-data-backup-for-mapping');
-        msg['output_path'] = msg['output_path'].replace('/sfm-kg-data', '/home/default-user/kg-data');
+        //msg['input_path'] = msg['input_path'].replace('/sfm-collection-set-data', '/home/default-user/raw-data-backup-for-mapping');
+        //msg['input_mapping'] = msg['input_mapping'].replace('/sfm-collection-set-data', '/home/default-user/raw-data-backup-for-mapping');
+        msg['output_path'] = msg['output_path'].replace('/sfm-kg-data', '/home/default-user/2021-08-05-kg-data');
 
         if(msg['type'] === 'rml_mapping') {
 
