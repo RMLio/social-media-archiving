@@ -23,8 +23,22 @@ CONSTRUCT {
 }
 WHERE {
 
+  #
+  # Select related context of the grouped content: collectionCHO and collectionRepresentation
+  #
+  ?collectionRepresentationVersion prov:specializationOf ?collectionRepresentation .
+
+  ?aggregationRepresentation
+    a edm:Aggregation ;
+    edm:hasView ?collectionRepresentation ;
+    edm:aggregatedCHO ?collectionCHO .
+
+
+  #
+  # Get the hashtags and how often they occur for each collection representation version (only more than 1 occurrence)
+  # 
   {
-    SELECT ?collectionCHO ?collectionRepresentation ?collectionRepresentationVersion ?hashtag (count(?hashtag) as ?count)
+    SELECT ?collectionRepresentationVersion ?hashtag (count(?hashtag) as ?count)
     WHERE {
       
       ?itemCHO schema:mentions ?hashtag .
@@ -41,15 +55,10 @@ WHERE {
         dcterms:isPartOf ?collectionRepresentationVersion .
 
       ?collectionRepresentationVersion
-        a bsm:SocialMediaCollectionRepresentationVersion ;
-        prov:specializationOf ?collectionRepresentation .
+        a bsm:SocialMediaCollectionRepresentationVersion .
 
-      ?aggregationRepresentation
-        a edm:Aggregation ;
-        edm:hasView ?collectionRepresentation ;
-        edm:aggregatedCHO ?collectionCHO .
     }
-    GROUP BY ?collectionCHO ?collectionRepresentation ?collectionRepresentationVersion ?hashtag
+    GROUP BY ?collectionRepresentationVersion ?hashtag
     HAVING (count(?hashtag) > 1)
   }
 

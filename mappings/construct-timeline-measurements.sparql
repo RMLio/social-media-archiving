@@ -26,7 +26,7 @@ CONSTRUCT {
 WHERE {
 
   #
-  # Get some context: related concepts to the aggregated data queried in the subquery below
+  # Select related context of the grouped content: collectionCHO and collectionRepresentation
   #
   ?collectionRepresentationVersion
     a edm:WebResource ;
@@ -37,11 +37,10 @@ WHERE {
       edm:hasView ?collectionRepresentation ;
       edm:aggregatedCHO ?collectionCHO .
 
-    ?collectionCHO
-      a edm:ProvidedCHO .
 
   #
-  # Get the aggregated number of posts per year and month
+  # Get the aggregated number of posts per year and month for a representation version
+  # for example JSON representation at 2020100420
   #
   {
   SELECT ?collectionRepresentationVersion ?year ?month (COUNT(?itemRepresentation) AS ?numberOfPosts)
