@@ -13,8 +13,9 @@ fi;
 # get environment variables
 export $(cat .env | sed 's/#.*//g' | xargs)
 
-curl -X POST \
 #  --user $SPARQL_ENDPOINT_USER:$SPARQL_ENDPOINT_PASSWORD \
+curl -X POST \
   --data-binary @$1 \
   --header 'Content-Type:application/xml' \
   $SPARQL_ENDPOINT_URL/bigdata/namespace
+echo
