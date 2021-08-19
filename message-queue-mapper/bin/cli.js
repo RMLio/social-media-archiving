@@ -12,6 +12,7 @@ const createTarget = require('../lib/targets/target-factory');
 const winston = require('winston');
 const path = require('path');
 
+require('dotenv').config();
 /*
  * Handle CLI arguments.
  */
@@ -58,8 +59,29 @@ const logger = winston.createLogger(winstonConfig);
 logger.info('Using the following options:');
 logger.info(`\tConfigFile: ${program.config}\n`);
 
-let config = fs.readFileSync(program.config);
-config = JSON.parse(config);
+let config = fs.readFileSync(program.config, "utf8");
+
+let populatedConfig = config;
+let reVars = /.*?(\${.*?}).*?/gm;
+let usedEnvVariables = config.matchAll(reVars);
+let nonFoundVars = [];
+for(let match of usedEnvVariables) {
+  let found = match[1];
+  // extract var name, e.g. DB_HOST from ${DB_HOST} so we can compare with env variables
+  let varName = found.substring(2, (found.length -1) );
+
+  if(varName in process.env){
+    // split-join solution because of behavior of replaceAll and global flag, see Stackoverflow: https://stackoverflow.com/a/542305
+    populatedConfig = populatedConfig.split(found).join(process.env[varName]);
+  } else {
+    nonFoundVars.push(varName);
+  }
+}
+
+if(nonFoundVars.length > 0) {
+  logger.warn(`No value set for the following used environment variables: ${nonFoundVars}`);
+}
+config = JSON.parse(populatedConfig);
 
 const configDir = path.dirname(program.config);
 /*
