@@ -26,6 +26,9 @@ variables:
     username: ${SFM_DB_USER}
     password: ${SFM_DB_PASSWORD}
 
+targets:
+  subject-target: ["${TRIPLE_STORE_COLLECTIONS}~sd"]
+
 mappings:
 
   harvests:
