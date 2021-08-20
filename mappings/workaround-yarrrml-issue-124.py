@@ -7,9 +7,6 @@
 
 from rdflib import Graph
 import csv
-import matplotlib as mpl
-import matplotlib.pyplot as plt
-import numpy as np
 from pprint import pprint
 from optparse import OptionParser
 import os
