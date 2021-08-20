@@ -50,6 +50,9 @@ applyFix(){
   local output_file=$2
   echo "fixing '$rml_file' and store fix in '$output_file'"
   python workaround-yarrrml-issue-124.py -i $rml_file -o $output_file
+
+  # rdflib does not generate a prefix declaration for 'rdf', thus adding it manually
+  sed -i '1s/^/@prefix rdf: <http:\/\/www.w3.org\/1999\/02\/22-rdf-syntax-ns#>.\n/' $output_file
 }
 
 if [ $# -ne 2 ];
