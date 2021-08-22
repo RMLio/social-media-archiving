@@ -10,11 +10,12 @@ PREFIX oa: <http://www.w3.org/ns/oa#>
 PREFIX qb: <http://purl.org/linked-data/cube#>
 PREFIX ex: <http://example.org/ns#>
 
-CONSTRUCT {
-  
-  ?postRepresentation
+
+
+INSERT {
+   ?postRepresentation
     dcterms:isPartOf ?collectionRepresentation ;
-    dcterms:isPartOf ?collectionRepresentationVersion .
+    dcterms:isPartOf ?collectionRepresentationVersion . 
 }
 WHERE {
 
@@ -26,19 +27,30 @@ WHERE {
     a http:Response ;
     dcterms:isPartOf ?warcFile .
 
-  ?warcFile
-    a premis:File ;
-    dcterms:isPartOf ?collectionRepresentationVersion .
+  #
+  # There are less warc files and collections than posts, query them once and reuse them later
+  #
+  {
+  SELECT ?warcFile ?collectionRepresentationVersion ?collectionRepresentation
+  WHERE {
+    hint:SubQuery hint:runOnce true .
+    SERVICE <$TRIPLE_STORE_COLLECTIONS> {
+      ?warcFile
+        a premis:File ;
+        dcterms:isPartOf ?collectionRepresentationVersion .
 
-  ?collectionRepresentationVersion
-    prov:specializationOf ?collectionRepresentation .
+      ?collectionRepresentationVersion
+        prov:specializationOf ?collectionRepresentation .
 
-  ?aggregation
-    a edm:Aggregation ;
-    edm:hasView ?collectionRepresentation ;
-    edm:aggregatedCHO ?collectionCHO .
+      ?aggregation
+        a edm:Aggregation ;
+        edm:hasView ?collectionRepresentation ;
+        edm:aggregatedCHO ?collectionCHO .
 
-  ?collectionCHO
-    a edm:ProvidedCHO, bsm:SocialMediaCollection .
-
+      ?collectionCHO
+        a edm:ProvidedCHO, bsm:SocialMediaCollection .
+    }
+   }
+  }
 }
+
