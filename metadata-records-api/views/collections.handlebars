@@ -1,18 +1,151 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
+  <head>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
-</head>
-<body>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/styles/bootstrap.min.css">
+    <link rel="stylesheet" href="/styles/sidebar.css">
+    <link rel="stylesheet" href="/styles/own.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+
+    <title>PLACEHOLDER Collection name</title>
+  </head>
+  <body>
+
+
+<!-- Bootstrap NavBar -->
+<nav class="navbar navbar-expand-md navbar-light bg-light border-bottom border-dark fixed-top">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#">
+        <!--<img src="https://v4-alpha.getbootstrap.com/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">-->
+        <img src="/images/besocialLogo.png" width="70" height="70" class="d-inline-block align-top" alt="">
+        <!--<span class="menu-collapsed">BESOCIAL</span>-->
+    </a>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="http://localhost:3001/collections">Collections<span class="sr-only">(current)</span></a>
+            </li>
+
+            <!-- This menu is hidden in bigger devices with d-sm-none. 
+           The sidebar isn't proper for smaller screens imo, so this dropdown menu can keep all the useful sidebar itens exclusively for smaller screens  -->
+            <li class="nav-item dropdown d-sm-block d-md-none">
+                <a class="nav-link dropdown-toggle" href="#" id="smallerscreenmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Menu
+                </a>
+                <div class="dropdown-menu" aria-labelledby="smallerscreenmenu">
+                    <a class="dropdown-item" href="#description">Description</a>
+                    <a class="dropdown-item" href="#timespan">Timespan</a>
+                    <a class="dropdown-item" href="#content">Content</a>
+                    <a class="dropdown-item" href="#seeds">Seeds</a>
+                    <a class="dropdown-item" href="#access">Access</a>
+                    <a class="dropdown-item" href="#metadata">Metadata</a>
+                </div>
+            </li>
+            <!-- Smaller devices menu END -->
+
+        </ul>
+    </div>
+</nav>
+<!-- NavBar END -->
+
+
+<!-- Bootstrap row -->
+<div class="row" id="body-row">
+    <!-- Sidebar -->
+    <div id="sidebar-container" class="sidebar-expanded d-none d-md-block col-2">
+        <!-- d-* hiddens the Sidebar in smaller devices. Its itens can be kept on the Navbar 'Menu' -->
+        <!-- Bootstrap List Group -->
+        <ul class="list-group sticky-top sticky-offset">
+            <!-- Separator with title -->
+            <li class="list-group-item sidebar-separator-title text-muted d-flex align-items-center menu-collapsed">
+                <small>COLLECTIONS MENU</small>
+            </li>
+            <!-- /END Separator -->
+ 
+            <a href="#content" class="bg-dark list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-start align-items-center">
+                    <span class="fa fa-archive fa-fw mr-3"></span>
+                    <span class="menu-collapsed">Collections List</span>
+                </div>
+            </a>
+            <a href="#access" class="bg-dark list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-start align-items-center">
+                    <span class="fa fa-unlock fa-fw mr-3"></span>
+                    <span class="menu-collapsed">Access</span>
+                </div>
+            </a>
+           <!-- Separator without title -->
+            <li class="list-group-item sidebar-separator menu-collapsed"></li>
+            <!-- /END Separator -->
+           <a href="#" data-toggle="sidebar-colapse" class="bg-dark list-group-item list-group-item-action d-flex align-items-center">
+                <div class="d-flex w-100 justify-content-start align-items-center">
+                    <span id="collapse-icon" class="fa fa-2x mr-3"></span>
+                    <span id="collapse-text" class="menu-collapsed">Collapse</span>
+                </div>
+            </a>
+            <!-- Logo -->
+            <li class="list-group-item logo-separator d-flex justify-content-center">
+        <img src="/images/besocialLogo.png" width="45" height="45" class="d-inline-block align-top" alt="">
+            </li>
+        </ul>
+        <!-- List Group END-->
+    </div>
+    <!-- sidebar-container END -->
+
+    <!-- MAIN -->
+    <div class="col py-5">
+
 <h1>Collections</h1>
-<div>
-    <ul>
-        {{#each data}}
-            <li>{{this.title}}: <a href="http://localhost:3000/collection/{{this.identifier}}/export/ead2002" download="ead-{{this.identifier}}.xml">Link to EAD</a>
-                                <a href="http://localhost:3000/collection/{{this.identifier}}/export/marc21" download="marc-{{this.identifier}}.xml">Link to MARC</a></li>
-        {{/each}} 
-    </ul>
+
+<p>This page contains a list of social media collections, harvested for the BESOCIAL project.</p>
+
+<section id="collectionList">
+  <h2>Collection List</h2>
+
+  <div class="row">
+  {{#each data}}
+      <div class="col-xl-3 col-sm-6 col-12"> 
+        <div class="card bg-light">
+          <div class="card-body">
+            <h5 class="card-title">
+              {{this.title}}
+            </h5>
+            <p class="card-text">
+            5213 social media posts
+            </p>
+            <a class="card-link" href="/collection/{{this.identifier}}/">HTML</a>
+            <a class="card-link" href="/collection/{{this.identifier}}/export/ead2002">EAD (XML)</a>
+            <a class="card-link" href="/collection/{{this.identifier}}/export/marc21">MARC (XML)</a>
+          </div>
+        </div>
+      </div>
+  {{/each}}
+  </div>
+
+</section>
+
+<section id="access">
+  <h2>Access</h2>
+  <p>Collections on this website can be fully accessed in the reading rooms of KBR at Mont des Arts 28, 1000 Brussels.</p>
+  <p>Certain collections can partially be accessed online, therefore please have a look at the detailed website of the collection</p>
+</section>
 </div>
+    <script src="/scripts/jquery-3.5.1.slim.min.js"></script>
+    <script src="/scripts/popper.min.js"></script>
+    <script src="/scripts/bootstrap.min.js"></script>
+    <script src="/scripts/sidebar.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.3.0/dist/chart.min.js"></script>
+ 
+
 </body>
 </html>
 
