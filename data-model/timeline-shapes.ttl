@@ -11,7 +11,7 @@ bss:collectionRepresentationTimelineShape
   a sh:NodeShape ;
   sh:targetClass bsm:SocialMediaCollectionRepresentation ;
   sh:property [
-    sh:path [ sh:inversePath bsd:collectionRepresentationDimension ] ;
+    sh:path [ sh:inversePath bsm:collectionRepresentationDimension ] ;
     sh:qualifiedValueShape bss:correctTimelineMeasurementShape ;
     sh:qualifiedMinCount 2 ;
   ] .
@@ -20,7 +20,7 @@ bss:collectionRepresentationVersionTimelineShape
   a sh:NodeShape ;
   sh:targetClass bsm:SocialMediaCollectionRepresentationVersion ;
   sh:property [
-    sh:path [ sh:inversePath bsd:collectionRepresentationVersionDimension ] ;
+    sh:path [ sh:inversePath bsm:collectionRepresentationVersionDimension ] ;
     sh:qualifiedValueShape bss:correctTimelineMeasurementShape ;
     sh:qualifiedMinCount 2 ;
   ] .
