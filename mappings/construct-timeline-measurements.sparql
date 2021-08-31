@@ -52,7 +52,7 @@ WHERE {
       }
 
       {
-        SELECT ?collectionCHO ?collectionRepresentation ?collectionRepresentationVersion 
+        SELECT ?collectionCHO ?collectionRepresentation ?collectionRepresentationVersion
         WHERE {
           hint:SubQuery hint:runOnce true .
           SERVICE <${TRIPLE_STORE_COLLECTIONS}> {

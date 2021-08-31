@@ -11,10 +11,10 @@ PREFIX qb: <http://purl.org/linked-data/cube#>
 PREFIX ex: <http://example.org/ns#>
 PREFIX sioc: <http://rdfs.org/sioc/ns#>
 
-CONSTRUCT {
+INSERT {
   
   ?obs
-    a qb:Observation ;
+    a bsm:HashtagsObservation ;
     bsm:collectionDimension                         ?collectionCHO ;
     bsm:collectionRepresentationDimension           ?collectionRepresentation ;
     bsm:collectionRepresentationVersionDimension    ?collectionRepresentationVersion ;
@@ -23,44 +23,57 @@ CONSTRUCT {
 }
 WHERE {
 
-  #
-  # Select related context of the grouped content: collectionCHO and collectionRepresentation
-  #
-  ?collectionRepresentationVersion prov:specializationOf ?collectionRepresentation .
+  BIND (URI(concat("http://w3id.org/besocial/data/obs_", STRUUID())) as ?obs)
 
-  ?aggregationRepresentation
-    a edm:Aggregation ;
-    edm:hasView ?collectionRepresentation ;
-    edm:aggregatedCHO ?collectionCHO .
-
-
-  #
-  # Get the hashtags and how often they occur for each collection representation version (only more than 1 occurrence)
-  # 
   {
-    SELECT ?collectionRepresentationVersion ?hashtag (count(?hashtag) as ?count)
+    SELECT ?collectionCHO ?collectionRepresentation ?collectionRepresentationVersion ?hashtag (count(?itemAggregation) as ?count)
     WHERE {
-      
-      ?itemCHO schema:mentions ?hashtag .
+      SERVICE<${TRIPLE_STORE_ITEMS}> {
+        ?itemAggregation
+          a edm:Aggregation ;
+          edm:hasView ?itemRepresentation ;
+          edm:aggregatedCHO ?itemCHO .
 
-      ?hashtag a sioc:Tag .
+        ?itemRepresentation
+          a edm:WebResource ;
+          dcterms:isPartOf ?collectionRepresentationVersion .        
 
-      ?itemAggregation
-        a edm:Aggregation ;
-        edm:hasView ?itemRepresentation ;
-        edm:aggregatedCHO ?itemCHO .
+        #
+        # only count mentioned things which are hashtags
+        #
+        ?itemCHO
+          a schema:SocialMediaPosting ;
+          schema:mentions ?hashtag .
+     
+        ?hashtag a sioc:Tag . 
+      }
 
-      ?itemRepresentation
-        a edm:WebResource ;
-        dcterms:isPartOf ?collectionRepresentationVersion .
+      #
+      # Match found social media posts with their collections
+      # so we get needed dimensions to build the observations
+      #
+      {
+        SELECT ?collectionCHO ?collectionRepresentation ?collectionRepresentationVersion
+        WHERE {
+          hint:SubQuery hint:runOnce true .
+          SERVICE <${TRIPLE_STORE_COLLECTIONS}> {
 
-      ?collectionRepresentationVersion
-        a bsm:SocialMediaCollectionRepresentationVersion .
+            ?collectionRepresentationVersion
+              a bsm:SocialMediaCollectionRepresentationVersion ;
+              prov:specializationOf ?collectionRepresentation .
 
+            ?collectionRepresentation
+              a bsm:SocialMediaCollectionRepresentation .
+
+            ?collectionAggregation
+              edm:hasView ?collectionRepresentation ;
+              edm:aggregatedCHO ?collectionCHO .
+          }    
+        }
+      }
     }
-    GROUP BY ?collectionRepresentationVersion ?hashtag
+    GROUP BY ?collectionCHO ?collectionRepresentation ?collectionRepresentationVersion ?hashtag
     HAVING (count(?hashtag) > 1)
   }
-
-  BIND (URI(concat("http://w3id.org/besocial/data/obs_", STRUUID())) as ?obs)
 }
+
