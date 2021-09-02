@@ -1,0 +1,367 @@
+@prefix :      <http://www.europeana.eu/schemas/edm/> .
+@prefix abc:   <http://metadata.net/harmony/abc#> .
+@prefix ore:   <http://www.openarchives.org/ore/terms/> .
+@prefix adms:  <http://www.w3.org/ns/adms#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix afn:   <http://jena.apache.org/ARQ/function#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcmitype: <http://purl.org/dc/dcmitype/> .
+@prefix voaf:  <http://purl.org/vocommons/voaf#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix edm:   <http://www.europeana.eu/schemas/edm/> .
+@prefix DOLCE-Lite: <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sh:    <http://www.w3.org/ns/shacl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix frbr_core: <http://purl.org/vocab/frbr/core#> .
+@prefix vann:  <http://purl.org/vocab/vann/> .
+@prefix radion: <http://www.w3.org/ns/radion#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix frbroo: <http://iflastandards.info/ns/fr/frbr/frbroo/> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+@prefix crm:   <http://www.cidoc-crm.org/cidoc-crm/> .
+
+<https://astrea.linkeddata.es/shapes#f815437ade0ce9fd86c2f9341b2e78f6>
+        a               sh:NodeShape ;
+        sh:nodeKind     sh:IRI ;
+        sh:property     <https://astrea.linkeddata.es/shapes#780633628ea1568e7090e729aea95071> , <https://astrea.linkeddata.es/shapes#f6f3122103383c6028a78b04ea439d1a> ;
+        sh:targetClass  ore:Aggregation .
+
+<https://astrea.linkeddata.es/shapes#b93dfd098fb6b5f3d87842d68bf79e30>
+        a               sh:NodeShape ;
+        rdfs:label      "Event"@en ;
+        sh:name         "Event"@en ;
+        sh:nodeKind     sh:IRI ;
+        sh:property     <https://astrea.linkeddata.es/shapes#10ddaefc063f891c1a4406204ead823b> , <https://astrea.linkeddata.es/shapes#c5bd3d00a112b05516b53a6008e4299b> , <https://astrea.linkeddata.es/shapes#7bda8a7d6e64463b3f6131faecc633cb> ;
+        sh:targetClass  frbr_core:Event , frbroo:F8_Event , abc:Temporality , <http://www.cidoc-crm.org/rdfs/cidoc-crm#E4_Period> , edm:Event .
+
+<https://astrea.linkeddata.es/shapes#fb4f938e4b24c5ee137730d85e65c291>
+        a            sh:PropertyShape ;
+        rdfs:label   "UGC"@en ;
+        sh:name      "UGC"@en ;
+        sh:nodeKind  sh:Literal ;
+        sh:path      edm:ugc .
+
+<https://astrea.linkeddata.es/shapes#7f2e1fd37cffca7d2b123abbe9324023>
+        a            sh:PropertyShape ;
+        rdfs:label   "Preview"@en ;
+        sh:class     edm:WebResource ;
+        sh:name      "Preview"@en ;
+        sh:nodeKind  sh:BlankNodeOrIRI ;
+        sh:path      edm:preview .
+
+<https://astrea.linkeddata.es/shapes#8d802efcb59580e24d7c17c7375c0958>
+        a            sh:PropertyShape ;
+        sh:nodeKind  sh:IRIOrLiteral ;
+        sh:path      edm:aggregatedCHO .
+
+<https://astrea.linkeddata.es/shapes#c5bd3d00a112b05516b53a6008e4299b>
+        a            sh:PropertyShape ;
+        rdfs:label   "Happened At"@en ;
+        sh:class     edm:Place ;
+        sh:equals    <http://www.cidoc-crm.org/rdfs/cidoc-crm#P7_took_place_at> ;
+        sh:name      "Happened At"@en ;
+        sh:nodeKind  sh:BlankNodeOrIRI ;
+        sh:path      edm:happenedAt .
+
+<https://astrea.linkeddata.es/shapes#4737ce559384e4e10af1489383d7d435>
+        a            sh:PropertyShape ;
+        rdfs:label   "Was Present At"@en ;
+        sh:class     edm:Event ;
+        sh:equals    <http://www.cidoc-crm.org/rdfs/cidoc-crm#P12i_was_present_at> ;
+        sh:name      "Was Present At"@en ;
+        sh:nodeKind  sh:BlankNodeOrIRI ;
+        sh:path      edm:wasPresentAt .
+
+<https://astrea.linkeddata.es/shapes#08265ff533407fe8d52baae7095120fe>
+        a               sh:NodeShape ;
+        rdfs:label      "Agent"@en ;
+        sh:name         "Agent"@en ;
+        sh:nodeKind     sh:IRI ;
+        sh:property     <https://astrea.linkeddata.es/shapes#4737ce559384e4e10af1489383d7d435> ;
+        sh:targetClass  edm:Agent , <http://www.cidoc-crm.org/rdfs/cidoc-crm#E39_Actor> .
+
+<https://astrea.linkeddata.es/shapes#c46ef0e1a7e9b215d2c9066b02f88654>
+        a               sh:NodeShape ;
+        rdfs:label      "Europeana Aggregation" ;
+        sh:name         "Europeana Aggregation" ;
+        sh:nodeKind     sh:IRI ;
+        sh:property     <https://astrea.linkeddata.es/shapes#8d802efcb59580e24d7c17c7375c0958> ;
+        sh:targetClass  edm:EuropeanaAggregation .
+
+<https://astrea.linkeddata.es/shapes#dafb190fcafb88bc3aab356fff28c717>
+        a            sh:PropertyShape ;
+        rdfs:label   "Europeana URI"@en ;
+        sh:name      "Europeana URI"@en ;
+        sh:nodeKind  sh:BlankNodeOrIRI ;
+        sh:path      edm:uri .
+
+<https://astrea.linkeddata.es/shapes#2a8c72d49fe74a0b25ac4e13f946c61f>
+        a            sh:PropertyShape ;
+        rdfs:label   "Is Next In Sequence Of"@en ;
+        sh:name      "Is Next In Sequence Of"@en ;
+        sh:nodeKind  sh:BlankNodeOrIRI ;
+        sh:path      edm:isNextInSequence .
+
+<https://astrea.linkeddata.es/shapes#00ee0736d50e595f3a77ebed5564dc29>
+        a               sh:NodeShape ;
+        rdfs:label      "Web Resource"@en ;
+        sh:name         "Web Resource"@en ;
+        sh:nodeKind     sh:IRI ;
+        sh:targetClass  edm:WebResource .
+
+<https://astrea.linkeddata.es/shapes#8ee516e611e95b044abb8fc84cd16297>
+        a            sh:PropertyShape ;
+        rdfs:label   "Is Representation Of"@en ;
+        sh:name      "Is Representation Of"@en ;
+        sh:nodeKind  sh:BlankNodeOrIRI .
+
+<https://astrea.linkeddata.es/shapes#8eabbebdf4f4553f40d8f2a1f57cbf22>
+        a            sh:PropertyShape ;
+        rdfs:label   "Is Shown At"@en ;
+        sh:class     edm:WebResource ;
+        sh:name      "Is Shown At"@en ;
+        sh:nodeKind  sh:BlankNodeOrIRI ;
+        sh:path      edm:isShownAt .
+
+<https://astrea.linkeddata.es/shapes#f6f3122103383c6028a78b04ea439d1a>
+        a            sh:PropertyShape ;
+        rdfs:label   "Aggregated Cultural Heritage Object"@en ;
+        sh:class     edm:ProvidedCHO ;
+        sh:name      "Aggregated Cultural Heritage Object"@en ;
+        sh:nodeKind  sh:BlankNodeOrIRI ;
+        sh:path      edm:aggregatedCHO .
+
+<https://astrea.linkeddata.es/shapes#0a363030854f65decc73b9b71f32fd6d>
+        a               sh:NodeShape ;
+        rdfs:label      "Place"@en ;
+        sh:name         "Place"@en ;
+        sh:nodeKind     sh:IRI ;
+        sh:targetClass  frbroo:F9_Place , <http://www.cidoc-crm.org/rdfs/cidoc-crm#E53_Place> , edm:Place , frbr_core:Place , DOLCE-Lite:space-region , abc:Place .
+
+<https://astrea.linkeddata.es/shapes#0b8a28657a5f908d855cb900b5ca16b6>
+        a            sh:PropertyShape ;
+        rdfs:label   "Current Location"@en ;
+        sh:class     edm:Place ;
+        sh:equals    wgs84_pos:location , <http://www.cidoc-crm.org/rdfs/cidoc-crm#P55_has_current_location> ;
+        sh:name      "Current Location"@en ;
+        sh:nodeKind  sh:BlankNodeOrIRI ;
+        sh:path      edm:currentLocation .
+
+<https://astrea.linkeddata.es/shapes#8af16733c2ed6e05789114010aa7b634>
+        a            sh:PropertyShape ;
+        rdfs:label   "Begin"@en ;
+        sh:name      "Begin"@en ;
+        sh:nodeKind  sh:Literal ;
+        sh:path      edm:begin .
+
+<https://astrea.linkeddata.es/shapes#ea1d178160482e1ad4f1ccd3a17e5262>
+        a            sh:PropertyShape ;
+        rdfs:label   "Realizes"@en ;
+        sh:class     edm:InformationResource ;
+        sh:equals    <http://www.cidoc-crm.org/rdfs/cidoc-crm#P128_carries> ;
+        sh:name      "Realizes"@en ;
+        sh:nodeKind  sh:BlankNodeOrIRI ;
+        sh:path      edm:realizes .
+
+<https://astrea.linkeddata.es/shapes#fed54c430a47eff1a8a24154250ef9f7>
+        a            sh:PropertyShape ;
+        rdfs:label   "Europeana Rights"@en ;
+        sh:name      "Europeana Rights"@en ;
+        sh:nodeKind  sh:BlankNodeOrIRI ;
+        sh:path      edm:rights .
+
+<https://astrea.linkeddata.es/shapes#b6eec18a4435aed566b7675091b75eb2>
+        a               sh:NodeShape ;
+        sh:nodeKind     sh:IRI ;
+        sh:targetClass  ore:Proxy .
+
+<https://astrea.linkeddata.es/shapes#ebaae160a9f5f6efc856b4d3c82f6ca8>
+        a            sh:PropertyShape ;
+        rdfs:label   "Landing Page"@en ;
+        sh:class     edm:WebResource ;
+        sh:name      "Landing Page"@en ;
+        sh:nodeKind  sh:BlankNodeOrIRI ;
+        sh:path      edm:landingPage .
+
+<https://astrea.linkeddata.es/shapes#fb359e4b08b5929fc1256c35a6c5a361>
+        a               sh:NodeShape ;
+        rdfs:label      "Non-Information Resource"@en ;
+        sh:name         "Non-Information Resource"@en ;
+        sh:nodeKind     sh:IRI ;
+        sh:not          <https://astrea.linkeddata.es/shapes#f4042e0c04437d04b0743031936d5062> ;
+        sh:targetClass  edm:NonInformationResource .
+
+<https://astrea.linkeddata.es/shapes#31d40a5f8a4563d20670cc9d0c181aaa>
+        a            sh:PropertyShape ;
+        rdfs:label   "Object"@en ;
+        sh:class     edm:WebResource ;
+        sh:name      "Object"@en ;
+        sh:nodeKind  sh:BlankNodeOrIRI ;
+        sh:path      edm:object .
+
+<https://astrea.linkeddata.es/shapes#7bda8a7d6e64463b3f6131faecc633cb>
+        a            sh:PropertyShape ;
+        rdfs:label   "Occured At"@en ;
+        sh:class     edm:TimeSpan ;
+        sh:equals    <http://www.cidoc-crm.org/rdfs/cidoc-crm#P4_has_time-span> ;
+        sh:name      "Occured At"@en ;
+        sh:nodeKind  sh:BlankNodeOrIRI ;
+        sh:path      edm:occurredAt .
+
+<https://astrea.linkeddata.es/shapes#11a20a6ac4ea1de4b05edb2f4471fbdd>
+        a            sh:PropertyShape ;
+        rdfs:label   "Is Successor Of"@en ;
+        sh:name      "Is Successor Of"@en ;
+        sh:nodeKind  sh:BlankNodeOrIRI ;
+        sh:path      edm:isSuccessorOf .
+
+<https://astrea.linkeddata.es/shapes#3e30105374089d7a1389d15aab2a09cb>
+        a            sh:PropertyShape ;
+        rdfs:label   "Europeana Proxy"@en ;
+        sh:name      "Europeana Proxy"@en ;
+        sh:nodeKind  sh:BlankNodeOrIRI ;
+        sh:path      edm:europeanaProxy .
+
+<https://astrea.linkeddata.es/shapes#a96de010b4ef4bdb737db49c673fc7bf>
+        a            sh:PropertyShape ;
+        rdfs:label   "End"@en ;
+        sh:name      "End"@en ;
+        sh:nodeKind  sh:Literal ;
+        sh:path      edm:end .
+
+<https://astrea.linkeddata.es/shapes#10ddaefc063f891c1a4406204ead823b>
+        a            sh:PropertyShape ;
+        sh:maxCount  "1"^^xsd:nonNegativeInteger ;
+        sh:minCount  "1"^^xsd:nonNegativeInteger ;
+        sh:nodeKind  sh:IRIOrLiteral ;
+        sh:path      edm:happenedAt .
+
+<https://astrea.linkeddata.es/report/0458091816>
+        a       <https://w3id.org/def/astrea#ReportEntry> ;
+        <https://w3id.org/def/astrea#message>
+                "Shapes generated with no errors" ;
+        <https://w3id.org/def/astrea#source>
+                "http://www.europeana.eu/schemas/edm/" ;
+        <https://w3id.org/def/astrea#statusCode>
+                "200"^^xsd:int .
+
+<http://astrea.linkeddata.es/report>
+        a       <https://w3id.org/def/astrea#ShapeReport> ;
+        <https://w3id.org/def/astrea#contains>
+                <https://astrea.linkeddata.es/shapes#7f2e1fd37cffca7d2b123abbe9324023> , <https://astrea.linkeddata.es/shapes#a96de010b4ef4bdb737db49c673fc7bf> , <https://astrea.linkeddata.es/shapes#176ab44017f7cda1551f68089db5c5c1> , <https://astrea.linkeddata.es/shapes#08265ff533407fe8d52baae7095120fe> , <https://astrea.linkeddata.es/shapes#237312e468f49df3c9ec546e48cdd47c> , <https://astrea.linkeddata.es/shapes#7bda8a7d6e64463b3f6131faecc633cb> , <https://astrea.linkeddata.es/shapes#f4042e0c04437d04b0743031936d5062> , <https://astrea.linkeddata.es/shapes#10ddaefc063f891c1a4406204ead823b> , <https://astrea.linkeddata.es/shapes#00ee0736d50e595f3a77ebed5564dc29> , <https://astrea.linkeddata.es/shapes#ebaae160a9f5f6efc856b4d3c82f6ca8> , <https://astrea.linkeddata.es/shapes#f6f3122103383c6028a78b04ea439d1a> , <https://astrea.linkeddata.es/shapes#1ec3494455aab8b01c5700a3ab68ddeb> , <https://astrea.linkeddata.es/shapes#ea1d178160482e1ad4f1ccd3a17e5262> , <https://astrea.linkeddata.es/shapes#dafb190fcafb88bc3aab356fff28c717> , <https://astrea.linkeddata.es/shapes#6c344720382543a6c9748863c5cf07fc> , <https://astrea.linkeddata.es/shapes#b93dfd098fb6b5f3d87842d68bf79e30> , <https://astrea.linkeddata.es/shapes#187a17ce013b2b035b4c742c6d88e585> , <https://astrea.linkeddata.es/shapes#8eabbebdf4f4553f40d8f2a1f57cbf22> , <https://astrea.linkeddata.es/shapes#0b8a28657a5f908d855cb900b5ca16b6> , <https://astrea.linkeddata.es/shapes#c5bd3d00a112b05516b53a6008e4299b> , <https://astrea.linkeddata.es/shapes#b6eec18a4435aed566b7675091b75eb2> , <https://astrea.linkeddata.es/shapes#ffeaf0d3664c31215f614a64f5bb45a5> , <https://astrea.linkeddata.es/shapes#11a20a6ac4ea1de4b05edb2f4471fbdd> , <https://astrea.linkeddata.es/shapes#8ee516e611e95b044abb8fc84cd16297> , <https://astrea.linkeddata.es/shapes#31d40a5f8a4563d20670cc9d0c181aaa> , <https://astrea.linkeddata.es/shapes#f815437ade0ce9fd86c2f9341b2e78f6> , <https://astrea.linkeddata.es/shapes#878ed38a38bc12b959fbe6077ad14613> , <https://astrea.linkeddata.es/shapes#6515c153e9f1dcbee79829339a7016be> , <https://astrea.linkeddata.es/shapes#4737ce559384e4e10af1489383d7d435> , <https://astrea.linkeddata.es/shapes#fb359e4b08b5929fc1256c35a6c5a361> , <https://astrea.linkeddata.es/shapes#e24ae2285c772d6285b3514be6534cb8> , <https://astrea.linkeddata.es/shapes#2a8c72d49fe74a0b25ac4e13f946c61f> , <https://astrea.linkeddata.es/shapes#fb4f938e4b24c5ee137730d85e65c291> , <https://astrea.linkeddata.es/shapes#780633628ea1568e7090e729aea95071> , <https://astrea.linkeddata.es/shapes#0a363030854f65decc73b9b71f32fd6d> , <https://astrea.linkeddata.es/shapes#3e30105374089d7a1389d15aab2a09cb> , <https://astrea.linkeddata.es/shapes#8d802efcb59580e24d7c17c7375c0958> , <https://astrea.linkeddata.es/shapes#9469e47d28b4a7dc78fa4bba2d06e986> , <https://astrea.linkeddata.es/shapes#b23eb52bffc927620b715401b339154d> , <https://astrea.linkeddata.es/shapes#fed54c430a47eff1a8a24154250ef9f7> , <https://astrea.linkeddata.es/shapes#8af16733c2ed6e05789114010aa7b634> , <https://astrea.linkeddata.es/shapes#c46ef0e1a7e9b215d2c9066b02f88654> ;
+        <https://w3id.org/def/astrea#generatedShapesFrom>
+                <https://astrea.linkeddata.es/report/0458091816> .
+
+<https://astrea.linkeddata.es/shapes#ffeaf0d3664c31215f614a64f5bb45a5>
+        a               sh:NodeShape ;
+        sh:nodeKind     sh:IRI ;
+        sh:targetClass  skos:Concept .
+
+<https://astrea.linkeddata.es/shapes#6c344720382543a6c9748863c5cf07fc>
+        a               sh:NodeShape ;
+        rdfs:label      "Europeana Object"@en ;
+        sh:name         "Europeana Object"@en ;
+        sh:nodeKind     sh:IRI ;
+        sh:targetClass  edm:EuropeanaObject .
+
+<https://astrea.linkeddata.es/shapes#878ed38a38bc12b959fbe6077ad14613>
+        a            sh:PropertyShape ;
+        rdfs:label   "Europeana Type"@en ;
+        sh:name      "Europeana Type"@en ;
+        sh:nodeKind  sh:Literal ;
+        sh:path      edm:type .
+
+<https://astrea.linkeddata.es/shapes#6515c153e9f1dcbee79829339a7016be>
+        a               sh:NodeShape ;
+        rdfs:label      "Provided CHO"@en ;
+        sh:name         "Provided CHO"@en ;
+        sh:nodeKind     sh:IRI ;
+        sh:property     <https://astrea.linkeddata.es/shapes#1ec3494455aab8b01c5700a3ab68ddeb> , <https://astrea.linkeddata.es/shapes#0b8a28657a5f908d855cb900b5ca16b6> ;
+        sh:targetClass  edm:ProvidedCHO .
+
+<https://astrea.linkeddata.es/shapes#1ec3494455aab8b01c5700a3ab68ddeb>
+        a            sh:PropertyShape ;
+        rdfs:label   "Has Type"@en ;
+        sh:class     edm:NonInformationResource ;
+        sh:equals    <http://www.cidoc-crm.org/rdfs/cidoc-crm#P2_has_type> ;
+        sh:name      "Has Type"@en ;
+        sh:nodeKind  sh:BlankNodeOrIRI ;
+        sh:path      edm:hasType .
+
+<https://astrea.linkeddata.es/shapes#9469e47d28b4a7dc78fa4bba2d06e986>
+        a            sh:PropertyShape ;
+        rdfs:label   "Is Annotation Of"@en ;
+        sh:name      "Is Annotation Of"@en ;
+        sh:nodeKind  sh:BlankNodeOrIRI ;
+        sh:or        ( [ sh:class  edm:ProvidedCHO ;
+                         sh:path   edm:isAnnotationOf
+                       ]
+                       [ sh:class  []  ;
+                         sh:path   edm:isAnnotationOf
+                       ]
+                     ) .
+
+<https://astrea.linkeddata.es/shapes#780633628ea1568e7090e729aea95071>
+        a            sh:PropertyShape ;
+        rdfs:label   "Has View"@en ;
+        sh:class     edm:WebResource ;
+        sh:name      "Has View"@en ;
+        sh:nodeKind  sh:BlankNodeOrIRI ;
+        sh:path      edm:hasView .
+
+<https://astrea.linkeddata.es/shapes#b23eb52bffc927620b715401b339154d>
+        a            sh:PropertyShape ;
+        rdfs:label   "Is Shown By"@en ;
+        sh:class     edm:WebResource ;
+        sh:name      "Is Shown By"@en ;
+        sh:nodeKind  sh:BlankNodeOrIRI ;
+        sh:path      edm:isShownBy .
+
+<https://astrea.linkeddata.es/shapes#176ab44017f7cda1551f68089db5c5c1>
+        a            sh:PropertyShape ;
+        rdfs:label   "Incorporates"@en ;
+        sh:equals    frbroo:R14_incorporates ;
+        sh:name      "Incorporates"@en ;
+        sh:nodeKind  sh:BlankNodeOrIRI ;
+        sh:path      edm:incorporates .
+
+<https://astrea.linkeddata.es/shapes#f4042e0c04437d04b0743031936d5062>
+        a               sh:NodeShape ;
+        rdfs:label      "Information Resource"@en ;
+        sh:name         "Information Resource"@en ;
+        sh:nodeKind     sh:IRI ;
+        sh:property     <https://astrea.linkeddata.es/shapes#4737ce559384e4e10af1489383d7d435> ;
+        sh:targetClass  frbroo:F4_Manifestation_Singleton , edm:InformationResource , frbroo:F1_Work , frbr_core:Manifestation , frbroo:F2_Expression , frbroo:F3_Manifestation_Product_Type , frbr_core:Work , <http://www.cidoc-crm.org/rdfs/cidoc-crm#E89_Propositional_Object> , frbr_core:Expression .
+
+<https://astrea.linkeddata.es/shapes#237312e468f49df3c9ec546e48cdd47c>
+        a               sh:NodeShape ;
+        rdfs:label      "Time Span"@en ;
+        sh:name         "Time Span"@en ;
+        sh:nodeKind     sh:IRI ;
+        sh:targetClass  edm:TimeSpan , <http://www.cidoc-crm.org/rdfs/cidoc-crm#E52_Time-Span> , DOLCE-Lite:time-interval , abc:Time .
+
+<https://astrea.linkeddata.es/shapes#e24ae2285c772d6285b3514be6534cb8>
+        a               sh:NodeShape ;
+        rdfs:label      "Physical Thing"@en ;
+        sh:name         "Physical Thing"@en ;
+        sh:nodeKind     sh:IRI ;
+        sh:property     <https://astrea.linkeddata.es/shapes#ea1d178160482e1ad4f1ccd3a17e5262> , <https://astrea.linkeddata.es/shapes#4737ce559384e4e10af1489383d7d435> ;
+        sh:targetClass  edm:PhysicalThing , <http://www.cidoc-crm.org/rdfs/cidoc-crm#E18_Physical_Thing> .
+
+<https://astrea.linkeddata.es/shapes#187a17ce013b2b035b4c742c6d88e585>
+        a            sh:PropertyShape ;
+        rdfs:label   "Collection Name"@en ;
+        sh:name      "Collection Name"@en ;
+        sh:nodeKind  sh:BlankNodeOrIRI ;
+        sh:path      edm:collectionName .
+
+_:b0    a               sh:NodeShape ;
+        sh:property     <https://astrea.linkeddata.es/shapes#0b8a28657a5f908d855cb900b5ca16b6> ;
+        sh:targetClass  _:b0 .
+
+_:b1    a               sh:NodeShape ;
+        sh:property     <https://astrea.linkeddata.es/shapes#1ec3494455aab8b01c5700a3ab68ddeb> ;
+        sh:targetClass  _:b1 .

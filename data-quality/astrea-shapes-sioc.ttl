@@ -1,0 +1,1026 @@
+@prefix sh:    <http://www.w3.org/ns/shacl#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix afn:   <http://jena.apache.org/ARQ/function#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix wot:   <http://xmlns.com/wot/0.1/> .
+@prefix vs:    <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix sioc:  <http://rdfs.org/sioc/ns#> .
+
+<https://astrea.linkeddata.es/shapes#7dc243f2730785c5c3e744ed9ec8ab88>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "description"@en , "The content of the Post."@en ;
+        sh:datatype       rdfs:Literal ;
+        sh:description    "The content of the Post."@en ;
+        sh:name           "description"@en ;
+        sh:nodeKind       sh:Literal ;
+        sh:path           sioc:description .
+
+<https://astrea.linkeddata.es/shapes#4a72b168231fad057680f0c4c1442669>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "scope of"@en , "A Role that has a scope of this resource."@en ;
+        sh:class          sioc:Role ;
+        sh:description    "A Role that has a scope of this resource."@en ;
+        sh:name           "scope of"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:scope_of .
+
+<https://astrea.linkeddata.es/shapes#317af38fe30829fae922e0530716c545>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "num replies"@en , "The number of replies that this Item, Thread, Post, etc. has. Useful for when the reply structure is absent."@en ;
+        sh:datatype       xsd:nonNegativeInteger ;
+        sh:description    "The number of replies that this Item, Thread, Post, etc. has. Useful for when the reply structure is absent."@en ;
+        sh:minInclusive   0 ;
+        sh:name           "num replies"@en ;
+        sh:nodeKind       sh:Literal ;
+        sh:path           sioc:num_replies ;
+        sh:pattern        "[\\-+]?[0-9]+" .
+
+<https://astrea.linkeddata.es/shapes#0998f4bd19f75877ec0e5f6582ea898d>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "link"@en , "A URI of a document which contains this SIOC object."@en ;
+        sh:description    "A URI of a document which contains this SIOC object."@en ;
+        sh:name           "link"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:link .
+
+<https://astrea.linkeddata.es/shapes#7c9a6c8f582dc349679915f7a7c86b3b>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "mentions"@en , "Refers to a UserAccount that a particular Item mentions."@en ;
+        sh:class          sioc:UserAccount ;
+        sh:description    "Refers to a UserAccount that a particular Item mentions."@en ;
+        sh:name           "mentions"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:mentions .
+
+<https://astrea.linkeddata.es/shapes#677e5676df9c5961e1d8daeb1a82c18c>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "owner of"@en , "A resource owned by a particular UserAccount, for example, a weblog or image gallery."@en ;
+        sh:description    "A resource owned by a particular UserAccount, for example, a weblog or image gallery."@en ;
+        sh:name           "owner of"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI .
+
+<https://astrea.linkeddata.es/shapes#5bb71f389c5331ccd8e0e71c895c250d>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "part of"@en , "A resource that the subject is a part of."@en ;
+        sh:description    "A resource that the subject is a part of."@en ;
+        sh:name           "part of"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:part_of .
+
+<https://astrea.linkeddata.es/shapes#b6d940db9768f7ea469e81508efd5dae>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "Space"@en ;
+        sh:description    "A Space is a place where data resides, e.g. on a website, desktop, fileshare, etc."@en ;
+        sh:name           "Space"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:not            <https://astrea.linkeddata.es/shapes#8da7180db13d9a8e736bfaf0ad38d02b> , <https://astrea.linkeddata.es/shapes#5a4ae8a75b469322beb67e900451f8ac> , <https://astrea.linkeddata.es/shapes#62a69944e7c4b46a31418e217b1ef386> , <https://astrea.linkeddata.es/shapes#14da80e9490d9dbcd2c4ffd6a9035941> ;
+        sh:property       <https://astrea.linkeddata.es/shapes#142e6a40794e1b2999b88f8d6ef8b762> ;
+        sh:targetClass    sioc:Space .
+
+<https://astrea.linkeddata.es/shapes#c35c6c1db792d08bd7cfbaa7f2474b4e>
+        a            sh:PropertyShape ;
+        rdfs:label   "has group"@en ;
+        sh:name      "has group"@en ;
+        sh:nodeKind  sh:BlankNodeOrIRI ;
+        sh:path      sioc:has_group .
+
+<https://astrea.linkeddata.es/shapes#5a4ae8a75b469322beb67e900451f8ac>
+        a         sh:PropertyShape ;
+        sh:class  sioc:Usergroup .
+
+<https://astrea.linkeddata.es/shapes#2e531d47cd3cde88b216524b9cbbd88b>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "title"@en , "This is the title (subject line) of the Post. Note that for a Post within a threaded discussion that has no parents, it would detail the topic thread."@en ;
+        sh:datatype       rdfs:Literal ;
+        sh:description    "This is the title (subject line) of the Post. Note that for a Post within a threaded discussion that has no parents, it would detail the topic thread."@en ;
+        sh:name           "title"@en ;
+        sh:nodeKind       sh:Literal ;
+        sh:path           sioc:title .
+
+<https://astrea.linkeddata.es/shapes#bf2bb22b24f259b07b8a67970975c81b>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "creator of"@en , "A resource that the UserAccount is a creator of."@en ;
+        sh:description    "A resource that the UserAccount is a creator of."@en ;
+        sh:name           "creator of"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI .
+
+<https://astrea.linkeddata.es/shapes#cd375dca3bf7988c58e5a8479eb5adeb>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "has host"@en , "The Site that hosts this Container."@en ;
+        sh:class          sioc:Site ;
+        sh:description    "The Site that hosts this Container."@en ;
+        sh:name           "has host"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:has_host .
+
+<https://astrea.linkeddata.es/shapes#d3e36af8de024eb04f78ce53679a8b6a>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "avatar"@en , "An image or depiction used to represent this UserAccount."@en ;
+        sh:description    "An image or depiction used to represent this UserAccount."@en ;
+        sh:name           "avatar"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI .
+
+<https://astrea.linkeddata.es/shapes#81cde7bf3e849985ff31a3d122854858>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "reference"@en , "Links either created explicitly or extracted implicitly on the HTML level from the Post."@en ;
+        sh:description    "Links either created explicitly or extracted implicitly on the HTML level from the Post."@en ;
+        sh:name           "reference"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI .
+
+<https://astrea.linkeddata.es/shapes#256bd1507ee9b0e675388546e57db7e8>
+        a            sh:PropertyShape ;
+        sh:nodeKind  sh:BlankNodeOrIRI ;
+        sh:path      dcterms:subject .
+
+<https://astrea.linkeddata.es/shapes#b7ba0aea3aa4379ee6fa18cc79ba194a>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "last name"@en , "Last (real) name of this user. Synonyms include surname or family name."@en ;
+        sh:datatype       rdfs:Literal ;
+        sh:description    "Last (real) name of this user. Synonyms include surname or family name."@en ;
+        sh:name           "last name"@en ;
+        sh:nodeKind       sh:Literal ;
+        sh:path           sioc:last_name .
+
+<https://astrea.linkeddata.es/shapes#0cb456c6da5f844bfa90fb19c38b38bc>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "parent of"@en , "A child Container or Forum that this Container or Forum is a parent of."@en ;
+        sh:class          sioc:Container ;
+        sh:description    "A child Container or Forum that this Container or Forum is a parent of."@en ;
+        sh:name           "parent of"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:parent_of .
+
+<https://astrea.linkeddata.es/shapes#84915ee64f24d6d59eb90d461fc15752>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "related to"@en , "Related resources for this resource, e.g. for Posts, perhaps determined implicitly from topics or references."@en ;
+        sh:description    "Related resources for this resource, e.g. for Posts, perhaps determined implicitly from topics or references."@en ;
+        sh:name           "related to"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:related_to .
+
+<https://astrea.linkeddata.es/shapes#9a7d578bdfc1b1bf8786c36a682d61c6>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "shared by"@en , "For shared Items where there is a certain creator_of and an intermediary who shares or forwards it (e.g. as a sibling Item)."@en ;
+        rdfs:seeAlso      sioc:sibling ;
+        sh:class          sioc:UserAccount ;
+        sh:description    "For shared Items where there is a certain creator_of and an intermediary who shares or forwards it (e.g. as a sibling Item)."@en ;
+        sh:name           "shared by"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:shared_by .
+
+<https://astrea.linkeddata.es/shapes#142e6a40794e1b2999b88f8d6ef8b762>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "has usergroup"@en , "Points to a Usergroup that has certain access to this Space."@en ;
+        sh:class          sioc:Usergroup ;
+        sh:description    "Points to a Usergroup that has certain access to this Space."@en ;
+        sh:name           "has usergroup"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:has_usergroup .
+
+<https://astrea.linkeddata.es/shapes#6c59838b1615e474f6199ec1ae23bc7b>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "Role"@en ;
+        sh:description    "A Role is a function of a UserAccount within a scope of a particular Forum, Site, etc."@en ;
+        sh:name           "Role"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:not            <https://astrea.linkeddata.es/shapes#f905c44e835a1be84217e765f8404037> , <https://astrea.linkeddata.es/shapes#4093b1e76d6c6708e115a00457a642e4> , <https://astrea.linkeddata.es/shapes#8da7180db13d9a8e736bfaf0ad38d02b> , <https://astrea.linkeddata.es/shapes#5a4ae8a75b469322beb67e900451f8ac> , <https://astrea.linkeddata.es/shapes#14da80e9490d9dbcd2c4ffd6a9035941> ;
+        sh:targetClass    sioc:Role .
+
+<https://astrea.linkeddata.es/shapes#56f4efff1bdfb737400db97f5992e27b>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "reply of"@en , "Links to an Item or Post which this Item or Post is a reply to."@en ;
+        sh:class          sioc:Item ;
+        sh:description    "Links to an Item or Post which this Item or Post is a reply to."@en ;
+        sh:name           "reply of"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:reply_of .
+
+<https://astrea.linkeddata.es/shapes#6b5b62a6d5e34f24a3cafbf171ed091d>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "id"@en , "An identifier of a SIOC concept instance. For example, a user ID. Must be unique for instances of each type of SIOC concept within the same site."@en ;
+        sh:datatype       rdfs:Literal ;
+        sh:description    "An identifier of a SIOC concept instance. For example, a user ID. Must be unique for instances of each type of SIOC concept within the same site."@en ;
+        sh:name           "id"@en ;
+        sh:nodeKind       sh:Literal ;
+        sh:path           sioc:id .
+
+<https://astrea.linkeddata.es/shapes#7e72f54b4a3e66919e299ba578dfdf41>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "has parent"@en , "A Container or Forum that this Container or Forum is a child of."@en ;
+        sh:class          sioc:Container ;
+        sh:description    "A Container or Forum that this Container or Forum is a child of."@en ;
+        sh:name           "has parent"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:has_parent .
+
+<https://astrea.linkeddata.es/shapes#f905c44e835a1be84217e765f8404037>
+        a         sh:PropertyShape ;
+        sh:class  sioc:Container .
+
+<https://astrea.linkeddata.es/shapes#026aca65031cbd7b18cf9e5758099a42>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "has function"@en , "A Role that this UserAccount has."@en ;
+        sh:class          sioc:Role ;
+        sh:description    "A Role that this UserAccount has."@en ;
+        sh:name           "has function"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:has_function .
+
+<https://astrea.linkeddata.es/shapes#9e76314841dc310e34b56366fabad575>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "modified at"@en , "When this was modified, in ISO 8601 format."@en ;
+        sh:datatype       rdfs:Literal ;
+        sh:description    "When this was modified, in ISO 8601 format."@en ;
+        sh:name           "modified at"@en ;
+        sh:nodeKind       sh:Literal ;
+        sh:path           sioc:modified_at .
+
+<https://astrea.linkeddata.es/shapes#3a3242ca38a287ea171fbf51ef226dff>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "previous version"@en , "Links to the previous revision of this Item or Post."@en ;
+        sh:class          sioc:Item ;
+        sh:description    "Links to the previous revision of this Item or Post."@en ;
+        sh:name           "previous version"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:previous_version .
+
+<https://astrea.linkeddata.es/shapes#14a10f0ff4b9578746f076ed7a2aab0c>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "has member"@en , "A UserAccount that is a member of this Usergroup."@en ;
+        sh:class          sioc:UserAccount ;
+        sh:description    "A UserAccount that is a member of this Usergroup."@en ;
+        sh:name           "has member"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:has_member .
+
+<https://astrea.linkeddata.es/shapes#5ce9d6dd826c6d53dc9e032db863bb2e>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "follows"@en , "Indicates that one UserAccount follows another UserAccount (e.g. for microblog posts or other content item updates)."@en ;
+        sh:class          sioc:UserAccount ;
+        sh:description    "Indicates that one UserAccount follows another UserAccount (e.g. for microblog posts or other content item updates)."@en ;
+        sh:name           "follows"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:follows .
+
+<https://astrea.linkeddata.es/shapes#f42753cc70f9becb2cae92e161be6d3e>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "addressed to"@en , "Refers to who (e.g. a UserAccount, e-mail address, etc.) a particular Item is addressed to."@en ;
+        sh:description    "Refers to who (e.g. a UserAccount, e-mail address, etc.) a particular Item is addressed to."@en ;
+        sh:name           "addressed to"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI .
+
+<https://astrea.linkeddata.es/shapes#14da80e9490d9dbcd2c4ffd6a9035941>
+        a         sh:PropertyShape ;
+        sh:class  sioc:Item .
+
+<https://astrea.linkeddata.es/shapes#1f4c06b21cd7351b48a247fcbceeb699>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "has part"@en , "An resource that is a part of this subject."@en ;
+        sh:description    "An resource that is a part of this subject."@en ;
+        sh:name           "has part"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:has_part .
+
+<https://astrea.linkeddata.es/shapes#6b7210003a13d766e95054407d5fb615>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "has owner"@en , "A UserAccount that this resource is owned by."@en ;
+        sh:class          sioc:UserAccount ;
+        sh:description    "A UserAccount that this resource is owned by."@en ;
+        sh:name           "has owner"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:has_owner .
+
+<https://astrea.linkeddata.es/shapes#5a2077d3ab458a3627cbf1e4f3bd7104>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "account of"@en , "Refers to the foaf:Agent or foaf:Person who owns this sioc:UserAccount."@en ;
+        sh:class          foaf:Agent ;
+        sh:description    "Refers to the foaf:Agent or foaf:Person who owns this sioc:UserAccount."@en ;
+        sh:name           "account of"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:account_of .
+
+<https://astrea.linkeddata.es/report/941083681>
+        a       <https://w3id.org/def/astrea#ReportEntry> ;
+        <https://w3id.org/def/astrea#message>
+                "Shapes generated with no errors" ;
+        <https://w3id.org/def/astrea#source>
+                "http://rdfs.org/sioc/ns#" ;
+        <https://w3id.org/def/astrea#statusCode>
+                "200"^^xsd:int .
+
+<https://astrea.linkeddata.es/shapes#a456481dc1df42fe79201a30fccb8487>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "space of"@en , "A resource which belongs to this data Space."@en ;
+        sh:description    "A resource which belongs to this data Space."@en ;
+        sh:name           "space of"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI .
+
+<https://astrea.linkeddata.es/shapes#d86e8cc47a51b41257480d476fdba298>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "modifier of"@en , "A resource that this UserAccount has modified."@en ;
+        sh:description    "A resource that this UserAccount has modified."@en ;
+        sh:name           "modifier of"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI .
+
+<https://astrea.linkeddata.es/shapes#a727bfcbcdc63e80c86cac43b7207418>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "has creator"@en , "This is the UserAccount that made this resource."@en ;
+        sh:class          sioc:UserAccount ;
+        sh:description    "This is the UserAccount that made this resource."@en ;
+        sh:name           "has creator"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:has_creator .
+
+<https://astrea.linkeddata.es/shapes#fb5982032376acf6033dd15e9dec8660>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "ip address"@en , "The IP address used when creating this Item, UserAccount, etc. This can be associated with a creator. Some wiki articles list the IP addresses for the creator or modifiers when the usernames are absent."@en ;
+        sh:datatype       rdfs:Literal ;
+        sh:description    "The IP address used when creating this Item, UserAccount, etc. This can be associated with a creator. Some wiki articles list the IP addresses for the creator or modifiers when the usernames are absent."@en ;
+        sh:name           "ip address"@en ;
+        sh:nodeKind       sh:Literal ;
+        sh:path           sioc:ip_address .
+
+<https://astrea.linkeddata.es/shapes#1fc54252e97d69f5ff83339105480605>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "Community"@en ;
+        sh:description    "Community is a high-level concept that defines an online community and what it consists of."@en ;
+        sh:name           "Community"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:not            <https://astrea.linkeddata.es/shapes#62a69944e7c4b46a31418e217b1ef386> , <https://astrea.linkeddata.es/shapes#8da7180db13d9a8e736bfaf0ad38d02b> , <https://astrea.linkeddata.es/shapes#14da80e9490d9dbcd2c4ffd6a9035941> ;
+        sh:targetClass    sioc:Community .
+
+<https://astrea.linkeddata.es/shapes#7dbb8172300ada781213cb5011625a45>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "moderator of"@en , "A Forum that a UserAccount is a moderator of."@en ;
+        sh:class          sioc:Forum ;
+        sh:description    "A Forum that a UserAccount is a moderator of."@en ;
+        sh:name           "moderator of"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:moderator_of .
+
+<https://astrea.linkeddata.es/shapes#c6a2d595241e88243ced433a2be6dc67>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "container of"@en , "An Item that this Container contains."@en ;
+        sh:class          sioc:Item ;
+        sh:description    "An Item that this Container contains."@en ;
+        sh:name           "container of"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:container_of .
+
+<https://astrea.linkeddata.es/shapes#db41b0ab51b85a1351785f4a4e9081ac>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "about"@en , "Specifies that this Item is about a particular resource, e.g. a Post describing a book, hotel, etc."@en ;
+        sh:description    "Specifies that this Item is about a particular resource, e.g. a Post describing a book, hotel, etc."@en ;
+        sh:name           "about"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI .
+
+<https://astrea.linkeddata.es/shapes#f433c277a16001fdfde55f83a3dd1daf>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "host of"@en , "A Container that is hosted on this Site."@en ;
+        sh:class          sioc:Container ;
+        sh:description    "A Container that is hosted on this Site."@en ;
+        sh:name           "host of"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:host_of .
+
+<https://astrea.linkeddata.es/shapes#f0966f0337f02b5ebd04decbaae3f790>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "feed"@en , "A feed (e.g. RSS, Atom, etc.) pertaining to this resource (e.g. for a Forum, Site, UserAccount, etc.)."@en ;
+        sh:description    "A feed (e.g. RSS, Atom, etc.) pertaining to this resource (e.g. for a Forum, Site, UserAccount, etc.)."@en ;
+        sh:name           "feed"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:feed .
+
+<https://astrea.linkeddata.es/shapes#4497652ba8f74b464d6fba46416808b6>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "administrator of"@en , "A Site that the UserAccount is an administrator of."@en ;
+        sh:class          sioc:Site ;
+        sh:description    "A Site that the UserAccount is an administrator of."@en ;
+        sh:name           "administrator of"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:administrator_of .
+
+<https://astrea.linkeddata.es/shapes#07fe8d090dee52aa25cacf9ba01c537d>
+        a            sh:PropertyShape ;
+        sh:nodeKind  sh:BlankNodeOrIRI ;
+        sh:path      foaf:depiction .
+
+<https://astrea.linkeddata.es/shapes#0a96b5dadbaf11f051a830e85a6fc05e>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "User Account"@en ;
+        sh:description    "A user account in an online community site."@en ;
+        sh:name           "User Account"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:not            <https://astrea.linkeddata.es/shapes#5a4ae8a75b469322beb67e900451f8ac> , <https://astrea.linkeddata.es/shapes#62a69944e7c4b46a31418e217b1ef386> , <https://astrea.linkeddata.es/shapes#f905c44e835a1be84217e765f8404037> , <https://astrea.linkeddata.es/shapes#14da80e9490d9dbcd2c4ffd6a9035941> , <https://astrea.linkeddata.es/shapes#4093b1e76d6c6708e115a00457a642e4> ;
+        sh:property       <https://astrea.linkeddata.es/shapes#b7ba0aea3aa4379ee6fa18cc79ba194a> , <https://astrea.linkeddata.es/shapes#5ce9d6dd826c6d53dc9e032db863bb2e> , <https://astrea.linkeddata.es/shapes#da1b025dc94caacec1e879e3424cb6e5> , <https://astrea.linkeddata.es/shapes#d5c64ae2899f0051fd02e777ec867730> , <https://astrea.linkeddata.es/shapes#0991778ce7d272fe4056d7801eb9ccba> , <https://astrea.linkeddata.es/shapes#4497652ba8f74b464d6fba46416808b6> , <https://astrea.linkeddata.es/shapes#ae75cda2c85f133acb2298dec22bdec6> , <https://astrea.linkeddata.es/shapes#7dbb8172300ada781213cb5011625a45> , <https://astrea.linkeddata.es/shapes#5a2077d3ab458a3627cbf1e4f3bd7104> ;
+        sh:targetClass    sioc:UserAccount .
+
+<https://astrea.linkeddata.es/shapes#825e2dc28de92e68df95594134955fe6>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "name"@en , "The name of a SIOC concept instance, e.g. a username for a UserAccount, group name for a Usergroup, etc."@en ;
+        sh:datatype       rdfs:Literal ;
+        sh:description    "The name of a SIOC concept instance, e.g. a username for a UserAccount, group name for a Usergroup, etc."@en ;
+        sh:name           "name"@en ;
+        sh:nodeKind       sh:Literal ;
+        sh:path           sioc:name .
+
+<https://astrea.linkeddata.es/shapes#be2a468bfb2b6bfe1dbc58c260a6783c>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "created at"@en , "When this was created, in ISO 8601 format."@en ;
+        sh:datatype       rdfs:Literal ;
+        sh:description    "When this was created, in ISO 8601 format."@en ;
+        sh:name           "created at"@en ;
+        sh:nodeKind       sh:Literal ;
+        sh:path           sioc:created_at .
+
+<https://astrea.linkeddata.es/shapes#47def45dc28b66e2cebd3606b4ebabf6>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "next version"@en , "Links to the next revision of this Item or Post."@en ;
+        sh:class          sioc:Item ;
+        sh:description    "Links to the next revision of this Item or Post."@en ;
+        sh:name           "next version"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:next_version .
+
+<https://astrea.linkeddata.es/shapes#bbcca1b07856345d8f76c68e2c3b43df>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "usergroup of"@en , "A Space that the Usergroup has access to."@en ;
+        sh:class          sioc:Space ;
+        sh:description    "A Space that the Usergroup has access to."@en ;
+        sh:name           "usergroup of"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:usergroup_of .
+
+<https://astrea.linkeddata.es/shapes#7d0d578963c3e0a753e84284c6867c2f>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "content"@en , "The content of the Item in plain text format."@en ;
+        sh:datatype       rdfs:Literal ;
+        sh:description    "The content of the Item in plain text format."@en ;
+        sh:name           "content"@en ;
+        sh:nodeKind       sh:Literal ;
+        sh:path           sioc:content .
+
+<https://astrea.linkeddata.es/shapes#e7284fb748d8dba6708df210e4b253f7>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "has reply"@en , "Points to an Item or Post that is a reply or response to this Item or Post."@en ;
+        sh:class          sioc:Item ;
+        sh:description    "Points to an Item or Post that is a reply or response to this Item or Post."@en ;
+        sh:name           "has reply"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:has_reply .
+
+<https://astrea.linkeddata.es/shapes#6f0e5eed4973add92235fcaa2c6df4cc>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "Site"@en ;
+        sh:description    "A Site can be the location of an online community or set of communities, with UserAccounts and Usergroups creating Items in a set of Containers. It can be thought of as a web-accessible data Space."@en ;
+        sh:name           "Site"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:property       <https://astrea.linkeddata.es/shapes#5f85552cfde0f5bc7d03cd0b9bd941f9> , <https://astrea.linkeddata.es/shapes#f433c277a16001fdfde55f83a3dd1daf> ;
+        sh:targetClass    sioc:Site .
+
+<https://astrea.linkeddata.es/shapes#e0dd458f982ed04d6439a1dca5ab7bfc>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "email"@en , "An electronic mail address of the UserAccount."@en ;
+        sh:description    "An electronic mail address of the UserAccount."@en ;
+        sh:name           "email"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI .
+
+<https://astrea.linkeddata.es/shapes#f9301c2bb006192c97729820bc77f98e>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "discussion of"@en , "The Item that this discussion is about."@en ;
+        sh:class          sioc:Item ;
+        sh:description    "The Item that this discussion is about."@en ;
+        sh:name           "discussion of"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:discussion_of .
+
+<https://astrea.linkeddata.es/shapes#b6b53e6aac65d0e4e86ba3e92290fa59>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "has space"@en , "A data Space which this resource is a part of."@en ;
+        sh:class          sioc:Space ;
+        sh:description    "A data Space which this resource is a part of."@en ;
+        sh:name           "has space"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:has_space .
+
+<https://astrea.linkeddata.es/shapes#477cac8dc01dd37e56bd4e956ec505e4>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "has modifier"@en , "A UserAccount that modified this resource (e.g. Item, Container, Space)."@en ;
+        sh:class          sioc:UserAccount ;
+        sh:description    "A UserAccount that modified this resource (e.g. Item, Container, Space)."@en ;
+        sh:name           "has modifier"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:has_modifier .
+
+<https://astrea.linkeddata.es/shapes#834496820d84f2bd11c81fcd36986aa7>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "Container"@en ;
+        sh:description    "An area in which content Items are contained."@en ;
+        sh:name           "Container"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:not            <https://astrea.linkeddata.es/shapes#14da80e9490d9dbcd2c4ffd6a9035941> , <https://astrea.linkeddata.es/shapes#8da7180db13d9a8e736bfaf0ad38d02b> , <https://astrea.linkeddata.es/shapes#62a69944e7c4b46a31418e217b1ef386> , <https://astrea.linkeddata.es/shapes#5a4ae8a75b469322beb67e900451f8ac> ;
+        sh:property       <https://astrea.linkeddata.es/shapes#8bd1f33da14b7fc8fb4f7ab5b80f19d2> , <https://astrea.linkeddata.es/shapes#cd375dca3bf7988c58e5a8479eb5adeb> , <https://astrea.linkeddata.es/shapes#c6a2d595241e88243ced433a2be6dc67> , <https://astrea.linkeddata.es/shapes#7e72f54b4a3e66919e299ba578dfdf41> , <https://astrea.linkeddata.es/shapes#fcb64365fe59dbf1e7f52e8df0cabcf9> , <https://astrea.linkeddata.es/shapes#0197b7ca16247e5142d1f86399f476f4> , <https://astrea.linkeddata.es/shapes#0cb456c6da5f844bfa90fb19c38b38bc> ;
+        sh:targetClass    sioc:Container .
+
+<https://astrea.linkeddata.es/shapes#c257179e675e5cc1c02fd4d4bb0321d0>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "last activity date"@en , "The date and time of the last activity associated with a SIOC concept instance, and expressed in ISO 8601 format. This could be due to a reply Post or Comment, a modification to an Item, etc."@en ;
+        sh:datatype       rdfs:Literal ;
+        sh:description    "The date and time of the last activity associated with a SIOC concept instance, and expressed in ISO 8601 format. This could be due to a reply Post or Comment, a modification to an Item, etc."@en ;
+        sh:name           "last activity date"@en ;
+        sh:nodeKind       sh:Literal ;
+        sh:path           sioc:last_activity_date .
+
+<https://astrea.linkeddata.es/shapes#13a69f00f680d16a828b507416020a7a>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "Thread"@en ;
+        sh:description    "A container for a series of threaded discussion Posts or Items."@en ;
+        sh:name           "Thread"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:targetClass    sioc:Thread .
+
+<https://astrea.linkeddata.es/shapes#7634bf768878a107aa62424ae1630a41>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "likes"@en , "Used to indicate some form of endorsement by a UserAccount or Agent of an Item, Container, Space, UserAccount, etc."@en ;
+        sh:description    "Used to indicate some form of endorsement by a UserAccount or Agent of an Item, Container, Space, UserAccount, etc."@en ;
+        sh:name           "likes"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:likes .
+
+<https://astrea.linkeddata.es/shapes#bfb0b506165ca8e85929f23bb6842800>
+        a               sh:NodeShape ;
+        sh:nodeKind     sh:IRI ;
+        sh:targetClass  foaf:OnlineAccount .
+
+<https://astrea.linkeddata.es/shapes#f60773faa2c93159ce591e0998aebdb5>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "note"@en , "A note associated with this resource, for example, if it has been edited by a UserAccount."@en ;
+        sh:datatype       rdfs:Literal ;
+        sh:description    "A note associated with this resource, for example, if it has been edited by a UserAccount."@en ;
+        sh:name           "note"@en ;
+        sh:nodeKind       sh:Literal ;
+        sh:path           sioc:note .
+
+<https://astrea.linkeddata.es/shapes#05d7e5e369be93a4ddc628f9eb969b7f>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "num authors"@en , "The number of unique authors (UserAccounts and unregistered posters) who have contributed to this Item, Thread, Post, etc."@en ;
+        sh:datatype       xsd:nonNegativeInteger ;
+        sh:description    "The number of unique authors (UserAccounts and unregistered posters) who have contributed to this Item, Thread, Post, etc."@en ;
+        sh:minInclusive   0 ;
+        sh:name           "num authors"@en ;
+        sh:nodeKind       sh:Literal ;
+        sh:path           sioc:num_authors ;
+        sh:pattern        "[\\-+]?[0-9]+" .
+
+<https://astrea.linkeddata.es/shapes#8b1aa7002303d6836b29e038c0c7a4bf>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "previous by date"@en , "Previous Item or Post in a given Container sorted by date."@en ;
+        sh:class          sioc:Item ;
+        sh:description    "Previous Item or Post in a given Container sorted by date."@en ;
+        sh:name           "previous by date"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:previous_by_date .
+
+<https://astrea.linkeddata.es/shapes#eaa2e8eae78c2082d8a93a82b8a54c67>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "Post"@en ;
+        sh:description    "An article or message that can be posted to a Forum."@en ;
+        sh:name           "Post"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:property       <https://astrea.linkeddata.es/shapes#7dc243f2730785c5c3e744ed9ec8ab88> , <https://astrea.linkeddata.es/shapes#f1970821d10972a9a8c00f76e898e805> , <https://astrea.linkeddata.es/shapes#2e531d47cd3cde88b216524b9cbbd88b> , <https://astrea.linkeddata.es/shapes#be2a468bfb2b6bfe1dbc58c260a6783c> , <https://astrea.linkeddata.es/shapes#9e76314841dc310e34b56366fabad575> , <https://astrea.linkeddata.es/shapes#cd1967356c210fdf0e6c47bd7a0dc3ac> ;
+        sh:targetClass    sioc:Post .
+
+<https://astrea.linkeddata.es/shapes#5bddec62ba7a485059b549d799881546>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "function of"@en , "A UserAccount that has this Role."@en ;
+        sh:description    "A UserAccount that has this Role."@en ;
+        sh:name           "function of"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI .
+
+<https://astrea.linkeddata.es/shapes#f59896111e7c9e945605532d042cfe86>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "The number of times this Item, Thread, UserAccount profile, etc. has been viewed."@en , "num views"@en ;
+        sh:datatype       xsd:nonNegativeInteger ;
+        sh:description    "The number of times this Item, Thread, UserAccount profile, etc. has been viewed."@en ;
+        sh:minInclusive   0 ;
+        sh:name           "num views"@en ;
+        sh:nodeKind       sh:Literal ;
+        sh:path           sioc:num_views ;
+        sh:pattern        "[\\-+]?[0-9]+" .
+
+<https://astrea.linkeddata.es/shapes#67a8496e162df9d8826ab600ed505c7a>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "num threads"@en , "The number of Threads (AKA discussion topics) in a Forum."@en ;
+        sh:datatype       xsd:nonNegativeInteger ;
+        sh:description    "The number of Threads (AKA discussion topics) in a Forum."@en ;
+        sh:minInclusive   0 ;
+        sh:name           "num threads"@en ;
+        sh:nodeKind       sh:Literal ;
+        sh:path           sioc:num_threads ;
+        sh:pattern        "[\\-+]?[0-9]+" .
+
+<https://astrea.linkeddata.es/shapes#feda1d30c2a4aaf5aebe979e5a0810da>
+        a            sh:PropertyShape ;
+        sh:nodeKind  sh:Literal ;
+        sh:path      dcterms:description .
+
+<https://astrea.linkeddata.es/shapes#1b3363aac026d639fac734187ad036f8>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "Forum"@en ;
+        sh:description    "A discussion area on which Posts or entries are made."@en ;
+        sh:name           "Forum"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:property       <https://astrea.linkeddata.es/shapes#008e6b0c9cfb4f85762e51526fa6d00a> , <https://astrea.linkeddata.es/shapes#67a8496e162df9d8826ab600ed505c7a> ;
+        sh:targetClass    sioc:Forum .
+
+<https://astrea.linkeddata.es/shapes#ae75cda2c85f133acb2298dec22bdec6>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "member of"@en , "A Usergroup that this UserAccount is a member of."@en ;
+        sh:class          sioc:Usergroup ;
+        sh:description    "A Usergroup that this UserAccount is a member of."@en ;
+        sh:name           "member of"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:member_of .
+
+<https://astrea.linkeddata.es/shapes#ac99d93f9654afe6ee3c516419f6929d>
+        a            sh:PropertyShape ;
+        sh:nodeKind  sh:BlankNodeOrIRI ;
+        sh:path      dcterms:references .
+
+<https://astrea.linkeddata.es/shapes#78e7409c0e4565fbc873886443692dd4>
+        a            sh:PropertyShape ;
+        rdfs:label   "group of"@en ;
+        sh:name      "group of"@en ;
+        sh:nodeKind  sh:BlankNodeOrIRI ;
+        sh:path      sioc:group_of .
+
+<https://astrea.linkeddata.es/shapes#4093b1e76d6c6708e115a00457a642e4>
+        a         sh:PropertyShape ;
+        sh:class  sioc:Space .
+
+<https://astrea.linkeddata.es/shapes#0991778ce7d272fe4056d7801eb9ccba>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "email sha1"@en , "An electronic mail address of the UserAccount, encoded using SHA1."@en ;
+        sh:datatype       rdfs:Literal ;
+        sh:description    "An electronic mail address of the UserAccount, encoded using SHA1."@en ;
+        sh:name           "email sha1"@en ;
+        sh:nodeKind       sh:Literal ;
+        sh:path           sioc:email_sha1 .
+
+<https://astrea.linkeddata.es/shapes#67d5150fe6411f1fb45b1109c7bd0e7f>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "has container"@en , "The Container to which this Item belongs."@en ;
+        sh:class          sioc:Container ;
+        sh:description    "The Container to which this Item belongs."@en ;
+        sh:name           "has container"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:has_container .
+
+<https://astrea.linkeddata.es/shapes#d5c64ae2899f0051fd02e777ec867730>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "subscriber of"@en , "A Container that a UserAccount is subscribed to."@en ;
+        rdfs:seeAlso      sioc:feed ;
+        sh:class          sioc:Container ;
+        sh:description    "A Container that a UserAccount is subscribed to."@en ;
+        sh:name           "subscriber of"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:subscriber_of .
+
+<http://astrea.linkeddata.es/report>
+        a       <https://w3id.org/def/astrea#ShapeReport> ;
+        <https://w3id.org/def/astrea#contains>
+                <https://astrea.linkeddata.es/shapes#7d0d578963c3e0a753e84284c6867c2f> , <https://astrea.linkeddata.es/shapes#cd375dca3bf7988c58e5a8479eb5adeb> , <https://astrea.linkeddata.es/shapes#a456481dc1df42fe79201a30fccb8487> , <https://astrea.linkeddata.es/shapes#c257179e675e5cc1c02fd4d4bb0321d0> , <https://astrea.linkeddata.es/shapes#67d5150fe6411f1fb45b1109c7bd0e7f> , <https://astrea.linkeddata.es/shapes#f9301c2bb006192c97729820bc77f98e> , <https://astrea.linkeddata.es/shapes#8da7180db13d9a8e736bfaf0ad38d02b> , <https://astrea.linkeddata.es/shapes#bfb0b506165ca8e85929f23bb6842800> , <https://astrea.linkeddata.es/shapes#14da80e9490d9dbcd2c4ffd6a9035941> , <https://astrea.linkeddata.es/shapes#65564f6f7b1dba435467db69f937d93d> , <https://astrea.linkeddata.es/shapes#7dc243f2730785c5c3e744ed9ec8ab88> , <https://astrea.linkeddata.es/shapes#d3e36af8de024eb04f78ce53679a8b6a> , <https://astrea.linkeddata.es/shapes#d5c64ae2899f0051fd02e777ec867730> , <https://astrea.linkeddata.es/shapes#cd1967356c210fdf0e6c47bd7a0dc3ac> , <https://astrea.linkeddata.es/shapes#55a05e88e2f1bdf8b52fa7d0eb1efeca> , <https://astrea.linkeddata.es/shapes#4a72b168231fad057680f0c4c1442669> , <https://astrea.linkeddata.es/shapes#147c715eadc8092c3ea626a8d4488d35> , <https://astrea.linkeddata.es/shapes#4497652ba8f74b464d6fba46416808b6> , <https://astrea.linkeddata.es/shapes#5a2077d3ab458a3627cbf1e4f3bd7104> , <https://astrea.linkeddata.es/shapes#1a23efc5e27bebaab7929d6e29607568> , <https://astrea.linkeddata.es/shapes#4a20fa535fa4cff44e82bd3158f5470a> , <https://astrea.linkeddata.es/shapes#543a154717954af4018ba7e9b5b4b69b> , <https://astrea.linkeddata.es/shapes#6d129aa94893c2ed255755dc88c341ea> , <https://astrea.linkeddata.es/shapes#7dbb8172300ada781213cb5011625a45> , <https://astrea.linkeddata.es/shapes#d86e8cc47a51b41257480d476fdba298> , <https://astrea.linkeddata.es/shapes#6f0e5eed4973add92235fcaa2c6df4cc> , <https://astrea.linkeddata.es/shapes#f42753cc70f9becb2cae92e161be6d3e> , <https://astrea.linkeddata.es/shapes#0991778ce7d272fe4056d7801eb9ccba> , <https://astrea.linkeddata.es/shapes#57915702333d3c4011eb3bfa935ff3e0> , <https://astrea.linkeddata.es/shapes#5bddec62ba7a485059b549d799881546> , <https://astrea.linkeddata.es/shapes#0cb456c6da5f844bfa90fb19c38b38bc> , <https://astrea.linkeddata.es/shapes#e0dd458f982ed04d6439a1dca5ab7bfc> , <https://astrea.linkeddata.es/shapes#ae75cda2c85f133acb2298dec22bdec6> , <https://astrea.linkeddata.es/shapes#a727bfcbcdc63e80c86cac43b7207418> , <https://astrea.linkeddata.es/shapes#07fe8d090dee52aa25cacf9ba01c537d> , <https://astrea.linkeddata.es/shapes#81cde7bf3e849985ff31a3d122854858> , <https://astrea.linkeddata.es/shapes#008e6b0c9cfb4f85762e51526fa6d00a> , <https://astrea.linkeddata.es/shapes#3a3242ca38a287ea171fbf51ef226dff> , <https://astrea.linkeddata.es/shapes#f0966f0337f02b5ebd04decbaae3f790> , <https://astrea.linkeddata.es/shapes#834496820d84f2bd11c81fcd36986aa7> , <https://astrea.linkeddata.es/shapes#b6d940db9768f7ea469e81508efd5dae> , <https://astrea.linkeddata.es/shapes#13a69f00f680d16a828b507416020a7a> , <https://astrea.linkeddata.es/shapes#9a7d578bdfc1b1bf8786c36a682d61c6> , <https://astrea.linkeddata.es/shapes#6c59838b1615e474f6199ec1ae23bc7b> , <https://astrea.linkeddata.es/shapes#0a96b5dadbaf11f051a830e85a6fc05e> , <https://astrea.linkeddata.es/shapes#2a65398e377862f9a024a95dcc378ba9> , <https://astrea.linkeddata.es/shapes#2e531d47cd3cde88b216524b9cbbd88b> , <https://astrea.linkeddata.es/shapes#da1b025dc94caacec1e879e3424cb6e5> , <https://astrea.linkeddata.es/shapes#4c2a1a418101dda5d5d5da2836b944b9> , <https://astrea.linkeddata.es/shapes#317af38fe30829fae922e0530716c545> , <https://astrea.linkeddata.es/shapes#bbcca1b07856345d8f76c68e2c3b43df> , <https://astrea.linkeddata.es/shapes#b6b53e6aac65d0e4e86ba3e92290fa59> , <https://astrea.linkeddata.es/shapes#9e76314841dc310e34b56366fabad575> , <https://astrea.linkeddata.es/shapes#84915ee64f24d6d59eb90d461fc15752> , <https://astrea.linkeddata.es/shapes#00476dfb925e0ce25a724a9f293af712> , <https://astrea.linkeddata.es/shapes#b7ba0aea3aa4379ee6fa18cc79ba194a> , <https://astrea.linkeddata.es/shapes#f433c277a16001fdfde55f83a3dd1daf> , <https://astrea.linkeddata.es/shapes#961519ec34fb2235285ed7d614dc1dc4> , <https://astrea.linkeddata.es/shapes#c6a2d595241e88243ced433a2be6dc67> , <https://astrea.linkeddata.es/shapes#148b5ef48738f2e7990ec97ebbfb4709> , <https://astrea.linkeddata.es/shapes#1b3363aac026d639fac734187ad036f8> , <https://astrea.linkeddata.es/shapes#78e7409c0e4565fbc873886443692dd4> , <https://astrea.linkeddata.es/shapes#56f4efff1bdfb737400db97f5992e27b> , <https://astrea.linkeddata.es/shapes#f60773faa2c93159ce591e0998aebdb5> , <https://astrea.linkeddata.es/shapes#5f85552cfde0f5bc7d03cd0b9bd941f9> , <https://astrea.linkeddata.es/shapes#1f4c06b21cd7351b48a247fcbceeb699> , <https://astrea.linkeddata.es/shapes#fb5982032376acf6033dd15e9dec8660> , <https://astrea.linkeddata.es/shapes#c35c6c1db792d08bd7cfbaa7f2474b4e> , <https://astrea.linkeddata.es/shapes#5a4ae8a75b469322beb67e900451f8ac> , <https://astrea.linkeddata.es/shapes#5ce9d6dd826c6d53dc9e032db863bb2e> , <https://astrea.linkeddata.es/shapes#3f2ae919e9c05cd1b735ab4f438ab19b> , <https://astrea.linkeddata.es/shapes#677e5676df9c5961e1d8daeb1a82c18c> , <https://astrea.linkeddata.es/shapes#f1970821d10972a9a8c00f76e898e805> , <https://astrea.linkeddata.es/shapes#825e2dc28de92e68df95594134955fe6> , <https://astrea.linkeddata.es/shapes#7c9a6c8f582dc349679915f7a7c86b3b> , <https://astrea.linkeddata.es/shapes#eaa2e8eae78c2082d8a93a82b8a54c67> , <https://astrea.linkeddata.es/shapes#5bb71f389c5331ccd8e0e71c895c250d> , <https://astrea.linkeddata.es/shapes#1fc54252e97d69f5ff83339105480605> , <https://astrea.linkeddata.es/shapes#43dfdbab3d551d26d9b49dca17363705> , <https://astrea.linkeddata.es/shapes#477cac8dc01dd37e56bd4e956ec505e4> , <https://astrea.linkeddata.es/shapes#23fdf1c1d4e039dc9a241035a559e1de> , <https://astrea.linkeddata.es/shapes#47def45dc28b66e2cebd3606b4ebabf6> , <https://astrea.linkeddata.es/shapes#142e6a40794e1b2999b88f8d6ef8b762> , <https://astrea.linkeddata.es/shapes#be2a468bfb2b6bfe1dbc58c260a6783c> , <https://astrea.linkeddata.es/shapes#12709240b8cd0d2f5c966a492d168859> , <https://astrea.linkeddata.es/shapes#f59896111e7c9e945605532d042cfe86> , <https://astrea.linkeddata.es/shapes#fe6f05d91da484e8985b0cd9bfdaccb6> , <https://astrea.linkeddata.es/shapes#bf2bb22b24f259b07b8a67970975c81b> , <https://astrea.linkeddata.es/shapes#7e72f54b4a3e66919e299ba578dfdf41> , <https://astrea.linkeddata.es/shapes#62a69944e7c4b46a31418e217b1ef386> , <https://astrea.linkeddata.es/shapes#ac99d93f9654afe6ee3c516419f6929d> , <https://astrea.linkeddata.es/shapes#4093b1e76d6c6708e115a00457a642e4> , <https://astrea.linkeddata.es/shapes#0998f4bd19f75877ec0e5f6582ea898d> , <https://astrea.linkeddata.es/shapes#f905c44e835a1be84217e765f8404037> , <https://astrea.linkeddata.es/shapes#14a10f0ff4b9578746f076ed7a2aab0c> , <https://astrea.linkeddata.es/shapes#05d7e5e369be93a4ddc628f9eb969b7f> , <https://astrea.linkeddata.es/shapes#256bd1507ee9b0e675388546e57db7e8> , <https://astrea.linkeddata.es/shapes#7634bf768878a107aa62424ae1630a41> , <https://astrea.linkeddata.es/shapes#db41b0ab51b85a1351785f4a4e9081ac> , <https://astrea.linkeddata.es/shapes#8041e53bb2e783e44d5709ff46b3990a> , <https://astrea.linkeddata.es/shapes#8b1aa7002303d6836b29e038c0c7a4bf> , <https://astrea.linkeddata.es/shapes#e7284fb748d8dba6708df210e4b253f7> , <https://astrea.linkeddata.es/shapes#feda1d30c2a4aaf5aebe979e5a0810da> , <https://astrea.linkeddata.es/shapes#0197b7ca16247e5142d1f86399f476f4> , <https://astrea.linkeddata.es/shapes#026aca65031cbd7b18cf9e5758099a42> , <https://astrea.linkeddata.es/shapes#8bd1f33da14b7fc8fb4f7ab5b80f19d2> , <https://astrea.linkeddata.es/shapes#6b5b62a6d5e34f24a3cafbf171ed091d> , <https://astrea.linkeddata.es/shapes#67a8496e162df9d8826ab600ed505c7a> , <https://astrea.linkeddata.es/shapes#fcb64365fe59dbf1e7f52e8df0cabcf9> , <https://astrea.linkeddata.es/shapes#6b7210003a13d766e95054407d5fb615> , <https://astrea.linkeddata.es/shapes#3b1fed4016ea3410e7b39f0cf0331513> ;
+        <https://w3id.org/def/astrea#generatedShapesFrom>
+                <https://astrea.linkeddata.es/report/941083681> .
+
+<https://astrea.linkeddata.es/shapes#3f2ae919e9c05cd1b735ab4f438ab19b>
+        a            sh:PropertyShape ;
+        sh:nodeKind  sh:Literal ;
+        sh:path      dcterms:title .
+
+<https://astrea.linkeddata.es/shapes#fcb64365fe59dbf1e7f52e8df0cabcf9>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "last item date"@en , "The date and time of the last Post (or Item) in a Forum (or a Container), in ISO 8601 format."@en ;
+        sh:datatype       rdfs:Literal ;
+        sh:description    "The date and time of the last Post (or Item) in a Forum (or a Container), in ISO 8601 format."@en ;
+        sh:name           "last item date"@en ;
+        sh:nodeKind       sh:Literal ;
+        sh:path           sioc:last_item_date .
+
+<https://astrea.linkeddata.es/shapes#543a154717954af4018ba7e9b5b4b69b>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "Usergroup"@en ;
+        sh:description    "A set of UserAccounts whose owners have a common purpose or interest. Can be used for access control purposes."@en ;
+        sh:name           "Usergroup"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:not            <https://astrea.linkeddata.es/shapes#62a69944e7c4b46a31418e217b1ef386> , <https://astrea.linkeddata.es/shapes#8da7180db13d9a8e736bfaf0ad38d02b> , <https://astrea.linkeddata.es/shapes#f905c44e835a1be84217e765f8404037> , <https://astrea.linkeddata.es/shapes#4093b1e76d6c6708e115a00457a642e4> , <https://astrea.linkeddata.es/shapes#14da80e9490d9dbcd2c4ffd6a9035941> ;
+        sh:property       <https://astrea.linkeddata.es/shapes#14a10f0ff4b9578746f076ed7a2aab0c> , <https://astrea.linkeddata.es/shapes#bbcca1b07856345d8f76c68e2c3b43df> ;
+        sh:targetClass    sioc:Usergroup .
+
+<https://astrea.linkeddata.es/shapes#5f85552cfde0f5bc7d03cd0b9bd941f9>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "has administrator"@en , "A UserAccount that is an administrator of this Site."@en ;
+        sh:class          sioc:UserAccount ;
+        sh:description    "A UserAccount that is an administrator of this Site."@en ;
+        sh:name           "has administrator"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:has_administrator .
+
+<https://astrea.linkeddata.es/shapes#57915702333d3c4011eb3bfa935ff3e0>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "Item"@en ;
+        sh:description    "An Item is something which can be in a Container."@en ;
+        sh:name           "Item"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:not            <https://astrea.linkeddata.es/shapes#4093b1e76d6c6708e115a00457a642e4> , <https://astrea.linkeddata.es/shapes#62a69944e7c4b46a31418e217b1ef386> , <https://astrea.linkeddata.es/shapes#5a4ae8a75b469322beb67e900451f8ac> , <https://astrea.linkeddata.es/shapes#8da7180db13d9a8e736bfaf0ad38d02b> , <https://astrea.linkeddata.es/shapes#f905c44e835a1be84217e765f8404037> ;
+        sh:property       <https://astrea.linkeddata.es/shapes#7c9a6c8f582dc349679915f7a7c86b3b> , <https://astrea.linkeddata.es/shapes#e7284fb748d8dba6708df210e4b253f7> , <https://astrea.linkeddata.es/shapes#12709240b8cd0d2f5c966a492d168859> , <https://astrea.linkeddata.es/shapes#7d0d578963c3e0a753e84284c6867c2f> , <https://astrea.linkeddata.es/shapes#00476dfb925e0ce25a724a9f293af712> , <https://astrea.linkeddata.es/shapes#8041e53bb2e783e44d5709ff46b3990a> , <https://astrea.linkeddata.es/shapes#8b1aa7002303d6836b29e038c0c7a4bf> , <https://astrea.linkeddata.es/shapes#56f4efff1bdfb737400db97f5992e27b> , <https://astrea.linkeddata.es/shapes#3a3242ca38a287ea171fbf51ef226dff> , <https://astrea.linkeddata.es/shapes#fe6f05d91da484e8985b0cd9bfdaccb6> , <https://astrea.linkeddata.es/shapes#9a7d578bdfc1b1bf8786c36a682d61c6> , <https://astrea.linkeddata.es/shapes#47def45dc28b66e2cebd3606b4ebabf6> , <https://astrea.linkeddata.es/shapes#67d5150fe6411f1fb45b1109c7bd0e7f> , <https://astrea.linkeddata.es/shapes#148b5ef48738f2e7990ec97ebbfb4709> ;
+        sh:targetClass    sioc:Item .
+
+<https://astrea.linkeddata.es/shapes#008e6b0c9cfb4f85762e51526fa6d00a>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "has moderator"@en , "A UserAccount that is a moderator of this Forum."@en ;
+        sh:class          sioc:UserAccount ;
+        sh:description    "A UserAccount that is a moderator of this Forum."@en ;
+        sh:name           "has moderator"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:has_moderator .
+
+<https://astrea.linkeddata.es/shapes#43dfdbab3d551d26d9b49dca17363705>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "topic"@en , "A topic of interest, linking to the appropriate URI, e.g. in the Open Directory Project or of a SKOS category."@en ;
+        sh:description    "A topic of interest, linking to the appropriate URI, e.g. in the Open Directory Project or of a SKOS category."@en ;
+        sh:name           "topic"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:topic .
+
+<https://astrea.linkeddata.es/shapes#8da7180db13d9a8e736bfaf0ad38d02b>
+        a         sh:PropertyShape ;
+        sh:class  sioc:UserAccount .
+
+<https://astrea.linkeddata.es/shapes#8bd1f33da14b7fc8fb4f7ab5b80f19d2>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "num items"@en , "The number of Posts (or Items) in a Forum (or a Container)."@en ;
+        sh:datatype       xsd:nonNegativeInteger ;
+        sh:description    "The number of Posts (or Items) in a Forum (or a Container)."@en ;
+        sh:minInclusive   0 ;
+        sh:name           "num items"@en ;
+        sh:nodeKind       sh:Literal ;
+        sh:path           sioc:num_items ;
+        sh:pattern        "[\\-+]?[0-9]+" .
+
+<https://astrea.linkeddata.es/shapes#3b1fed4016ea3410e7b39f0cf0331513>
+        a               sh:NodeShape ;
+        sh:nodeKind     sh:IRI ;
+        sh:targetClass  foaf:Agent .
+
+<https://astrea.linkeddata.es/shapes#148b5ef48738f2e7990ec97ebbfb4709>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "next by date"@en , "Next Item or Post in a given Container sorted by date."@en ;
+        sh:class          sioc:Item ;
+        sh:description    "Next Item or Post in a given Container sorted by date."@en ;
+        sh:name           "next by date"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:next_by_date .
+
+<https://astrea.linkeddata.es/shapes#55a05e88e2f1bdf8b52fa7d0eb1efeca>
+        a               sh:NodeShape ;
+        sh:nodeKind     sh:IRI ;
+        sh:targetClass  foaf:Document .
+
+<https://astrea.linkeddata.es/shapes#00476dfb925e0ce25a724a9f293af712>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "embeds knowledge"@en , "This links Items to embedded statements, facts and structured content."@en ;
+        sh:class          <http://www.w3.org/2004/03/trix/rdfg-1/Graph> ;
+        sh:description    "This links Items to embedded statements, facts and structured content."@en ;
+        sh:name           "embeds knowledge"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:embeds_knowledge .
+
+<https://astrea.linkeddata.es/shapes#23fdf1c1d4e039dc9a241035a559e1de>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "generator"@en , "A URI for the application used to generate this Item."@en ;
+        sh:description    "A URI for the application used to generate this Item."@en ;
+        sh:name           "generator"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI .
+
+<https://astrea.linkeddata.es/shapes#0197b7ca16247e5142d1f86399f476f4>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "A UserAccount that is subscribed to this Container."@en , "has subscriber"@en ;
+        rdfs:seeAlso      sioc:feed ;
+        sh:class          sioc:UserAccount ;
+        sh:description    "A UserAccount that is subscribed to this Container."@en ;
+        sh:name           "has subscriber"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:has_subscriber .
+
+<https://astrea.linkeddata.es/shapes#62a69944e7c4b46a31418e217b1ef386>
+        a         sh:PropertyShape ;
+        sh:class  sioc:Role .
+
+<https://astrea.linkeddata.es/shapes#da1b025dc94caacec1e879e3424cb6e5>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "first name"@en , "First (real) name of this User. Synonyms include given name or christian name."@en ;
+        sh:datatype       rdfs:Literal ;
+        sh:description    "First (real) name of this User. Synonyms include given name or christian name."@en ;
+        sh:name           "first name"@en ;
+        sh:nodeKind       sh:Literal ;
+        sh:path           sioc:first_name .
+
+<https://astrea.linkeddata.es/shapes#1a23efc5e27bebaab7929d6e29607568>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "links to"@en , "Links extracted from hyperlinks within a SIOC concept, e.g. Post or Site."@en ;
+        sh:description    "Links extracted from hyperlinks within a SIOC concept, e.g. Post or Site."@en ;
+        sh:name           "links to"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:links_to .
+
+<https://astrea.linkeddata.es/shapes#12709240b8cd0d2f5c966a492d168859>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "When this was delivered, in ISO 8601 format."@en , "delivered at"@en ;
+        sh:class          rdfs:Literal ;
+        sh:datatype       rdfs:Literal ;
+        sh:description    "When this was delivered, in ISO 8601 format."@en ;
+        sh:name           "delivered at"@en ;
+        sh:nodeKind       sh:Literal , sh:BlankNodeOrIRI ;
+        sh:path           sioc:delivered_at .
+
+<https://astrea.linkeddata.es/shapes#f1970821d10972a9a8c00f76e898e805>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "subject"@en , "Keyword(s) describing subject of the Post."@en ;
+        sh:datatype       rdfs:Literal ;
+        sh:description    "Keyword(s) describing subject of the Post."@en ;
+        sh:name           "subject"@en ;
+        sh:nodeKind       sh:Literal ;
+        sh:path           sioc:subject .
+
+<https://astrea.linkeddata.es/shapes#6d129aa94893c2ed255755dc88c341ea>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "attachment"@en , "The URI of a file attached to an Item."@en ;
+        sh:description    "The URI of a file attached to an Item."@en ;
+        sh:name           "attachment"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI .
+
+<https://astrea.linkeddata.es/shapes#cd1967356c210fdf0e6c47bd7a0dc3ac>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "content encoded"@en , "The encoded content of the Post, contained in CDATA areas."@en ;
+        sh:datatype       rdfs:Literal ;
+        sh:description    "The encoded content of the Post, contained in CDATA areas."@en ;
+        sh:name           "content encoded"@en ;
+        sh:nodeKind       sh:Literal ;
+        sh:path           sioc:content_encoded .
+
+<https://astrea.linkeddata.es/shapes#8041e53bb2e783e44d5709ff46b3990a>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "latest version"@en , "Links to the latest revision of this Item or Post."@en ;
+        sh:class          sioc:Item ;
+        sh:description    "Links to the latest revision of this Item or Post."@en ;
+        sh:name           "latest version"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           sioc:latest_version .
+
+<https://astrea.linkeddata.es/shapes#4c2a1a418101dda5d5d5da2836b944b9>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "last reply date"@en , "The date and time of the last reply Post or Comment, which could be associated with a starter Item or Post or with a Thread, and expressed in ISO 8601 format."@en ;
+        sh:datatype       rdfs:Literal ;
+        sh:description    "The date and time of the last reply Post or Comment, which could be associated with a starter Item or Post or with a Thread, and expressed in ISO 8601 format."@en ;
+        sh:name           "last reply date"@en ;
+        sh:nodeKind       sh:Literal ;
+        sh:path           sioc:last_reply_date .
+
+<https://astrea.linkeddata.es/shapes#65564f6f7b1dba435467db69f937d93d>
+        a            sh:PropertyShape ;
+        sh:nodeKind  sh:Literal ;
+        sh:path      dcterms:date .
+
+<https://astrea.linkeddata.es/shapes#961519ec34fb2235285ed7d614dc1dc4>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "has scope"@en , "A resource that this Role applies to."@en ;
+        sh:description    "A resource that this Role applies to."@en ;
+        sh:name           "has scope"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI .
+
+<https://astrea.linkeddata.es/shapes#2a65398e377862f9a024a95dcc378ba9>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "has discussion"@en , "A discussion that is related to this Item. The discussion can be anything, for example, a sioc:Forum or sioc:Thread, a sioct:WikiArticle or simply a foaf:Document."@en ;
+        sh:description    "A discussion that is related to this Item. The discussion can be anything, for example, a sioc:Forum or sioc:Thread, a sioct:WikiArticle or simply a foaf:Document."@en ;
+        sh:name           "has discussion"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI .
+
+<https://astrea.linkeddata.es/shapes#4a20fa535fa4cff44e82bd3158f5470a>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "respond to"@en , "For the reply-to address set in email messages, IMs, etc. The property name was chosen to avoid confusion with has_reply/reply_of (the reply graph)."@en ;
+        sh:description    "For the reply-to address set in email messages, IMs, etc. The property name was chosen to avoid confusion with has_reply/reply_of (the reply graph)."@en ;
+        sh:name           "respond to"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI .
+
+<https://astrea.linkeddata.es/shapes#fe6f05d91da484e8985b0cd9bfdaccb6>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  sioc: ;
+        rdfs:label        "read at"@en , "When this was read, in ISO 8601 format."@en ;
+        sh:class          rdfs:Literal ;
+        sh:datatype       rdfs:Literal ;
+        sh:description    "When this was read, in ISO 8601 format."@en ;
+        sh:name           "read at"@en ;
+        sh:nodeKind       sh:Literal , sh:BlankNodeOrIRI ;
+        sh:path           sioc:read_at .
+
+<https://astrea.linkeddata.es/shapes#147c715eadc8092c3ea626a8d4488d35>
+        a            sh:PropertyShape ;
+        sh:nodeKind  sh:BlankNodeOrIRI ;
+        sh:path      foaf:account .

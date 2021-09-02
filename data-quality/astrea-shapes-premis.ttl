@@ -1,0 +1,740 @@
+@prefix :      <http://www.loc.gov/premis/rdf/v3/> .
+@prefix cc:    <http://creativecommons.org/ns#> .
+@prefix bf:    <http://id.loc.gov/ontologies/bibframe/> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix afn:   <http://jena.apache.org/ARQ/function#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:    <http://www.w3.org/ns/shacl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix bflc:  <http://id.loc.gov/ontologies/bflc/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix prov:  <http://www.w3.org/ns/prov#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+
+<https://astrea.linkeddata.es/shapes#434ac8193d5a7fba2e58dd6d366270ef>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "Institutional policy"@en ;
+        sh:description    "A policy decision made by an organization."@en ;
+        sh:name           "Institutional policy"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:not            <https://astrea.linkeddata.es/shapes#5dd928b0a7d6c66bf626a23d4acd32e9> , <https://astrea.linkeddata.es/shapes#3e484ee65df713845ec5459668d16f6e> , <https://astrea.linkeddata.es/shapes#0b5f20e1f39852af6b097b02833a3c05> ;
+        sh:targetClass    :InstitutionalPolicy .
+
+<https://astrea.linkeddata.es/shapes#ab7588747dfd8a31fa2766063a453533>
+        a         sh:PropertyShape ;
+        sh:class  :HardwareAgent .
+
+<https://astrea.linkeddata.es/shapes#b34a80c81c49267c8bca2007f0c0dbce>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "has medium"@en ;
+        sh:class          :StorageMedium ;
+        sh:name           "has medium"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           :medium .
+
+<https://astrea.linkeddata.es/shapes#f00b045f66669985c7c1b5da7fc458e7>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "has outcome"@en ;
+        sh:class          :OutcomeStatus ;
+        sh:name           "has outcome"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           :outcome .
+
+<https://astrea.linkeddata.es/shapes#419851bd3291f9511042f31630820791>
+        a         sh:PropertyShape ;
+        sh:class  :IntellectualEntity .
+
+<https://astrea.linkeddata.es/shapes#a5bdb8a62de529b5ba08d1ab355c8a83>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "Identifier"@en ;
+        sh:description    "An unambiguous reference to the PREMIS entity within the preservation\n      repository."@en ;
+        sh:name           "Identifier"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:targetClass    :Identifier .
+
+<https://astrea.linkeddata.es/shapes#7df828558ca521e29077430c88adf423>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "Person"@en ;
+        sh:name           "Person"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:not            <https://astrea.linkeddata.es/shapes#eb21097e5b27569d78dfa7c026fe8a82> , <https://astrea.linkeddata.es/shapes#8b0e7d2edb69e48bb697cd7c77bf3b72> , <https://astrea.linkeddata.es/shapes#ab7588747dfd8a31fa2766063a453533> ;
+        sh:targetClass    :Person .
+
+<https://astrea.linkeddata.es/shapes#424b9a81d529999a74b41b31d0e05236>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "allows"@en ;
+        sh:class          :Rule ;
+        sh:name           "allows"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           :allows .
+
+<https://astrea.linkeddata.es/shapes#3e484ee65df713845ec5459668d16f6e>
+        a         sh:PropertyShape ;
+        sh:class  :Copyright .
+
+<https://astrea.linkeddata.es/shapes#a57219e5a3fe51c29d9ddf419da2ed90>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "Dependency"@en ;
+        sh:description    "Relationship where one Object requires another Object to support its function, delivery, or\n      the coherence of its content."@en ;
+        sh:name           "Dependency"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:property       <https://astrea.linkeddata.es/shapes#6839bb0ee7e70ed8bdb5f01557d5cf1e> , <https://astrea.linkeddata.es/shapes#ce678d024fd216413906c964ee43f5f0> ;
+        sh:targetClass    :Dependency .
+
+<https://astrea.linkeddata.es/shapes#6e149185d661ad919cbee83982faa3dc>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "has dependency"@en ;
+        sh:class          :Dependency ;
+        sh:name           "has dependency"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           :dependency .
+
+<https://astrea.linkeddata.es/shapes#97847b3b8c38377ff8aa1f83e8e0168c>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "Rule"@en ;
+        sh:description    "Statement about the Actions an Agent is permitted to undertake or prohibited from\n      undertaking with respect to an Object."@en ;
+        sh:name           "Rule"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:property       <https://astrea.linkeddata.es/shapes#f6f2862f1d9602910e7d3d2514338b57> , <https://astrea.linkeddata.es/shapes#6f8cc28321689b4e68e60554b26ab13e> ;
+        sh:targetClass    :Rule .
+
+<https://astrea.linkeddata.es/shapes#6fdc5159d8cc53a5b368aa1231150dc3>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "Agent"@en ;
+        sh:description    "Actor (human, machine, or software) associated with one or more Event and/or Rights\n      statement associated with a digital object."@en ;
+        sh:name           "Agent"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:property       <https://astrea.linkeddata.es/shapes#5ac59ae02cd8030d0ab0e5c41f0ce7cc> ;
+        sh:targetClass    :Agent .
+
+<https://astrea.linkeddata.es/shapes#70fa5e6acba873ad687d3a6989f819db>
+        a               sh:NodeShape ;
+        sh:nodeKind     sh:IRI ;
+        sh:property     <https://astrea.linkeddata.es/shapes#664b962e003056e5783ceaf08ca0331e> ;
+        sh:targetClass  dcterms:FileFormat .
+
+<https://astrea.linkeddata.es/shapes#28b8cc44c2d142df543b2cc9d2cd7f18>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "has validation rules"@en ;
+        sh:datatype       rdfs:Literal ;
+        sh:name           "has validation rules"@en ;
+        sh:nodeKind       sh:Literal ;
+        sh:path           :validationRules .
+
+<https://astrea.linkeddata.es/shapes#d91ea3acc2ebf94a778601ecc1ffe1b2>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "Copyright"@en ;
+        rdfs:seeAlso      <http://id.loc.gov/vocabulary/preservation/copyrightStatus> ;
+        sh:description    "Copyright law."@en ;
+        sh:name           "Copyright"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:not            <https://astrea.linkeddata.es/shapes#5dd928b0a7d6c66bf626a23d4acd32e9> , <https://astrea.linkeddata.es/shapes#00c21ffb68f44031bd33fad8be3aee40> , <https://astrea.linkeddata.es/shapes#0b5f20e1f39852af6b097b02833a3c05> ;
+        sh:targetClass    :Copyright .
+
+<https://astrea.linkeddata.es/shapes#2d1bace48de05307294128fb3a9cc7c1>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "Environment characteristic"@en ;
+        rdfs:seeAlso      <http://id.loc.gov/vocabulary/preservation/environmentCharacteristic> ;
+        sh:description    "An assessment of the extent to which the described environment supports its\n      purpose."@en ;
+        sh:name           "Environment characteristic"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:targetClass    :EnvironmentCharacteristic .
+
+<https://astrea.linkeddata.es/shapes#6f8cc28321689b4e68e60554b26ab13e>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "has restriction"@en ;
+        sh:datatype       rdfs:Literal ;
+        sh:name           "has restriction"@en ;
+        sh:nodeKind       sh:Literal ;
+        sh:path           :restriction .
+
+<https://astrea.linkeddata.es/shapes#2994715a9ef176bd6ba4268c1750ebb1>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "inhibits"@en ;
+        sh:class          :Action ;
+        sh:name           "inhibits"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           :inhibits .
+
+<https://astrea.linkeddata.es/shapes#4aecfc6614e4d236eac3fd784f6316a7>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "Intellectual entity"@en ;
+        rdfs:seeAlso      <http://id.loc.gov/vocabulary/preservation/environmentFunctionType> ;
+        sh:description    "A set of content that is considered a single intellectual unit for purposes of management and\n      description: for example, a particular book, map, photograph, database, or piece of hardware or\n      software. An Intellectual Entity can include other Intellectual Entities; for example, a web site can\n      include a web page; a web page can include an image. An Intellectual Entity may have one or more digital\n      representations. An Intellectual Entity may also describe an environment, defined as technology\n      supporting a digital object in some way (e.g. by rendering or executing it). Environments can consist of\n      software, hardware, or a combination of both."@en ;
+        sh:name           "Intellectual entity"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:not            <https://astrea.linkeddata.es/shapes#5c050338de2846b4e67d6cee98ca1052> , <https://astrea.linkeddata.es/shapes#c7d6e1773efb48fbb9ae19d652c3a401> , <https://astrea.linkeddata.es/shapes#06281a5f79c3a95f6b944dc5afa962fb> ;
+        sh:property       <https://astrea.linkeddata.es/shapes#00fdf71794a23af2a4cb2ac9a036ca72> , <https://astrea.linkeddata.es/shapes#664b962e003056e5783ceaf08ca0331e> ;
+        sh:targetClass    :IntellectualEntity .
+
+<https://astrea.linkeddata.es/shapes#053451c7541a2900a23fc0cc32edfbbf>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "end date"@en ;
+        sh:name           "end date"@en ;
+        sh:nodeKind       sh:Literal ;
+        sh:path           :endDate .
+
+<https://astrea.linkeddata.es/shapes#fa07f0863395151d3280276454d516b2>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "Signature encoding"@en ;
+        rdfs:seeAlso      <http://id.loc.gov/vocabulary/preservation/signatureEncoding> ;
+        sh:description    "Encoding used for the signature value and key information."@en ;
+        sh:name           "Signature encoding"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:targetClass    :SignatureEncoding .
+
+<https://astrea.linkeddata.es/shapes#06281a5f79c3a95f6b944dc5afa962fb>
+        a         sh:PropertyShape ;
+        sh:class  :Representation .
+
+<https://astrea.linkeddata.es/shapes#eb21097e5b27569d78dfa7c026fe8a82>
+        a         sh:PropertyShape ;
+        sh:class  :SoftwareAgent .
+
+<https://astrea.linkeddata.es/shapes#95e9c4ccdb684d6d09b4c66af88a6786>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "File"@en ;
+        sh:description    "Named and ordered sequence of bytes that is known to an operating system."@en ;
+        sh:name           "File"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:not            <https://astrea.linkeddata.es/shapes#06281a5f79c3a95f6b944dc5afa962fb> , <https://astrea.linkeddata.es/shapes#419851bd3291f9511042f31630820791> , <https://astrea.linkeddata.es/shapes#c7d6e1773efb48fbb9ae19d652c3a401> ;
+        sh:property       <https://astrea.linkeddata.es/shapes#f786d2289f803aa6b36ae12234d2f323> , <https://astrea.linkeddata.es/shapes#ea60f256d541b4aff8f90601af2fa59a> , <https://astrea.linkeddata.es/shapes#f37b91153a49b19dc89903e393b2956d> , <https://astrea.linkeddata.es/shapes#00fdf71794a23af2a4cb2ac9a036ca72> , <https://astrea.linkeddata.es/shapes#da79762f1065ef0f51c44d710032e935> , <https://astrea.linkeddata.es/shapes#eb19f5ad183a927bb3fff51e20437cf3> , <https://astrea.linkeddata.es/shapes#23b33c7828dfaf2a9cdb2ba60559d40e> ;
+        sh:targetClass    :File .
+
+<https://astrea.linkeddata.es/shapes#b4f7a601c42bacc1a908221981fc3fcc>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "Rights status"@en ;
+        sh:description    "Information about how a RightsBasis applies to a particular object."@en ;
+        sh:name           "Rights status"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:property       <https://astrea.linkeddata.es/shapes#8b0db1bd33288b3a19f5a23dd967cc81> , <https://astrea.linkeddata.es/shapes#a562967f0f51f731afdf4f57e9d75b4e> ;
+        sh:targetClass    :RightsStatus .
+
+<https://astrea.linkeddata.es/shapes#5308e7a7594f3d0891b1cfee84a89d0f>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "Outcome status"@en ;
+        rdfs:seeAlso      <http://id.loc.gov/vocabulary/preservation/eventOutcome> ;
+        sh:description    "Overall result of the Event in terms of success, partial success, or failure."@en ;
+        sh:name           "Outcome status"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:targetClass    :OutcomeStatus .
+
+<https://astrea.linkeddata.es/shapes#5ff8e14072504ac8812ac5db3dee2309>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "Bitstream"@en ;
+        sh:description    "Contiguous or non-contiguous data within a file that has meaningful properties for\n      preservation purposes."@en ;
+        sh:name           "Bitstream"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:not            <https://astrea.linkeddata.es/shapes#06281a5f79c3a95f6b944dc5afa962fb> , <https://astrea.linkeddata.es/shapes#5c050338de2846b4e67d6cee98ca1052> , <https://astrea.linkeddata.es/shapes#419851bd3291f9511042f31630820791> ;
+        sh:property       <https://astrea.linkeddata.es/shapes#ea60f256d541b4aff8f90601af2fa59a> , <https://astrea.linkeddata.es/shapes#23b33c7828dfaf2a9cdb2ba60559d40e> , <https://astrea.linkeddata.es/shapes#f37b91153a49b19dc89903e393b2956d> , <https://astrea.linkeddata.es/shapes#eb19f5ad183a927bb3fff51e20437cf3> , <https://astrea.linkeddata.es/shapes#f786d2289f803aa6b36ae12234d2f323> ;
+        sh:targetClass    :Bitstream .
+
+<https://astrea.linkeddata.es/shapes#f6f2862f1d9602910e7d3d2514338b57>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "act"@en ;
+        sh:class          :Action ;
+        sh:name           "act"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           :act .
+
+<https://astrea.linkeddata.es/shapes#9a34dbeac5d646169b67ee099086fd53>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "Fixity"@en ;
+        rdfs:seeAlso      <http://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions> ;
+        sh:description    "Information used to verify whether an object has been altered in an undocumented or\n      unauthorized way."@en ;
+        sh:name           "Fixity"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:targetClass    :Fixity .
+
+<https://astrea.linkeddata.es/shapes#a5917dcdeef0db423234bc256fdb66e7>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "Event"@en ;
+        rdfs:seeAlso      <http://id.loc.gov/vocabulary/preservation/eventType> ;
+        sh:description    "Action performed within or outside the repository that affects its capability to preserve Objects over the long term."@en ;
+        sh:name           "Event"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:property       <https://astrea.linkeddata.es/shapes#f00b045f66669985c7c1b5da7fc458e7> , <https://astrea.linkeddata.es/shapes#f294b0888475382fe4ba0b23cac2a197> ;
+        sh:targetClass    :Event .
+
+<https://astrea.linkeddata.es/shapes#a562967f0f51f731afdf4f57e9d75b4e>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "has determination date"@en ;
+        sh:datatype       xsd:date ;
+        sh:name           "has determination date"@en ;
+        sh:nodeKind       sh:Literal ;
+        sh:path           :determinationDate ;
+        sh:pattern        "-?([1-9][0-9]{3,}|0[0-9]{3})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])(Z|(\\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?" .
+
+<https://astrea.linkeddata.es/shapes#8b0e7d2edb69e48bb697cd7c77bf3b72>
+        a         sh:PropertyShape ;
+        sh:class  :Organization .
+
+<https://astrea.linkeddata.es/shapes#68ea46b5764c593763d70d874a26a0b1>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "has key"@en ;
+        sh:datatype       rdfs:Literal ;
+        sh:name           "has key"@en ;
+        sh:nodeKind       sh:Literal ;
+        sh:path           :key .
+
+<https://astrea.linkeddata.es/shapes#23b33c7828dfaf2a9cdb2ba60559d40e>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "has signature"@en ;
+        sh:class          :Signature ;
+        sh:name           "has signature"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           :signature .
+
+<https://astrea.linkeddata.es/shapes#da79762f1065ef0f51c44d710032e935>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "has composition level"@en ;
+        sh:datatype       xsd:nonNegativeInteger ;
+        sh:minInclusive   0 ;
+        sh:name           "has composition level"@en ;
+        sh:nodeKind       sh:Literal ;
+        sh:path           :compositionLevel ;
+        sh:pattern        "[\\-+]?[0-9]+" .
+
+<https://astrea.linkeddata.es/shapes#d2a7305522c0d2be3c7ef2e47ef782e1>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "has rationale"@en ;
+        sh:datatype       rdfs:Literal ;
+        sh:name           "has rationale"@en ;
+        sh:nodeKind       sh:Literal ;
+        sh:path           :rationale .
+
+<https://astrea.linkeddata.es/shapes#00c21ffb68f44031bd33fad8be3aee40>
+        a         sh:PropertyShape ;
+        sh:class  :InstitutionalPolicy .
+
+<https://astrea.linkeddata.es/shapes#66142a936b6e1d0feec8b6714aa3d2b6>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "has policy"@en ;
+        rdfs:seeAlso      <http://id.loc.gov/vocabulary/preservation/preservationLevelRole> ;
+        sh:class          :PreservationPolicy ;
+        sh:name           "has policy"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           :policy .
+
+<https://astrea.linkeddata.es/shapes#b1ab67b8715e16b1e6223a244cd13ade>
+        a         sh:PropertyShape ;
+        sh:class  :Person .
+
+<https://astrea.linkeddata.es/shapes#3cd3c0f1a6c0b2c9ec9544d7c4a9da75>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "Object"@en ;
+        sh:description    "Discrete unit of information subject to digital preservation. Subclasses of Object are\n      Intellectual Entity, Representation, File and Bitstream."@en ;
+        sh:name           "Object"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:property       <https://astrea.linkeddata.es/shapes#6e149185d661ad919cbee83982faa3dc> , <https://astrea.linkeddata.es/shapes#66142a936b6e1d0feec8b6714aa3d2b6> , <https://astrea.linkeddata.es/shapes#2e5036fd57f0ba88022083f69362034e> , <https://astrea.linkeddata.es/shapes#5ac59ae02cd8030d0ab0e5c41f0ce7cc> ;
+        sh:targetClass    :Object .
+
+<https://astrea.linkeddata.es/shapes#5ac59ae02cd8030d0ab0e5c41f0ce7cc>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "has relationship"@en ;
+        rdfs:seeAlso      <http://id.loc.gov/vocabulary/preservation/relationshipSubType> ;
+        sh:class          :Object ;
+        sh:name           "has relationship"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           :relationship .
+
+<https://astrea.linkeddata.es/shapes#f37b91153a49b19dc89903e393b2956d>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "stored at"@en ;
+        sh:class          :StorageLocation ;
+        sh:name           "stored at"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           :storedAt .
+
+<https://astrea.linkeddata.es/shapes#07ce7ed04223e9dfae73fce70e7d674d>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "has documentation"@en ;
+        sh:class          rdfs:Resource ;
+        sh:name           "has documentation"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           :documentation .
+
+<https://astrea.linkeddata.es/shapes#5c050338de2846b4e67d6cee98ca1052>
+        a         sh:PropertyShape ;
+        sh:class  :File .
+
+<https://astrea.linkeddata.es/shapes#b085f80f89ebc15de826b5f35597bb57>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "start date"@en ;
+        sh:name           "start date"@en ;
+        sh:nodeKind       sh:Literal ;
+        sh:path           :startDate .
+
+<https://astrea.linkeddata.es/shapes#303161e3ab45dd6e06db5045bf57aab3>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "License"@en ;
+        sh:description    "A license agreement or other legal document that grants rights."@en ;
+        sh:name           "License"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:not            <https://astrea.linkeddata.es/shapes#00c21ffb68f44031bd33fad8be3aee40> , <https://astrea.linkeddata.es/shapes#3e484ee65df713845ec5459668d16f6e> , <https://astrea.linkeddata.es/shapes#5dd928b0a7d6c66bf626a23d4acd32e9> ;
+        sh:targetClass    :License .
+
+<https://astrea.linkeddata.es/shapes#6839bb0ee7e70ed8bdb5f01557d5cf1e>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "has characteristic"@en ;
+        sh:class          :EnvironmentCharacteristic ;
+        sh:name           "has characteristic"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           :characteristic .
+
+<https://astrea.linkeddata.es/shapes#e2f008e962aa21034a9a995151dd03b3>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "Software agent"@en ;
+        sh:name           "Software agent"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:not            <https://astrea.linkeddata.es/shapes#b1ab67b8715e16b1e6223a244cd13ade> , <https://astrea.linkeddata.es/shapes#8b0e7d2edb69e48bb697cd7c77bf3b72> , <https://astrea.linkeddata.es/shapes#ab7588747dfd8a31fa2766063a453533> ;
+        sh:property       <https://astrea.linkeddata.es/shapes#664b962e003056e5783ceaf08ca0331e> ;
+        sh:targetClass    :SoftwareAgent .
+
+<https://astrea.linkeddata.es/shapes#8b0db1bd33288b3a19f5a23dd967cc81>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "has basis"@en , "Links from a RightsStatus to the RightsBasis instance that supports or documents\n      it."@en ;
+        sh:class          :RightsBasis ;
+        sh:description    "Links from a RightsStatus to the RightsBasis instance that supports or documents\n      it."@en ;
+        sh:name           "has basis"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           :basis .
+
+<https://astrea.linkeddata.es/shapes#d130d64295911b769530b63c992cfe19>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "Statute"@en ;
+        sh:description    "A law that grants or revokes rights, such as laws governing privacy or orphan\n      works."@en ;
+        sh:name           "Statute"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:not            <https://astrea.linkeddata.es/shapes#3e484ee65df713845ec5459668d16f6e> , <https://astrea.linkeddata.es/shapes#0b5f20e1f39852af6b097b02833a3c05> , <https://astrea.linkeddata.es/shapes#00c21ffb68f44031bd33fad8be3aee40> ;
+        sh:targetClass    :Statute .
+
+<https://astrea.linkeddata.es/shapes#f294b0888475382fe4ba0b23cac2a197>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "has outcome note"@en ;
+        sh:datatype       rdfs:Literal ;
+        sh:name           "has outcome note"@en ;
+        sh:nodeKind       sh:Literal ;
+        sh:path           :outcomeNote .
+
+<https://astrea.linkeddata.es/shapes#ea44c5377bcf75b28a540aa2318ebecd>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "governs"@en ;
+        sh:class          :Object ;
+        sh:name           "governs"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           :governs .
+
+<https://astrea.linkeddata.es/shapes#8cf534f79c2ede566ffd8a40d91cea7f>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "has encoding"@en ;
+        sh:class          :SignatureEncoding ;
+        sh:name           "has encoding"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           :encoding .
+
+<https://astrea.linkeddata.es/shapes#9fbbf53aceb55b4b6aeef5c8c3e82576>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "has jurisdiction"@en ;
+        sh:class          rdfs:Resource ;
+        sh:name           "has jurisdiction"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           :jurisdiction .
+
+<https://astrea.linkeddata.es/shapes#ce678d024fd216413906c964ee43f5f0>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "has purpose"@en ;
+        sh:class          :Action ;
+        sh:name           "has purpose"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           :purpose .
+
+<https://astrea.linkeddata.es/shapes#9683b7355ee39f3233e0c874993f3617>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "Storage location"@en ;
+        rdfs:seeAlso      <http://id.loc.gov/vocabulary/preservation/contentLocationType> ;
+        sh:description    "Information needed to retrieve a physical item from its physical storage location or a file\n      from the storage system, or to access a bitstream within a file."@en ;
+        sh:name           "Storage location"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:property       <https://astrea.linkeddata.es/shapes#b34a80c81c49267c8bca2007f0c0dbce> ;
+        sh:targetClass    :StorageLocation .
+
+<https://astrea.linkeddata.es/shapes#9599c6aa56c46830b2b5b169883eff05>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "Representation"@en ;
+        sh:description    "Digital or physical Object instantiating or embodying an Intellectual Entity. A digital\n      representation is the set of stored digital files and structural metadata needed to provide a complete\n      and reasonable rendition of the Intellectual Entity. A physical representation is an item such as a\n      manuscript, video cassette, or printed document."@en ;
+        sh:name           "Representation"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:not            <https://astrea.linkeddata.es/shapes#c7d6e1773efb48fbb9ae19d652c3a401> , <https://astrea.linkeddata.es/shapes#5c050338de2846b4e67d6cee98ca1052> , <https://astrea.linkeddata.es/shapes#419851bd3291f9511042f31630820791> ;
+        sh:property       <https://astrea.linkeddata.es/shapes#00fdf71794a23af2a4cb2ac9a036ca72> , <https://astrea.linkeddata.es/shapes#f37b91153a49b19dc89903e393b2956d> ;
+        sh:targetClass    :Representation .
+
+<https://astrea.linkeddata.es/shapes#c7d6e1773efb48fbb9ae19d652c3a401>
+        a         sh:PropertyShape ;
+        sh:class  :Bitstream .
+
+<http://astrea.linkeddata.es/report>
+        a       <https://w3id.org/def/astrea#ShapeReport> ;
+        <https://w3id.org/def/astrea#contains>
+                <https://astrea.linkeddata.es/shapes#5dd928b0a7d6c66bf626a23d4acd32e9> , <https://astrea.linkeddata.es/shapes#6fdc5159d8cc53a5b368aa1231150dc3> , <https://astrea.linkeddata.es/shapes#7df828558ca521e29077430c88adf423> , <https://astrea.linkeddata.es/shapes#f6f2862f1d9602910e7d3d2514338b57> , <https://astrea.linkeddata.es/shapes#6839bb0ee7e70ed8bdb5f01557d5cf1e> , <https://astrea.linkeddata.es/shapes#a5917dcdeef0db423234bc256fdb66e7> , <https://astrea.linkeddata.es/shapes#b4eea3bacdb26bb3b51940b5bd49980b> , <https://astrea.linkeddata.es/shapes#97847b3b8c38377ff8aa1f83e8e0168c> , <https://astrea.linkeddata.es/shapes#439282a56ed1ea1800cb4e18db92af3c> , <https://astrea.linkeddata.es/shapes#0b5f20e1f39852af6b097b02833a3c05> , <https://astrea.linkeddata.es/shapes#f294b0888475382fe4ba0b23cac2a197> , <https://astrea.linkeddata.es/shapes#8cf534f79c2ede566ffd8a40d91cea7f> , <https://astrea.linkeddata.es/shapes#23b33c7828dfaf2a9cdb2ba60559d40e> , <https://astrea.linkeddata.es/shapes#b1ab67b8715e16b1e6223a244cd13ade> , <https://astrea.linkeddata.es/shapes#b085f80f89ebc15de826b5f35597bb57> , <https://astrea.linkeddata.es/shapes#4d9923db8ef1431c1b18042c70987695> , <https://astrea.linkeddata.es/shapes#a57219e5a3fe51c29d9ddf419da2ed90> , <https://astrea.linkeddata.es/shapes#664b962e003056e5783ceaf08ca0331e> , <https://astrea.linkeddata.es/shapes#2e5036fd57f0ba88022083f69362034e> , <https://astrea.linkeddata.es/shapes#eb21097e5b27569d78dfa7c026fe8a82> , <https://astrea.linkeddata.es/shapes#b34a80c81c49267c8bca2007f0c0dbce> , <https://astrea.linkeddata.es/shapes#d130d64295911b769530b63c992cfe19> , <https://astrea.linkeddata.es/shapes#c7d6e1773efb48fbb9ae19d652c3a401> , <https://astrea.linkeddata.es/shapes#3cd3c0f1a6c0b2c9ec9544d7c4a9da75> , <https://astrea.linkeddata.es/shapes#6cd439837753e9dd6c59542fe90e885e> , <https://astrea.linkeddata.es/shapes#8b0db1bd33288b3a19f5a23dd967cc81> , <https://astrea.linkeddata.es/shapes#68ea46b5764c593763d70d874a26a0b1> , <https://astrea.linkeddata.es/shapes#ea44c5377bcf75b28a540aa2318ebecd> , <https://astrea.linkeddata.es/shapes#f00b045f66669985c7c1b5da7fc458e7> , <https://astrea.linkeddata.es/shapes#3e484ee65df713845ec5459668d16f6e> , <https://astrea.linkeddata.es/shapes#6f8cc28321689b4e68e60554b26ab13e> , <https://astrea.linkeddata.es/shapes#5308e7a7594f3d0891b1cfee84a89d0f> , <https://astrea.linkeddata.es/shapes#66142a936b6e1d0feec8b6714aa3d2b6> , <https://astrea.linkeddata.es/shapes#a5bdb8a62de529b5ba08d1ab355c8a83> , <https://astrea.linkeddata.es/shapes#28b8cc44c2d142df543b2cc9d2cd7f18> , <https://astrea.linkeddata.es/shapes#4aecfc6614e4d236eac3fd784f6316a7> , <https://astrea.linkeddata.es/shapes#4facc628d3bb8bd043f8fb38d277473b> , <https://astrea.linkeddata.es/shapes#ce678d024fd216413906c964ee43f5f0> , <https://astrea.linkeddata.es/shapes#f37b91153a49b19dc89903e393b2956d> , <https://astrea.linkeddata.es/shapes#2994715a9ef176bd6ba4268c1750ebb1> , <https://astrea.linkeddata.es/shapes#424b9a81d529999a74b41b31d0e05236> , <https://astrea.linkeddata.es/shapes#14792699b71d1fe9a6c76d53ab37e71e> , <https://astrea.linkeddata.es/shapes#9a34dbeac5d646169b67ee099086fd53> , <https://astrea.linkeddata.es/shapes#d2a7305522c0d2be3c7ef2e47ef782e1> , <https://astrea.linkeddata.es/shapes#5ff8e14072504ac8812ac5db3dee2309> , <https://astrea.linkeddata.es/shapes#ea60f256d541b4aff8f90601af2fa59a> , <https://astrea.linkeddata.es/shapes#615f3e87f4fd219ed32e7ae52ad3d545> , <https://astrea.linkeddata.es/shapes#419851bd3291f9511042f31630820791> , <https://astrea.linkeddata.es/shapes#eb19f5ad183a927bb3fff51e20437cf3> , <https://astrea.linkeddata.es/shapes#e2f008e962aa21034a9a995151dd03b3> , <https://astrea.linkeddata.es/shapes#a562967f0f51f731afdf4f57e9d75b4e> , <https://astrea.linkeddata.es/shapes#9fbbf53aceb55b4b6aeef5c8c3e82576> , <https://astrea.linkeddata.es/shapes#9599c6aa56c46830b2b5b169883eff05> , <https://astrea.linkeddata.es/shapes#f786d2289f803aa6b36ae12234d2f323> , <https://astrea.linkeddata.es/shapes#434ac8193d5a7fba2e58dd6d366270ef> , <https://astrea.linkeddata.es/shapes#7d0920b9b435443603961be16285a2f0> , <https://astrea.linkeddata.es/shapes#2d1bace48de05307294128fb3a9cc7c1> , <https://astrea.linkeddata.es/shapes#fa07f0863395151d3280276454d516b2> , <https://astrea.linkeddata.es/shapes#07ce7ed04223e9dfae73fce70e7d674d> , <https://astrea.linkeddata.es/shapes#b4f7a601c42bacc1a908221981fc3fcc> , <https://astrea.linkeddata.es/shapes#f470f07189e436c875d2280ec195e3b4> , <https://astrea.linkeddata.es/shapes#ba0a1454ac8bc42b2e13b52e6996b8d0> , <https://astrea.linkeddata.es/shapes#053451c7541a2900a23fc0cc32edfbbf> , <https://astrea.linkeddata.es/shapes#6e149185d661ad919cbee83982faa3dc> , <https://astrea.linkeddata.es/shapes#05c25c3581a876005f2f6f5eaa15896a> , <https://astrea.linkeddata.es/shapes#9683b7355ee39f3233e0c874993f3617> , <https://astrea.linkeddata.es/shapes#00c21ffb68f44031bd33fad8be3aee40> , <https://astrea.linkeddata.es/shapes#303161e3ab45dd6e06db5045bf57aab3> , <https://astrea.linkeddata.es/shapes#da79762f1065ef0f51c44d710032e935> , <https://astrea.linkeddata.es/shapes#ed2716c542532369f5651b0cc68dcc8c> , <https://astrea.linkeddata.es/shapes#5c050338de2846b4e67d6cee98ca1052> , <https://astrea.linkeddata.es/shapes#06281a5f79c3a95f6b944dc5afa962fb> , <https://astrea.linkeddata.es/shapes#5ac59ae02cd8030d0ab0e5c41f0ce7cc> , <https://astrea.linkeddata.es/shapes#95e9c4ccdb684d6d09b4c66af88a6786> , <https://astrea.linkeddata.es/shapes#00fdf71794a23af2a4cb2ac9a036ca72> , <https://astrea.linkeddata.es/shapes#7c8c8d8fd78a8cd90c6bbbe015a5d4a0> , <https://astrea.linkeddata.es/shapes#ab7588747dfd8a31fa2766063a453533> , <https://astrea.linkeddata.es/shapes#8b0e7d2edb69e48bb697cd7c77bf3b72> , <https://astrea.linkeddata.es/shapes#d91ea3acc2ebf94a778601ecc1ffe1b2> , <https://astrea.linkeddata.es/shapes#70fa5e6acba873ad687d3a6989f819db> , <https://astrea.linkeddata.es/shapes#2ac98c9d254648aeecb86ca8c1dae7ce> ;
+        <https://w3id.org/def/astrea#generatedShapesFrom>
+                <https://astrea.linkeddata.es/report/1455019476> .
+
+<https://astrea.linkeddata.es/shapes#7c8c8d8fd78a8cd90c6bbbe015a5d4a0>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "prohibits"@en ;
+        sh:class          :Rule ;
+        sh:name           "prohibits"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           :prohibits .
+
+<https://astrea.linkeddata.es/shapes#f786d2289f803aa6b36ae12234d2f323>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "inhibited by"@en ;
+        sh:class          :Inhibitor ;
+        sh:name           "inhibited by"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           :inhibitedBy .
+
+<https://astrea.linkeddata.es/shapes#439282a56ed1ea1800cb4e18db92af3c>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "has citation"@en ;
+        sh:datatype       rdfs:Literal ;
+        sh:name           "has citation"@en ;
+        sh:nodeKind       sh:Literal ;
+        sh:path           :citation .
+
+<https://astrea.linkeddata.es/shapes#664b962e003056e5783ceaf08ca0331e>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "has version"@en ;
+        sh:datatype       rdfs:Literal ;
+        sh:name           "has version"@en ;
+        sh:nodeKind       sh:Literal ;
+        sh:path           :version .
+
+<https://astrea.linkeddata.es/shapes#4d9923db8ef1431c1b18042c70987695>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "Preservation policy"@en ;
+        rdfs:seeAlso      <http://id.loc.gov/vocabulary/preservation/preservationLevelRole> ;
+        sh:description    "Information indicating the decision or policy on the set of preservation functions to be\n      applied to an object and the context in which the decision or policy was made. Note that in addition to\n      subclasses declared at presLevType, SignificantProperties is also a subclass of PreservationPolicy.\n      Implementers may also wish to create locally-defined subclasses."@en ;
+        sh:name           "Preservation policy"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:targetClass    :PreservationPolicy .
+
+<https://astrea.linkeddata.es/shapes#5dd928b0a7d6c66bf626a23d4acd32e9>
+        a         sh:PropertyShape ;
+        sh:class  :Statute .
+
+<https://astrea.linkeddata.es/shapes#ed2716c542532369f5651b0cc68dcc8c>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "Signature"@en ;
+        rdfs:seeAlso      <http://id.loc.gov/vocabulary/preservation/signatureMethod> ;
+        sh:description    "Mathematical technique used to validate the authenticity and integrity of a message,\n      software or digital document."@en ;
+        sh:name           "Signature"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:property       <https://astrea.linkeddata.es/shapes#28b8cc44c2d142df543b2cc9d2cd7f18> , <https://astrea.linkeddata.es/shapes#8cf534f79c2ede566ffd8a40d91cea7f> , <https://astrea.linkeddata.es/shapes#68ea46b5764c593763d70d874a26a0b1> ;
+        sh:targetClass    :Signature .
+
+<https://astrea.linkeddata.es/shapes#b4eea3bacdb26bb3b51940b5bd49980b>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "has note"@en ;
+        sh:datatype       rdfs:Literal ;
+        sh:name           "has note"@en ;
+        sh:nodeKind       sh:Literal ;
+        sh:path           :note .
+
+<https://astrea.linkeddata.es/shapes#0b5f20e1f39852af6b097b02833a3c05>
+        a         sh:PropertyShape ;
+        sh:class  :License .
+
+<https://astrea.linkeddata.es/shapes#f470f07189e436c875d2280ec195e3b4>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "Rights basis"@en ;
+        rdfs:seeAlso      <http://id.loc.gov/vocabulary/preservation/rightsBasis> ;
+        sh:description    "Designation of the basis for the right or permission governing the Object."@en ;
+        sh:name           "Rights basis"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:property       <https://astrea.linkeddata.es/shapes#424b9a81d529999a74b41b31d0e05236> , <https://astrea.linkeddata.es/shapes#ea44c5377bcf75b28a540aa2318ebecd> , <https://astrea.linkeddata.es/shapes#ba0a1454ac8bc42b2e13b52e6996b8d0> , <https://astrea.linkeddata.es/shapes#439282a56ed1ea1800cb4e18db92af3c> , <https://astrea.linkeddata.es/shapes#9fbbf53aceb55b4b6aeef5c8c3e82576> , <https://astrea.linkeddata.es/shapes#7c8c8d8fd78a8cd90c6bbbe015a5d4a0> ;
+        sh:targetClass    :RightsBasis .
+
+<https://astrea.linkeddata.es/shapes#eb19f5ad183a927bb3fff51e20437cf3>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "has fixity"@en ;
+        sh:class          :Fixity ;
+        sh:name           "has fixity"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           :fixity .
+
+<https://astrea.linkeddata.es/report/1455019476>
+        a       <https://w3id.org/def/astrea#ReportEntry> ;
+        <https://w3id.org/def/astrea#message>
+                "Shapes generated with no errors" ;
+        <https://w3id.org/def/astrea#source>
+                "http://www.loc.gov/premis/rdf/v3/" ;
+        <https://w3id.org/def/astrea#statusCode>
+                "200"^^xsd:int .
+
+<https://astrea.linkeddata.es/shapes#4facc628d3bb8bd043f8fb38d277473b>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "Organization"@en ;
+        sh:name           "Organization"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:not            <https://astrea.linkeddata.es/shapes#eb21097e5b27569d78dfa7c026fe8a82> , <https://astrea.linkeddata.es/shapes#b1ab67b8715e16b1e6223a244cd13ade> , <https://astrea.linkeddata.es/shapes#ab7588747dfd8a31fa2766063a453533> ;
+        sh:targetClass    :Organization .
+
+<https://astrea.linkeddata.es/shapes#2ac98c9d254648aeecb86ca8c1dae7ce>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "has identifier"@en ;
+        sh:class          :Identifier ;
+        sh:name           "has identifier"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           :identifier .
+
+<https://astrea.linkeddata.es/shapes#6cd439837753e9dd6c59542fe90e885e>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "Significant properties"@en ;
+        sh:description    "Characteristics of a particular object subjectively determined to be important to maintain\n      through preservation actions."@en ;
+        sh:name           "Significant properties"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:targetClass    :SignificantProperties .
+
+<https://astrea.linkeddata.es/shapes#05c25c3581a876005f2f6f5eaa15896a>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "Inhibitor"@en ;
+        rdfs:seeAlso      <http://id.loc.gov/vocabulary/preservation/inhibitorType> ;
+        sh:description    "Feature of a Digital Object intended to inhibit access, copying, dissemination, or\n      migration. Common Inhibitors are encryption and password protection."@en ;
+        sh:name           "Inhibitor"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:property       <https://astrea.linkeddata.es/shapes#2994715a9ef176bd6ba4268c1750ebb1> , <https://astrea.linkeddata.es/shapes#68ea46b5764c593763d70d874a26a0b1> ;
+        sh:targetClass    :Inhibitor .
+
+<https://astrea.linkeddata.es/shapes#ba0a1454ac8bc42b2e13b52e6996b8d0>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "has terms"@en ;
+        sh:datatype       rdfs:Literal ;
+        sh:name           "has terms"@en ;
+        sh:nodeKind       sh:Literal ;
+        sh:path           :terms .
+
+<https://astrea.linkeddata.es/shapes#14792699b71d1fe9a6c76d53ab37e71e>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "Hardware agent"@en ;
+        sh:name           "Hardware agent"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:not            <https://astrea.linkeddata.es/shapes#b1ab67b8715e16b1e6223a244cd13ade> , <https://astrea.linkeddata.es/shapes#8b0e7d2edb69e48bb697cd7c77bf3b72> , <https://astrea.linkeddata.es/shapes#eb21097e5b27569d78dfa7c026fe8a82> ;
+        sh:property       <https://astrea.linkeddata.es/shapes#664b962e003056e5783ceaf08ca0331e> ;
+        sh:targetClass    :HardwareAgent .
+
+<https://astrea.linkeddata.es/shapes#7d0920b9b435443603961be16285a2f0>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "Action"@en ;
+        rdfs:seeAlso      <http://id.loc.gov/vocabulary/preservation/actionsGranted> ;
+        sh:description    "Operation type to perform on an Object. Effectively performing this action may produce an Event."@en ;
+        sh:name           "Action"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:targetClass    :Action .
+
+<https://astrea.linkeddata.es/shapes#ea60f256d541b4aff8f90601af2fa59a>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "has size"@en ;
+        sh:datatype       xsd:nonNegativeInteger ;
+        sh:minInclusive   0 ;
+        sh:name           "has size"@en ;
+        sh:nodeKind       sh:Literal ;
+        sh:path           :size ;
+        sh:pattern        "[\\-+]?[0-9]+" .
+
+<https://astrea.linkeddata.es/shapes#2e5036fd57f0ba88022083f69362034e>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "has rights status"@en ;
+        sh:class          :RightsStatus ;
+        sh:name           "has rights status"@en ;
+        sh:nodeKind       sh:BlankNodeOrIRI ;
+        sh:path           :rightsStatus .
+
+<https://astrea.linkeddata.es/shapes#00fdf71794a23af2a4cb2ac9a036ca72>
+        a                 sh:PropertyShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "has original name"@en ;
+        sh:datatype       rdfs:Literal ;
+        sh:name           "has original name"@en ;
+        sh:nodeKind       sh:Literal ;
+        sh:path           :originalName .
+
+<https://astrea.linkeddata.es/shapes#615f3e87f4fd219ed32e7ae52ad3d545>
+        a                 sh:NodeShape ;
+        rdfs:isDefinedBy  : ;
+        rdfs:label        "Storage medium"@en ;
+        rdfs:seeAlso      <http://id.loc.gov/vocabulary/preservation/storageMedium> ;
+        sh:description    "The physical medium on which the Object is stored (e.g., magnetic tape, hard disk, CD-ROM,\n      DVD)."@en ;
+        sh:name           "Storage medium"@en ;
+        sh:nodeKind       sh:IRI ;
+        sh:targetClass    :StorageMedium .
