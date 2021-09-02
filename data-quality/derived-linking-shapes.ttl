@@ -1,0 +1,46 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix schema: <http://schema.org/> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix premis: <http://www.loc.gov/premis/rdf/v3/> .
+@prefix bsm: <http://w3id.org/besocial/ns/model#> .
+@prefix bss: <http://w3id.org/besocial/ns/shapes#> .
+@prefix bsd: <http://w3id.org/besocial/data/> .
+@prefix edm: <http://www.europeana.eu/schemas/edm#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+bss:postCollectionLinksShape
+  a sh:NodeShape ;
+  rdfs:label "PostCollectionLinksShape"@en ;
+  rdfs:comment "There should be direct links from social media posts to collections."@en ;
+  sh:targetClass premis:Representation ;
+  sh:property bss:validCollectionRepresentationLink ;
+  sh:property bss:validCollectionRepresentationVersionLink .
+
+bss:validCollectionRepresentationLink
+  a sh:PropertyShape ;
+  rdfs:label "validCollectionRepresentationLink"@en ;
+  rdfs:comment "There should be at least one link to a bsm:SocialMediaCollectionRepresentation."@en ;
+  sh:path dcterms:isPartOf ;
+  sh:qualifiedMinCount 1 ;
+  sh:qualifiedValueShape [
+    sh:class bsm:SocialMediaCollectionRepresentation ;
+  ] .
+
+bss:validCollectionRepresentationVersionLink
+  a sh:PropertyShape ;
+  rdfs:label "validCollectionRepresentationVersionLink"@en ;
+  rdfs:comment "There should be at least one link to a bsm:SocialMediaCollectionRepresentationVersion."@en ;
+  sh:path dcterms:isPartOf ;
+  sh:qualifiedMinCount 1 ;
+  sh:qualifiedValueShape [
+    sh:class bsm:SocialMediaCollectionRepresentationVersion ;
+  ] .
+
+bss:postSiocNamedEntitiesShape
+  a sh:NodeShape ;
+  rdfs:label "postSiocNamedEntities"@en ;
+  rdfs:comment "There should be a direct link between social media posts and named entities according to the SIOC data model."@en ;
+  rdfs:comment "This shape is under construction, the challenge is how to determine if each named entity linked via prov:Derivation's is listed via schema:mentions." .
