@@ -1,0 +1,60 @@
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix schema: <http://schema.org/> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix nee: <http://www.ics.forth.gr/isl/oae/core#> .
+@prefix premis: <http://www.loc.gov/premis/rdf/v3/> .
+@prefix bsm: <http://w3id.org/besocial/ns/model#> .
+@prefix bss: <http://w3id.org/besocial/ns/shapes#> .
+@prefix bsd: <http://w3id.org/besocial/data/> .
+@prefix edm: <http://www.europeana.eu/schemas/edm#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+bss:socialMediaPostShape
+  a sh:NodeShape ;
+  rdfs:label "SocialMediaPostShape"@en ;
+  rdfs:comment "Each social media post should have an identifier as well as a valid creator and creation date. Furthermore things it mentions should be named entities or hashtags."@en ;
+  sh:targetClass schema:SocialMediaPosting ;
+  sh:property bss:validCreationDate ;
+  sh:property bss:validCreator ;
+  sh:property bss:validIdentifier ;
+  sh:property bss:validMentions .
+
+bss:validCreationDate
+  a sh:PropertyShape ;
+  rdfs:label "validCreationDate"@en ;
+  rdfs:comment "There should be exactly one dc:created creation date of type xsd:dateTime."@en ;
+  sh:path dc:created ;
+  sh:datatype xsd:dateTime ;
+  sh:minCount 1 ;
+  sh:maxCount 1 .
+
+bss:validCreator
+  a sh:PropertyShape ;
+  rdfs:label "There should be exactly one dc:creator of type sioc:UserAccount."@en ;
+  sh:path dc:creator ;
+  sh:class sioc:UserAccount ;
+  sh:minCount 1 ;
+  sh:maxCount 1 .
+
+bss:validIdentifier
+  a sh:PropertyShape ;
+  rdfs:label "validIdentifier"@en ;
+  rdfs:comment "There should be exactly one dcterm:identifier."@en ;
+  sh:path dcterms:identifier ;
+  sh:minLength 1 ;
+  sh:minCount 1 ;
+  sh:maxCount 1 .
+
+bss:validMentions
+  a sh:PropertyShape ;
+  rdfs:label "validMentions"@en ;
+  rdfs:comment "Currenty social media posts can only schema:mention hashtags or named entities."@en ;
+  sh:path schema:mentions ;
+  sh:or (
+    [ sh:class sioc:Tag ; ]
+    [ sh:class nee:Entity ;  ]
+  ) .
