@@ -13,7 +13,7 @@ bss:collectionRepresentationTimelineShape
   dc:title "collectionRepresentationTimelineShape"@en ;
   dc:description "Each social media collection representation should have at least one aggregated tweet count measurement such that it can be visualized in a line chart."@en ;
   sh:property [
-    sh:path [ sh:inversePath bsd:collectionRepresentationDimension ] ;
+    sh:path [ sh:inversePath bsm:collectionRepresentationDimension ] ;
     sh:qualifiedValueShape bss:correctTimelineMeasurementShape ;
     sh:qualifiedMinCount 2 ;
   ] .
@@ -24,7 +24,7 @@ bss:collectionRepresentationVersionTimelineShape
   dc:title "collectionRepresentationVersionTimelineShape"@en ;
   dc:description "Each social media collection representation version should have at least two aggregated tweet count measurement such that it can be visualized in a line chart."@en ;
   sh:property [
-    sh:path [ sh:inversePath bsd:collectionRepresentationVersionDimension ] ;
+    sh:path [ sh:inversePath bsm:collectionRepresentationVersionDimension ] ;
     sh:qualifiedValueShape bss:correctTimelineMeasurementShape ;
     sh:qualifiedMinCount 2 ;
   ] .
