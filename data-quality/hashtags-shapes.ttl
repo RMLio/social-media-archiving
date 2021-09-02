@@ -1,0 +1,43 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix bsm: <http://w3id.org/besocial/ns/model#> .
+@prefix bss: <http://w3id.org/besocial/ns/shapes#> .
+@prefix bsd: <http://w3id.org/besocial/data/> .
+@prefix edm: <http://www.europeana.eu/schemas/edm#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+bss:collectionRepresentationTimelineShape
+  a sh:NodeShape ;
+  sh:targetClass bsm:SocialMediaCollectionRepresentation ;
+  dc:title "collectionRepresentationHashtagShape"@en ;
+  dc:description "Each social media collection representation should have at least one hashtag measurement."@en ;
+  sh:property [
+    sh:path [ sh:inversePath bsd:collectionRepresentationDimension ] ;
+    sh:qualifiedValueShape bss:correctHashtagMeasurementShape ;
+    sh:qualifiedMinCount 1 ;
+  ] .
+
+bss:collectionRepresentationVersionHashtagShape
+  a sh:NodeShape ;
+  dc:title "collectionRepresentationVersionHashtagShape"@en ;
+  dc:description "Each social meedia collection representation version should have at least one hashtag measurement."@en ;
+  sh:targetClass bsm:SocialMediaCollectionRepresentationVersion ;
+  sh:property [
+    sh:path [ sh:inversePath bsd:collectionRepresentationVersionDimension ] ;
+    sh:qualifiedValueShape bss:correctHashtagMeasurementShape ;
+    sh:qualifiedMinCount 1 ;
+  ] .
+
+bss:correctHashtagMeasurementShape
+  a sh:NodeShape ;
+  sh:targetClass bsm:HashtagsObservation ;
+  dc:title "correctHashtagMeasurementShape"@en ;
+  dc:descriptioon "A data shape for a RDF data cube observation of the occurrence number of a hashtag. The constraints should ensure that the observation can be displayed in a chart."@en ;
+  dc:creator <https://sven-lieber.org/profile#me> ;
+  sh:property [
+    sh:path bsm:numberPostsWithHashtags ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:integer ;
+  ] .
