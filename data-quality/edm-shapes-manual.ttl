@@ -1,0 +1,63 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix edm: <http://www.europeana.eu/schemas/edm#> .
+@prefix bss: <http://w3id.org/besocial/ns/shapes#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+
+bss:providedCHOMinimum 
+  a sh:NodeShape ;
+  rdfs:label "ProvidedCHO minimum"@en ;
+  rdfs:comment "Properties needed according to the EDM mapping guidelines"@en ;
+  sh:targetClass edm:ProvidedCHO ;
+  sh:property [
+    sh:path dc:language ;
+    sh:minCount 1 ;
+  ] ;
+  sh:property [
+    sh:path edm:type ;
+    sh:minCount 1 ;
+  ] ;
+  sh:property [
+    sh:path edm:aggregatedCHO ;
+    sh:minCount 1 ;
+  ] ;
+  sh:property [
+    sh:path edm:dataProvider;
+    sh:minCount 1 ;
+  ] ;
+  sh:property [
+    sh:path edm:provider ;
+    sh:minCount 1 ;
+  ] ;
+  sh:property [
+    sh:path edm:rights ;
+    sh:minCount 1 ;
+  ] ;
+  sh:node bss:humanReadableDescription ;
+  sh:node bss:shownRelation ;
+  sh:node bss:typeDetails .
+
+bss:humanReadableDescription
+  a sh:NodeShape ;
+  sh:or (
+    [ sh:path dc:description ; sh:minCount 1 ; ]
+    [ sh:path dc:title ; sh:minCount 1 ; ]
+  ) .
+
+bss:shownRelation
+  a sh:NodeShape ;
+  sh:or (
+    [ sh:path edm:isShownAt ; sh:minCount 1 ; ]
+    [ sh:path edm:isShownBy ; sh:minCount 1 ; ]
+  ) .
+
+bss:typeDetails 
+  a sh:NodeShape ;
+  sh:or (
+    [ sh:path dc:subject ; sh:minCount 1 ;]
+    [ sh:path dc:type ; sh:minCount 1; ]
+    [ sh:path dcterms:spatial ; sh:minCount 1; ]
+    [ sh:path dcterms:temporal ; sh:minCount 1 ; ]
+  ) .
