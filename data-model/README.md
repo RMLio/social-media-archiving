@@ -18,6 +18,8 @@ In this document we develop requirements in the form of user stories which are r
 
 > :computer: *I am a user story from the perspective of a data steward*
 
+> :books: *I am a user story from the perspective of an archivist*
+
 Our data model is represented using the Resource Description Framework (RDF)
 and for the different components of the model (and the data) we use the following namespaces.
 
@@ -59,7 +61,8 @@ In general this data model makes use of the following *de facto* standard vocabu
 In the following we elaborate on our context and needed concepts.
 While elaborating we incrementally add requirements in the form of **user stories**,
 thus following common best practices.
-A complete list of these user stories (and related Competency Questions) is available in [this live GoogleSpreadsheet](https://docs.google.com/spreadsheets/d/13D2Z-stDdWhul3CGI5UClhPlGJtkFMBhB_Mk3Tl7giQ/edit#gid=0). (Todo: add a static representation of these user stories and competency questions to the current repository for each release)
+A complete list of these user stories (and related requirements) is available in the file `requirements.csv`.
+~~A complete list of these user stories (and related Competency Questions) is available in [this live GoogleSpreadsheet](https://docs.google.com/spreadsheets/d/13D2Z-stDdWhul3CGI5UClhPlGJtkFMBhB_Mk3Tl7giQ/edit#gid=0).~~ (outdated)
 
 Following common ontology-engineering practices, we create competency questions for each user story related to the data model.
 These questions are used to describe which questions our data model should be able to answer.
@@ -71,6 +74,17 @@ Such SPARQL queries are formal representations of the informal competency questi
 A social media collection is described by giving it for example a name, a description and a harvesting schedule which fetches the content based on collection-related *seeds*.
 On collection level we represent collections created via the tool Social Feed Manager (SFM) or other tools,
 and related provenance such as the version history of collection-related concepts.
+
+> :books: 1. *As an archivist, I want to create a social media collection by specifying a title, a description, API credentials and a harvesting schedule.*
+
+> :books: 2. *As an archivist, I want to specify the seeds of a collection, e.g. usernames or search queries, so I decide what will be harvevsted in accorance with an archiving selection policy.*
+
+> :books: 3. *As an archivist, I want to update an existing collection by specifying a new harvesting schedule, such that I can accommodate for system resources or specific seeds.*
+
+> :books: 4. *As an archivist, I want to update a seed of a collection, e.g. a different user name or a changed search query, such that I can accommodate for changes in an archiving selection policy.*
+
+> :books: 5. *As an archivist, I want to delete a seed of a collection, to accomodate for changes in an archiving selection policy.*
+
 
 ### Collections
 According to SFM, a collection is bound to a specific representation of social media content and a collection-set is a higher level grouping of collections.
@@ -84,11 +98,11 @@ We anyway should represent a collection separately from its representations
 even if we *only* ever have one representation,
 such that we reach our high-level goals regarding interoperability with EDM and PREMIS.
 
-> :smiley: *As an archive-user, I want to know how many and which collections exist, so I can understand which content is covered and if it is relevant to me.*
+> :smiley: 6. *As an archive-user, I want to know how many and which collections exist, so I can understand which content is covered and if it is relevant to me.*
 
-> :computer: *As a data steward, I want to represent a collection and its representation, so I stay interoperable with EDM and PREMIS.*
+> :computer: 7. *As a data steward, I want to represent a collection and its representation, so I stay interoperable with EDM and PREMIS.*
 
-> :smiley: *As an archive-user, I want to know in which representations collection items are available, e.g. JSON or HTML, so I can assess if the content is relevant to me.*
+> :smiley: 8. *As an archive-user, I want to know in which representations collections are available, e.g. JSON or HTML, so I can assess if the content is relevant to me.*
 
 **Our solution**
 
@@ -211,7 +225,7 @@ If the user name changed and the harvester is notified by this, e.g. during Twit
 Thus over time, the seed history also reflects changes.
 This might be valuable information, e.g. in 2021 the Belgian social democratic party *sp.a* was rebranded to *vooruit* which was also reflected in the user names of their social media accounts.
 
-> :computer: *As a data steward, I want to know the version history of a seed, so I can assess its provenance.*
+> :computer: 9. *As a data steward, I want to know the version history of a seed, so I can assess its provenance.*
 
 **Our solution**
 
@@ -257,15 +271,15 @@ With the SFM tool, harvests can be scheduled *daily*, *weekly* or even every few
 Therefore such a harvesting schedule results in periodical harvests extending the collection with new content and thus possibly representing a new version of a collection.
 This also takes changed collection metadata into account, for instance when the seeds of a collection are changed at any time via the SFM UI, the next harvest will take the updated seeds into account.
 
-> :computer: *As a data steward, I want to know the version history of a collection, so I can assess its provenance.*
+> :computer: 10. *As a data steward, I want to know the version history of a collection, so I can assess its provenance.*
 
-> :computer: *As a data steward, I want to know which seeds versions were used by a scheduled harvest, so I can assess its provenance.*
+> :computer: 11. *As a data steward, I want to know which seeds versions were used by a scheduled harvest, so I can assess its provenance.*
 
-> :computer: *As a data steward, I want to know which seeds contributed in which time period to a collection version, so I an assess the collection's provenance.*
+> :computer: 12. *As a data steward, I want to know which seeds contributed in which time period to a collection version, so I an assess the collection's provenance.*
 
-> :computer: *As a data steward, I want to know which harvests succeeded, failed, or were skipped, so I can gain insights in the system's behavior.*
+> :computer: 13. *As a data steward, I want to know which harvests succeeded, failed, or were skipped, so I can gain insights in the system's behavior.*
 
-> :computer: *As a data steward, I want to know which harvests concerned which type of social media, e.g. twitter search, twitter user timeline or flickr search, so I can filter a search.*
+> :computer: 14. *As a data steward, I want to know which harvests concerned which type of social media, e.g. twitter search, twitter user timeline or flickr search, so I can filter a search.*
 
 *Harvests* result in one or more *WARC* files, thus these files are part of a collection representation and versions.
 For example, the three harvests `h1`, `h2` and `h3` represent the versions `v1`, `v2` and `v3` of collection `c1`.
@@ -273,9 +287,9 @@ The harvests result in the three WARC files `w1`, `w2` and `w3`.
 In this case `w1` is part of `v1`, `v2` and `v3`; `w2` is part of `v1` and `v2`; and `w3` is part of `v3`.
 Additionally all these WARC Files are part of `c1` representing the collection across versions.
 
-> :computer: *As a data steward, I want to know which harvested files belong to which scheduled harvest, so I can assess its provenance in the context of a collection..*
+> :computer: 15. *As a data steward, I want to know which harvested files belong to which scheduled harvest, so I can assess its provenance in the context of a collection..*
 
-> :computer: *As a data steward, I want to know which harvested files belong to which collection and collection version, so I can assess its provenance in the context of a collection.*
+> :computer: 16. *As a data steward, I want to know which harvested files belong to which collection and collection version, so I can assess its provenance in the context of a collection.*
 
 **Our solution**
 <details>
@@ -360,3 +374,80 @@ but in an hypothetical SFM `webrecorder_user_timeline` collection we harvest the
 Because a social media post is identified by a unique ID and conceptually represents
 different representations, we can use the EDM and PREMIS model to represent item level social media posts.
 
+> :computer: 17. *As a data steward, I want to represent a social media post (item level) and its representation, so I stay interoperable with EDM and PREMIS.*
+
+### Harvest
+
+After a successful harvest, social media posts are preserved within WARC files by the tool SFM.
+
+> :computer: 18. *As a data steward, I want to describe harvested social media posts with RDF, such that data stewardship is easily possible.*
+
+WARC files contain a `warcinfo` header as well as zero or more `HTTP requests` and related `HTTP responses`.
+HTTP requests are linked via the WARC header `concurrent-to` to their respective responses.
+The payload of HTTP responses is usually compressed and in case of API calls, one response may contain several social media posts (e.g. 200 tweets for Twitter).
+
+> :computer: 19. *As a data steward, I want to know which HTTP requests were made and when, such that the provenance of the harvesting is transparent.*
+
+> :computer: 20. *As a data steward, I want to know which HTTP responses are the result of which HTTP requests, such that the provenance of the harvesting is transparent.*
+
+> :computer: 21. *As a data steward, I want to know which HTTP requests and responses belong to which WARC file, such that resulting content is findable also in a storage location.*
+
+
+### Descriptive social media post information
+
+Social media posts harvested via an API usually contain rich metadata such as an identifier, author or structured information about linked content.
+
+> :computer: 22. *As a data steward, I want to know the unique identifier of a social media post, such that different representations of the same post can be linked together.*
+
+> :computer: 23. *As a data steward, I want to know the author ID of a social media post is, such that stewardship is possible.*
+
+> :smiley: 24. *As an archive-user, I want to know the author account name as provided by the API of a social media post, such that no opague identifiers have to be used.*
+
+> :smiley: 25. *As an archive-user, I want to know when a social media post representation was harvested, so I can assess if the content is relevant to me.*
+
+
+### Mentioned entities
+
+A social media post may contain mentions of other users, hashtags or in general "named entities" such as locations, events or known persons.
+Depending on the social media provider and the harvesting method, these data is available in harvested structured data.
+For example, for tweets from Twitter hashtags and other mentioned Twitter users are available in a JSON array containing the name of the user/hashtag and at which string position the user/hashtag occurs.
+
+> :smiley: 26. *As an archive-user, I want to know which hashtags were extracted from a social media post, so I can assess if the content is relevant to me.*
+
+Besides hashtags and user mentions, the free text content may contain "named entities".
+
+> :smiley: 27. *As an archive-user, I want to know which named entities were extracted from a social media post, so I can assess if the content is relevant to me.*
+
+### Named Entity recognition provenance
+
+Extracted named entities need to be extracted computationally and the extraction is related to an uncertainty as the recognition process might not be 100% accurate.
+For quality control and in general for provenance, it is important to know with which component named entities were recognized/extracted.
+
+> :computer: 28. *As a data steward, I want to know which component was used to extract named entities, so I can assess and maintain the quality of the extracted data.*
+
+> :smiley: 29. *As an archive-user, I want to know how named entities were extracted, so I can assess the quality and if the content is relevant to me.*
+
+## Collection dashboard
+
+Hundreds of social media collections may be created and each collection may contain hundred of millions of social media posts.
+The access to item level data is usually restricted to "reading rooms" or special logins of the archiving institution providing the collections.
+For archive-users it is crucial to access the collections in a user-friendly way to assess if the consultation of the collections' content is worth the related efforts of obtaining access.
+The library and archive principle of "finding aids", tools and data supporting users in finding information in collections, can be supported by a user interface in form of a dashboard.
+
+Besides structured metadata, such a dashboard can convey aggregated information from item level on collection level.
+This facilitates the selection process for archive users, as they can consult rich information about collections before making a decision whether they want to request access to the collections' content.
+
+"xx","As an archive-user, I want to see out of how many social media posts over time a collection (version) consists, so I can assess if the collection's content is relevant for me."
+
+> :smiley: 12. *As an archive-user, I want to know which time period the items of a collection cover in terms of their creation, so I can assess if the content is relevant to me.*
+
+> :smiley: 26. *As an archive-user, I want to know which named entities are mentioned in a collection, e.g. cities or events, so I can assess if the content is relevant to me.*
+
+## Export MARC
+
+## Export EAD
+
+
+## Admin dashboard
+
+> :computer: 8. *As a data steward, I want to know which harvested files contain a specific social media post, such that I can better perform GDPR or copyright-related requests.*
