@@ -12,22 +12,26 @@ bss:collectionRepresentationTimelineShape
   sh:targetClass bsm:SocialMediaCollectionRepresentation ;
   dc:title "collectionRepresentationTimelineShape"@en ;
   dc:description "Each social media collection representation should have at least one aggregated tweet count measurement such that it can be visualized in a line chart."@en ;
-  sh:property [
+  sh:property bss:atLeastTwoTimelineObservations .
+
+bss:atLeastTwoTimelineObservations a sh:PropertyShape ;
+    sh:name "atLeastTwoTimelineObservations"@en ;
     sh:path [ sh:inversePath bsm:collectionRepresentationDimension ] ;
     sh:qualifiedValueShape bss:correctTimelineMeasurementShape ;
-    sh:qualifiedMinCount 2 ;
-  ] .
+    sh:qualifiedMinCount 2 .
 
 bss:collectionRepresentationVersionTimelineShape
   a sh:NodeShape ;
   sh:targetClass bsm:SocialMediaCollectionRepresentationVersion ;
   dc:title "collectionRepresentationVersionTimelineShape"@en ;
   dc:description "Each social media collection representation version should have at least two aggregated tweet count measurement such that it can be visualized in a line chart."@en ;
-  sh:property [
+  sh:property bss:atLeastTwoTimelineObservationsVersion .
+
+bss:atLeastTwoTimelineObservationsVersion a sh:PropertyShape ;
+    sh:name "atLeastTwoTimelineObservationsVersion"@en ;
     sh:path [ sh:inversePath bsm:collectionRepresentationVersionDimension ] ;
     sh:qualifiedValueShape bss:correctTimelineMeasurementShape ;
-    sh:qualifiedMinCount 2 ;
-  ] .
+    sh:qualifiedMinCount 2 .
 
 bss:correctMonthlyMeasurementShape
   a sh:NodeShape ;
@@ -35,21 +39,27 @@ bss:correctMonthlyMeasurementShape
   dc:title "correctMonthlyMeasurementShape"@en ;
   dc:descriptioon "A data shape for a RDF data cube observation of a number of social media posts per month and year. The constraints should ensure that the observation can be displayed in a chart."@en ;
   dc:creator <https://sven-lieber.org/profile#me> ;
-  sh:property [
+  sh:property bss:validMonthObservation;
+  sh:property bss:validYearObservation;
+  sh:property bss:validNumberPostsObservation .
+
+bss:validMonthObservation a sh:PropertyShape ;
+    sh:name "validMonthObservation"@en ;
     sh:path bsm:monthDimension ;
     sh:minCount 1 ;
     sh:maxCount 1 ;
-    sh:datatype xsd:gMonth ;
-  ] ;
-  sh:property [
+    sh:datatype xsd:gMonth .
+
+bss:validYearObservation a sh:PropertyShape ;
+    sh:name "validYearObservation"@en ;
     sh:path bsm:yearDimension ;
     sh:minCount 1 ;
     sh:maxCount 1 ;
-    sh:datatype xsd:gYear ;
-  ] ;
-  sh:property [
+    sh:datatype xsd:gYear .
+
+bss:validNumberPostsObservation a sh:PropertyShape ;
+    sh:name "validNumberPostsObservation"@en ;
     sh:path bsm:numberPosts ;
     sh:minCount 1 ;
     sh:maxCount 1 ;
-    sh:datatype xsd:integer ;
-  ] .
+    sh:datatype xsd:integer .
