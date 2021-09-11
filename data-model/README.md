@@ -437,16 +437,36 @@ The library and archive principle of "finding aids", tools and data supporting u
 Besides structured metadata, such a dashboard can convey aggregated information from item level on collection level.
 This facilitates the selection process for archive users, as they can consult rich information about collections before making a decision whether they want to request access to the collections' content.
 
-"xx","As an archive-user, I want to see out of how many social media posts over time a collection (version) consists, so I can assess if the collection's content is relevant for me."
+> :smiley: 30. *As an archive-user, I want to see descriptive information about the collection from the archivist, so I can assess if the content is relevant to me.*
 
-> :smiley: 12. *As an archive-user, I want to know which time period the items of a collection cover in terms of their creation, so I can assess if the content is relevant to me.*
+> :smiley: 31. *As an archive-user, I want to see out of how many social media posts over time a collection (version) consists, so I can assess if the collection's content is relevant for me.*
 
-> :smiley: 26. *As an archive-user, I want to know which named entities are mentioned in a collection, e.g. cities or events, so I can assess if the content is relevant to me.*
+> :smiley: 32. *As an archive-user, I want to know which time period the items of a collection cover in terms of their creation, so I can assess if the content is relevant to me.*
+
+> :smiley: 33. *As an archive-user, I want to know the harvesting period of a collection (version), so I can assess if the content is relevant to me.*
+
+> :smiley: 34. *As an archive-user, I want to know which versions exist for a collection, so I can assess which version is the most relevant to me.*
+
+> :smiley: 35. *As an archive-user, I want to know which seeds were used to create a collection (version), so I can assess if the content is relevant to me.*
+
+> :smiley: 36. *As an archive-user, I want to know which named entities are mentioned in a collection, e.g. cities or events, so I can assess if the content is relevant to me.*
+
+> :smiley: 37. *As an archive-user, I want to know which types of named entities are mentioned in a collection, so I can assess per type if the content is relevant to me.*
+
+> :smiley: 38. *As an archive-user, I want to know which hashtags were used how often in a collection (version), so I can assess if the content is relevant to me.*
+
+> :smiley: 39. *As an archive-user, I want to know under which license I can get the collection, so I can assess if I can request access.*
+
+> :smiley: 40. *As an archive-user, I want to know in which metadata formats I can obtain collection information, so I can assess which format may suits my needs or tooling.*
 
 ## Export MARC
 
+Social media collections may be used for academic research. Thus, collections should be citable and be referencable with library standards.
+The MARC format, standardized in the ISO standard 2709 is an old but common bibliographic metadata standard.
+
 ## Export EAD
 
+The Encoded Archival Description (EAD) is an XML standard for encoding metadata regarding archival records.
 
 ## Admin dashboard
 
