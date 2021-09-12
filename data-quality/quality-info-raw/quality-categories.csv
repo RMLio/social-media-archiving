@@ -1,0 +1,5 @@
+"ID","name","description"
+"1","Structural Integrity","This category groups quality dimensions related to structural integrity based on used vocabularies such as the Europeana Data Model (EDM) or PREMIS."
+"2","UI Dashboard","This category groups quality dimensions related to provide a UI dashboard for social media collections to users."
+"3","MARC Export","This category groups quality dimensions related to provide a description in the bibliographic MARC format of social media collections based on our Knowledge Graph."
+"4","EAD Export","This category groups quality dimensions related to provide a description as Encoded Archival Description (EAD) for social media collections based on our Knowlegde Graph."

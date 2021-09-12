@@ -1,0 +1,4 @@
+"ID","requirement ID","dimension ID","name","description"
+"1","1","1","Required collection title","A collection (version) should have a title such that humans can refer to it and easier remember it."
+"2","1","1","Required collection description","A collection (version) should have a description in natural language such that humans can assess the content."
+"3","2","1","Collection description min length","A collection (version) should have a description of at least 200 characters to avoid short meaningless phrases."
