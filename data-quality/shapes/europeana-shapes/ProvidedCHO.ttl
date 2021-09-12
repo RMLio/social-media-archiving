@@ -1,0 +1,323 @@
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+@prefix dc:   <http://purl.org/dc/elements/1.1/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix ore:  <http://www.openarchives.org/ore/terms/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdaGr2: <http://rdvocab.info/ElementsGr2/> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix edm:  <http://www.europeana.eu/schemas/edm/> .
+
+@prefix esc:  <http://www.europeana.eu/schemas/edm/shapes/categories#> .
+@prefix etp:  <http://www.europeana.eu/schemas/edm/shapes/library#>   .
+
+@base             <http://www.europeana.eu/schemas/edm/shapes/external/> .
+@prefix Agent:    <Agent#base>    .
+@prefix Concept:  <Concept#base>  .
+@prefix Place:    <Place#base>    .
+@prefix TimeSpan: <TimeSpan#base> .
+
+################################################################################
+# Shape Graph for edm:ProvidedCHO
+################################################################################
+
+<ProvidedCHO>
+  rdf:type owl:Ontology, sh:Graph ;
+  owl:versionInfo "Draft version for edm:ProvidedCHO Class"^^xsd:string ;
+
+  # Import shape template library
+  sh:shapesGraph etp: ;
+
+  # SHACL language
+  sh:shapesGraph <http://www.w3.org/ns/shacl> ;
+.
+
+################################################################################
+# Base Shape for the edm:ProvidedCHO Class
+################################################################################
+
+<ProvidedCHO#base>
+  a sh:NodeShape ;
+  rdfs:subClassOf rdfs:Resource ;
+  sh:description """This shape gathers all constraints that apply to a 
+                    edm:ProvidedCHO class""" ;
+
+  sh:targetClass edm:ProvidedCHO ;
+
+  # class level constraints
+  sh:node            <ProvidedCHO#closure> ;
+  sh:node            <ProvidedCHO#correlation> ;
+
+  # DC properties
+  sh:property        <ProvidedCHO/dc_identifier#type> ;
+  sh:property        <ProvidedCHO/dc_language#type> ;
+  sh:property        <ProvidedCHO/dc_title#type> ;
+
+  # DCTERMS properties
+  sh:property        <ProvidedCHO/dct_alternative#type> ;
+  sh:property        <ProvidedCHO/dct_tableOfContents#type> ;
+
+  # EDM properties
+  sh:property        <ProvidedCHO/edm_currentLocation#type> ;
+  sh:property        <ProvidedCHO/edm_hasMet#type> ;
+  sh:property        <ProvidedCHO/edm_incorporates#type> ;
+  sh:property        <ProvidedCHO/edm_isDerivativeOf#type> ;
+  sh:property        <ProvidedCHO/edm_isNextInSequence#type> ;
+  sh:property        <ProvidedCHO/edm_isRepresentationOf#type> ;
+  sh:property        <ProvidedCHO/edm_isRepresentationOf#cardinality> ;
+  sh:property        <ProvidedCHO/edm_isSimilarTo#type> ;
+  sh:property        <ProvidedCHO/edm_isSuccessorOf#type> ;
+  sh:property        <ProvidedCHO/edm_realizes#type> ;
+  sh:property        <ProvidedCHO/edm_type#type> ;
+  sh:property        <ProvidedCHO/edm_type#cardinality> ;
+  sh:property        <ProvidedCHO/edm_type#values> ;
+  sh:property        <ProvidedCHO/edm_ugc#type> ;
+
+  # OWL properties
+  sh:property        <ProvidedCHO/owl_sameAs#type> ;
+.
+
+# class level constraints ######################################################
+
+<ProvidedCHO#closure>
+  sh:description """An edm:ProvidedCHO resource must be defined using only the 
+                    properties defined in EDM for Provided CHOs""" ;
+  dc:type esc:closure ;
+  dc:relation "R-206-DEFINE-ALLOWED-NAMESPACES" ;
+  sh:closed true ;
+  sh:ignoredProperties (
+    rdf:type
+    dc:contributor dc:coverage dc:creator dc:date dc:description dc:format 
+    dc:identifier dc:language dc:publisher dc:relation dc:rights dc:source
+    dc:subject dc:title dc:type dct:alternative dct:conformsTo dct:created 
+    dct:extent dct:hasFormat dct:hasPart dct:hasVersion dct:isFormatOf 
+    dct:isPartOf dct:isReferencedBy dct:isReplacedBy dct:isRequiredBy
+    dct:issued dct:isVersionOf dct:medium dct:provenance dct:references
+    dct:replaces dct:requires dct:spatial dct:tableOfContents dct:temporal
+    edm:currentLocation edm:hasMet edm:hasType edm:incorporates 
+    edm:isDerivativeOf edm:isNextInSequence edm:isRelatedTo 
+    edm:isRepresentationOf edm:isSimilarTo edm:isSuccessorOf edm:realizes 
+    edm:type edm:ugc
+    owl:sameAs
+  ) ;
+.
+
+# the constraint for edm:type was taken out of this rule
+<ProvidedCHO#correlation>
+  a sh:Shape ;
+  sh:description """Check that if edm:ProvidedCHO is present, at least: one 
+                    dc:title or sh:description should be present; one dc:subject
+                    or dc:type or dc:coverage or dcterms:spatial and edm:type 
+                    should be present""" ;
+  dc:type esc:correlation ;
+  dc:relation "R-68-REQUIRED-PROPERTIES"
+           , "R-67-BOOLEAN-PROPERTY-PATTERNS" ;
+  sh:message """At least: one dc:title or sh:description; one dc:subject or 
+                dc:type or dc:coverage or dcterms:spatial; and one edm:type 
+                should be present""" ;
+  sh:and (
+    [
+      sh:node [
+        sh:or (
+          [ sh:property [ sh:path dc:title       ; sh:minCount 1 ; ] ]
+          [ sh:property [ sh:path dc:description ; sh:minCount 1 ; ] ]
+        )
+      ]
+    ]
+    [
+      sh:node [
+        sh:or (
+          [ sh:property [ sh:path dc:subject  ; sh:minCount 1 ; ] ]
+          [ sh:property [ sh:path dc:type     ; sh:minCount 1 ; ] ]
+          [ sh:property [ sh:path dc:coverage ; sh:minCount 1 ; ] ]
+          [ sh:property [ sh:path dct:spatial ; sh:minCount 1 ; ] ]
+        )
+      ]
+    ]
+  ) ;
+.
+
+
+# dc:identifier ################################################################
+
+<ProvidedCHO/dc_identifier#type>
+  a sh:PropertyShape ;
+  sh:path dc:identifier ;
+  sh:nodeKind sh:Literal ;
+.
+
+# dc:language ##################################################################
+
+<ProvidedCHO/dc_language#type>
+  a sh:PropertyShape ;
+  sh:path dc:language ;
+  sh:nodeKind sh:Literal ;
+.
+
+# dc:title #####################################################################
+
+<ProvidedCHO/dc_title#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path dc:title ;
+  sh:nodeKind sh:Literal ;
+.
+
+# dcterms:alternative ##########################################################
+
+<ProvidedCHO/dct_alternative#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path dct:alternative ;
+  sh:nodeKind sh:Literal ;
+.
+
+# dcterms:tableOfContents ######################################################
+
+<ProvidedCHO/dct_tableOfContents#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path dct:tableOfContents ;
+  sh:nodeKind sh:Literal ;
+.
+
+# edm:currentLocation ##########################################################
+
+<ProvidedCHO/edm_currentLocation#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path edm:currentLocation ;
+  sh:nodeKind sh:IRI ;
+.
+
+# edm:hasMet ###################################################################
+
+<ProvidedCHO/edm_hasMet#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path edm:hasMet ;
+  sh:nodeKind sh:IRI ;
+.
+
+# edm:incorporates #############################################################
+
+<ProvidedCHO/edm_incorporates#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path edm:incorporates ;
+  sh:nodeKind sh:IRI ;
+.
+
+# edm:isDerivativeOf ###########################################################
+
+<ProvidedCHO/edm_isDerivativeOf#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path edm:isDerivativeOf ;
+  sh:nodeKind sh:IRI ;
+.
+
+# edm:isNextInSequence #########################################################
+
+<ProvidedCHO/edm_isNextInSequence#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path edm:isNextInSequence ;
+  sh:nodeKind sh:IRI ;
+.
+
+# edm:isRepresentationOf #######################################################
+
+<ProvidedCHO/edm_isRepresentationOf#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path edm:isRepresentationOf ;
+  sh:nodeKind sh:IRI ;
+.
+
+<ProvidedCHO/edm_isRepresentationOf#cardinality>
+  a sh:PropertyShape ;
+  dc:type esc:cardinality ;
+  dc:relation "R-211-CARDINALITY-CONSTRAINTS" ;
+  sh:path edm:isRepresentationOf ;
+  sh:minCount 0 ;
+  sh:maxCount 1 ;
+.
+
+# edm:isSimilarTo ##############################################################
+
+<ProvidedCHO/edm_isSimilarTo#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path edm:isSimilarTo ;
+  sh:nodeKind sh:IRI ;
+.
+
+# edm:isSuccessorOf ############################################################
+
+<ProvidedCHO/edm_isSuccessorOf#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path edm:isSuccessorOf ;
+  sh:nodeKind sh:IRI ;
+.
+
+# edm:realizes #################################################################
+
+<ProvidedCHO/edm_realizes#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path edm:realizes ;
+  sh:nodeKind sh:IRI ;
+.
+
+# edm:type #####################################################################
+
+<ProvidedCHO/edm_type#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path edm:type ;
+  sh:nodeKind sh:Literal ;
+.
+
+<ProvidedCHO/edm_type#cardinality>
+  a sh:PropertyShape ;
+  dc:type esc:cardinality ;
+  dc:relation "R-211-CARDINALITY-CONSTRAINTS" ;
+  sh:path edm:type ;
+  sh:minCount 1 ;
+  sh:maxCount 1 ;
+.
+
+<ProvidedCHO/edm_type#values>
+  a sh:PropertyShape ;
+  dc:type esc:values ;
+  sh:description """The value of edm:type must match one of: 
+                    TEXT, VIDEO, SOUND, IMAGE, 3D""" ;
+# sh:description """Check that edm:type matches the value 
+#                   TEXT, VIDEO, SOUND, IMAGE, 3D""" ;
+  dc:relation "R-30-DEFINE-VALUE-LISTS" ;
+  sh:path edm:type ;
+  sh:in ( "TEXT" "VIDEO" "SOUND" "IMAGE" "3D" ) ;
+.
+
+# edm:ugc ######################################################################
+
+<ProvidedCHO/edm_ugc#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path edm:ugc ;
+  sh:nodeKind sh:Literal ;
+.
+
+# owl:sameAs ###################################################################
+
+<ProvidedCHO/owl_sameAs#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path owl:sameAs ;
+  sh:nodeKind sh:IRI ;
+.

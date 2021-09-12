@@ -1,0 +1,269 @@
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+@prefix dc:   <http://purl.org/dc/elements/1.1/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix ore:  <http://www.openarchives.org/ore/terms/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdaGr2: <http://rdvocab.info/ElementsGr2/> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix edm:  <http://www.europeana.eu/schemas/edm/> .
+
+@prefix esc:  <http://www.europeana.eu/schemas/edm/shapes/categories#> .
+
+@base                <http://www.europeana.eu/schemas/edm/shapes/external/> .
+@prefix WebResource: <WebResource#base> .
+@prefix Agent:       <Agent#base> .
+@prefix Concept:     <Concept#base> .
+@prefix Place:       <Place#base> .
+@prefix TimeSpan:    <TimeSpan#base> .
+
+################################################################################
+# Shape Graph for edm:WebResource
+################################################################################
+
+<WebResource>
+  rdf:type owl:Ontology, sh:Graph ;
+  owl:versionInfo "Draft version for edm:WebResource Class"^^xsd:string ;
+  sh:shapesGraph <http://www.w3.org/ns/shacl> ;
+.
+
+################################################################################
+# Base Shape for the edm:WebResource Class
+################################################################################
+
+<WebResource#base>
+  a sh:NodeShape ;
+  rdfs:subClassOf rdfs:Resource ;
+  sh:description """This shape gathers all constraints that apply to a 
+                    edm:WebResource class""" ;
+
+  sh:targetClass edm:WebResource ;
+
+  # class level constraints
+  sh:node            <WebResource#closure> ;
+
+  # DC properties
+#  sh:property        <WebResource/dc_creator#range-class> ;
+#  sh:property        <WebResource/dc_rights#redundancy> ;
+
+  # DCTERMS properties
+#  sh:property        <WebResource/dct_created#range-values> ;
+#  sh:property        <WebResource/dct_created#correlation_1> ;
+#  sh:property        <WebResource/dct_created#correlation_2> ;
+#  sh:property        <WebResource/dc_description#datatype> ;
+  sh:property        <WebResource/dct_hasPart#type> ;
+  sh:property        <WebResource/dct_hasPart#range-class> ;
+  sh:property        <WebResource/dct_isPartOf#type> ;
+  sh:property        <WebResource/dct_isPartOf#range-class> ;
+  sh:property        <WebResource/dct_issued#range-values> ;
+  sh:property        <WebResource/dct_issued#range-class> ;
+  sh:property        <WebResource/dct_issued#correlation> ;
+
+  # EDM properties
+  sh:property        <WebResource/edm_isNextInSequence#type> ;
+  sh:property        <WebResource/edm_isNextInSequence#range-class> ;
+  sh:property        <WebResource/edm_isNextInSequence#correlation> ;
+  sh:property        <WebResource/edm_rights#type> ;
+  sh:property        <WebResource/edm_rights#cardinality> ;
+  sh:property        <WebResource/edm_rights#values> ;
+
+  # OWL properties
+  sh:property        <WebResource/owl_sameAs#type> ;
+.
+
+# class level constraints ######################################################
+
+<WebResource#closure>
+  sh:description """An edm:WebResource resource must be defined using only the 
+                    properties defined in EDM for WebResources""" ;
+  dc:type esc:closure ;
+  dc:relation "R-206-DEFINE-ALLOWED-NAMESPACES" ;
+  sh:closed true ;
+  sh:ignoredProperties (
+    rdf:type 
+    dc:creator dc:description dc:format dc:rights dc:source
+    dct:conformsTo dct:created dct:extent 
+    dct:hasPart dct:isFormatOf dct:isPartOf dct:issued
+    edm:isNextInSequence edm:rights
+    owl:sameAs
+  ) ;
+.
+
+# dct:hasPart ##################################################################
+
+<WebResource/dct_hasPart#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path dct:hasPart ;
+  sh:nodeKind sh:IRI ;
+.
+
+<WebResource/dct_hasPart#range-class>
+  a sh:PropertyShape ;
+  sh:description "dcterms:hasPart must refer to a valid edm:WebResource" ;
+  dc:type esc:range-class ;
+  dc:relation "R-225-VALIDATION-OF-CLASS-ASSOCIATION" ;
+  sh:path dct:hasPart ;
+  sh:node WebResource: ;
+  sh:class edm:WebResource ;
+.
+
+# dct:isPartOf #################################################################
+
+#not the same as in ProvidedCHO
+<WebResource/dct_isPartOf#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path dct:isPartOf ;
+  sh:nodeKind sh:IRI ;
+.
+
+<WebResource/dct_isPartOf#range-class>
+  a sh:PropertyShape ;
+  sh:description "dcterms:isPartOf must refer to a valid edm:WebResource" ;
+  dc:type esc:range-class ;
+  dc:relation "R-225-VALIDATION-OF-CLASS-ASSOCIATION" ;
+  sh:path dct:isPartOf ;
+  sh:node WebResource: ;
+  sh:class edm:WebResource ;
+.
+
+# dct:issued ###################################################################
+
+#not in the spreadsheet
+<WebResource/dct_issued#range-values>
+  a sh:PropertyShape ;
+  sh:description """Check that the value for date matches ISO 8601 starting with
+                    the year and hyphenating the day and month parts: 
+                    YYYY-MM-DD""" ;
+  dc:type esc:range-value ;
+  dc:relation "R-44-PATTERN-MATCHING-ON-RDF-LITERALS" ;
+  sh:path dct:issued ;
+  sh:filterShape [ #restrict only to Literals
+    sh:property [
+      sh:path dct:issued ;
+      sh:nodeKind sh:Literal ;
+    ]
+  ] ;
+  #does not check for valid dates but could be expanded
+  sh:pattern "^[0-9]{4}[-][0-9]{2}[-][0-9]{2}$" ;
+.
+
+#not in the spreadsheet
+<WebResource/dct_issued#range-class>
+  a sh:PropertyShape ;
+  sh:description """the reference should be one to a TimeSpan (the access to 
+                    the data and the data itself should be formatted according 
+                    to the TimeSpan specifications.)""" ;
+  dc:type esc:range-class ;
+  dc:relation "R-171-VALIDATION-OF-URIS-BY-DEREFERENCING" ;  
+  sh:path dct:issued ;
+  sh:filterShape [
+      sh:property [
+          sh:path dct:issued ;
+          sh:nodeKind sh:IRI ;
+      ]
+  ] ;
+  sh:node TimeSpan: ;
+  sh:class edm:TimeSpan ;
+.
+
+<WebResource/dct_issued#correlation>
+  a sh:PropertyShape ;
+  dc:type esc:correlation ;
+  sh:description """dcterms:issued must be equal or later than dcterms:created 
+                    and dcterms:issued of the ProvidedCHO""" ;
+  dc:type esc:correlation ;
+  dc:relation "R-43-LITERAL-VALUE-COMPARISON" ;
+  sh:path dct:issued ;
+
+  #requires a second focus node (ie. ProvidedCHO)
+  #can though be implemented using SPARQL
+.
+
+# edm:isNextInSequence #########################################################
+
+<WebResource/edm_isNextInSequence#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path edm:isNextInSequence ;
+  sh:nodeKind sh:IRI ;
+.
+
+<WebResource/edm_isNextInSequence#range-class>
+  a sh:PropertyShape ;
+  sh:description """The reference should be a valid edm:WebResource""" ;
+  dc:type esc:range-class ;
+  dc:relation "R-171-VALIDATION-OF-URIS-BY-DEREFERENCING"
+           , "R-225-VALIDATION-OF-CLASS-ASSOCIATION" ;
+  sh:path edm:isNextInSequence ;
+  sh:node WebResource: ;
+  sh:class edm:WebResource ;
+.
+
+<WebResource/edm_isNextInSequence#correlation>
+  a sh:PropertyShape ;
+  dc:type esc:correlation ;
+  sh:description """Both WebResources referred to and subject of this property 
+                    must share the same parent, if present""" ;
+# sh:description """Check that if WebResource 2 is PartOf WebResource X and 
+#                   IsNextInSequence WebResource 1 and WebResource 2 are part of
+#                   WebResource X""" ;
+  dc:relation "?" ;
+  sh:path edm:isNextInSequence ;
+
+# Implement using a SPARQL query
+.
+
+
+# edm:rights ###################################################################
+
+<WebResource/edm_rights#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path edm:rights ;
+  sh:nodeKind sh:IRI ;
+.
+
+<WebResource/edm_rights#cardinality>
+  a sh:PropertyShape ;
+  dc:type esc:cardinality ;
+  dc:relation "R-211-CARDINALITY-CONSTRAINTS" ;
+  sh:path edm:rights;
+  sh:maxCount 1 ;
+.
+
+<WebResource/edm_rights#values>
+  a sh:PropertyShape ;
+  dc:type esc:values ;
+  sh:description """Check the value is one of the controlled values: 
+             http://pro.europeana.eu/web/guest/available-rights-statements """ ;
+  dc:relation "R-210-DEFINE-EXCLUSIVELY-ALLOWED-PROPERTIES"
+            , "R-30-DEFINE-VALUE-LISTS" ;
+  sh:path edm:rights ;
+  sh:in ( <http://creativecommons.org/publicdomain/mark/1.0/> 
+          <http://www.europeana.eu/rights/out-of-copyright-non-commercial/>
+          <http://creativecommons.org/publicdomain/zero/1.0/>
+          <http://creativecommons.org/licenses/by/4.0/>
+          <http://creativecommons.org/licenses/by-sa/4.0/>
+          <http://creativecommons.org/licenses/by-nd/4.0/>
+          <http://creativecommons.org/licenses/by-nc/4.0/>
+          <http://creativecommons.org/licenses/by-nc-sa/4.0/>
+          <http://creativecommons.org/licenses/by-nc-nd/4.0/>
+          <http://www.europeana.eu/rights/rr-f/>
+          <http://www.europeana.eu/rights/rr-p/> 
+          <http://www.europeana.eu/rights/orphan-work-eu/>
+          <http://www.europeana.eu/rights/unknown/> ) ;
+.
+
+# owl:sameAs ###################################################################
+
+<WebResource/owl_sameAs#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path owl:sameAs ;
+  sh:nodeKind sh:IRI ;
+.

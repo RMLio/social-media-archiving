@@ -1,0 +1,41 @@
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+@prefix dc:   <http://purl.org/dc/elements/1.1/> .
+@prefix ore:  <http://www.openarchives.org/ore/terms/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix edm:  <http://www.europeana.eu/schemas/edm/> .
+
+@prefix etp:  <http://www.europeana.eu/schemas/edm/shapes/library#> .
+
+@base         <http://www.europeana.eu/schemas/edm/shapes/external/> .
+
+################################################################################
+#                             SHAPE DEFINITIONS                                #
+################################################################################
+
+<>
+  rdf:type owl:Ontology, sh:Graph ;
+  owl:versionInfo "Draft version for EDM shapes profile for EDM external"^^xsd:string ;
+
+  # Import RDFS definitions for EDM
+  owl:imports <http://www.europeana.eu/schemas/edm/rdf/edm.owl> ;
+
+  # Import shape definitions for all EDM Classes
+  owl:imports <ProvidedCHO> ;
+  owl:imports <Aggregation> ;
+  owl:imports <WebResource> ;
+  owl:imports <Concept> ;
+  owl:imports <Agent> ;
+  owl:imports <Place> ;
+  owl:imports <TimeSpan> ;
+
+  # Import shape template library
+  sh:shapesGraph etp: ;
+
+  # SHACL language
+  sh:shapesGraph <http://www.w3.org/ns/shacl> ;
+.

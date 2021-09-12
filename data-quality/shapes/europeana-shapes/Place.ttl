@@ -1,0 +1,219 @@
+@prefix sh:        <http://www.w3.org/ns/shacl#> .
+@prefix xsd:       <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:       <http://purl.org/dc/terms/> .
+@prefix dc:        <http://purl.org/dc/elements/1.1/> .
+@prefix foaf:      <http://xmlns.com/foaf/0.1/> .
+@prefix ore:       <http://www.openarchives.org/ore/terms/> .
+@prefix skos:      <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:      <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdaGr2:    <http://rdvocab.info/ElementsGr2/> .
+@prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix owl:       <http://www.w3.org/2002/07/owl#> .
+@prefix edm:       <http://www.europeana.eu/schemas/edm/> .
+
+@prefix esc:  <http://www.europeana.eu/schemas/edm/shapes/categories#> .
+
+@base             <http://www.europeana.eu/schemas/edm/shapes/external/> .
+@prefix Agent:    <Agent#base> .
+@prefix Concept:  <Concept#base> .
+@prefix Place:    <Place#base> .
+@prefix TimeSpan: <TimeSpan#base> .
+
+################################################################################
+# Shape Graph for edm:Place
+################################################################################
+
+<Place>
+  rdf:type owl:Ontology, sh:Graph ;
+  owl:versionInfo "Draft version for edm:Place Class"^^xsd:string ;
+  sh:shapesGraph <http://www.w3.org/ns/shacl> ;
+.
+
+################################################################################
+# Base Shape for the edm:Place Class
+################################################################################
+
+<Place#base>
+  a sh:NodeShape ;
+  rdfs:subClassOf rdfs:Resource ;
+  sh:description """This shape gathers all constraints that apply to a 
+                    edm:Place class""" ;
+
+  sh:targetClass edm:Place ;
+
+  # class level constraints
+  sh:node            <Place#closure> ;
+
+  # SKOS properties
+  sh:property        <Place/skos_prefLabel#type> ;
+  sh:property        <Place/skos_altLabel#type> ;
+  sh:property        <Place/skos_note#type> ;
+
+  # WGS84 properties
+  sh:property        <Place/wgs84_lat#type> ;
+  sh:property        <Place/wgs84_lat#cardinality> ;
+  sh:property        <Place/wgs84_long#type> ;
+  sh:property        <Place/wgs84_long#cardinality> ;
+  sh:property        <Place/wgs84_alt#type> ;
+  sh:property        <Place/wgs84_alt#cardinality> ;
+
+  # DCTERMS properties
+  sh:property        <Place/dct_hasPart#type> ;
+  sh:property        <Place/dct_isPartOf#type> ;
+
+  # EDM properties
+  sh:property        <Place/edm_isNextInSequence#type> ;
+  sh:property        <Place/edm_isNextInSequence#cardinality> ;
+
+  # OWL properties
+  sh:property        <Place/owl_sameAs#type> ;
+.
+
+# class level constraints ######################################################
+
+<Place#closure>
+  sh:description """An edm:Place resource must be defined using only the 
+                    properties defined in EDM for Places""" ;
+  dc:type esc:closure ;
+  dc:relation "R-206-DEFINE-ALLOWED-NAMESPACES" ;
+  sh:closed true ;
+  sh:ignoredProperties (
+    rdf:type 
+    skos:prefLabel skos:altLabel skos:note
+    wgs84_pos:lat wgs84_pos:long wgs84_pos:alt
+    dct:hasPart dct:isPartOf
+    edm:isNextInSequence
+    owl:sameAs
+  ) ;
+.
+
+
+# skos:prefLabel ###############################################################
+
+<Place/skos_prefLabel#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path skos:prefLabel ;
+  sh:nodeKind sh:Literal ;
+.
+
+# skos:altLabel ################################################################
+
+<Place/skos_altLabel#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path skos:altLabel ;
+  sh:nodeKind sh:Literal ;
+.
+
+# skos:note ####################################################################
+
+<Place/skos_note#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path skos:note ;
+  sh:nodeKind sh:Literal ;
+.
+
+# wgs84_pos:lat ################################################################
+
+<Place/wgs84_lat#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path wgs84_pos:lat ;
+  sh:nodeKind sh:Literal ;
+.
+
+<Place/wgs84_lat#cardinality>
+  a sh:PropertyShape ;
+  dc:type esc:cardinality ;
+  sh:description "There must be at most one wgs84_pos:lat" ;
+  dc:relation "R-211-CARDINALITY-CONSTRAINTS" ;
+  sh:path wgs84_pos:lat ;
+  sh:minCount 0 ;
+  sh:maxCount 1 ;
+.
+
+# wgs84_pos:long ###############################################################
+
+<Place/wgs84_long#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path wgs84_pos:long ;
+  sh:nodeKind sh:Literal ;
+.
+
+<Place/wgs84_long#cardinality>
+  a sh:PropertyShape ;
+  dc:type esc:cardinality ;
+  sh:description "There must be at most one wgs84_pos:long" ;
+  dc:relation "R-211-CARDINALITY-CONSTRAINTS" ;
+  sh:path wgs84_pos:long ;
+  sh:minCount 0 ;
+  sh:maxCount 1 ;
+.
+
+# wgs84_pos:alt ###############################################################
+
+<Place/wgs84_alt#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path wgs84_pos:alt ;
+  sh:nodeKind sh:Literal ;
+.
+
+<Place/wgs84_alt#cardinality>
+  a sh:PropertyShape ;
+  dc:type esc:cardinality ;
+  sh:description "There must be at most one wgs84_pos:alt" ;
+  dc:relation "R-211-CARDINALITY-CONSTRAINTS" ;
+  sh:path wgs84_pos:alt ;
+  sh:minCount 0 ;
+  sh:maxCount 1 ;
+.
+
+# dcterms:hasPart ##############################################################
+
+<Place/dct_hasPart#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path dct:hasPart ;
+  sh:nodeKind sh:IRI ;
+.
+
+# dcterms:isPartOf #############################################################
+
+<Place/dct_isPartOf#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path dct:isPartOf ;
+  sh:nodeKind sh:IRI ;
+.
+
+# edm:isNextInSequence #########################################################
+
+<Place/edm_isNextInSequence#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path edm:isNextInSequence ;
+  sh:nodeKind sh:IRI ;
+.
+
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+<Place/edm_isNextInSequence#cardinality>
+  a sh:PropertyShape ;
+  dc:type esc:cardinality ;
+  dc:relation "R-211-CARDINALITY-CONSTRAINTS" ;
+  sh:path edm:isNextInSequence ;
+  sh:minCount 0 ;
+.
+
+# owl:sameAs ###################################################################
+
+<Place/owl_sameAs#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path owl:sameAs ;
+  sh:nodeKind sh:IRI ;
+.

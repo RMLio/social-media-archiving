@@ -1,0 +1,326 @@
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+@prefix dc:   <http://purl.org/dc/elements/1.1/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix ore:  <http://www.openarchives.org/ore/terms/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdaGr2: <http://rdvocab.info/ElementsGr2/> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix edm:  <http://www.europeana.eu/schemas/edm/> .
+
+@prefix esc:  <http://www.europeana.eu/schemas/edm/shapes/categories#> .
+
+@base                <http://www.europeana.eu/schemas/edm/shapes/external/> .
+@prefix ProvidedCHO: <ProvidedCHO#base> .
+@prefix WebResource: <WebResource#base> .
+
+################################################################################
+# Shape Graph for ore:Aggregation
+################################################################################
+
+<Aggregation>
+  rdf:type owl:Ontology, sh:Graph ;
+  owl:versionInfo "Draft version for edm:ProvidedCHO Class"^^xsd:string ;
+  sh:shapesGraph <http://www.w3.org/ns/shacl> ;
+.
+
+################################################################################
+# Base Shape for the ore:Aggregation Class
+################################################################################
+
+<Aggregation#base>
+  a sh:NodeShape ;
+  rdfs:subClassOf rdfs:Resource ;
+  sh:description """This shape gathers all constraints that apply to a 
+                    ore:Aggregation class""" ;
+
+  sh:targetClass ore:Aggregation ;
+
+  # class level constraints
+  sh:node      <Aggregation#closure> ;
+  sh:node      <Aggregation#correlation> ;
+
+  # DC properties
+  sh:property        <Aggregation/dc_rights#type> ;
+#  sh:property        <Aggregation/dc_rights#redundancy> ;
+
+  # EDM properties 
+  sh:property        <Aggregation/edm_aggregatedCHO#type> ;
+  sh:property        <Aggregation/edm_aggregatedCHO#cardinality> ;
+  sh:property        <Aggregation/edm_aggregatedCHO#range-class> ;
+  sh:property        <Aggregation/edm_dataProvider#cardinality> ;
+  sh:property        <Aggregation/edm_hasView#type> ;
+  sh:property        <Aggregation/edm_hasView#range-class> ;
+  sh:property        <Aggregation/edm_isShownAt#type> ;
+  sh:property        <Aggregation/edm_isShownAt#cardinality> ;
+  sh:property        <Aggregation/edm_isShownAt#range-class> ;
+  sh:property        <Aggregation/edm_isShownBy#type> ;
+  sh:property        <Aggregation/edm_isShownBy#cardinality> ;
+  sh:property        <Aggregation/edm_isShownBy#range-class> ;
+  sh:property        <Aggregation/edm_object#type> ;
+  sh:property        <Aggregation/edm_object#range-class> ;
+  sh:property        <Aggregation/edm_provider#cardinality> ;
+  sh:property        <Aggregation/edm_rights#type> ;
+  sh:property        <Aggregation/edm_rights#values> ;
+  sh:property        <Aggregation/edm_ugc#type> ;
+  sh:property        <Aggregation/edm_ugc#cardinality> ;
+  sh:property        <Aggregation/edm_unstored#type> ;
+.
+
+# class level constraints ######################################################
+
+<Aggregation#closure>
+  sh:description """An ore:Aggregation resource must be defined using only the 
+                    properties defined in EDM for Aggregations""" ;
+  dc:type esc:closure ;
+  dc:relation "R-206-DEFINE-ALLOWED-NAMESPACES" ;
+  sh:closed true ;
+  sh:ignoredProperties (
+    rdf:type dc:rights
+    edm:aggregatedCHO edm:dataProvider edm:hasView edm:isShownAt 
+    edm:isShownBy edm:object edm:provider edm:rights edm:ugc edm:unstored
+  ) ;
+.
+
+<Aggregation#correlation>
+  a sh:Shape ;
+  sh:description """At least one edm:isShownAt or edm:isShownBy should be 
+                    present""" ;
+  dc:type esc:correlation ;
+  dc:relation "R-68-REQUIRED-PROPERTIES"
+           , "R-67-BOOLEAN-PROPERTY-PATTERNS" ;
+  sh:or (
+    [ sh:property [ sh:path edm:isShownAt ; sh:minCount 1 ; ] ]
+    [ sh:property [ sh:path edm:isShownBy ; sh:minCount 1 ; ] ]
+  ) ;
+.
+
+# dc:rights ####################################################################
+
+<Aggregation/dc_rights#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path edm:rights ;
+  sh:nodeKind sh:Literal ;
+.
+
+# edm:aggregatedCHO ############################################################
+
+<Aggregation/edm_aggregatedCHO#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path edm:aggregatedCHO ;
+  sh:nodeKind sh:IRI ;
+.
+
+<Aggregation/edm_aggregatedCHO#cardinality>
+  a sh:PropertyShape ;
+  dc:type esc:cardinality ;
+  dc:relation "R-211-CARDINALITY-CONSTRAINTS" ;
+  sh:path edm:aggregatedCHO ;
+  sh:minCount 1 ;
+  sh:maxCount 1 ;
+.
+
+<Aggregation/edm_aggregatedCHO#range-class>
+  a sh:PropertyShape ;
+  sh:description "The reference should be a valid edm:ProvidedCHO" ;
+# sh:description "Check that the URI refers to an existing CHO" ;
+  dc:type esc:range-class ;
+  dc:relation "R-171-VALIDATION-OF-URIS-BY-DEREFERENCING"
+            , "R-225-VALIDATION-OF-CLASS-ASSOCIATION" ;
+  sh:path edm:aggregatedCHO ;
+  sh:node ProvidedCHO: ;
+  sh:class edm:ProvidedCHO ;
+.
+
+# edm:dataProvider #############################################################
+
+<Aggregation/edm_dataProvider#cardinality>
+  a sh:PropertyShape ;
+  dc:type esc:cardinality ;
+  dc:relation "R-211-CARDINALITY-CONSTRAINTS" ;
+  sh:path edm:dataProvider ;
+  sh:minCount 1 ;
+  sh:maxCount 1 ;
+.
+
+# edm:hasView ##################################################################
+
+<Aggregation/edm_hasView#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path edm:hasView ;
+  sh:nodeKind sh:IRI ;
+.
+
+#not in the spreadsheet
+<Aggregation/edm_hasView#range-class>
+  a sh:PropertyShape ;
+  sh:description "The reference should be a valid edm:WebResource" ;
+# sh:description "Check that the pointed media resolves to a landing page" ;
+  dc:type esc:range-class ;
+  dc:relation "R-171-VALIDATION-OF-URIS-BY-DEREFERENCING"
+           , "R-171bis-VALIDATE-RESOURCE-MEDIA-TYPE-FROM-DEREFERENCING"
+           , "R-225-VALIDATION-OF-CLASS-ASSOCIATION" ;
+  sh:path edm:hasView ;
+  sh:node WebResource: ;
+  sh:class edm:WebResource ;
+.
+
+# edm:isShownAt ################################################################
+
+<Aggregation/edm_isShownAt#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path edm:isShownAt ;
+  sh:nodeKind sh:IRI ;
+.
+
+<Aggregation/edm_isShownAt#cardinality>
+  a sh:PropertyShape ;
+  dc:type esc:cardinality ;
+  dc:relation "R-211-CARDINALITY-CONSTRAINTS" ;
+  sh:path edm:isShownAt ;
+  sh:minCount 0 ;
+  sh:maxCount 1 ;
+.
+
+<Aggregation/edm_isShownAt#range-class>
+  a sh:PropertyShape ;
+  sh:description "The reference should be a valid edm:WebResource" ;
+# sh:description "Check that the pointed media resolves to a landing page" ;
+  dc:type esc:range-class ;
+  dc:relation "R-171-VALIDATION-OF-URIS-BY-DEREFERENCING"
+           , "R-171bis-VALIDATE-RESOURCE-MEDIA-TYPE-FROM-DEREFERENCING"
+           , "R-225-VALIDATION-OF-CLASS-ASSOCIATION" ;
+  sh:path edm:isShownAt ;
+  sh:node WebResource: ;
+  sh:class edm:WebResource ;
+.
+
+# edm:isShownBy ################################################################
+
+<Aggregation/edm_isShownBy#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path edm:isShownBy ;
+  sh:nodeKind sh:IRI ;
+.
+
+<Aggregation/edm_isShownBy#cardinality>
+  a sh:PropertyShape ;
+  dc:type esc:cardinality ;
+  dc:relation "R-211-CARDINALITY-CONSTRAINTS" ;
+  sh:path edm:isShownBy ;
+  sh:minCount 0 ;
+  sh:maxCount 1 ;
+.
+
+<Aggregation/edm_isShownBy#range-class>
+  a sh:PropertyShape ;
+  sh:description "The reference should be a valid edm:WebResource" ;
+# sh:description "Check that the URI resolves to a media" ;
+  dc:type esc:range-class ;
+  dc:relation "R-171-VALIDATION-OF-URIS-BY-DEREFERENCING"
+           , "R-171bis-VALIDATE-RESOURCE-MEDIA-TYPE-FROM-DEREFERENCING"
+           , "R-225-VALIDATION-OF-CLASS-ASSOCIATION" ;
+  sh:path edm:isShownBy ;
+  sh:node WebResource: ;
+  sh:class edm:WebResource ;
+.
+
+# edm:object ###################################################################
+
+<Aggregation/edm_object#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path edm:object ;
+  sh:nodeKind sh:IRI ;
+.
+
+<Aggregation/edm_object#range-class>
+  a sh:PropertyShape ;
+  sh:description "The reference should be a valid edm:WebResource" ;
+# sh:description "Check that the URI resolves to a media" ;
+  dc:type esc:range-class ;
+  dc:relation "R-171-VALIDATION-OF-URIS-BY-DEREFERENCING"
+           , "R-171bis-VALIDATE-RESOURCE-MEDIA-TYPE-FROM-DEREFERENCING"
+           , "R-225-VALIDATION-OF-CLASS-ASSOCIATION" ;
+  sh:path edm:object ;
+  sh:node WebResource: ;
+  sh:class edm:WebResource ;
+.
+
+# edm:provider #################################################################
+
+<Aggregation/edm_provider#cardinality>
+  a sh:PropertyShape ;
+  dc:type esc:cardinality ;
+  dc:relation "R-211-CARDINALITY-CONSTRAINTS" ;
+  sh:path edm:provider ;
+  sh:minCount 1 ;
+  sh:maxCount 1 ;
+.
+
+# edm:rights ###################################################################
+
+<Aggregation/edm_rights#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path edm:rights ;
+  sh:nodeKind sh:IRI ;
+.
+
+<Aggregation/edm_rights#values>
+  a sh:PropertyShape ;
+  dc:type esc:values ;
+  sh:description """Check the value is one of the controlled values: 
+             http://pro.europeana.eu/web/guest/available-rights-statements """ ;
+  dc:relation "R-210-DEFINE-EXCLUSIVELY-ALLOWED-PROPERTIES"
+           , "R-30-DEFINE-VALUE-LISTS" ;
+  sh:path edm:rights ;
+  sh:in ( <http://creativecommons.org/publicdomain/mark/1.0/> 
+          <http://www.europeana.eu/rights/out-of-copyright-non-commercial/>
+          <http://creativecommons.org/publicdomain/zero/1.0/>
+          <http://creativecommons.org/licenses/by/4.0/>
+          <http://creativecommons.org/licenses/by-sa/4.0/>
+          <http://creativecommons.org/licenses/by-nd/4.0/>
+          <http://creativecommons.org/licenses/by-nc/4.0/>
+          <http://creativecommons.org/licenses/by-nc-sa/4.0/>
+          <http://creativecommons.org/licenses/by-nc-nd/4.0/>
+          <http://www.europeana.eu/rights/rr-f/>
+          <http://www.europeana.eu/rights/rr-p/> 
+          <http://www.europeana.eu/rights/orphan-work-eu/>
+          <http://www.europeana.eu/rights/unknown/> ) ;
+.
+
+# edm:ugc ######################################################################
+
+<Aggregation/edm_ugc#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path edm:ugc ;
+  sh:nodeKind sh:Literal ;
+.
+
+<Aggregation/edm_ugc#cardinality>
+  a sh:PropertyShape ;
+  dc:type esc:cardinality ;
+  dc:relation "R-211-CARDINALITY-CONSTRAINTS" ;
+  sh:path edm:ugc ;
+  sh:minCount 0 ;
+  sh:maxCount 1 ;
+.
+
+# edm:unstored #################################################################
+
+<Aggregation/edm_unstored#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path edm:unstored ;
+  sh:nodeKind sh:Literal ;
+.

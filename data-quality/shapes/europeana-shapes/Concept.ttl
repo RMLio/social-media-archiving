@@ -1,0 +1,216 @@
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+@prefix dc:   <http://purl.org/dc/elements/1.1/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix ore:  <http://www.openarchives.org/ore/terms/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdaGr2: <http://rdvocab.info/ElementsGr2/> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix edm:  <http://www.europeana.eu/schemas/edm/> .
+
+@prefix esc:  <http://www.europeana.eu/schemas/edm/shapes/categories#> .
+@prefix etp:  <http://www.europeana.eu/schemas/edm/shapes/library#> .
+
+@base             <http://www.europeana.eu/schemas/edm/shapes/external/> .
+@prefix Concept:  <Concept#base> .
+
+################################################################################
+# Shape Graph for skos:Concept
+################################################################################
+
+<Concept>
+  rdf:type owl:Ontology, sh:Graph ;
+  owl:versionInfo "Draft version for skos:Concept Class"^^xsd:string ;
+  sh:shapesGraph <http://www.w3.org/ns/shacl> ;
+  sh:shapesGraph etp: ;
+.
+
+################################################################################
+# Base Shape for the skos:Concept Class
+################################################################################
+
+<Concept#base>
+  a sh:Shape ;
+  rdfs:subClassOf rdfs:Resource ;
+  sh:description """This shape gathers all constraints that apply to a 
+                    skos:Concept class""" ;
+
+  sh:targetClass skos:Concept ;
+
+  # class level constraints
+  sh:node      <Concept#closure> ;
+
+  # SKOS properties
+  sh:property        <Concept/skos_prefLabel#type> ;
+  sh:property        <Concept/skos_altLabel#type> ;
+  sh:property        <Concept/skos_broader#type> ;
+  sh:property        <Concept/skos_narrower#type> ;
+  sh:property        <Concept/skos_related#type> ;
+  sh:property        <Concept/skos_broadMatch#type> ;
+  sh:property        <Concept/skos_narrowMatch#type> ;
+  sh:property        <Concept/skos_relatedMatch#type> ;
+  sh:property        <Concept/skos_exactMatch#type> ;
+  sh:property        <Concept/skos_closeMatch#type> ;
+  sh:property        <Concept/skos_note#type> ;
+  sh:property        <Concept/skos_notation#type> ;
+  sh:constraint      <Concept/skos_notation#datatype> ;
+  sh:property        <Concept/skos_inScheme#type> ;
+.
+
+# class level constraints ######################################################
+
+<Concept#closure>
+  sh:description """An skos:Concept resource must be defined using only the 
+                    properties defined in EDM for Concepts""" ;
+  dc:type esc:closure ;
+  dc:relation "R-206-DEFINE-ALLOWED-NAMESPACES" ;
+  sh:closed true ;
+  sh:ignoredProperties (
+    rdf:type
+    skos:prefLabel skos:altLabel skos:broader skos:narrower skos:related
+    skos:broadMatch skos:narrowMatch skos:relatedMatch
+    skos:exactMatch skos:closeMatch skos:note skos:notation skos:inScheme
+  ) ;
+.
+
+# skos:prefLabel ###############################################################
+
+<Concept/skos_prefLabel#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:description "Values for skos:prefLabel must be Literals" ;
+  sh:path skos:prefLabel ;
+  sh:nodeKind sh:Literal ;
+.
+
+# skos:altLabel ################################################################
+
+<Concept/skos_altLabel#type>
+  a sh:PropertyShape ;
+  sh:description "Values for skos:altLabel must be Literals" ;
+  dc:type esc:type ;
+  sh:path skos:altLabel ;
+  sh:nodeKind sh:Literal ;
+.
+
+# skos:broader #################################################################
+
+<Concept/skos_broader#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:description "Values for skos:broader must be Resources" ;
+  sh:path skos:broader ;
+  sh:nodeKind sh:IRI ;
+.
+
+# skos:narrower ################################################################
+
+<Concept/skos_narrower#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:description "Values for skos:narrower must be Resources" ;
+  sh:path skos:narrower ;
+  sh:nodeKind sh:IRI ;
+.
+
+# skos:related #################################################################
+
+<Concept/skos_related#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:description "Values for skos:related must be Resources" ;
+  sh:path skos:related ;
+  sh:nodeKind sh:IRI ;
+.
+
+# skos:broadMatch ##############################################################
+
+<Concept/skos_broadMatch#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:description "Values for skos:broadMatch must be Resources" ;
+  sh:path skos:broadMatch ;
+  sh:nodeKind sh:IRI ;
+.
+
+# skos:narrowMatch #############################################################
+
+<Concept/skos_narrowMatch#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:description "Values for skos:narrowMatch must be Resources" ;
+  sh:path skos:narrowMatch ;
+  sh:nodeKind sh:IRI ;
+.
+
+# skos:relatedMatch ############################################################
+
+<Concept/skos_relatedMatch#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:description "Values for skos:relatedMatch must be Resources" ;
+  sh:path skos:relatedMatch ;
+  sh:nodeKind sh:IRI ;
+.
+
+# skos:exactMatch ##############################################################
+
+<Concept/skos_exactMatch#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:description "Values for skos:exactMatch must be Resources" ;
+  sh:path skos:exactMatch ;
+  sh:nodeKind sh:IRI ;
+.
+
+# skos:closeMatch ##############################################################
+
+<Concept/skos_closeMatch#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:description "Values for skos:closeMatch must be Resources" ;
+  sh:path skos:closeMatch ;
+  sh:nodeKind sh:IRI ;
+.
+
+# skos:note ####################################################################
+
+<Concept/skos_note#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:description "Values for skos:note must be Literals" ;
+  sh:path skos:note ;
+  sh:nodeKind sh:Literal ;
+.
+
+# skos:notation ################################################################
+
+<Concept/skos_notation#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:description "Values for skos:notation must be Literals" ;
+  sh:path skos:notation ;
+  sh:nodeKind sh:Literal ;
+.
+
+<Concept/skos_notation#datatype>
+  a sh:PropertyShape ;
+  sh:description "skos:notation should be assigned with a typed literal" ;
+  dc:type esc:datatype ;
+  sh:nodeKind sh:Literal ;
+  sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
+  sh:path skos:notation ;
+.
+
+# skos:inScheme ################################################################
+
+<Concept/skos_inScheme#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:description "Values for skos:inScheme must be Resources" ;
+  sh:path skos:inScheme ;
+  sh:nodeKind sh:IRI ;
+.

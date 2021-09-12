@@ -1,0 +1,181 @@
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+@prefix dc:   <http://purl.org/dc/elements/1.1/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix ore:  <http://www.openarchives.org/ore/terms/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdaGr2: <http://rdvocab.info/ElementsGr2/> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix edm:  <http://www.europeana.eu/schemas/edm/> .
+
+@prefix esc:  <http://www.europeana.eu/schemas/edm/shapes/categories#> .
+
+@base             <http://www.europeana.eu/schemas/edm/shapes/external/> .
+@prefix TimeSpan: <TimeSpan#base> .
+
+################################################################################
+# Shape Graph for edm:TimeSpan
+################################################################################
+
+<TimeSpan>
+  rdf:type owl:Ontology, sh:Graph ;
+  owl:versionInfo "Draft version for edm:TimeSpan Class"^^xsd:string ;
+  sh:shapesGraph <http://www.w3.org/ns/shacl> ;
+.
+
+################################################################################
+# Base Shape for the edm:TimeSpan Class
+################################################################################
+
+<TimeSpan#base>
+  a sh:NodeShape ;
+  rdfs:subClassOf rdfs:Resource ;
+  sh:description """This shape gathers all constraints that apply to a 
+                    edm:TimeSpan class""" ;
+
+  sh:targetClass edm:TimeSpan ;
+
+  # class level constraints
+  sh:node            <TimeSpan#closure> ;
+
+  # SKOS properties
+  sh:property        <TimeSpan/skos_prefLabel#type> ;
+  sh:property        <TimeSpan/skos_altLabel#type> ;
+  sh:property        <TimeSpan/skos_note#type> ;
+
+  # DCTERMS properties
+  sh:property        <TimeSpan/dct_hasPart#type> ;
+  sh:property        <TimeSpan/dct_isPartOf#type> ;
+
+  # EDM properties
+  sh:property        <TimeSpan/edm_begin#type> ;
+  sh:property        <TimeSpan/edm_begin#cardinality> ;
+  sh:property        <TimeSpan/edm_end#type> ;
+  sh:property        <TimeSpan/edm_end#cardinality> ;
+  sh:property        <TimeSpan/edm_isNextInSequence#type> ;
+
+  # OWL properties
+  sh:property        <TimeSpan/owl_sameAs#type> ;
+.
+
+# class level constraints ######################################################
+
+<TimeSpan#closure>
+  sh:description """An edm:TimeSpan resource must be defined using only the 
+                    properties defined in EDM for Time Spans""" ;
+  dc:type esc:closure ;
+  dc:relation "R-206-DEFINE-ALLOWED-NAMESPACES" ;
+  sh:closed true ;
+  sh:ignoredProperties (
+    rdf:type 
+    skos:prefLabel skos:altLabel skos:note
+    dct:hasPart dct:isPartOf
+    edm:begin edm:end edm:isNextInSequence
+    owl:sameAs
+  ) ;
+.
+
+
+# skos:prefLabel ###############################################################
+
+<TimeSpan/skos_prefLabel#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path skos:prefLabel ;
+  sh:nodeKind sh:Literal ;
+.
+
+# skos:altLabel ################################################################
+
+<TimeSpan/skos_altLabel#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path skos:altLabel ;
+  sh:nodeKind sh:Literal ;
+.
+
+# skos:note ####################################################################
+
+<TimeSpan/skos_note#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path skos:note ;
+  sh:nodeKind sh:Literal ;
+.
+
+# dcterms:hasPart ##############################################################
+
+<TimeSpan/dct_hasPart#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path dct:hasPart ;
+  sh:nodeKind sh:IRI ;
+.
+
+# dcterms:isPartOf #############################################################
+
+<TimeSpan/dct_isPartOf#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path dct:isPartOf ;
+  sh:nodeKind sh:IRI ;
+.
+
+# edm:begin ####################################################################
+
+<TimeSpan/edm_begin#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path edm:begin ;
+  sh:nodeKind sh:Literal ;
+.
+
+<TimeSpan/edm_begin#cardinality>
+  a sh:PropertyShape ;
+  dc:type esc:cardinality ;
+  sh:description "There must be at most one edm:begin" ;
+  dc:relation "R-211-CARDINALITY-CONSTRAINTS" ;
+  sh:path edm:begin ;
+  sh:minCount 0 ;
+  sh:maxCount 1 ;
+.
+
+# edm:end ######################################################################
+
+<TimeSpan/edm_end#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path edm:end ;
+  sh:nodeKind sh:Literal ;
+.
+
+<TimeSpan/edm_end#cardinality>
+  a sh:PropertyShape ;
+  dc:type esc:cardinality ;
+  sh:description "There must be at most one edm:end" ;
+  dc:relation "R-211-CARDINALITY-CONSTRAINTS" ;
+  sh:path edm:end ;
+  sh:minCount 0 ;
+  sh:maxCount 1 ;
+.
+
+# edm:isNextInSequence #########################################################
+
+<TimeSpan/edm_isNextInSequence#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path edm:isNextInSequence ;
+  sh:nodeKind sh:IRI ;
+.
+
+# owl:sameAs ###################################################################
+
+<TimeSpan/owl_sameAs#type>
+  a sh:PropertyShape ;
+  dc:type esc:type ;
+  sh:path owl:sameAs ;
+  sh:nodeKind sh:IRI ;
+.
