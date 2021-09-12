@@ -1,0 +1,80 @@
+@prefix bsq: <http://w3id.org/besocial/ns/quality#> .
+@prefix dqv: <http://www.w3.org/ns/dqv#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+bsq:category_1 a dqv:Category;
+  skos:definition "This category groups quality dimensions related to structural integrity based on used vocabularies such as the Europeana Data Model (EDM) or PREMIS."@en;
+  skos:prefLabel "Structural Integrity"@en .
+
+bsq:category_2 a dqv:Category;
+  skos:definition "This category groups quality dimensions related to provide a UI dashboard for social media collections to users."@en;
+  skos:prefLabel "UI Dashboard"@en .
+
+bsq:category_3 a dqv:Category;
+  skos:definition "This category groups quality dimensions related to provide a description in the bibliographic MARC format of social media collections based on our Knowledge Graph."@en;
+  skos:prefLabel "MARC Export"@en .
+
+bsq:category_4 a dqv:Category;
+  skos:definition "This category groups quality dimensions related to provide a description as Encoded Archival Description (EAD) for social media collections based on our Knowlegde Graph."@en;
+  skos:prefLabel "EAD Export"@en .
+
+bsq:dimension_1 a dqv:Dimension;
+  skos:definition "A rich description in natural language which can help other humans to assess the content of a collection."@en;
+  skos:prefLabel "Rich collection description"@en;
+  dqv:inCategory bsq:category_2 .
+
+bsq:dimension_2 a dqv:Dimension;
+  skos:definition "Users should be able to assess which time period the collections' content covers."@en;
+  skos:prefLabel "Temporal coverage of collection content"@en;
+  dqv:inCategory bsq:category_2 .
+
+bsq:dimension_3 a dqv:Dimension;
+  skos:definition "Users should be able to assess in which time period the harvests were executed."@en;
+  skos:prefLabel "Temporal coverage of collection harvests"@en;
+  dqv:inCategory bsq:category_2 .
+
+bsq:dimension_4 a dqv:Dimension;
+  skos:definition "Users should be able to assess the different versions of a collection."@en;
+  skos:prefLabel "Collection versions"@en;
+  dqv:inCategory bsq:category_2 .
+
+bsq:dimension_5 a dqv:Dimension;
+  skos:definition "Users should be able to assess which seeds were used to create a collection (version)."@en;
+  skos:prefLabel "Collection's seeds"@en;
+  dqv:inCategory bsq:category_2 .
+
+bsq:dimension_6 a dqv:Dimension;
+  skos:definition "Users should be able to assess which named entities are present in the collection (version)."@en;
+  skos:prefLabel "Collection's named entities"@en;
+  dqv:inCategory bsq:category_2 .
+
+bsq:dimension_7 a dqv:Dimension;
+  skos:definition "Users should be able to assess which hashtags are present in the collection (version)."@en;
+  skos:prefLabel "Collection's hashtags"@en;
+  dqv:inCategory bsq:category_2 .
+
+bsq:dimension_8 a dqv:Dimension;
+  skos:definition "Users should be able to assess the reusability of the collection in terms of license."@en;
+  skos:prefLabel "Collection's license"@en;
+  dqv:inCategory bsq:category_2 .
+
+bsq:dimension_9 a dqv:Dimension;
+  skos:definition "Users should be able to assess available metadata formats used to describe the collection (version)."@en;
+  skos:prefLabel "Collection's metadata formats"@en;
+  dqv:inCategory bsq:category_2 .
+
+bsq:metric_1 a dqv:Metric;
+  skos:definition "A collection (version) should have a title such that humans can refer to it and easier remember it."@en;
+  skos:prefLabel "need-title"@en;
+  dqv:inDimension bsq:dimension_1 .
+
+bsq:metric_2 a dqv:Metric;
+  skos:definition "A collection (version) should have a description in natural language such that humans can assess the content."@en;
+  skos:prefLabel "need-description"@en;
+  dqv:inDimension bsq:dimension_1 .
+
+bsq:metric_3 a dqv:Metric;
+  skos:definition "A collection (version) should have a description of at least 200 characters to avoid short meaningless phrases."@en;
+  skos:prefLabel "long-description"@en;
+  dqv:inDimension bsq:dimension_1 .

@@ -1,0 +1,52 @@
+prefixes:
+  idlab-fn: "http://example.com/idlab/function/"
+  dc: "http://purl.org/dc/elements/1.1/"
+  dcterms: "http://purl.org/dc/terms/"
+  dcmitype: "http://purl.org/dc/dcmitype/"
+  premis: "http://www.loc.gov/premis/rdf/v3/"
+  relSubType: "https://id.loc.gov/vocabulary/preservation/relationshipSubType/"
+  ebucore: "https://www.ebu.ch/metadata/ontologies/ebucore#"
+  grel: "http://users.ugent.be/~bjdmeest/function/grel.ttl#"  
+  owl: "http://www.w3.org/2002/07/owl#"
+  prov: "http://www.w3.org/ns/prov#"
+  dqv: "http://www.w3.org/ns/dqv#"
+  skos: "http://www.w3.org/2004/02/skos/core#"
+  xsd: "http://www.w3.org/2001/XMLSchema#"
+  edm: "http://www.europeana.eu/schemas/edm/"
+  bsm: "http://w3id.org/besocial/ns/model#"
+  bss: "http://w3id.org/besocial/ns/shapes#"
+  bsq: "http://w3id.org/besocial/ns/quality#"
+  bsd: "http://w3id.org/besocial/data/"
+  ex: "http://example.org/ns#"
+
+mappings:
+
+  qualityCategories:
+    sources:
+      - ['quality-categories.csv~csv']
+    s: bsq:category_$(ID)
+    po:
+      - [a, dqv:Category]
+      - [skos:prefLabel, $(name), en~lang]
+      - [skos:definition, $(description), en~lang]
+
+
+  qualityDimensions:
+    sources:
+      - ['quality-dimensions.csv~csv']
+    s: bsq:dimension_$(ID)
+    po:
+      - [a, dqv:Dimension]
+      - [skos:prefLabel, $(name), en~lang]
+      - [skos:definition, $(description), en~lang]
+      - [dqv:inCategory, bsq:category_$(category ID)~iri]
+
+  qualityMetrics:
+    sources:
+      - ['quality-metrics.csv~csv']
+    s: bsq:metric_$(ID)
+    po:
+      - [a, dqv:Metric]
+      - [skos:prefLabel, $(name), en~lang]
+      - [skos:definition, $(description), en~lang]
+      - [dqv:inDimension, bsq:dimension_$(dimension ID)~iri]
