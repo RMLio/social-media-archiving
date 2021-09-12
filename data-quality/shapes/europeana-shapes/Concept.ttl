@@ -23,7 +23,7 @@
 
 <Concept>
   rdf:type owl:Ontology, sh:Graph ;
-  owl:versionInfo "Draft version for skos:Concept Class"^^xsd:string ;
+  owl:versionInfo "Draft version for skos:Concept Class, adapted in September 2021 by Sven Lieber to comply with the W3C recommended version of SHACL by executing the following changes: https://github.com/RMLio/social-media-archiving/blob/master/data-quality/shapes/europeana-shapes/README.md"^^xsd:string ;
   sh:shapesGraph <http://www.w3.org/ns/shacl> ;
   sh:shapesGraph etp: ;
 .
