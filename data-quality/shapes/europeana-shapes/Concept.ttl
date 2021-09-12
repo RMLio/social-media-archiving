@@ -40,9 +40,6 @@
 
   sh:targetClass skos:Concept ;
 
-  # class level constraints
-  sh:node      <Concept#closure> ;
-
   # SKOS properties
   sh:property        <Concept/skos_prefLabel#type> ;
   sh:property        <Concept/skos_altLabel#type> ;
@@ -63,6 +60,10 @@
 # class level constraints ######################################################
 
 <Concept#closure>
+  a sh:NodeShape ;
+
+  sh:targetClass skos:Concept ;
+
   sh:description """An skos:Concept resource must be defined using only the 
                     properties defined in EDM for Concepts""" ;
   dc:type esc:closure ;

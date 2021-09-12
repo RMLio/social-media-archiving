@@ -18,7 +18,7 @@ To fix the violations we executed the following steps:
 * We adapted the main shape to be of type `sh:NodeShape` instead of `sh:Shape`
 * We replaced `sh:predicate` with `sh:path`
 * We replaced `sh:scopeClass` with `sh:targetClass`
-* We replaced `sh:constraint` with `sh:node`
+* We replaced `sh:constraint` with `sh:node` (except for "closure shapes" as `sh:closed` did not work this way, in that case we made the closure shape target the class instead of let it being invoked)
 
 ## Aggregation
 
@@ -31,7 +31,7 @@ To fix the violations we executed the following steps:
 * We replaced `sh:predicate` with `sh:path`
 * Line 35: The aggregation shape is an instance of `sh:NodeShape` instead of `sh:Shape`
 * Line 40: The term `sh:scopeClass` was changed to `sh:targetClass`
-* Line 43,44: The terms `sh:constraint` were replaced with `sh:node` as they refer to other constraints
+* Line 43,44: The terms `sh:constraint` were replaced with `sh:node` as they refer to other constraints (except for "closure shapes" as `sh:closed` did not work this way, in that case we made the closure shape target the class instead of let it being invoked)
 * Line 89: The class for `<Aggregation#correlation>` was changed from `sh:Constraint` to `sh:Shape`
 * Line 136: The term `sh:valueShape` was replaced with `sh:node`
 * Line 316: The property shape `<Aggregation/edm_ugc#cardinality>` contained two minCounts, the larger value was adapted to `sh:maxCount`
@@ -47,7 +47,7 @@ To fix the violations we executed the following steps:
 * We adapted the main shape to be of type `sh:NodeShape` instead of `sh:Shape`
 * We replaced `sh:predicate` with `sh:path`
 * We replaced `sh:scopeClass` with `sh:targetClass`
-* We replaced `sh:constraint` with `sh:node`
+* We replaced `sh:constraint` with `sh:node` (except for "closure shapes" as `sh:closed` did not work this way, in that case we made the closure shape target the class instead of let it being invoked)
 * We changed the shape in line 200: instead of referring to an external shape (also defined using outdated SHACL), we added the following constraints after consulting the external shape `etp:TypedLiteralConstraint`
   * line 203: the value of `skos:notation` should be a literal
   * line 204: the datatype of `skos:notation` should either be an `xsd:string` or `xsd:langString`
@@ -62,7 +62,7 @@ To fix the violations we executed the following steps:
 * We adapted the main shape to be of type `sh:NodeShape` instead of `sh:Shape`
 * We replaced `sh:predicate` with `sh:path`
 * We replaced `sh:scopeClass` with `sh:targetClass`
-* We replaced `sh:constraint` with `sh:node`
+* We replaced `sh:constraint` with `sh:node` (except for "closure shapes" as `sh:closed` did not work this way, in that case we made the closure shape target the class instead of let it being invoked)
 
 # ProvidedCHO
 
@@ -74,7 +74,7 @@ To fix the violations we executed the following steps:
 * We adapted the main shape to be of type `sh:NodeShape` instead of `sh:Shape`
 * We replaced `sh:predicate` with `sh:path`
 * We replaced `sh:scopeClass` with `sh:targetClass`
-* We replaced `sh:constraint` with `sh:node`
+* We replaced `sh:constraint` with `sh:node` (except for "closure shapes" as `sh:closed` did not work this way, in that case we made the closure shape target the class instead of let it being invoked)
 * We changed the datatype of the construct in line 200 from `sh:Constraint` to `sh:Shape`
 
 # TimeSpan
@@ -87,7 +87,7 @@ To fix the violations we executed the following steps:
 * We adapted the main shape to be of type `sh:NodeShape` instead of `sh:Shape`
 * We replaced `sh:predicate` with `sh:path`
 * We replaced `sh:scopeClass` with `sh:targetClass`
-* We replaced `sh:constraint` with `sh:node`
+* We replaced `sh:constraint` with `sh:node` (except for "closure shapes" as `sh:closed` did not work this way, in that case we made the closure shape target the class instead of let it being invoked)
 
 # WebResource
 
@@ -99,6 +99,6 @@ To fix the violations we executed the following steps:
 * We adapted the main shape to be of type `sh:NodeShape` instead of `sh:Shape`
 * We replaced `sh:predicate` with `sh:path`
 * We replaced `sh:scopeClass` with `sh:targetClass`
-* We replaced `sh:constraint` with `sh:node`
+* We replaced `sh:constraint` with `sh:node` (except for "closure shapes" as `sh:closed` did not work this way, in that case we made the closure shape target the class instead of let it being invoked)
 * We removed the `sh:minCount 0` in line 236 and modified the second `sh:minCount 1` in line 237 to `sh:maxCount 1` to be in line with the EDM Mapping guidelines for `edm:rights`
 * We uncommented the 6 constraints (line 49,50,53-56) because they point to non existing shapes for dcterms properties

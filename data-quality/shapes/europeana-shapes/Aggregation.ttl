@@ -40,7 +40,6 @@
   sh:targetClass ore:Aggregation ;
 
   # class level constraints
-  sh:node      <Aggregation#closure> ;
   sh:node      <Aggregation#correlation> ;
 
   # DC properties
@@ -73,6 +72,9 @@
 # class level constraints ######################################################
 
 <Aggregation#closure>
+  a sh:NodeShape ;
+
+  sh:targetClass ore:Aggregation ;
   sh:description """An ore:Aggregation resource must be defined using only the 
                     properties defined in EDM for Aggregations""" ;
   dc:type esc:closure ;

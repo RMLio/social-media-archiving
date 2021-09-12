@@ -42,9 +42,6 @@
 
   sh:targetClass edm:Place ;
 
-  # class level constraints
-  sh:node            <Place#closure> ;
-
   # SKOS properties
   sh:property        <Place/skos_prefLabel#type> ;
   sh:property        <Place/skos_altLabel#type> ;
@@ -73,6 +70,10 @@
 # class level constraints ######################################################
 
 <Place#closure>
+  a sh:NodeShape ;
+
+  sh:targetClass edm:Place ;
+
   sh:description """An edm:Place resource must be defined using only the 
                     properties defined in EDM for Places""" ;
   dc:type esc:closure ;

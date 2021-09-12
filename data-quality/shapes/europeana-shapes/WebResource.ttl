@@ -42,9 +42,6 @@
 
   sh:targetClass edm:WebResource ;
 
-  # class level constraints
-  sh:node            <WebResource#closure> ;
-
   # DC properties
 #  sh:property        <WebResource/dc_creator#range-class> ;
 #  sh:property        <WebResource/dc_rights#redundancy> ;
@@ -77,6 +74,10 @@
 # class level constraints ######################################################
 
 <WebResource#closure>
+  a sh:NodeShape ;
+
+  sh:targetClass edm:WebResource ;
+
   sh:description """An edm:WebResource resource must be defined using only the 
                     properties defined in EDM for WebResources""" ;
   dc:type esc:closure ;

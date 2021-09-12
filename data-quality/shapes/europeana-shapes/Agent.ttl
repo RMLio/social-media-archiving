@@ -41,9 +41,6 @@
 
   sh:targetClass edm:Agent ;
 
-  # class level constraints
-  sh:node      <Agent#closure> ;
-
   # SKOS properties
   sh:property        <Agent/skos_prefLabel#type> ;
   sh:property        <Agent/skos_altLabel#type> ;
@@ -87,6 +84,10 @@
 # class level constraints ######################################################
 
 <Agent#closure>
+  a sh:NodeShape ;
+
+  sh:targetClass edm:Agent ;
+
   sh:description """An edm:Agent resource must be defined using only the 
                     properties defined in EDM for Agents""" ;
   dc:type esc:closure ;

@@ -48,7 +48,6 @@
   sh:targetClass edm:ProvidedCHO ;
 
   # class level constraints
-  sh:node            <ProvidedCHO#closure> ;
   sh:node            <ProvidedCHO#correlation> ;
 
   # DC properties
@@ -83,6 +82,10 @@
 # class level constraints ######################################################
 
 <ProvidedCHO#closure>
+  a sh:NodeShape ;
+
+  sh:targetClass edm:ProvidedCHO ;
+
   sh:description """An edm:ProvidedCHO resource must be defined using only the 
                     properties defined in EDM for Provided CHOs""" ;
   dc:type esc:closure ;
