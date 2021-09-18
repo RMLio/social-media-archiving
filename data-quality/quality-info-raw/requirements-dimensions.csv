@@ -3,7 +3,7 @@
 "2","2","1","A rich collection description requires minimum length."
 "3","3","2","The temporal coverage of content should be indicated on a monthly scale."
 "4","4","2","The temporal coverage of content should be indicated in terms of start and end date."
-"5","5","3","The temporal coverage of harvests should be indicted by first harvest date and last harvest date."
+"5","5","3","The temporal coverage of harvests should be indicated by first harvest date and last harvest date."
 "6","6","3","The temporal coverage of harvests should be indicated for each collection."
 "7","7","3","The temporal coverage of harvests should be indicated for each collection version."
 "8","8","4","A version should cover information about its versions."
