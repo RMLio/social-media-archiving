@@ -17,6 +17,7 @@ prefixes:
   bss: "http://w3id.org/besocial/ns/shapes#"
   bsq: "http://w3id.org/besocial/ns/quality#"
   bsd: "http://w3id.org/besocial/data/"
+  oa: "http://www.w3.org/ns/oa#"
   ex: "http://example.org/ns#"
 
 mappings:
@@ -41,6 +42,7 @@ mappings:
       - [skos:definition, $(description), en~lang]
       - [dqv:inCategory, bsq:category_$(category ID)~iri]
 
+
   qualityMetrics:
     sources:
       - ['quality-metrics.csv~csv']
@@ -49,4 +51,18 @@ mappings:
       - [a, dqv:Metric]
       - [skos:prefLabel, $(name), en~lang]
       - [skos:definition, $(description), en~lang]
+      - [dqv:expectedDataType, xsd:$(expected datatype)~iri]
       - [dqv:inDimension, bsq:dimension_$(dimension ID)~iri]
+
+
+  metricShapesAnnotation:
+    sources:
+      - ['link-metrics-shapes.csv~csv']
+    s: bsq:annot_$(shape IRI)_$(metric ID)
+    po:
+      - [a, oa:Annotation]
+      - [oa:motivatedBy, bsq:$(assessment type)~iri]
+      - [oa:hasTarget, bsq:metric_$(metric ID)~iri]
+      - [oa:hasBody, bss:$(shape IRI)~iri]
+
+

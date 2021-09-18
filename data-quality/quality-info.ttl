@@ -1,7 +1,94 @@
+@prefix : <http://mapping.example.com/> .
+@prefix bsd: <http://w3id.org/besocial/data/> .
+@prefix bsm: <http://w3id.org/besocial/ns/model#> .
 @prefix bsq: <http://w3id.org/besocial/ns/quality#> .
+@prefix bss: <http://w3id.org/besocial/ns/shapes#> .
+@prefix d2rq: <http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcmitype: <http://purl.org/dc/dcmitype/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix dqv: <http://www.w3.org/ns/dqv#> .
+@prefix ebucore: <https://www.ebu.ch/metadata/ontologies/ebucore#> .
+@prefix edm: <http://www.europeana.eu/schemas/edm/> .
+@prefix ex: <http://example.org/ns#> .
+@prefix fnml: <http://semweb.mmlab.be/ns/fnml#> .
+@prefix fno: <https://w3id.org/function/ontology#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix grel: <http://users.ugent.be/~bjdmeest/function/grel.ttl#> .
+@prefix idlab-fn: <http://example.com/idlab/function/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix premis: <http://www.loc.gov/premis/rdf/v3/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix relSubType: <https://id.loc.gov/vocabulary/preservation/relationshipSubType/> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+bsq:annot_requiredDescription_3 a oa:Annotation;
+  oa:hasBody bss:requiredDescription;
+  oa:hasTarget bsq:metric_3;
+  oa:motivatedBy bsq:singleCollectionAssessment .
+
+bsq:annot_requiredDescription_4 a oa:Annotation;
+  oa:hasBody bss:requiredDescription;
+  oa:hasTarget bsq:metric_4;
+  oa:motivatedBy bsq:collectionAssessment .
+
+bsq:annot_requiredTitle_1 a oa:Annotation;
+  oa:hasBody bss:requiredTitle;
+  oa:hasTarget bsq:metric_1;
+  oa:motivatedBy bsq:singleCollectionAssessment .
+
+bsq:annot_requiredTitle_2 a oa:Annotation;
+  oa:hasBody bss:requiredTitle;
+  oa:hasTarget bsq:metric_2;
+  oa:motivatedBy bsq:collectionAssessment .
+
+bsq:annot_richDescription_5 a oa:Annotation;
+  oa:hasBody bss:richDescription;
+  oa:hasTarget bsq:metric_5;
+  oa:motivatedBy bsq:singleCollectionAssessment .
+
+bsq:annot_richDescription_6 a oa:Annotation;
+  oa:hasBody bss:richDescription;
+  oa:hasTarget bsq:metric_6;
+  oa:motivatedBy bsq:collectionAssessment .
+
+bsq:annot_validMonthObservation_7 a oa:Annotation;
+  oa:hasBody bss:validMonthObservation;
+  oa:hasTarget bsq:metric_7;
+  oa:motivatedBy bsq:singleCollectionAssessment .
+
+bsq:annot_validMonthObservation_8 a oa:Annotation;
+  oa:hasBody bss:validMonthObservation;
+  oa:hasTarget bsq:metric_8;
+  oa:motivatedBy bsq:collectionAssessment .
+
+bsq:annot_validNumberPostsObservation_7 a oa:Annotation;
+  oa:hasBody bss:validNumberPostsObservation;
+  oa:hasTarget bsq:metric_7;
+  oa:motivatedBy bsq:singleCollectionAssessment .
+
+bsq:annot_validNumberPostsObservation_8 a oa:Annotation;
+  oa:hasBody bss:validNumberPostsObservation;
+  oa:hasTarget bsq:metric_8;
+  oa:motivatedBy bsq:collectionAssessment .
+
+bsq:annot_validYearObservation_7 a oa:Annotation;
+  oa:hasBody bss:validYearObservation;
+  oa:hasTarget bsq:metric_7;
+  oa:motivatedBy bsq:singleCollectionAssessment .
+
+bsq:annot_validYearObservation_8 a oa:Annotation;
+  oa:hasBody bss:validYearObservation;
+  oa:hasTarget bsq:metric_8;
+  oa:motivatedBy bsq:collectionAssessment .
 
 bsq:category_1 a dqv:Category;
   skos:definition "This category groups quality dimensions related to structural integrity based on used vocabularies such as the Europeana Data Model (EDM) or PREMIS."@en;
@@ -66,15 +153,180 @@ bsq:dimension_9 a dqv:Dimension;
 
 bsq:metric_1 a dqv:Metric;
   skos:definition "A collection (version) should have a title such that humans can refer to it and easier remember it."@en;
-  skos:prefLabel "need-title"@en;
+  skos:prefLabel "Required collection title"@en;
+  dqv:expectedDataType xsd:boolean;
   dqv:inDimension bsq:dimension_1 .
+
+bsq:metric_10 a dqv:Metric;
+  skos:definition "Determine the number of collection (versions) not showing content start and end date"@en;
+  skos:prefLabel "Number of missing start and end dates content"@en;
+  dqv:expectedDataType xsd:integer;
+  dqv:inDimension bsq:dimension_2 .
+
+bsq:metric_11 a dqv:Metric;
+  skos:definition "A collection (version) shows date of the first and date of the last harvest"@en;
+  skos:prefLabel "Collection harvest start and end date"@en;
+  dqv:expectedDataType xsd:boolean;
+  dqv:inDimension bsq:dimension_3 .
+
+bsq:metric_12 a dqv:Metric;
+  skos:definition "Determine the number of collection (versions) not showing harvest start and end date"@en;
+  skos:prefLabel "Number of missing start and end dates harvest"@en;
+  dqv:expectedDataType xsd:integer;
+  dqv:inDimension bsq:dimension_3 .
+
+bsq:metric_13 a dqv:Metric;
+  skos:definition "A collection shows when its harvests where executed"@en;
+  skos:prefLabel "Collection harvests"@en;
+  dqv:expectedDataType xsd:boolean;
+  dqv:inDimension bsq:dimension_3 .
+
+bsq:metric_14 a dqv:Metric;
+  skos:definition "Determine the number of collections not showing when its harvests were executed"@en;
+  skos:prefLabel "Number of missing collection harvests"@en;
+  dqv:expectedDataType xsd:integer;
+  dqv:inDimension bsq:dimension_3 .
+
+bsq:metric_15 a dqv:Metric;
+  skos:definition "A collection version shows when its harvest(s) where executed"@en;
+  skos:prefLabel "Collection version harvests"@en;
+  dqv:expectedDataType xsd:boolean;
+  dqv:inDimension bsq:dimension_3 .
+
+bsq:metric_16 a dqv:Metric;
+  skos:definition "Determine the number of collection versions not showing when its harvests were executed."@en;
+  skos:prefLabel "Number of missing collection version harvests"@en;
+  dqv:expectedDataType xsd:integer;
+  dqv:inDimension bsq:dimension_3 .
+
+bsq:metric_17 a dqv:Metric;
+  skos:definition "A collection shows its versions"@en;
+  skos:prefLabel "Collection versions"@en;
+  dqv:expectedDataType xsd:boolean;
+  dqv:inDimension bsq:dimension_4 .
+
+bsq:metric_18 a dqv:Metric;
+  skos:definition "Determine the number of collections not showing its versions"@en;
+  skos:prefLabel "Number of missing collection versions info"@en;
+  dqv:expectedDataType xsd:integer;
+  dqv:inDimension bsq:dimension_4 .
+
+bsq:metric_19 a dqv:Metric;
+  skos:definition "A collection (version) shows which seeds versions were used to create it"@en;
+  skos:prefLabel "Collection seeds"@en;
+  dqv:expectedDataType xsd:boolean;
+  dqv:inDimension bsq:dimension_5 .
 
 bsq:metric_2 a dqv:Metric;
-  skos:definition "A collection (version) should have a description in natural language such that humans can assess the content."@en;
-  skos:prefLabel "need-description"@en;
+  skos:definition "Determine the number of collections missing a dublin core title."@en;
+  skos:prefLabel "Number of missing titles"@en;
+  dqv:expectedDataType xsd:integer;
   dqv:inDimension bsq:dimension_1 .
 
+bsq:metric_20 a dqv:Metric;
+  skos:definition "Determine the number of collection (versions) not showing which seeds versions were used to create it"@en;
+  skos:prefLabel "Number of missing collection seeds"@en;
+  dqv:expectedDataType xsd:integer;
+  dqv:inDimension bsq:dimension_5 .
+
+bsq:metric_21 a dqv:Metric;
+  skos:definition "A collection (version) shows the top-10 named entities identified in the collection (version)"@en;
+  skos:prefLabel "Collection named entities"@en;
+  dqv:expectedDataType xsd:boolean;
+  dqv:inDimension bsq:dimension_6 .
+
+bsq:metric_22 a dqv:Metric;
+  skos:definition "Determine the number of collection (versions) not showing top-10 named entities identified in the collection (version)."@en;
+  skos:prefLabel "Number of missing top 10 named entities"@en;
+  dqv:expectedDataType xsd:integer;
+  dqv:inDimension bsq:dimension_6 .
+
+bsq:metric_23 a dqv:Metric;
+  skos:definition "A collection (version) shows at least the top-10 person and locations named entities"@en;
+  skos:prefLabel "Collection persons and locations"@en;
+  dqv:expectedDataType xsd:boolean;
+  dqv:inDimension bsq:dimension_6 .
+
+bsq:metric_24 a dqv:Metric;
+  skos:definition "Determine the number of collection (versions) not showing at least the top-10 person and locations named entities"@en;
+  skos:prefLabel "Number of missing collection persons and locations"@en;
+  dqv:expectedDataType xsd:integer;
+  dqv:inDimension bsq:dimension_6 .
+
+bsq:metric_25 a dqv:Metric;
+  skos:definition "A collection (version) shows the top-10 hashtags identified in the collection (version)"@en;
+  skos:prefLabel "Collection hashtags"@en;
+  dqv:expectedDataType xsd:boolean;
+  dqv:inDimension bsq:dimension_7 .
+
+bsq:metric_26 a dqv:Metric;
+  skos:definition "Determine the number of collection (versions) not showing top-10 hashtags identified in the collection (version)"@en;
+  skos:prefLabel "Number of missing collection hashtags"@en;
+  dqv:expectedDataType xsd:integer;
+  dqv:inDimension bsq:dimension_7 .
+
+bsq:metric_27 a dqv:Metric;
+  skos:definition "A collection (version) shows its license for reuse"@en;
+  skos:prefLabel "Collection license"@en;
+  dqv:expectedDataType xsd:boolean;
+  dqv:inDimension bsq:dimension_8 .
+
+bsq:metric_28 a dqv:Metric;
+  skos:definition "Determine the number of collection (versions) not showing their license for reuse"@en;
+  skos:prefLabel "Number of missing collection license"@en;
+  dqv:expectedDataType xsd:integer;
+  dqv:inDimension bsq:dimension_8 .
+
+bsq:metric_29 a dqv:Metric;
+  skos:definition "A collection (version) shows its available formats"@en;
+  skos:prefLabel "Collection formats"@en;
+  dqv:expectedDataType xsd:boolean;
+  dqv:inDimension bsq:dimension_9 .
+
 bsq:metric_3 a dqv:Metric;
-  skos:definition "A collection (version) should have a description of at least 200 characters to avoid short meaningless phrases."@en;
-  skos:prefLabel "long-description"@en;
+  skos:definition "A collection (version) should have a description in natural language such that humans can assess the content."@en;
+  skos:prefLabel "Required collection description"@en;
+  dqv:expectedDataType xsd:boolean;
   dqv:inDimension bsq:dimension_1 .
+
+bsq:metric_30 a dqv:Metric;
+  skos:definition "Determine the number of collection (versions) not showing their available formats"@en;
+  skos:prefLabel "Number of missing collection formats"@en;
+  dqv:expectedDataType xsd:integer;
+  dqv:inDimension bsq:dimension_9 .
+
+bsq:metric_4 a dqv:Metric;
+  skos:definition "Determine the number of collections missing a dublin core description."@en;
+  skos:prefLabel "Number of missing descriptions"@en;
+  dqv:expectedDataType xsd:integer;
+  dqv:inDimension bsq:dimension_1 .
+
+bsq:metric_5 a dqv:Metric;
+  skos:definition "A collection (version) should have a description of at least 200 characters to avoid short meaningless phrases."@en;
+  skos:prefLabel "Collection description min length"@en;
+  dqv:expectedDataType xsd:boolean;
+  dqv:inDimension bsq:dimension_1 .
+
+bsq:metric_6 a dqv:Metric;
+  skos:definition "Determine the number of collections with a description which is too short to be considered meaningful."@en;
+  skos:prefLabel "Number of insufficient descriptions"@en;
+  dqv:expectedDataType xsd:integer;
+  dqv:inDimension bsq:dimension_1 .
+
+bsq:metric_7 a dqv:Metric;
+  skos:definition "The number of social media posts per month should be indicated for a collection."@en;
+  skos:prefLabel "Collection shows posts per month"@en;
+  dqv:expectedDataType xsd:boolean;
+  dqv:inDimension bsq:dimension_2 .
+
+bsq:metric_8 a dqv:Metric;
+  skos:definition "Determine the number of collection (versions) with incomplete temporal coverage, i.e. posts not indicated per month."@en;
+  skos:prefLabel "Number of collections with incomplete monthly temporal coverage"@en;
+  dqv:expectedDataType xsd:integer;
+  dqv:inDimension bsq:dimension_2 .
+
+bsq:metric_9 a dqv:Metric;
+  skos:definition "A collection (version) shows date of the first and date of the last content item"@en;
+  skos:prefLabel "Collection content start and end date"@en;
+  dqv:expectedDataType xsd:boolean;
+  dqv:inDimension bsq:dimension_2 .
