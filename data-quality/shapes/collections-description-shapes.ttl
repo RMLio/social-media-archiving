@@ -1,0 +1,47 @@
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix schema: <http://schema.org/> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix nee: <http://www.ics.forth.gr/isl/oae/core#> .
+@prefix premis: <http://www.loc.gov/premis/rdf/v3/> .
+@prefix bsm: <http://w3id.org/besocial/ns/model#> .
+@prefix bss: <http://w3id.org/besocial/ns/shapes#> .
+@prefix bsd: <http://w3id.org/besocial/data/> .
+@prefix edm: <http://www.europeana.eu/schemas/edm#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+bss:collectionRichDescriptionShape
+  a sh:NodeShape ;
+  rdfs:label "collectionRichDescriptionShape"@en ;
+  rdfs:comment "According to quality dimension bsq:dimension_1 (rich collection description), a collection should have at least a title and description, as well as a description with a minumum length."@en ;
+  sh:targetClass bsm:SocialMediaCollectionRepresentation ;
+  sh:property bss:requiredTitle ;
+  sh:property bss:requiredDescription ;
+  sh:property bss:richDescription .
+
+bss:requiredTitle
+  a sh:PropertyShape ;
+  rdfs:label "requiredTitle"@en ;
+  rdfs:comment "A collection should have a title."@en ;
+  sh:path dc:title ;
+  sh:datatype xsd:string ;
+  sh:minCount 1 .
+
+bss:requiredDescription
+  a sh:PropertyShape ;
+  rdfs:label "requiredDescription"@en ;
+  rdfs:comment "A collection should have a description."@en ;
+  sh:path dc:description ;
+  sh:datatype xsd:string ;
+  sh:minCount 1 .
+
+bss:richDescription
+  a sh:PropertyShape ;
+  rdfs:label "richDescription"@en ;
+  rdfs:comment "A collection should have a description with a minimum length."@en ;
+  sh:path dc:description ;
+  sh:minLength 200 .
+
