@@ -1,0 +1,57 @@
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix bsm: <http://w3id.org/besocial/ns/model#> .
+@prefix bss: <http://w3id.org/besocial/ns/shapes#> .
+@prefix bsd: <http://w3id.org/besocial/data/> .
+@prefix edm: <http://www.europeana.eu/schemas/edm#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+
+bss:collectionHarvestFirstDateShape
+  a sh:NodeShape ;
+  sh:targetClass bsm:SocialMediaCollectionRepresentation, bsm:SocialMediaCollectionRepresentationVersion ;
+  dc:title "collectionHarvestFirstDateShape"@en ;
+  dc:description "Each social media collection representation (version) should indicate the date of its first harvest"@en ;
+  sh:property bss:neededHarvestFirstDate ;
+  sh:property bss:neededHarvestLastDate .
+
+
+bss:neededHarvestFirstDate a sh:PropertyShape ;
+    sh:name "neededHarvestFirstDate"@en ;
+    sh:path [ sh:inversePath bsm:collectionRepresentationDimension ] ;
+    sh:qualifiedValueShape bss:validHarvestFirstDateObservation ;
+    sh:qualifiedMinCount 1 . 
+
+bss:neededHarvestLastDate a sh:PropertyShape ;
+    sh:name "neededHarvestLastDate"@en ;
+    sh:path [ sh:inversePath bsm:collectionRepresentationDimension ] ;
+    sh:qualifiedValueShape bss:validHarvestLastDateObservation ;
+    sh:qualifiedMinCount 1 . 
+
+bss:validHarvestFirstDateObservation a sh:NodeShape ;
+  sh:targetClass bsm:HarvestFirstDateObservation ;
+  dc:title "validHarvestFirstDateObservation"@en ;
+  dc:description "A data shape for a RDF data cube observation of social media collections' first harvest date."@en ;
+  dc:creator <https://sven-lieber.org/profile#me> ;
+  sh:class    bsm:HarvestFirstDateObservation ;
+  sh:property bss:validIdentifiedDate .
+
+bss:validHarvestLastDateObservation a sh:NodeShape ;
+  sh:targetClass bsm:HarvestLastDateObservation ;
+  dc:title "validHarvestLastDateObservation"@en ;
+  dc:description "A data shape for a RDF data cube observation of social media collections' last harvest date."@en ;
+  dc:creator <https://sven-lieber.org/profile#me> ;
+  sh:class    bsm:HarvestLastDateObservation ;
+  sh:property bss:validIdentifiedDate .
+
+bss:validIdentifiedDate a sh:PropertyShape ;
+  sh:name "validIdentifiedDate"@en ;
+  sh:path bsm:identifiedDate ;
+  sh:minCount 1 ; 
+  sh:maxCount 1 ; 
+  sh:datatype xsd:dateTime .
+
