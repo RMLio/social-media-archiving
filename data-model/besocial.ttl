@@ -58,6 +58,11 @@ bsm:SocialMediaPostsObservation a rdfs:Class ;
   rdfs:comment "A data cube observation regarding a number of social media posts."@en ;
   rdfs:subClassOf qb:Observation . 
 
+bsm:NamedEntityObservation a rdfs:Class ;
+  rdfs:label "NamedEntityObservation"@en ;
+  rdfs:comment "A data cube observation regarding the number of posts mentioning a specified named entity"@en ;
+  rdfs:subClassOf qb:Observation .
+
 bsm:HashtagObservation a rdfs:Class ;
   rdfs:label "HashtagObservation"@en ;
   rdfs:comment "A data cube observation regarding the number of posts mentioning a specified hashtag"@en ;
