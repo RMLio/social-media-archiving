@@ -1,0 +1,57 @@
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix bsm: <http://w3id.org/besocial/ns/model#> .
+@prefix bss: <http://w3id.org/besocial/ns/shapes#> .
+@prefix bsd: <http://w3id.org/besocial/data/> .
+@prefix edm: <http://www.europeana.eu/schemas/edm#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+
+bss:collectionContentFirstDateShape
+  a sh:NodeShape ;
+  sh:targetClass bsm:SocialMediaCollectionRepresentation, bsm:SocialMediaCollectionRepresentationVersion ;
+  dc:title "contentFirstDateShape"@en ;
+  dc:description "Each social media collection representation (version) should indicate the date of its first post"@en ;
+  sh:property bss:neededContentFirstDate ;
+  sh:property bss:neededContentLastDate .
+
+
+bss:neededContentFirstDate a sh:PropertyShape ;
+    sh:name "neededContentFirstDate"@en ;
+    sh:path [ sh:inversePath bsm:collectionRepresentationDimension ] ;
+    sh:qualifiedValueShape bss:validContentFirstDateObservation ;
+    sh:qualifiedMinCount 1 . 
+
+bss:neededContentLastDate a sh:PropertyShape ;
+    sh:name "neededContentLastDate"@en ;
+    sh:path [ sh:inversePath bsm:collectionRepresentationDimension ] ;
+    sh:qualifiedValueShape bss:validContentLastDateObservation ;
+    sh:qualifiedMinCount 1 . 
+
+bss:validContentFirstDateObservation a sh:NodeShape ;
+  sh:targetClass bsm:ContentFirstDateObservation ;
+  dc:title "validContentFirstDateObservation"@en ;
+  dc:description "A data shape for a RDF data cube observation of social media collections' posts first date."@en ;
+  dc:creator <https://sven-lieber.org/profile#me> ;
+  sh:class    bsm:ContentFirstDateObservation ;
+  sh:property bss:validIdentifiedDate .
+
+bss:validContentLastDateObservation a sh:NodeShape ;
+  sh:targetClass bsm:ContentLastDateObservation ;
+  dc:title "validContentLastDateObservation"@en ;
+  dc:description "A data shape for a RDF data cube observation of social media collections' posts last date."@en ;
+  dc:creator <https://sven-lieber.org/profile#me> ;
+  sh:class    bsm:ContentLastDateObservation ;
+  sh:property bss:validIdentifiedDate .
+
+bss:validIdentifiedDate a sh:PropertyShape ;
+  sh:name "validIdentifiedDate"@en ;
+  sh:path bsm:identifiedDate ;
+  sh:minCount 1 ; 
+  sh:maxCount 1 ; 
+  sh:datatype xsd:dateTime .
+

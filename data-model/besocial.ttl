@@ -58,6 +58,20 @@ bsm:SocialMediaPostsObservation a rdfs:Class ;
   rdfs:comment "A data cube observation regarding a number of social media posts."@en ;
   rdfs:subClassOf qb:Observation . 
 
+bsm:HashtagObservation a rdfs:Class ;
+  rdfs:label "HashtagObservation"@en ;
+  rdfs:comment "A data cube observation regarding the number of posts mentioning a specified hashtag"@en ;
+  rdfs:subClassOf qb:Observation .
+
+bsm:ContentStartDateObservation ;
+  rdfs:label "ContentStartDateObservation"@en ;
+  rdfs:comment "A data cube observation regarding the creation date of the first post of a collection"@en ;
+  rdfs:subClassOf qb:Observation .
+
+bsm:ContentLastDateObservation ;
+  rdfs:label "ContentLastDateObservation"@en ;
+  rdfs:comment "A data cube observation regarding the creation date of the last post of a collection"@en ;
+  rdfs:subClassOf qb:Observation .
 
 #
 # Harvests
@@ -117,6 +131,10 @@ bsm:numberPosts a qb:MeasureProperty, rdf:Property ;
 bsm:numberPostsWithHashtag a qb:MeasureProperty, rdf:Property ;
   rdfs:label "numberPostsWithHashtag"@en ;
   rdfs:comment "Number of how often a hashtag is used."@en .
+
+bsm:identifiedDate a qb:MeasureProperty, rdf:Property ;
+  rdfs:label "identifiedDate"@en ;
+  rdfs:comment "A date which was observed"@en .
 
 #
 # Harvest statuses

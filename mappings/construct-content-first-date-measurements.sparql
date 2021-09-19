@@ -1,0 +1,70 @@
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX http: <http://www.w3.org/2011/http#>
+PREFIX premis: <http://www.loc.gov/premis/rdf/v3/>
+PREFIX schema: <http://schema.org/>
+PREFIX edm: <http://www.europeana.eu/schemas/edm/>
+PREFIX bsm: <http://w3id.org/besocial/ns/model#>
+PREFIX bsd: <http://w3id.org/besocial/data/>
+PREFIX oa: <http://www.w3.org/ns/oa#>
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX ex: <http://example.org/ns#>
+
+INSERT {
+  
+  ?obs
+    a bsm:ContentStartDateObservation ;
+    bsm:collectionDimension                      ?collectionCHO ;
+    bsm:collectionRepresentationDimension        ?collectionRepresentation ;
+    bsm:collectionRepresentationVersionDimension ?collectionRepresentationVersion ;
+    bsm:identifiedDate                           ?startDate .
+
+}
+WHERE {
+
+  #
+  # Generate a new IRI for every observation
+  #
+  BIND (URI(concat("http://w3id.org/besocial/data/obs_", STRUUID())) as ?obs)
+
+  {
+    SELECT ?collectionCHO ?collectionRepresentation ?collectionRepresentationVersion (MIN(?creationDate) as ?startDate)
+    WHERE {
+      SERVICE <${TRIPLE_STORE_ITEMS}> {
+        ?itemAggregation
+          a edm:Aggregation ;
+          edm:hasView ?itemRepresentation ;
+          edm:aggregatedCHO ?itemCHO .
+
+        ?itemCHO
+          a schema:SocialMediaPosting ;
+          dc:created ?creationDate .
+      
+        ?itemRepresentation
+          a edm:WebResource ;
+          dcterms:isPartOf ?collectionRepresentationVersion .
+  
+      }
+
+      {
+        SELECT ?collectionCHO ?collectionRepresentation ?collectionRepresentationVersion
+        WHERE {
+          SERVICE <${TRIPLE_STORE_COLLECTIONS}> {
+
+            ?collectionRepresentationVersion
+              a bsm:SocialMediaCollectionRepresentationVersion ;
+              prov:specializationOf ?collectionRepresentation .
+
+            ?collectionRepresentation
+              a bsm:SocialMediaCollectionRepresentation .
+
+            ?collectionAggregation
+              edm:hasView ?collectionRepresentation ;
+              edm:aggregatedCHO ?collectionCHO .
+          }   
+        }   
+      }
+    } GROUP BY ?collectionCHO ?collectionRepresentation ?collectionRepresentationVersion
+  }
+}
