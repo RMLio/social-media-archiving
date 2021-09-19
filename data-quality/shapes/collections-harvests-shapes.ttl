@@ -36,19 +36,31 @@ bss:atLeastOneValidHarvest
 bss:validHarvest
   a sh:NodeShape ;
   rdfs:label "validHarvest"@en ;
-  sh:property bss:validHarvestDate ;
+  sh:property bss:validStartingDate ;
+  sh:property bss:atLeastOneValidSeedForCollection ;
   sh:property bss:successfulHarvest .
-
-bss:validHarvestDate
-  a sh:PropertyShape ;
-  rdfs:label "validHarvestDate"@en ;
-  sh:path prov:startedAtTime ;
-  sh:minCount 1 ;
-  sh:maxCount 1 ;
-  sh:datatype xsd:dateTime .
 
 bss:successfulHarvest 
   a sh:PropertyShape ;
   rdfs:label "successfulHarvest"@en ;
   sh:path schema:eventStatus ;
   sh:hasValue bsm:harvestSuccessful .
+
+#
+# Seed-related shapes
+#
+
+bss:atLeastOneValidSeedForCollection
+  a sh:PropertyShape ;
+  rdfs:label "atLeastOneValidSeedForCollection"@en ;
+  sh:path (prov:used prov:hadMember) ;
+  sh:qualifiedValueShape bss:validHarvestSeed ;
+  sh:qualifiedMinCount 1 .
+
+bss:validHarvestSeed
+  a sh:NodeShape ;
+  rdfs:label "validHarvestSeed"@en ;
+  rdfs:comment "A PROV-O collection of social media harvest seeds."@en ;
+  sh:property bss:validGenerationDate ;
+  sh:property bss:needIdentifier ;
+  sh:property bss:needValue .

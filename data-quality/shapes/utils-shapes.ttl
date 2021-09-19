@@ -1,0 +1,46 @@
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix schema: <http://schema.org/> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix nee: <http://www.ics.forth.gr/isl/oae/core#> .
+@prefix premis: <http://www.loc.gov/premis/rdf/v3/> .
+@prefix bsm: <http://w3id.org/besocial/ns/model#> .
+@prefix bss: <http://w3id.org/besocial/ns/shapes#> .
+@prefix bsd: <http://w3id.org/besocial/data/> .
+@prefix edm: <http://www.europeana.eu/schemas/edm#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix prov: <http://www.w3.org/ns/shacl#> .
+
+
+bss:validGenerationDate
+  a sh:PropertyShape ;
+  rdfs:label "validGenerationDate"@en ;
+  sh:path prov:generatedAtTime ;
+  sh:minCount 1 ;
+  sh:maxCount 1 ;
+  sh:datatype xsd:dateTime .
+
+bss:validStartingDate
+  a sh:PropertyShape ;
+  rdfs:label "validStartingDate"@en ;
+  sh:path prov:startedAtTime ;
+  sh:minCount 1 ;
+  sh:maxCount 1 ;
+  sh:datatype xsd:dateTime .
+
+
+
+bss:needIdentifier 
+  a sh:PropertyShape ;
+  rdfs:label "needIdentifier"@en ;
+  sh:path dcterms:identifier ;
+  sh:minCount 1 .
+
+bss:needValue
+  a sh:PropertyShape ;
+  rdfs:label "needValue"@en ;
+  sh:path rdf:value ;
+  sh:minCount 1 .
