@@ -1,0 +1,55 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix bsm: <http://w3id.org/besocial/ns/model#> .
+@prefix bss: <http://w3id.org/besocial/ns/shapes#> .
+@prefix bsd: <http://w3id.org/besocial/data/> .
+@prefix edm: <http://www.europeana.eu/schemas/edm#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+bss:collectionRepresentationNamedEntitiesShape
+  a sh:NodeShape ;
+  sh:targetClass bsm:SocialMediaCollectionRepresentation ;
+  dc:title "collectionRepresentationNamedEntitiesShape"@en ;
+  dc:description "Each social media collection representation should have at least ten named entity measurements."@en ;
+  sh:property bss:atLeastTenNamedEntitiesForCollection .
+
+bss:collectionRepresentationVersionHashtagShape
+  a sh:NodeShape ;
+  dc:title "collectionRepresentationVersionHashtagShape"@en ;
+  dc:description "Each social meedia collection representation version should have at least ten named entities measurements."@en ;
+  sh:targetClass bsm:SocialMediaCollectionRepresentationVersion ;
+  sh:property bss:atLeastTenNamedEntitiesForCollectionVersion .
+
+bss:atLeastTenNamedEntitiesForCollection
+  a sh:PropertyShape ;
+  sh:path [ sh:inversePath bsm:collectionRepresentationDimension ] ;
+  sh:qualifiedValueShape bss:correctNamedEntityMeasurementShape ;
+  sh:qualifiedMinCount 10 .
+
+bss:atLeastTenNamedEntitiesForCollectionVersion
+  a sh:PropertyShape ;
+  sh:path [ sh:inversePath bsd:collectionRepresentationVersionDimension ] ;
+  sh:qualifiedValueShape bss:correctNamedEntityMeasurementShape ;
+  sh:qualifiedMinCount 10 .
+
+bss:correctNamedEntityMeasurementShape
+  a sh:NodeShape ;
+  sh:targetClass bsm:NamedEntityObservation ;
+  dc:title "correctNamedEntityMeasurementShape"@en ;
+  dc:descriptioon "A data shape for a RDF data cube observation of the number of named entities. The constraints should ensure that the observation can be displayed."@en ;
+  dc:creator <https://sven-lieber.org/profile#me> ;
+  sh:property bss:observedNamedEntity ;
+  sh:property bss:validNamedEntityNumberObservation .
+
+bss:validNamedEntityNumberObservation
+  a sh:PropertyShape ;
+  sh:path bsm:numberPostsWithNamedEntity ;
+  sh:minCount 1 ;
+  sh:maxCount 1 ;
+  sh:datatype xsd:integer .
+
+bss:observedNamedEntity 
+  a sh:PropertyShape ;
+  sh:path bsm:namedEntityDimension ;
+  sh:minCount 1 .

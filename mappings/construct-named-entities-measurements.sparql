@@ -1,0 +1,82 @@
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX http: <http://www.w3.org/2011/http#>
+PREFIX premis: <http://www.loc.gov/premis/rdf/v3/>
+PREFIX edm: <http://www.europeana.eu/schemas/edm/>
+PREFIX bsm: <http://w3id.org/besocial/ns/model#>
+PREFIX bsd: <http://w3id.org/besocial/data/>
+PREFIX oa: <http://www.w3.org/ns/oa#>
+PREFIX qb: <http://purl.org/linked-data/cube#>
+PREFIX schema: <http://schema.org/>
+PREFIX ex: <http://example.org/ns#>
+PREFIX sioc: <http://rdfs.org/sioc/ns#>
+PREFIX nee: <http://www.ics.forth.gr/isl/oae/core#>
+
+INSERT {
+  
+  ?obs
+    a bsm:NamedEntityObservation ;
+    bsm:collectionDimension                         ?collectionCHO ;
+    bsm:collectionRepresentationDimension           ?collectionRepresentation ;
+    bsm:collectionRepresentationVersionDimension    ?collectionRepresentationVersion ;
+    bsm:namedEntityDimension                        ?neObjectURL ;
+    bsm:numberPostsWithNamedEntity                  ?count .
+}
+WHERE {
+
+  BIND (URI(concat("http://w3id.org/besocial/data/obs_", STRUUID())) as ?obs)
+
+  {
+    SELECT ?collectionCHO ?collectionRepresentation ?collectionRepresentationVersion ?neObjectURL (count(?itemAggregation) as ?count)
+    WHERE {
+      SERVICE<db://sfm-items> {
+        ?itemAggregation
+          a edm:Aggregation ;
+          edm:hasView ?itemRepresentation ;
+          edm:aggregatedCHO ?itemCHO .
+
+        ?itemRepresentation
+          a edm:WebResource ;
+          dcterms:isPartOf ?collectionRepresentationVersion .        
+
+        #
+        # only count mentioned things which are named entities
+        #
+        ?itemCHO
+          a schema:SocialMediaPosting ;
+          schema:mentions ?neObject .
+     
+        ?neObject
+          a nee:Entity ;
+          nee:hasMatchedURL ?neObjectURL .
+      }
+
+      #
+      # Match found social media posts with their collections
+      # so we get needed dimensions to build the observations
+      #
+      {
+        SELECT ?collectionCHO ?collectionRepresentation ?collectionRepresentationVersion
+        WHERE {
+          SERVICE <db://sfm-collections> {
+
+            ?collectionRepresentationVersion
+              a bsm:SocialMediaCollectionRepresentationVersion ;
+              prov:specializationOf ?collectionRepresentation .
+
+            ?collectionRepresentation
+              a bsm:SocialMediaCollectionRepresentation .
+
+            ?collectionAggregation
+              edm:hasView ?collectionRepresentation ;
+              edm:aggregatedCHO ?collectionCHO .
+          }    
+        }
+      }
+    }
+    GROUP BY ?collectionCHO ?collectionRepresentation ?collectionRepresentationVersion ?neObjectURL
+    HAVING (count(?neObjectURL) > 1)
+  }
+}
+
