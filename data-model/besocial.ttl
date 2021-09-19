@@ -63,14 +63,24 @@ bsm:HashtagObservation a rdfs:Class ;
   rdfs:comment "A data cube observation regarding the number of posts mentioning a specified hashtag"@en ;
   rdfs:subClassOf qb:Observation .
 
-bsm:ContentStartDateObservation ;
-  rdfs:label "ContentStartDateObservation"@en ;
+bsm:ContentFirstDateObservation ;
+  rdfs:label "ContentFirstDateObservation"@en ;
   rdfs:comment "A data cube observation regarding the creation date of the first post of a collection"@en ;
   rdfs:subClassOf qb:Observation .
 
 bsm:ContentLastDateObservation ;
   rdfs:label "ContentLastDateObservation"@en ;
   rdfs:comment "A data cube observation regarding the creation date of the last post of a collection"@en ;
+  rdfs:subClassOf qb:Observation .
+
+bsm:HarvestFirstDateObservation ;
+  rdfs:label "HarvestStartDateObservation"@en ;
+  rdfs:comment "A data cube observation regarding the first harvest date of a collection"@en ;
+  rdfs:subClassOf qb:Observation .
+
+bsm:HarvestLastDateObservation ;
+  rdfs:label "HarvestLastDateObservation"@en ;
+  rdfs:comment "A data cube observation regarding the last harvest date of a collection"@en ;
   rdfs:subClassOf qb:Observation .
 
 #

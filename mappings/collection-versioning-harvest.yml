@@ -58,6 +58,7 @@ mappings:
       - [dcterms:format, "application/warc"]
       - [ebucore:hasMimeType, "application/warc"]
       - [dcterms:isPartOf, bsd:collectionVersionJSON_$(collection_id)_$(date_readable)~iri]
+      - [dcterms:isPartOf, bsd:collectionVersionJSON_$(collection_id)~iri]
       - [relSubType:isp, bsd:collectionVersionJSON_$(collection_id)_$(date_readable)~iri]
       - [prov:generatedAtTime, $(date_created), xsd:dateTime]
       - [prov:wasGeneratedBy, bsd:harvest_$(harvest_id)~iri]

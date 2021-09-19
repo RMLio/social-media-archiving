@@ -1,0 +1,54 @@
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix schema: <http://schema.org/> .
+@prefix sioc: <http://rdfs.org/sioc/ns#> .
+@prefix nee: <http://www.ics.forth.gr/isl/oae/core#> .
+@prefix premis: <http://www.loc.gov/premis/rdf/v3/> .
+@prefix bsm: <http://w3id.org/besocial/ns/model#> .
+@prefix bss: <http://w3id.org/besocial/ns/shapes#> .
+@prefix bsd: <http://w3id.org/besocial/data/> .
+@prefix edm: <http://www.europeana.eu/schemas/edm#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix prov: <http://www.w3.org/ns/shacl#> .
+
+bss:collectionHarvestsShape
+  a sh:NodeShape ;
+  rdfs:label "collectionHarvestShape"@en ;
+  sh:targetClass bsm:SocialMediaCollectionRepresentation ;
+  sh:property bss:atLeastOneValidHarvest .
+
+bss:collectionVersionHarvestsShape
+  a sh:NodeShape ;
+  rdfs:label "collectionVersionHarvestShape"@en ;
+  sh:targetClass bsm:SocialMediaCollectionRepresentationVersion ;
+  sh:property bss:atLeastOneValidHarvest .
+
+bss:atLeastOneValidHarvest
+  a sh:PropertyShape ;
+  rdfs:label "atLeastOneValidHarvest"@en ;
+  sh:path ([ sh:inversePath dcterms:isPartOf ] prov:wasGeneratedBy) ;
+  sh:qualifiedValueShape bss:validHarvest ;
+  sh:qualifiedMinCount 1 .
+
+bss:validHarvest
+  a sh:NodeShape ;
+  rdfs:label "validHarvest"@en ;
+  sh:property bss:validHarvestDate ;
+  sh:property bss:successfulHarvest .
+
+bss:validHarvestDate
+  a sh:PropertyShape ;
+  rdfs:label "validHarvestDate"@en ;
+  sh:path prov:startedAtTime ;
+  sh:minCount 1 ;
+  sh:maxCount 1 ;
+  sh:datatype xsd:dateTime .
+
+bss:successfulHarvest 
+  a sh:PropertyShape ;
+  rdfs:label "successfulHarvest"@en ;
+  sh:path schema:eventStatus ;
+  sh:hasValue bsm:harvestSuccessful .
