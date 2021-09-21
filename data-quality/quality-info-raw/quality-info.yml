@@ -18,6 +18,7 @@ prefixes:
   bsq: "http://w3id.org/besocial/ns/quality#"
   bsd: "http://w3id.org/besocial/data/"
   oa: "http://www.w3.org/ns/oa#"
+  fm: "https://purl.org/fair-metrics/terms/"
   ex: "http://example.org/ns#"
 
 mappings:
@@ -53,6 +54,13 @@ mappings:
       - [skos:definition, $(description), en~lang]
       - [dqv:expectedDataType, xsd:$(expected datatype)~iri]
       - [dqv:inDimension, bsq:dimension_$(dimension ID)~iri]
+      - [fm:measuring, $(measuring), en~lang]
+      - [fm:rationale, $(rationale), en~lang]
+      - [fm:requirements, $(requirements), en~lang]
+      - [fm:procedure, $(procedure), en~lang]
+      - [fm:validation, $(validation), en~lang]
+      - [fm:relevance, $(relevance), en~lang]
+      - [fm:examples, $(examples), en~lang]
 
 
   metricShapesAnnotation:

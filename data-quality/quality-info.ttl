@@ -11,6 +11,7 @@
 @prefix ebucore: <https://www.ebu.ch/metadata/ontologies/ebucore#> .
 @prefix edm: <http://www.europeana.eu/schemas/edm/> .
 @prefix ex: <http://example.org/ns#> .
+@prefix fm: <https://purl.org/fair-metrics/terms/> .
 @prefix fnml: <http://semweb.mmlab.be/ns/fnml#> .
 @prefix fno: <https://w3id.org/function/ontology#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
@@ -29,6 +30,106 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix void: <http://rdfs.org/ns/void#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+bsq:annot_atLeastOneValidCollectionVersion_17 a oa:Annotation;
+  oa:hasBody bss:atLeastOneValidCollectionVersion;
+  oa:hasTarget bsq:metric_17;
+  oa:motivatedBy bsq:singleCollectionAssessment .
+
+bsq:annot_atLeastOneValidCollectionVersion_18 a oa:Annotation;
+  oa:hasBody bss:atLeastOneValidCollectionVersion;
+  oa:hasTarget bsq:metric_18;
+  oa:motivatedBy bsq:collectionAssessment .
+
+bsq:annot_atLeastOneValidHarvest_13 a oa:Annotation;
+  oa:hasBody bss:atLeastOneValidHarvest;
+  oa:hasTarget bsq:metric_13;
+  oa:motivatedBy bsq:singleCollectionAssessment .
+
+bsq:annot_atLeastOneValidHarvest_14 a oa:Annotation;
+  oa:hasBody bss:atLeastOneValidHarvest;
+  oa:hasTarget bsq:metric_14;
+  oa:motivatedBy bsq:collectionAssessment .
+
+bsq:annot_atLeastOneValidHarvest_15 a oa:Annotation;
+  oa:hasBody bss:atLeastOneValidHarvest;
+  oa:hasTarget bsq:metric_15;
+  oa:motivatedBy bsq:singleCollectionAssessment .
+
+bsq:annot_atLeastOneValidHarvest_16 a oa:Annotation;
+  oa:hasBody bss:atLeastOneValidHarvest;
+  oa:hasTarget bsq:metric_16;
+  oa:motivatedBy bsq:collectionAssessment .
+
+bsq:annot_atLeastOneValidHarvest_19 a oa:Annotation;
+  oa:hasBody bss:atLeastOneValidHarvest;
+  oa:hasTarget bsq:metric_19;
+  oa:motivatedBy bsq:singleCollectionAssessment .
+
+bsq:annot_atLeastOneValidHarvest_20 a oa:Annotation;
+  oa:hasBody bss:atLeastOneValidHarvest;
+  oa:hasTarget bsq:metric_20;
+  oa:motivatedBy bsq:collectionAssessment .
+
+bsq:annot_atLeastTenHashtagsForCollection_25 a oa:Annotation;
+  oa:hasBody bss:atLeastTenHashtagsForCollection;
+  oa:hasTarget bsq:metric_25;
+  oa:motivatedBy bsq:singleCollectionAssessment .
+
+bsq:annot_atLeastTenHashtagsForCollection_26 a oa:Annotation;
+  oa:hasBody bss:atLeastTenHashtagsForCollection;
+  oa:hasTarget bsq:metric_26;
+  oa:motivatedBy bsq:collectionAssessment .
+
+bsq:annot_atLeastTenNamedEntitiesForCollection_21 a oa:Annotation;
+  oa:hasBody bss:atLeastTenNamedEntitiesForCollection;
+  oa:hasTarget bsq:metric_21;
+  oa:motivatedBy bsq:singleCollectionAssessment .
+
+bsq:annot_atLeastTenNamedEntitiesForCollection_22 a oa:Annotation;
+  oa:hasBody bss:atLeastTenNamedEntitiesForCollection;
+  oa:hasTarget bsq:metric_22;
+  oa:motivatedBy bsq:collectionAssessment .
+
+bsq:annot_neededContentFirstDate_10 a oa:Annotation;
+  oa:hasBody bss:neededContentFirstDate;
+  oa:hasTarget bsq:metric_10;
+  oa:motivatedBy bsq:collectionAssessment .
+
+bsq:annot_neededContentFirstDate_9 a oa:Annotation;
+  oa:hasBody bss:neededContentFirstDate;
+  oa:hasTarget bsq:metric_9;
+  oa:motivatedBy bsq:singleCollectionAssessment .
+
+bsq:annot_neededContentLastDate_10 a oa:Annotation;
+  oa:hasBody bss:neededContentLastDate;
+  oa:hasTarget bsq:metric_10;
+  oa:motivatedBy bsq:collectionAssessment .
+
+bsq:annot_neededContentLastDate_9 a oa:Annotation;
+  oa:hasBody bss:neededContentLastDate;
+  oa:hasTarget bsq:metric_9;
+  oa:motivatedBy bsq:singleCollectionAssessment .
+
+bsq:annot_neededHarvestFirstDate_11 a oa:Annotation;
+  oa:hasBody bss:neededHarvestFirstDate;
+  oa:hasTarget bsq:metric_11;
+  oa:motivatedBy bsq:singleCollectionAssessment .
+
+bsq:annot_neededHarvestFirstDate_12 a oa:Annotation;
+  oa:hasBody bss:neededHarvestFirstDate;
+  oa:hasTarget bsq:metric_12;
+  oa:motivatedBy bsq:collectionAssessment .
+
+bsq:annot_neededHarvestLastDate_11 a oa:Annotation;
+  oa:hasBody bss:neededHarvestLastDate;
+  oa:hasTarget bsq:metric_11;
+  oa:motivatedBy bsq:singleCollectionAssessment .
+
+bsq:annot_neededHarvestLastDate_12 a oa:Annotation;
+  oa:hasBody bss:neededHarvestLastDate;
+  oa:hasTarget bsq:metric_12;
+  oa:motivatedBy bsq:collectionAssessment .
 
 bsq:annot_requiredDescription_3 a oa:Annotation;
   oa:hasBody bss:requiredDescription;
@@ -59,6 +160,26 @@ bsq:annot_richDescription_6 a oa:Annotation;
   oa:hasBody bss:richDescription;
   oa:hasTarget bsq:metric_6;
   oa:motivatedBy bsq:collectionAssessment .
+
+bsq:annot_validIdentifiedDate_10 a oa:Annotation;
+  oa:hasBody bss:validIdentifiedDate;
+  oa:hasTarget bsq:metric_10;
+  oa:motivatedBy bsq:collectionAssessment .
+
+bsq:annot_validIdentifiedDate_11 a oa:Annotation;
+  oa:hasBody bss:validIdentifiedDate;
+  oa:hasTarget bsq:metric_11;
+  oa:motivatedBy bsq:singleCollectionAssessment .
+
+bsq:annot_validIdentifiedDate_12 a oa:Annotation;
+  oa:hasBody bss:validIdentifiedDate;
+  oa:hasTarget bsq:metric_12;
+  oa:motivatedBy bsq:collectionAssessment .
+
+bsq:annot_validIdentifiedDate_9 a oa:Annotation;
+  oa:hasBody bss:validIdentifiedDate;
+  oa:hasTarget bsq:metric_9;
+  oa:motivatedBy bsq:singleCollectionAssessment .
 
 bsq:annot_validMonthObservation_7 a oa:Annotation;
   oa:hasBody bss:validMonthObservation;
@@ -153,180 +274,390 @@ bsq:dimension_9 a dqv:Dimension;
 
 bsq:metric_1 a dqv:Metric;
   skos:definition "A collection (version) should have a title such that humans can refer to it and easier remember it."@en;
-  skos:prefLabel "Required collection title"@en;
+  skos:prefLabel "Missing collection title"@en;
   dqv:expectedDataType xsd:boolean;
-  dqv:inDimension bsq:dimension_1 .
+  dqv:inDimension bsq:dimension_1;
+  fm:examples "A social media collection (or more general a resource) which misses a dc:title property "@en;
+  fm:measuring "It is measured if a collection misses a title"@en;
+  fm:procedure "The related shapes are validated and the resulting SHACL validation report is queried with 'single-collection-assessment.sparql'"@en;
+  fm:rationale "A title is needed for humans to refer to the collection, see metric-related requirement"@en;
+  fm:relevance "This metric applies on social media collections (versions), however all resources profit from having a human readable title"@en;
+  fm:requirements "Collections should use the title property which is validated by the shape related to this metric"@en;
+  fm:validation "If no title property is found, this metric is true"@en .
 
 bsq:metric_10 a dqv:Metric;
   skos:definition "Determine the number of collection (versions) not showing content start and end date"@en;
   skos:prefLabel "Number of missing start and end dates content"@en;
   dqv:expectedDataType xsd:integer;
-  dqv:inDimension bsq:dimension_2 .
+  dqv:inDimension bsq:dimension_2;
+  fm:examples "A corpus of social media collections for which one or more miss data cube observations or have invalid observations about the dates of the first and last post"@en;
+  fm:measuring "It is measured how many collections miss stats about the date of their first post and the date of their last post"@en;
+  fm:procedure "The related shapes are validated and the resulting SHACL validation report is queried with `collection-assessment.sparql`"@en;
+  fm:rationale "For quality assessment it is important to identify collections with missing info about the dates of the first and last post"@en;
+  fm:relevance "This metric applies on social media collections (versions)"@en;
+  fm:requirements "A collection needs to link to its posts and posts need a creation date"@en;
+  fm:validation "This metric should be a positive integer representing the number of collections with missing first and last post date"@en .
 
 bsq:metric_11 a dqv:Metric;
   skos:definition "A collection (version) shows date of the first and date of the last harvest"@en;
-  skos:prefLabel "Collection harvest start and end date"@en;
+  skos:prefLabel "Missing collection harvest start and end date"@en;
   dqv:expectedDataType xsd:boolean;
-  dqv:inDimension bsq:dimension_3 .
+  dqv:inDimension bsq:dimension_3;
+  fm:examples "A social media collection referred via a dimension from a data cube observation, together with an observed date of the first harvest and another observation with an observed date of the last harvest. Either one of the observations is missing or has an invalid date"@en;
+  fm:measuring "It is measured if a collection misses stats about the date of its first harvest and the date of its last harvest"@en;
+  fm:procedure "The related shapes are validated and the resulting SHACL validation report is queried with 'single-collection-assessment.sparql'"@en;
+  fm:rationale "The date of the first and the date of the last harvest provide provenance of the collections’ creation"@en;
+  fm:relevance "This metric applies on social media collections (versions)"@en;
+  fm:requirements "A collection needs to link to its harvests and the harvests need a creation date"@en;
+  fm:validation "If a collection does not contain information about the dates of its first and last harvest, this metric is true"@en .
 
 bsq:metric_12 a dqv:Metric;
   skos:definition "Determine the number of collection (versions) not showing harvest start and end date"@en;
   skos:prefLabel "Number of missing start and end dates harvest"@en;
   dqv:expectedDataType xsd:integer;
-  dqv:inDimension bsq:dimension_3 .
+  dqv:inDimension bsq:dimension_3;
+  fm:examples "A corpus of social media collections for which one or more miss data cube observations or have invalid observations about the dates of the first and last harvest"@en;
+  fm:measuring "It is measured how many collections miss stats about the date of their first harvest and the date of their last harvest"@en;
+  fm:procedure "The related shapes are validated and the resulting SHACL validation report is queried with `collection-assessment.sparql`"@en;
+  fm:rationale "For quality assessment it is important to identify collections with missing info about the first and last harvest provenance"@en;
+  fm:relevance "This metric applies on social media collections (versions)"@en;
+  fm:requirements "A collection needs to link to its harvests and the harvests need a creation date"@en;
+  fm:validation "This metric should be a positive integer representing the number of collections with missing first and last harvest date"@en .
 
 bsq:metric_13 a dqv:Metric;
   skos:definition "A collection shows when its harvests where executed"@en;
-  skos:prefLabel "Collection harvests"@en;
+  skos:prefLabel "Missing collection harvest info"@en;
   dqv:expectedDataType xsd:boolean;
-  dqv:inDimension bsq:dimension_3 .
+  dqv:inDimension bsq:dimension_3;
+  fm:examples "A social media collection which does not link to a WARC file created by a harvest"@en;
+  fm:measuring "It is measured if a collection misses information about its harvests"@en;
+  fm:procedure "The related shapes are validated and the resulting SHACL validation report is queried with 'single-collection-assessment.sparql'"@en;
+  fm:rationale "Information about harvests, such as their data, provide valuable provenance information of collections"@en;
+  fm:relevance "This metric applies on social media collections (versions)"@en;
+  fm:requirements "A collection needs to link to its harvests and the harvests need a creation date"@en;
+  fm:validation "If a collection does not contain information about its harvests, this metric is true"@en .
 
 bsq:metric_14 a dqv:Metric;
   skos:definition "Determine the number of collections not showing when its harvests were executed"@en;
   skos:prefLabel "Number of missing collection harvests"@en;
   dqv:expectedDataType xsd:integer;
-  dqv:inDimension bsq:dimension_3 .
+  dqv:inDimension bsq:dimension_3;
+  fm:examples "A corpus of social media collections for which one or more do not link to at least one WARC file created by a harvest"@en;
+  fm:measuring "It is measured how many collections miss information about their harvests"@en;
+  fm:procedure "The related shapes are validated and the resulting SHACL validation report is queried with `collection-assessment.sparql`"@en;
+  fm:rationale "For quality assessment it is important to identify collections with missing harvest provenance"@en;
+  fm:relevance "This metric applies on social media collections (versions)"@en;
+  fm:requirements "A collection needs to link to its harvests and the harvests need a creation date"@en;
+  fm:validation "This metric should be a positive integer representing the number of collections with missing harvest information"@en .
 
 bsq:metric_15 a dqv:Metric;
   skos:definition "A collection version shows when its harvest(s) where executed"@en;
-  skos:prefLabel "Collection version harvests"@en;
+  skos:prefLabel "Missing collection version harvest info"@en;
   dqv:expectedDataType xsd:boolean;
-  dqv:inDimension bsq:dimension_3 .
+  dqv:inDimension bsq:dimension_3;
+  fm:examples "A social media collection version which does not link to a WARC file created by a harvest"@en;
+  fm:measuring "It is measured if a collection version misses information about its harvest(s)"@en;
+  fm:procedure "The related shapes are validated and the resulting SHACL validation report is queried with 'single-collection-assessment.sparql'"@en;
+  fm:rationale "Information about harvests, such as their data, provide valuable provenance information of collections"@en;
+  fm:relevance "This metric applies on social media collections (versions)"@en;
+  fm:requirements "A collection needs to link to its harvests and the harvests need a creation date"@en;
+  fm:validation "If a collection version does not contain information about its harvest(s), this metric is true"@en .
 
 bsq:metric_16 a dqv:Metric;
   skos:definition "Determine the number of collection versions not showing when its harvests were executed."@en;
   skos:prefLabel "Number of missing collection version harvests"@en;
   dqv:expectedDataType xsd:integer;
-  dqv:inDimension bsq:dimension_3 .
+  dqv:inDimension bsq:dimension_3;
+  fm:examples "A corpus of social media collection versions for which one or more do not link to at least one WARC file created by a harvest"@en;
+  fm:measuring "It is measured how many collection versions miss information about their harvest(s)"@en;
+  fm:procedure "The related shapes are validated and the resulting SHACL validation report is queried with `collection-assessment.sparql`"@en;
+  fm:rationale "For quality assessment it is important to identify collections with missing harvest provenance"@en;
+  fm:relevance "This metric applies on social media collections (versions)"@en;
+  fm:requirements "A collection needs to link to its harvests and the harvests need a creation date"@en;
+  fm:validation "This metric should be a positive integer representing the number of collection versions with missing harvest information"@en .
 
 bsq:metric_17 a dqv:Metric;
   skos:definition "A collection shows its versions"@en;
-  skos:prefLabel "Collection versions"@en;
+  skos:prefLabel "Missing collection versions info"@en;
   dqv:expectedDataType xsd:boolean;
-  dqv:inDimension bsq:dimension_4 .
+  dqv:inDimension bsq:dimension_4;
+  fm:examples "A social media collection which is not linked from versions via prov:specializationOf"@en;
+  fm:measuring "It is measured if a collection misses information about its versions"@en;
+  fm:procedure "The related shapes are validated and the resulting SHACL validation report is queried with 'single-collection-assessment.sparql'"@en;
+  fm:rationale "Collections metadata or seeds can be changed which influences the content of the collection, thus different versions should be available"@en;
+  fm:relevance "This metric applies on social media collections (versions)"@en;
+  fm:requirements "A collection needs to link to its versions"@en;
+  fm:validation "If a collection does not contain information about its versions, this metric is true"@en .
 
 bsq:metric_18 a dqv:Metric;
   skos:definition "Determine the number of collections not showing its versions"@en;
   skos:prefLabel "Number of missing collection versions info"@en;
   dqv:expectedDataType xsd:integer;
-  dqv:inDimension bsq:dimension_4 .
+  dqv:inDimension bsq:dimension_4;
+  fm:examples "A corpus of social media collection versions for which one or more are not linked from versions via prov:specializationOf"@en;
+  fm:measuring "It is measured how many collections miss information about their versions"@en;
+  fm:procedure "The related shapes are validated and the resulting SHACL validation report is queried with `collection-assessment.sparql`"@en;
+  fm:rationale "For quality assessment it is important to identify collections with missing version information"@en;
+  fm:relevance "This metric applies on social media collections (versions)"@en;
+  fm:requirements "A collection needs to link to its versions"@en;
+  fm:validation "This metric should be a positive integer representing the number of collections with missing version information"@en .
 
 bsq:metric_19 a dqv:Metric;
   skos:definition "A collection (version) shows which seeds versions were used to create it"@en;
-  skos:prefLabel "Collection seeds"@en;
+  skos:prefLabel "Missing collection seeds info"@en;
   dqv:expectedDataType xsd:boolean;
-  dqv:inDimension bsq:dimension_5 .
+  dqv:inDimension bsq:dimension_5;
+  fm:examples "A social media collection which does not link to harvests and seeds used by the harvest"@en;
+  fm:measuring "It is measured if a collection misses information about used seeds to create it"@en;
+  fm:procedure "The related shapes are validated and the resulting SHACL validation report is queried with 'single-collection-assessment.sparql'"@en;
+  fm:rationale "The seeds of collections provide valuable information about the content and should be accessible for users to assess the collection"@en;
+  fm:relevance "This metric applies on social media collections (versions)"@en;
+  fm:requirements "A collection (version) needs to link to concrete seeds versions used to create the collection"@en;
+  fm:validation "If a collection does not contain information about its seeds, this metric is true"@en .
 
 bsq:metric_2 a dqv:Metric;
   skos:definition "Determine the number of collections missing a dublin core title."@en;
   skos:prefLabel "Number of missing titles"@en;
   dqv:expectedDataType xsd:integer;
-  dqv:inDimension bsq:dimension_1 .
+  dqv:inDimension bsq:dimension_1;
+  fm:examples "A corpus of social media collections (or more general resources) for which one or more miss a dc:title property"@en;
+  fm:measuring "It is measured how many collections miss a title"@en;
+  fm:procedure "The related shapes are validated and the resulting SHACL validation report is queried with `collection-assessment.sparql`"@en;
+  fm:rationale "For quality assessment it is important to identify collections without title"@en;
+  fm:relevance "This metric applies on social media collections (versions), however all resources profit from having a human readable title"@en;
+  fm:requirements "Collections should use the title property which is validated by the shape related to this metric"@en;
+  fm:validation "This metric should be a positive integer representing the number of collections without title"@en .
 
 bsq:metric_20 a dqv:Metric;
   skos:definition "Determine the number of collection (versions) not showing which seeds versions were used to create it"@en;
   skos:prefLabel "Number of missing collection seeds"@en;
   dqv:expectedDataType xsd:integer;
-  dqv:inDimension bsq:dimension_5 .
+  dqv:inDimension bsq:dimension_5;
+  fm:examples "A corpus of social media collections for which one or more do not link to harvests and seeds used by the harvest"@en;
+  fm:measuring "It is measured how many collections miss information about used seeds to create them"@en;
+  fm:procedure "The related shapes are validated and the resulting SHACL validation report is queried with `collection-assessment.sparql`"@en;
+  fm:rationale "For quality assessment it is important to identify collections with missing seed information"@en;
+  fm:relevance "This metric applies on social media collections (versions)"@en;
+  fm:requirements "A collection (version) needs to link to concrete seeds versions used to create the collection"@en;
+  fm:validation "This metric should be a positive integer representing the number of collections with missing seed information"@en .
 
 bsq:metric_21 a dqv:Metric;
   skos:definition "A collection (version) shows the top-10 named entities identified in the collection (version)"@en;
-  skos:prefLabel "Collection named entities"@en;
+  skos:prefLabel "Missing collection named entities info"@en;
   dqv:expectedDataType xsd:boolean;
-  dqv:inDimension bsq:dimension_6 .
+  dqv:inDimension bsq:dimension_6;
+  fm:examples "A social media collection referred via a dimension from a data cube observation, together with a dimension for a named entity and an observed number of its occurrences within the collection. Either less than a specified number of such observations exist or the observation contains an invalid number"@en;
+  fm:measuring "It is measured if a collection misses information about most used named entities"@en;
+  fm:procedure "The related shapes are validated and the resulting SHACL validation report is queried with 'single-collection-assessment.sparql'"@en;
+  fm:rationale "A list of most used named entities in a collection provides valuable information to assess a collection"@en;
+  fm:relevance "This metric applies on social media collections (versions)"@en;
+  fm:requirements "Aggregated information about most used named entities of a collection should be available, e.g. as data cube observations"@en;
+  fm:validation "If a collection does not contain information about most used named entities, this metric is true"@en .
 
 bsq:metric_22 a dqv:Metric;
   skos:definition "Determine the number of collection (versions) not showing top-10 named entities identified in the collection (version)."@en;
   skos:prefLabel "Number of missing top 10 named entities"@en;
   dqv:expectedDataType xsd:integer;
-  dqv:inDimension bsq:dimension_6 .
+  dqv:inDimension bsq:dimension_6;
+  fm:examples "A corpus of social media collections for which one or more miss data cube observations or have invalid observations about posts"@en;
+  fm:measuring "It is measured how many collections miss information about most used named entities"@en;
+  fm:procedure "The related shapes are validated and the resulting SHACL validation report is queried with `collection-assessment.sparql`"@en;
+  fm:rationale "For quality assessment it is important to identify collections with missing most used named entities information"@en;
+  fm:relevance "This metric applies on social media collections (versions)"@en;
+  fm:requirements "Aggregated information about most used named entities of a collection should be available, e.g. as data cube observations"@en;
+  fm:validation "This metric should be a positive integer representing the number of collections with missing most used named entities information"@en .
 
 bsq:metric_23 a dqv:Metric;
   skos:definition "A collection (version) shows at least the top-10 person and locations named entities"@en;
-  skos:prefLabel "Collection persons and locations"@en;
+  skos:prefLabel "Missing collection persons and locations info"@en;
   dqv:expectedDataType xsd:boolean;
-  dqv:inDimension bsq:dimension_6 .
+  dqv:inDimension bsq:dimension_6;
+  fm:examples "A social media collection referred via a dimension from a data cube observation, together with a dimension for a named entity (person or location) and an observed number of its occurrences within the collection. Either less than a specified number of such observations exist or the observation contains an invalid number"@en;
+  fm:measuring "It is measured if a collection misses information about most used ‘person’ and ‘location’ named entities"@en;
+  fm:procedure "The related shapes are validated and the resulting SHACL validation report is queried with 'single-collection-assessment.sparql'"@en;
+  fm:rationale "Many types of named entities exist, persons and locations are common entities which are identified "@en;
+  fm:relevance "This metric applies on social media collections (versions)"@en;
+  fm:requirements "Aggregated information about most used person and location entities of a collection should be available, e.g. as data cube observations"@en;
+  fm:validation "If a collection does not contain information about most used persons and locations, this metric is true"@en .
 
 bsq:metric_24 a dqv:Metric;
   skos:definition "Determine the number of collection (versions) not showing at least the top-10 person and locations named entities"@en;
   skos:prefLabel "Number of missing collection persons and locations"@en;
   dqv:expectedDataType xsd:integer;
-  dqv:inDimension bsq:dimension_6 .
+  dqv:inDimension bsq:dimension_6;
+  fm:examples "A corpus of social media collections for which one or more miss data cube observations or have invalid observations about posts"@en;
+  fm:measuring "It is measured how many collections miss information about most used ‘person’ and ‘location’ named entities"@en;
+  fm:procedure "The related shapes are validated and the resulting SHACL validation report is queried with `collection-assessment.sparql`"@en;
+  fm:rationale "For quality assessment it is important to identify collections with missing information about identified persons and locations"@en;
+  fm:relevance "This metric applies on social media collections (versions)"@en;
+  fm:requirements "Aggregated information about most used person and location entities of a collection should be available, e.g. as data cube observations"@en;
+  fm:validation "This metric should be a positive integer representing the number of collections with missing person and location named entities information"@en .
 
 bsq:metric_25 a dqv:Metric;
   skos:definition "A collection (version) shows the top-10 hashtags identified in the collection (version)"@en;
-  skos:prefLabel "Collection hashtags"@en;
+  skos:prefLabel "Missing collection hashtags info"@en;
   dqv:expectedDataType xsd:boolean;
-  dqv:inDimension bsq:dimension_7 .
+  dqv:inDimension bsq:dimension_7;
+  fm:examples "A social media collection referred via a dimension from a data cube observation, together with a dimension for a hashtag and an observed number of its occurrences within the collection. Either less than a specified number of such observations exist or the observation contains an invalid number"@en;
+  fm:measuring "It is measured if a collection misses information about most used hashtags"@en;
+  fm:procedure "The related shapes are validated and the resulting SHACL validation report is queried with 'single-collection-assessment.sparql'"@en;
+  fm:rationale "A list of most used hashtags in a collection provides valuable information to assess a collection"@en;
+  fm:relevance "This metric applies on social media collections (versions)"@en;
+  fm:requirements "Aggregated information about most used hashtags of a collection should be available, e.g. as data cube observations"@en;
+  fm:validation "If a collection does not contain information about its most used hashtags, this metric is true"@en .
 
 bsq:metric_26 a dqv:Metric;
   skos:definition "Determine the number of collection (versions) not showing top-10 hashtags identified in the collection (version)"@en;
   skos:prefLabel "Number of missing collection hashtags"@en;
   dqv:expectedDataType xsd:integer;
-  dqv:inDimension bsq:dimension_7 .
+  dqv:inDimension bsq:dimension_7;
+  fm:examples "A corpus of social media collections for which one or more miss data cube observations or have invalid observations about posts"@en;
+  fm:measuring "It is measured how many collections miss information about most used hashtags"@en;
+  fm:procedure "The related shapes are validated and the resulting SHACL validation report is queried with `collection-assessment.sparql`"@en;
+  fm:rationale "For quality assessment it is important to identify collections with missing most used hashtags information"@en;
+  fm:relevance "This metric applies on social media collections (versions)"@en;
+  fm:requirements "Aggregated information about most used hashtags of a collection should be available, e.g. as data cube observations"@en;
+  fm:validation "This metric should be a positive integer representing the number of collections with missing most used hashtags information"@en .
 
 bsq:metric_27 a dqv:Metric;
   skos:definition "A collection (version) shows its license for reuse"@en;
-  skos:prefLabel "Collection license"@en;
+  skos:prefLabel "Mmissing collection license info"@en;
   dqv:expectedDataType xsd:boolean;
-  dqv:inDimension bsq:dimension_8 .
+  dqv:inDimension bsq:dimension_8;
+  fm:examples "A social media collection which does not link to license information"@en;
+  fm:measuring "It is measured if a collection misses licensing information"@en;
+  fm:procedure "The related shapes are validated and the resulting SHACL validation report is queried with 'single-collection-assessment.sparql'"@en;
+  fm:rationale "Licensing information provides users information about how collections might be reused"@en;
+  fm:relevance "This metric applies on social media collections (versions)"@en;
+  fm:requirements "A collection needs to link to its license"@en;
+  fm:validation "If a collection does not contain information about its license, this metric is true"@en .
 
 bsq:metric_28 a dqv:Metric;
   skos:definition "Determine the number of collection (versions) not showing their license for reuse"@en;
   skos:prefLabel "Number of missing collection license"@en;
   dqv:expectedDataType xsd:integer;
-  dqv:inDimension bsq:dimension_8 .
+  dqv:inDimension bsq:dimension_8;
+  fm:examples "A corpus of social media collections for which one or more do not link to license information"@en;
+  fm:measuring "It is measured how many collections miss licensing information"@en;
+  fm:procedure "The related shapes are validated and the resulting SHACL validation report is queried with `collection-assessment.sparql`"@en;
+  fm:rationale "For quality assessment it is important to identify collections with missing licensing information"@en;
+  fm:relevance "This metric applies on social media collections (versions)"@en;
+  fm:requirements "A collection needs to link to its license"@en;
+  fm:validation "This metric should be a positive integer representing the number of collections with missing license information"@en .
 
 bsq:metric_29 a dqv:Metric;
   skos:definition "A collection (version) shows its available formats"@en;
-  skos:prefLabel "Collection formats"@en;
+  skos:prefLabel "Missing collection formats info"@en;
   dqv:expectedDataType xsd:boolean;
-  dqv:inDimension bsq:dimension_9 .
+  dqv:inDimension bsq:dimension_9;
+  fm:examples "A social media collection which does not link to available metadata formats"@en;
+  fm:measuring "It is measured if a collection misses information about available metadata formats of the collection"@en;
+  fm:procedure "The related shapes are validated and the resulting SHACL validation report is queried with 'single-collection-assessment.sparql'"@en;
+  fm:rationale "Users of different domains with different software may need information about a collection in different metadata formats"@en;
+  fm:relevance "This metric applies on social media collections (versions), however all resources (datsets) profit from information about available formats"@en;
+  fm:requirements "A collection should have a property indicating in which metadata formats it is available"@en;
+  fm:validation "If a collection does not contain information about available metadata formats, this metric is true"@en .
 
 bsq:metric_3 a dqv:Metric;
   skos:definition "A collection (version) should have a description in natural language such that humans can assess the content."@en;
-  skos:prefLabel "Required collection description"@en;
+  skos:prefLabel "Missing collection description"@en;
   dqv:expectedDataType xsd:boolean;
-  dqv:inDimension bsq:dimension_1 .
+  dqv:inDimension bsq:dimension_1;
+  fm:examples "A social media collection (or more general a resource) which misses a dc:description property"@en;
+  fm:measuring "It is measured if a collection misses a description"@en;
+  fm:procedure "The related shapes are validated and the resulting SHACL validation report is queried with 'single-collection-assessment.sparql'"@en;
+  fm:rationale "A description is needed for humans to assess the collection, see metric-related requirement"@en;
+  fm:relevance "This metric applies on social media collections (versions), however all resources profit from having a human readable description"@en;
+  fm:requirements "Collections should use the description property which is validated by the shape related to this metric"@en;
+  fm:validation "If no description property is found, this metric is true"@en .
 
 bsq:metric_30 a dqv:Metric;
   skos:definition "Determine the number of collection (versions) not showing their available formats"@en;
   skos:prefLabel "Number of missing collection formats"@en;
   dqv:expectedDataType xsd:integer;
-  dqv:inDimension bsq:dimension_9 .
+  dqv:inDimension bsq:dimension_9;
+  fm:examples "A corpus of social media collections for which one or more do not link to available metadata formats"@en;
+  fm:measuring "It is measured how many collections miss information about available metadata formats of them"@en;
+  fm:procedure "The related shapes are validated and the resulting SHACL validation report is queried with `collection-assessment.sparql`"@en;
+  fm:rationale "For quality assessment it is important to identify collections with missing information about available metadata formats"@en;
+  fm:relevance "This metric applies on social media collections (versions), however all resources (datsets) profit from information about available formats"@en;
+  fm:requirements "A collection should have a property indicating in which metadata formats it is available"@en;
+  fm:validation "This metric should be a positive integer representing the number of collections with missing available metadata formats information"@en .
 
 bsq:metric_4 a dqv:Metric;
   skos:definition "Determine the number of collections missing a dublin core description."@en;
   skos:prefLabel "Number of missing descriptions"@en;
   dqv:expectedDataType xsd:integer;
-  dqv:inDimension bsq:dimension_1 .
+  dqv:inDimension bsq:dimension_1;
+  fm:examples "A corpus of social media collections (or more general resources) which all one or more miss a dc:description property"@en;
+  fm:measuring "It is measured how many collections miss a description"@en;
+  fm:procedure "The related shapes are validated and the resulting SHACL validation report is queried with `collection-assessment.sparql`"@en;
+  fm:rationale "For quality assessment it is important to identify collections without description"@en;
+  fm:relevance "This metric applies on social media collections (versions), however all resources profit from having a human readable description"@en;
+  fm:requirements "Collections should use the description property which is validated by the shape related to this metric"@en;
+  fm:validation "This metric should be a positive integer representing the number of collections without description"@en .
 
 bsq:metric_5 a dqv:Metric;
   skos:definition "A collection (version) should have a description of at least 200 characters to avoid short meaningless phrases."@en;
-  skos:prefLabel "Collection description min length"@en;
+  skos:prefLabel "Insufficient collection description"@en;
   dqv:expectedDataType xsd:boolean;
-  dqv:inDimension bsq:dimension_1 .
+  dqv:inDimension bsq:dimension_1;
+  fm:examples "A social media collection (or more general a resource) which has a dc:description property with a length smaller than 200"@en;
+  fm:measuring "It is measured if a collection has a description with insufficient length"@en;
+  fm:procedure "The related shapes are validated and the resulting SHACL validation report is queried with 'single-collection-assessment.sparql'"@en;
+  fm:rationale "A description is often more useful with sufficient length as otherwise the description is less descriptive"@en;
+  fm:relevance "This metric applies on social media collections (versions), however all resources profit from having a human readable description"@en;
+  fm:requirements "Collections should use the description property which is validated by the shape related to this metric"@en;
+  fm:validation "If a description with less than 200 characters is found, this metric is true"@en .
 
 bsq:metric_6 a dqv:Metric;
   skos:definition "Determine the number of collections with a description which is too short to be considered meaningful."@en;
   skos:prefLabel "Number of insufficient descriptions"@en;
   dqv:expectedDataType xsd:integer;
-  dqv:inDimension bsq:dimension_1 .
+  dqv:inDimension bsq:dimension_1;
+  fm:examples "A corpus of social media collections (or more general resources) for which one or more have a dc:description property with a  length smaller than 200"@en;
+  fm:measuring "It is measured how many collections have an insufficient length"@en;
+  fm:procedure "The related shapes are validated and the resulting SHACL validation report is queried with `collection-assessment.sparql`"@en;
+  fm:rationale "For quality assessment it is important to identify collections with insufficient descriptions"@en;
+  fm:relevance "This metric applies on social media collections (versions), however all resources profit from having a human readable description"@en;
+  fm:requirements "Collections should use the description property which is validated by the shape related to this metric"@en;
+  fm:validation "This metric should be a positive integer representing the number of collections with insufficient length"@en .
 
 bsq:metric_7 a dqv:Metric;
   skos:definition "The number of social media posts per month should be indicated for a collection."@en;
-  skos:prefLabel "Collection shows posts per month"@en;
+  skos:prefLabel "Missing collection posts per month"@en;
   dqv:expectedDataType xsd:boolean;
-  dqv:inDimension bsq:dimension_2 .
+  dqv:inDimension bsq:dimension_2;
+  fm:examples "A social media collection referred via a dimension from a data cube observation, together with a dimension for year and month and an observed number of posts. Either less than two such observations exist or the observations year, month or observed number have invalid datatypes."@en;
+  fm:measuring "It is measured if a collection misses stats about its posts per month"@en;
+  fm:procedure "The related shapes are validated and the resulting SHACL validation report is queried with 'single-collection-assessment.sparql'"@en;
+  fm:rationale "Statistics of posts per month provide a brief overview, see metric-related requirement"@en;
+  fm:relevance "This metric applies on social media collections (versions)"@en;
+  fm:requirements "Aggregated information about posts per month of a collection should be available, e.g. as data cube observations"@en;
+  fm:validation "If a collection does not contain the number of posts for valid months and years, this metric is true"@en .
 
 bsq:metric_8 a dqv:Metric;
   skos:definition "Determine the number of collection (versions) with incomplete temporal coverage, i.e. posts not indicated per month."@en;
   skos:prefLabel "Number of collections with incomplete monthly temporal coverage"@en;
   dqv:expectedDataType xsd:integer;
-  dqv:inDimension bsq:dimension_2 .
+  dqv:inDimension bsq:dimension_2;
+  fm:examples "A corpus of social media collections for which one or more miss data cube observations or have invalid observations about posts per month"@en;
+  fm:measuring "It is measured how many collections miss stats about their posts per month"@en;
+  fm:procedure "The related shapes are validated and the resulting SHACL validation report is queried with `collection-assessment.sparql`"@en;
+  fm:rationale "For quality assessment it is important to identify collections with missing posts per month stats"@en;
+  fm:relevance "This metric applies on social media collections (versions)"@en;
+  fm:requirements "Aggregated information about posts per month of a collection should be available, e.g. as data cube observations"@en;
+  fm:validation "This metric should be a positive integer representing the number of collections with incorrect or missing posts per month information"@en .
 
 bsq:metric_9 a dqv:Metric;
   skos:definition "A collection (version) shows date of the first and date of the last content item"@en;
-  skos:prefLabel "Collection content start and end date"@en;
+  skos:prefLabel "Missing collection content start and end date"@en;
   dqv:expectedDataType xsd:boolean;
-  dqv:inDimension bsq:dimension_2 .
+  dqv:inDimension bsq:dimension_2;
+  fm:examples "A social media collection referred via a dimension from a data cube observation, together with an observed date of the first post and another observation with an observed date of the last post. Either one of the observations is missing or has an invalid date"@en;
+  fm:measuring "It is measured if a collection misses stats about the date of its first post and the date of its last post"@en;
+  fm:procedure "The related shapes are validated and the resulting SHACL validation report is queried with 'single-collection-assessment.sparql'"@en;
+  fm:rationale "The date of the first and the date of the last post provide information about the scope of the collection"@en;
+  fm:relevance "This metric applies on social media collections (versions)"@en;
+  fm:requirements "A collection needs to link to its posts and posts need a creation date"@en;
+  fm:validation "If a collection does not contain information about the date of its first or the date of its last post, this metric is true"@en .
