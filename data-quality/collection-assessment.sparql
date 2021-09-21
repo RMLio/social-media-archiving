@@ -13,26 +13,31 @@ PREFIX sh: <http://www.w3.org/ns/shacl#>
 PREFIX ex: <http://example.org/ns#>
 PREFIX dqv: <http://www.w3.org/ns/dqv#>
 PREFIX sioc: <http://rdfs.org/sioc/ns#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
-
-CONSTRUCT{
-
-  ?measurement a dqv:QualityMeasurement ;
-    dqv:isMeasurementOf ?qualityMetric ;
-    dqv:value ?numberViolations .
-}
-WHERE {
-
-  SELECT ?qualityMetric (URI(concat("http://w3id.org/besocial/data/qualityMeasurement_", STRUUID())) as ?measurement) (COUNT(?violationResult) AS ?numberViolations)
+  SELECT ?qualityMetric ?metricLabel (COUNT(?violationResult) AS ?numberViolations)
   WHERE {
     ?violationResult a sh:ValidationResult ;
       sh:sourceShape ?violatedShape ;
       sh:focusNode ?focusNode .
 
+
     ?annot a oa:Annotation ;
       oa:motivatedBy bsq:collectionAssessment ;
       oa:hasBody ?violatedShape ;
       oa:hasTarget ?qualityMetric .
-  } GROUP BY ?qualityMetric
-}
+    
+    ?qualityMetric a dqv:Metric ;
+                   skos:prefLabel ?metricLabel .
 
+   #
+   # we are only interested in validation results which targeted a collection (not e.g. an observation)
+   {
+     SELECT ?focusNode
+     WHERE {
+       SERVICE <db://sfm-collections> {
+           ?focusNode a bsm:SocialMediaCollectionRepresentation .
+       }
+     }
+   } 
+  } GROUP BY ?qualityMetric ?metricLabel

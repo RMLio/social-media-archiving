@@ -20,11 +20,12 @@ CONSTRUCT{
   ?measurement a dqv:QualityMeasurement ;
     dqv:computedOn ?focusNode ;
     dqv:isMeasurementOf ?qualityMetric ;
-    dqv:value ?numberViolations .
+    dqv:value "true"^^xsd:boolean ;
+    prov:generatedAtTime ?measureTime .
 }
 WHERE {
 
-  SELECT ?focusNode ?qualityMetric (URI(concat("http://w3id.org/besocial/data/qualityMeasurement_", STRUUID())) as ?measurement) (COUNT(?violationResult) AS ?numberViolations)
+  SELECT ?focusNode ?qualityMetric (URI(concat("http://w3id.org/besocial/data/qualityMeasurement_", STRUUID())) as ?measurement) (COUNT(?violationResult) AS ?numberViolations) (NOW() as ?measureTime)
   WHERE {
     ?violationResult a sh:ValidationResult ;
       sh:sourceShape ?violatedShape ;
