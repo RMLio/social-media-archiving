@@ -12,7 +12,7 @@
 @prefix bsd: <http://w3id.org/besocial/data/> .
 @prefix edm: <http://www.europeana.eu/schemas/edm#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix prov: <http://www.w3.org/ns/shacl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
 
 bss:collectionHarvestsShape
   a sh:NodeShape ;
@@ -35,6 +35,7 @@ bss:atLeastOneValidHarvest
 
 bss:validHarvest
   a sh:NodeShape ;
+  sh:targetClass bsm:SocialMediaHarvest ;
   rdfs:label "validHarvest"@en ;
   sh:property bss:validStartingDate ;
   sh:property bss:atLeastOneValidSeedForCollection ;
@@ -64,3 +65,32 @@ bss:validHarvestSeed
   sh:property bss:validGenerationDate ;
   sh:property bss:needIdentifier ;
   sh:property bss:needValue .
+
+bss:validGenerationDate
+  a sh:PropertyShape ;
+  rdfs:label "validGenerationDate"@en ;
+  sh:path prov:generatedAtTime ;
+  sh:minCount 1 ;
+  sh:maxCount 1 ;
+  sh:datatype xsd:dateTime .
+
+bss:validStartingDate
+  a sh:PropertyShape ;
+  rdfs:label "validStartingDate"@en ;
+  sh:path prov:startedAtTime ;
+  sh:minCount 1 ;
+  sh:maxCount 1 ;
+  sh:datatype xsd:dateTime .
+
+
+bss:needIdentifier 
+  a sh:PropertyShape ;
+  rdfs:label "needIdentifier"@en ;
+  sh:path dcterms:identifier ;
+  sh:minCount 1 .
+
+bss:needValue
+  a sh:PropertyShape ;
+  rdfs:label "needValue"@en ;
+  sh:path rdf:value ;
+  sh:minCount 1 .
