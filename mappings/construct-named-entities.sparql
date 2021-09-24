@@ -6,7 +6,7 @@ PREFIX bsd: <http://w3id.org/besocial/data/>
 PREFIX sioc: <http://rdfs.org/sioc/ns#>
 PREFIX nee: <http://www.ics.forth.gr/isl/oae/core#>
 
-CONSTRUCT {
+INSERT {
 
   ?neObject a nee:Entity ;
     nee:hasMatchedURL ?ne .

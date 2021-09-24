@@ -31,7 +31,7 @@ WHERE {
   {
     SELECT ?collectionCHO ?collectionRepresentation ?collectionRepresentationVersion (MAX(?creationDate) as ?lastDate)
     WHERE {
-      SERVICE <${TRIPLE_STORE_ITEMS}> {
+      SERVICE <db://sfm-items> {
         ?itemAggregation
           a edm:Aggregation ;
           edm:hasView ?itemRepresentation ;
@@ -50,7 +50,7 @@ WHERE {
       {
         SELECT ?collectionCHO ?collectionRepresentation ?collectionRepresentationVersion
         WHERE {
-          SERVICE <${TRIPLE_STORE_COLLECTIONS}> {
+          SERVICE <db://sfm-collections> {
 
             ?collectionRepresentationVersion
               a bsm:SocialMediaCollectionRepresentationVersion ;

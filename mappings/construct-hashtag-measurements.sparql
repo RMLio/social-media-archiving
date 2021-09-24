@@ -3,6 +3,7 @@ PREFIX dc: <http://purl.org/dc/elements/1.1/>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX http: <http://www.w3.org/2011/http#>
 PREFIX premis: <http://www.loc.gov/premis/rdf/v3/>
+PREFIX schema: <http://schema.org/>
 PREFIX edm: <http://www.europeana.eu/schemas/edm/>
 PREFIX bsm: <http://w3id.org/besocial/ns/model#>
 PREFIX bsd: <http://w3id.org/besocial/data/>
@@ -28,7 +29,7 @@ WHERE {
   {
     SELECT ?collectionCHO ?collectionRepresentation ?collectionRepresentationVersion ?hashtag (count(?itemAggregation) as ?count)
     WHERE {
-      SERVICE<${TRIPLE_STORE_ITEMS}> {
+      SERVICE<db://sfm-items> {
         ?itemAggregation
           a edm:Aggregation ;
           edm:hasView ?itemRepresentation ;
@@ -55,8 +56,7 @@ WHERE {
       {
         SELECT ?collectionCHO ?collectionRepresentation ?collectionRepresentationVersion
         WHERE {
-          hint:SubQuery hint:runOnce true .
-          SERVICE <${TRIPLE_STORE_COLLECTIONS}> {
+          SERVICE <db://sfm-collections> {
 
             ?collectionRepresentationVersion
               a bsm:SocialMediaCollectionRepresentationVersion ;

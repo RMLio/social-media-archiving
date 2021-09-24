@@ -33,7 +33,7 @@ WHERE {
   {
     SELECT ?collectionCHO ?collectionRepresentation ?collectionRepresentationVersion (STRDT(STR(?year), xsd:gYear) as ?yearTyped) (STRDT(STR(?month), xsd:gMonth) as ?monthTyped) (count(?itemAggregation) as ?numberOfPosts)
     WHERE {
-      SERVICE <${TRIPLE_STORE_ITEMS}> {
+      SERVICE <db://sfm-items> {
         ?itemAggregation
           a edm:Aggregation ;
           edm:hasView ?itemRepresentation ;
@@ -47,15 +47,14 @@ WHERE {
           a edm:WebResource ;
           dcterms:isPartOf ?collectionRepresentationVersion .
   
-        BIND(substr(?creationDate, 0, 5) AS ?year)
-        BIND(substr(?creationDate, 6, 2) AS ?month)
+        BIND(year(?creationDate) AS ?year)
+        BIND(month(?creationDate) AS ?month)
       }
 
       {
         SELECT ?collectionCHO ?collectionRepresentation ?collectionRepresentationVersion
         WHERE {
-          hint:SubQuery hint:runOnce true .
-          SERVICE <${TRIPLE_STORE_COLLECTIONS}> {
+          SERVICE <db://sfm-collections> {
 
             ?collectionRepresentationVersion
               a bsm:SocialMediaCollectionRepresentationVersion ;

@@ -33,8 +33,7 @@ WHERE {
   {
   SELECT ?warcFile ?collectionRepresentationVersion ?collectionRepresentation
   WHERE {
-    hint:SubQuery hint:runOnce true .
-    SERVICE <$TRIPLE_STORE_COLLECTIONS> {
+    SERVICE <db://sfm-collections> {
       ?warcFile
         a premis:File ;
         dcterms:isPartOf ?collectionRepresentationVersion .
