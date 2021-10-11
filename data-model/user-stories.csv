@@ -39,6 +39,10 @@
 "38","As an archive-user, I want to know which hashtags were used how often in a collection (version), so I can assess if the content is relevant to me."
 "39","As an archive-user, I want to know under which license I can get the collection, so I can assess if I can request access."
 "40","As an archive-user, I want to know in which metadata formats I can obtain collection information, so I can assess which format may suits my needs or tooling."
+"41","As an archive-user, I want to see the media content (images, videos or gifs) included in a social media post, because this is a crucial part of the cultural heritage the post represents."
+"42","As a data-steward, I want to know which media content belongs to a social media post, so I can assess which posts contain media."
+"43","As a data-steward, I want to know the size of media content, so I can assess for example the sizes of all media content of a collection."
+"44","As a data-steward, I want to know when media was harvested and if it was successfully harvested or not, so I can assess provenance of media content harvest."
 
 
 "XX","As a data steward, I want to know which harvested files contain a specific social media post, such that I can better perform GDPR or copyright-related requests."

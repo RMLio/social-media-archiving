@@ -112,6 +112,19 @@ bsm:TwitterTimelineHarvest a rdfs:Class ;
   rdfs:subClassOf bsm:TwitterHarvest .
 
 #
+# Files
+#
+bsm:SocialMediaWARCFile a rdfs:Class ;
+  rdfs:label "SocialMediaWARCFile"@en ;
+  rdfs:comment "A file of mime type application/warc which contains social media content"@en ;
+  rdfs:subClassOf premis:File .
+
+bsm:MediaFile a rdfs:Class ;
+  rdfs:label "MediaFile"@en ;
+  rdfs:comment "A media file which could be either an image, video or gif."@en ;
+  rdfs:subClassOf premis:File .
+
+#
 # Named individuals
 #
 bsm:collectionDimension a qb:DimensionProperty, rdf:Property ;
